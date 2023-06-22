@@ -1,4 +1,4 @@
-using Assets.Scripts.GameStatsNameSpace;
+using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.GameStats;
 using Assets.Scripts.MonoBehaviours;
 using MeteorVoyager.Assets.Scripts.GameStatsNameSpace;
 using UnityEngine;
@@ -10,21 +10,13 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
     {
         [SerializeField] Slider chargingSlider;
         [SerializeField] GameObject chargingFillArea;
-        [SerializeField] GameObject damageButton;
         [SerializeField] BulletEmitter emitter;
-        public GameObject bullet;
-        public GameObject enemy;
-        public Vector3 worldPosition;
-        public float cooldown;
-        public float enemyCooldown;
-        public float cd;
-        public float eCd;
+        [Range(0f, 10f)] public float shotCooldown;
+        private float cd;
         float charging = 0;
-        float RBorder;
-        float NRBorder;
-
+        readonly float RBorder = Mathf.Deg2Rad * 75;
+        readonly float NRBorder = Mathf.Deg2Rad * -75;
         bool controlsDisabled;
-        bool enemiesCanSpawn;
 
         void Update()
         {
@@ -34,25 +26,25 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
                 touch = Camera.main.ScreenToWorldPoint(touch);
                 float x = touch.x - transform.position.x;
                 float y = touch.y - transform.position.y;
-                if (y > 0 && !GameStats.IsSomeFieldEnabled && !controlsDisabled)
+                if (y > 0 && !IsSomeFieldEnabled && !controlsDisabled)
                 {
                     RotateTurretToTouch(x, y);
                     int spreadPower = 0;
-                    if (charging > 0.9f * TurretUpgrades.Instance.ChargeAttack)
+                    if (charging > 0.9f * MainGameStatsHolder.TurretUpgrades.ChargeAttack)
                     {
                         emitter.Shoot(charging: charging);
                     }
                     else
                     {
-                        while (cd + cooldown < 0)
+                        while (cd + shotCooldown < 0)
                         {
                             emitter.Shoot(spreadPower);
-                            cd += cooldown;
+                            cd += shotCooldown;
                             spreadPower += 10;
                         }
-                        while (cd < -(cooldown * 20))
+                        while (cd < -(shotCooldown * 20))
                         {
-                            cd -= cooldown;
+                            cd -= shotCooldown;
                         }
                     }
                     charging = 0;
@@ -87,9 +79,9 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
 
         private void Charge()
         {
-            charging += Time.deltaTime * TurretUpgrades.Instance.ChargeAttack;
+            charging += Time.deltaTime * MainGameStatsHolder.TurretUpgrades.ChargeAttack;
             chargingFillArea.SetActive(true);
-            if (charging < 0.9f * TurretUpgrades.Instance.ChargeAttack)
+            if (charging < 0.9f * MainGameStatsHolder.TurretUpgrades.ChargeAttack)
             {
                 chargingFillArea.GetComponent<Image>().color = SetColor("#A7302D");
             }
@@ -97,14 +89,14 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
             {
                 chargingFillArea.GetComponent<Image>().color = SetColor("#012A03");
             }
-            if (charging > TurretUpgrades.Instance.ChargeAttack) charging = TurretUpgrades.Instance.ChargeAttack;
-            if (TurretUpgrades.Instance.ChargeAttack == 0)
+            if (charging > MainGameStatsHolder.TurretUpgrades.ChargeAttack) charging = MainGameStatsHolder.TurretUpgrades.ChargeAttack;
+            if (MainGameStatsHolder.TurretUpgrades.ChargeAttack == 0)
             {
                 chargingFillArea.SetActive(false);
             }
             else
             {
-                chargingSlider.value = charging / TurretUpgrades.Instance.ChargeAttack;
+                chargingSlider.value = charging / MainGameStatsHolder.TurretUpgrades.ChargeAttack;
                 chargingFillArea.SetActive(true);
             }
         }

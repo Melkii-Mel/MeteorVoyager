@@ -1,4 +1,4 @@
-using Assets.Scripts.GameStatsNameSpace;
+using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.GameStats;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -73,7 +73,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
         }
         private static int CalculateIndexFromEnemiesHealth(List<AudioClip> list)
         {
-            int index = Progression.Instance.GameStage;
+            int index = MainGameStatsHolder.Progression.GameStage;
             if (list.Count < index + 1)
             {
                 index = list.Count - 1;

@@ -1,6 +1,7 @@
-using Assets.Scripts.GameStatsNameSpace;
+using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.GameStats;
 using Unity.Mathematics;
 using UnityEngine;
+using MeteorVoyager.Assets.Scripts.GameStatsNameSpace;
 
 namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
 {
@@ -15,10 +16,9 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
         InfiniteInteger startingHealth;
         public float speed;
         public bool isGlowing;
-        const int MAXPOWERUPTIME = 60;
         private void Start()
         {
-            GetComponent<TrailRenderer>().enabled = SettingsGameStats.Instance.TrailsEnabled;
+            GetComponent<TrailRenderer>().enabled = MainGameStatsHolder.Settings.TrailsEnabled;
             transform.GetChild(0).gameObject.SetActive(isGlowing);
             startingHealth = health;
             SetStartingColor();
@@ -41,7 +41,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
             {
                 GivePowerUp();
             }
-            if (SettingsGameStats.Instance.ParticlesEnabled)
+            if (MainGameStatsHolder.Settings.ParticlesEnabled)
             {
                 try
                 {
@@ -56,7 +56,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
         public void DealDamage(InfiniteInteger damage)
         {
             ChangeColor();
-            if (SettingsGameStats.Instance.ParticlesEnabled)
+            if (MainGameStatsHolder.Settings.ParticlesEnabled)
             {
                 Instantiate(particles, transform.position, transform.rotation);
             }
@@ -80,10 +80,10 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
         private static void GiveMatter(InfiniteInteger damage)
         {
             InfiniteInteger reward = damage;
-            reward *= Timers.Instance.CoinMultiplierTimer > 0 ? 3 : 1;
-            reward *= Timers.Instance.X10Reward > 0 ? 10 : 1;
-            reward *= (int)Mathf.Pow(2, MeteorUpgrades.Instance.CoinMultiplier);
-            Currency.Instance.Balance += reward;
+            reward *= MainGameStatsHolder.Timers.CoinMultiplierTimer > 0 ? 3 : 1;
+            reward *= MainGameStatsHolder.Timers.X10Reward > 0 ? 10 : 1;
+            reward *= (int)Mathf.Pow(2, MainGameStatsHolder.MeteorUpgrades.CoinMultiplier);
+            MainGameStatsHolder.Currency.Balance += reward;
         }
 
         float Sigmoida(float value, float displacement = 0)
@@ -104,7 +104,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
 
         private void SetStartingColor()
         {
-            float colorIntencity = Sigmoida(health.GetExponent(), 2);
+            float colorIntencity = Sigmoida(health.Exponent, 2);
             GetComponent<SpriteRenderer>().color = new Color(r: colorIntencity, g: -colorIntencity + 1, b: -colorIntencity + 1);
             color = GetComponent<SpriteRenderer>().color;
             GetComponent<TrailRenderer>().startColor = color;
@@ -116,9 +116,9 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
             int randint = UnityEngine.Random.Range(0, 3);
             switch (randint)
             {
-                case 0: Timers.Instance.AddTime(MeteorUpgrades.Instance.CoinMultiplierTimeUpgrade * COEFF, Timers.Timer.CoinMultiplierTimer); break;
-                case 1: Timers.Instance.AddTime(MeteorUpgrades.Instance.DamageMultiplierTimeUpgrade * COEFF, Timers.Timer.DamageMultiplierTimer); break;
-                case 2: Timers.Instance.AddTime(MeteorUpgrades.Instance.ExplosivesAttacksTimeUpgrade * COEFF, Timers.Timer.ExplosivesAttacksTimer); break;
+                case 0: MainGameStatsHolder.Timers.AddTime(MainGameStatsHolder.MeteorUpgrades.CoinMultiplierTimeUpgrade * COEFF, Timers.Timer.CoinMultiplierTimer); break;
+                case 1: MainGameStatsHolder.Timers.AddTime(MainGameStatsHolder.MeteorUpgrades.DamageMultiplierTimeUpgrade * COEFF, Timers.Timer.DamageMultiplierTimer); break;
+                case 2: MainGameStatsHolder.Timers.AddTime(MainGameStatsHolder.MeteorUpgrades.ExplosivesAttacksTimeUpgrade * COEFF, Timers.Timer.ExplosivesAttacksTimer); break;
             }
             powerUpController = powerUpController != null ? powerUpController : GameObject.Find("Manager").GetComponent<PowerUpController>();
             powerUpController.StartController();

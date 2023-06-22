@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.GameStatsNameSpace;
-
+﻿using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.GameStats;
 namespace MeteorVoyager.Assets.Scripts
 {
     public class DamageCalculator
@@ -10,7 +9,7 @@ namespace MeteorVoyager.Assets.Scripts
         }
         public static InfiniteInteger CalculateDefaultDamage()
         {
-            return new InfiniteInteger(TurretUpgrades.Instance.Damage) * (float)(Timers.Instance.DamageMultiplierTimer > 0 ? 3 : 1);
+            return new InfiniteInteger(MainGameStatsHolder.TurretUpgrades.Damage + 1) * (float)(MainGameStatsHolder.Timers.DamageMultiplierTimer > 0 ? 3 : 1);
         }
     }
 }

@@ -1,4 +1,4 @@
-using Assets.Scripts.GameStatsNameSpace;
+using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.GameStats;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,8 +15,8 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
         }
         void Update()
         {
-            textBalance.GetComponent<Text>().text = "Matter: " + Currency.Instance.Balance.ToString();
-            textData.GetComponent<Text>().text = "Data: " + Currency.Instance.Data.ToString();
+            textBalance.GetComponent<Text>().text = "Matter: " + MainGameStatsHolder.Currency.Balance.ToString();
+            textData.GetComponent<Text>().text = "Data: " + MainGameStatsHolder.Currency.Data.ToString();
         }
         IEnumerator DataUnlockChecker()
         {

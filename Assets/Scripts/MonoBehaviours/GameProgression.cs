@@ -1,6 +1,7 @@
-using Assets.Scripts.GameStatsNameSpace;
+using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.GameStats;
 using System.Collections;
 using UnityEngine;
+using MeteorVoyager.Assets.Scripts.GameStatsNameSpace;
 
 namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
 {
@@ -11,7 +12,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
 
         private void Awake()
         {
-            progression = new GameStatsCreator().CreateGameStats<Progression>();
+            progression = MainGameStatsHolder.Progression;
             StartCoroutine(CheckGameStage());
         }
 
@@ -23,15 +24,15 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
                 {
                     UpdateGameStage();
                 }
-                if (gameStage == 1 && TurretUpgrades.Instance.ChargeAttack >= 1)
+                if (gameStage == 1 && MainGameStatsHolder.TurretUpgrades.ChargeAttack >= 1)
                 {
                     UpdateGameStage();
                 }
-                if (gameStage == 2 && Currency.Instance.Balance >= InfiniteInteger.Million)
+                if (gameStage == 2 && MainGameStatsHolder.Currency.Balance >= InfiniteInteger.Million)
                 {
                     UpdateGameStage();
                 }
-                if (gameStage == 3 && Currency.Instance.Data > 0)
+                if (gameStage == 3 && MainGameStatsHolder.Currency.Data > 0)
                 {
                     UpdateGameStage();
                 }

@@ -1,4 +1,4 @@
-using Assets.Scripts.GameStatsNameSpace;
+using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.GameStats;
 using UnityEngine;
 
 namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
@@ -18,7 +18,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
 
         void SetChargingSliderActivity()
         {
-            if (TurretUpgrades.Instance.ChargeAttack == 0)
+            if (MainGameStatsHolder.TurretUpgrades.ChargeAttack == 0)
             {
                 slider.SetActive(false);
             }

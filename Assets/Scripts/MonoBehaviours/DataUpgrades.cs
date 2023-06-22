@@ -1,4 +1,4 @@
-using Assets.Scripts.GameStatsNameSpace;
+using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.GameStats;
 using UnityEngine;
 
 namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
@@ -15,9 +15,9 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
         {
             if (gameObject == bossSpawnChanceButton)
             {
-                if (Currency.Instance.Data > int.MaxValue)
+                if (MainGameStatsHolder.Currency.Data > int.MaxValue)
                 {
-                    DataUpgradesGameStats.Instance.BossSpawnChanceLvl++;
+                    MainGameStatsHolder.DataUpgrades.BossSpawnChanceLvl++;
                 }
             }
             else if (gameObject == forceFieldButton)

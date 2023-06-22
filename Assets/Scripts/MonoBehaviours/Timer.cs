@@ -14,7 +14,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
         {
             if (intervalS <= 0)
             {
-                throw _invalidTimerIntervalException;
+                throw InvalidIntervalException;
             }
             IntervalS = intervalS;
             OnTick = action;
@@ -69,6 +69,6 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
             }
         }
 
-        private Exception _invalidTimerIntervalException = new Exception("Invalid timer interval. Must be greater than 0");
+        private static readonly Exception InvalidIntervalException = new("Invalid timer interval. Must be greater than 0");
     }
 }

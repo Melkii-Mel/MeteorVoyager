@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml.Serialization;
 
 namespace MeteorVoyager.Assets.Scripts
 {
@@ -38,10 +39,38 @@ namespace MeteorVoyager.Assets.Scripts
         private double _base;
         private float _exponent;
         #endregion
+        #region public properties
+        public double Base
+        {
+            get
+            {
+                return _base;
+            }
+            set
+            {
+                _base = value;
+            }
+        }
+        public int Exponent
+        {
+            get
+            {
+                return (int)_exponent;
+            }
+            set
+            {
+                _exponent = value;
+            }
+        }
+        #endregion
 
         public static implicit operator InfiniteInteger(int value)
         {
             return new InfiniteInteger(value);
+        }
+        public static implicit operator InfiniteInteger((double, int) value)
+        {
+            return new InfiniteInteger(value.Item1, value.Item2);
         }
         public static explicit operator double(InfiniteInteger value)
         {
@@ -94,15 +123,6 @@ namespace MeteorVoyager.Assets.Scripts
         public static InfiniteInteger operator /(InfiniteInteger a, InfiniteInteger b)
         {
             return PerformArithmeticOperation(a, b, Operators.Division);
-        }
-        public double GetBase()
-        {
-            return _base;
-        }
-
-        public int GetExponent()
-        {
-            return (int)_exponent;
         }
 
         public static bool operator >(InfiniteInteger a, InfiniteInteger b)

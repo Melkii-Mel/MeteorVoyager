@@ -1,4 +1,4 @@
-using Assets.Scripts.GameStatsNameSpace;
+using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.GameStats;
 using System.Collections;
 using UnityEngine;
 using static UnityEngine.ParticleSystem;
@@ -16,7 +16,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
         {
             while (true)
             {
-                int cm = Currency.Instance.Balance.GetExponent();
+                int cm = MainGameStatsHolder.Currency.Balance.Exponent;
                 var particles = GetComponent<ParticleSystem>();
                 EmissionModule ps = particles.GetComponent<ParticleSystem>().emission;
                 if (cm == 1)

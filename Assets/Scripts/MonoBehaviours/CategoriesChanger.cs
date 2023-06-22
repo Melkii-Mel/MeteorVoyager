@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
 {
@@ -14,14 +15,14 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
         {
             UpdateEnabledCategoriesCount();
             CheckForEnabledCategories();
-            categoryChanger.SetActive(false);
+            categoryChanger.GetComponent<Button>().interactable = false;
         }
 
         void Update()
         {
             UpdateEnabledCategoriesCount();
             CheckForEnabledCategories();
-            categoryChanger.SetActive(GameProgression.gameStage >= 2);
+            categoryChanger.GetComponent<Button>().interactable = GameProgression.gameStage >= 2;
         }
 
         void CheckForEnabledCategories()
@@ -62,8 +63,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
         }
         public void UpdateEnabledCategoriesCount()
         {
-            categoriesEnabled.AddRange(from GameObject category in categories
-                                       select false);
+            categoriesEnabled.AddRange(from GameObject category in categories select false);
         }
 
     }

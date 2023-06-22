@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 9109968618886696267}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.002116378, y: -3.134767, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -105,7 +105,7 @@ MonoBehaviour:
   chargedPierceCoefficient: 0
   chargedDamageCoefficient: 0
   isCharged: 0
-  timer: 0
+  timer: 0.5
 --- !u!61 &799408613801436592
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -119,7 +119,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0367586, y: 0.026256561}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -130,7 +130,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.4808517, y: 2.7119055}
   m_EdgeRadius: 0
 --- !u!96 &7032439850412280879
 TrailRenderer:
@@ -177,7 +177,7 @@ TrailRenderer:
   m_Time: 0.2
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 70.24433
     widthCurve:
       serializedVersion: 2
       m_Curve:

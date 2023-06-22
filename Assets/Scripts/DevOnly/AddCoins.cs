@@ -1,6 +1,7 @@
-using Assets.Scripts.GameStatsNameSpace;
+using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.GameStats;
 using UnityEngine;
 using UnityEngine.UI;
+using MeteorVoyager.Assets.Scripts.GameStatsNameSpace;
 
 namespace MeteorVoyager.Assets.Scripts.DevOnly
 {
@@ -15,7 +16,7 @@ namespace MeteorVoyager.Assets.Scripts.DevOnly
 
         public void GiveMoney()
         {
-            Currency.Instance.Balance += (InfiniteInteger)balance;
+            MainGameStatsHolder.Currency.Balance += (InfiniteInteger)balance;
         }
     }
 }

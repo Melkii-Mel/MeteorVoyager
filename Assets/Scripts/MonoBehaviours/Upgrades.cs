@@ -1,4 +1,4 @@
-using Assets.Scripts.GameStatsNameSpace;
+using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.GameStats;
 using MeteorVoyager.Assets.Scripts.GameStatsNameSpace;
 using System;
 using System.Collections;
@@ -18,12 +18,12 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
 
         private void OnEnable()
         {
-            GameStats.onRelocation += Start;
+            OnRelocation += Start;
         }
 
         private void OnDisable()
         {
-            GameStats.onRelocation -= Start;
+            OnRelocation -= Start;
         }
         public void Start()
         {
@@ -55,18 +55,20 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
 
         IEnumerator DamageUpgradeStateController()
         {
-            GameStats.IsDamageUpgradeEnabled = false;
-            GetComponent<Button>().interactable = false;
-            PlayerPrefs.SetInt("isDamageUpgradeEnabled", 0);
+            void SetActive(bool state)
+            {
+                GameStats.IsDamageUpgradeEnabled = state;
+                GetComponent<Button>().interactable = state;
+            }
+
+            SetActive(false);
             transform.GetChild(0).gameObject.GetComponent<Text>().text = "LOCKED";
-            while (TurretUpgrades.Instance.SpawnCooldown < 50)
+            while (MainGameStatsHolder.TurretUpgrades.SpawnCooldown < 50)
             {
                 yield return null;
             }
-            GameStats.IsDamageUpgradeEnabled = true;
-            GetComponent<Button>().interactable = true;
+            SetActive(true);
             UpdateText(Cost);
-            PlayerPrefs.SetInt("isDamageUpgradeEnabled", 1);
         }
 
         public void Buy()
@@ -74,14 +76,14 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
             void Upgrade()
             {
                 Value++;
-                Currency.Instance.Balance -= Cost;
+                MainGameStatsHolder.Currency.Balance -= Cost;
             }
             if (BuyMultiplier.multiplier != -1)
             {
                 for (int i = 0; i < BuyMultiplier.multiplier; i++)
                 {
                     Cost = _formula(Value);
-                    if (Currency.Instance.Balance >= Cost && Cost != -1)
+                    if (MainGameStatsHolder.Currency.Balance >= Cost && Cost != -1)
                     {
                         Upgrade();
                     }
@@ -93,7 +95,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
                 for (; ; )
                 {
                     Cost = _formula(Value);
-                    if (Currency.Instance.Balance >= Cost && Cost != -1)
+                    if (MainGameStatsHolder.Currency.Balance >= Cost && Cost != -1)
                     {
                         Upgrade();
                     }

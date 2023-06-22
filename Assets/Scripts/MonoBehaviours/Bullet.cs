@@ -1,4 +1,4 @@
-using Assets.Scripts.GameStatsNameSpace;
+using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.GameStats;
 using UnityEngine;
 
 namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
@@ -6,7 +6,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
     public class Bullet : MonoBehaviour
     {
         [SerializeField] GameObject explosion;
-        Transform player;
+        public Transform EmitterTransform { get; set; }
         public int ricochetCounter;
         public int pierceCounter;
         public float chargedPierceCoefficient = 1;
@@ -14,18 +14,17 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
         public bool isCharged;
         float _rBorder;
         float _lBorder;
-        [SerializeField] float timer;
+        [SerializeField][Range(0.5f, 10f)] float timer;
         float _scaleCounter;
+        private const float SPEED_MULTIPLIER = 100;
         Vector3 _scale;
         void Start()
         {
             _scale = transform.localScale;
-            GetComponent<TrailRenderer>().enabled = SettingsGameStats.Instance.TrailsEnabled;
-            player = GameObject.Find("Player").GetComponent<Transform>();
+            GetComponent<TrailRenderer>().enabled = MainGameStatsHolder.Settings.TrailsEnabled;
             UpdateStats();
             _rBorder = Consts.RBorder;
             _lBorder = Consts.LBorder;
-            if (timer == 0) timer = 0.5f;
 
         }
 
@@ -40,9 +39,12 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
                     _scaleCounter += Time.deltaTime;
                 }
             }
-            transform.Translate(new Vector2(0, 3 * (!isCharged ? Mathf.Log(TurretUpgrades.Instance.Damage + 1, 4) : 1) * Time.deltaTime));
-            timer -= Time.deltaTime;
-            if (timer > 0) gameObject.transform.rotation = player.rotation;
+            transform.Translate(new Vector2(0, 3 * (!isCharged ? Mathf.Log(MainGameStatsHolder.TurretUpgrades.Damage + 2, 4) : 1) * Time.deltaTime * SPEED_MULTIPLIER));
+            if (timer > 0)
+            {
+                timer -= Time.deltaTime;
+                gameObject.transform.rotation = EmitterTransform.rotation;
+            }
             float x = transform.position.x;
             if (x < _lBorder || x > _rBorder)
             {
@@ -52,7 +54,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
         private void OnTriggerEnter2D(Collider2D collision)
         {
             collision.gameObject.GetComponent<Enemy>().DealDamage(DamageCalculator.CalculateDefaultDamage());
-            if (Timers.Instance.ExplosivesAttacksTimer > 0)
+            if (MainGameStatsHolder.Timers.ExplosivesAttacksTimer > 0)
             {
                 Instantiate(explosion, gameObject.transform.position, gameObject.transform.rotation);
             }
@@ -71,7 +73,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
         {
             if (chargedDamageCoefficient < 1) chargedDamageCoefficient = 1;
             if (chargedPierceCoefficient < 1) chargedPierceCoefficient = 1;
-            pierceCounter = (int)(TurretUpgrades.Instance.PierceCount * chargedPierceCoefficient);
+            pierceCounter = (int)(MainGameStatsHolder.TurretUpgrades.PierceCount * chargedPierceCoefficient);
         }
     }
 }

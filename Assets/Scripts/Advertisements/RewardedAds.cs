@@ -1,7 +1,7 @@
-using Assets.Scripts.GameStatsNameSpace;
 using UnityEngine;
 using UnityEngine.Advertisements;
 using UnityEngine.UI;
+using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.GameStats;
 
 namespace MeteorVoyager.Assets.Scripts.Advertisements
 {
@@ -62,13 +62,13 @@ namespace MeteorVoyager.Assets.Scripts.Advertisements
         {
             if (adUnitId.Equals(_adUnitId) && showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED))
             {
-                if (Timers.Instance.X10Reward < 0)
+                if (MainGameStatsHolder.Timers.X10Reward < 0)
                 {
-                    Timers.Instance.X10Reward = 300;
+                    MainGameStatsHolder.Timers.X10Reward = 300;
                 }
                 else
                 {
-                    Timers.Instance.X10Reward += 300;
+                    MainGameStatsHolder.Timers.X10Reward += 300;
                 }
                 //Load another ad:
                 Advertisement.Load(_adUnitId, this);

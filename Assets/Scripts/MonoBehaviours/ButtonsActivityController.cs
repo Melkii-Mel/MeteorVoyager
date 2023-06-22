@@ -1,4 +1,4 @@
-using Assets.Scripts.GameStatsNameSpace;
+using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.GameStats;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,7 +32,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
             Text text = relocateButton.transform.GetChild(0).gameObject.GetComponent<Text>();
             Button button = relocateButton.GetComponent<Button>();
 
-            if (Currency.Instance.Balance > Million)
+            if (MainGameStatsHolder.Currency.Balance > Million)
             {
                 button.interactable = true;
                 text.text = "RELOCATE";

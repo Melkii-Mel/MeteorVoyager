@@ -1,4 +1,4 @@
-using Assets.Scripts.GameStatsNameSpace;
+using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.GameStats;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -82,7 +82,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
                 yield return null;
             }
 
-            Currency.Instance.Data = value;
+            MainGameStatsHolder.Currency.Data = value;
             ResetPos();
             player.EnableContol();
             spawner.StartEnemiesSpawning();
@@ -95,7 +95,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
         }
         InfiniteInteger CalculateAmountOfData()
         {
-            InfiniteInteger result = Currency.Instance.Balance.Pow(0.5f);
+            InfiniteInteger result = MainGameStatsHolder.Currency.Balance.Pow(0.5f);
             return result;
         }
     }

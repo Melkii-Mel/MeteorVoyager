@@ -1,4 +1,4 @@
-using Assets.Scripts.GameStatsNameSpace;
+using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.GameStats;
 using MeteorVoyager.Assets.Scripts.GameStatsNameSpace;
 using UnityEngine;
 using UnityEngine.UI;
@@ -39,36 +39,36 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
 
         public void SetMusicVolume(float @in)
         {
-            SettingsGameStats.Instance.MusicVolume = @in;
+            MainGameStatsHolder.Settings.MusicVolume = @in;
         }
 
         public void SetSoundsVolume(float @in)
         {
-            SettingsGameStats.Instance.SoundsVolume = @in;
+            MainGameStatsHolder.Settings.SoundsVolume = @in;
         }
 
         public void SetStarsAmount(float @in)
         {
-            SettingsGameStats.Instance.StarsAmountMultiplier = @in;
+            MainGameStatsHolder.Settings.StarsAmountMultiplier = @in;
             starsGenerator.UpdateCoefficient();
         }
 
         public void ToggleTrails(bool @in)
         {
-            SettingsGameStats.Instance.TrailsEnabled = @in;
+            MainGameStatsHolder.Settings.TrailsEnabled = @in;
         }
 
         public void ToggleParticles(bool @in)
         {
-            SettingsGameStats.Instance.ParticlesEnabled = @in;
+            MainGameStatsHolder.Settings.ParticlesEnabled = @in;
         }
         private void LoadValues()
         {
-            musicVolume.value = SettingsGameStats.Instance.MusicVolume;
-            soundsVolume.value = SettingsGameStats.Instance.SoundsVolume;
-            starsAmount.value = SettingsGameStats.Instance.StarsAmountMultiplier;
-            trails.isOn = SettingsGameStats.Instance.TrailsEnabled;
-            particles.isOn = SettingsGameStats.Instance.ParticlesEnabled;
+            musicVolume.value = MainGameStatsHolder.Settings.MusicVolume;
+            soundsVolume.value = MainGameStatsHolder.Settings.SoundsVolume;
+            starsAmount.value = MainGameStatsHolder.Settings.StarsAmountMultiplier;
+            trails.isOn = MainGameStatsHolder.Settings.TrailsEnabled;
+            particles.isOn = MainGameStatsHolder.Settings.ParticlesEnabled;
         }
     }
 }

@@ -1,4 +1,4 @@
-using Assets.Scripts.GameStatsNameSpace;
+using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.GameStats;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,15 +16,15 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
 
         public void StartController()
         {
-            if (Timers.Instance.CoinMultiplierTimer > 0 && !coinsRunning)
+            if (MainGameStatsHolder.Timers.CoinMultiplierTimer > 0 && !coinsRunning)
             {
                 StartCoroutine(CoinTimer());
             }
-            if (Timers.Instance.DamageMultiplierTimer > 0 && !powerRunning)
+            if (MainGameStatsHolder.Timers.DamageMultiplierTimer > 0 && !powerRunning)
             {
                 StartCoroutine(PowerTimer());
             }
-            if (Timers.Instance.ExplosivesAttacksTimer > 0 && !explosionRunning)
+            if (MainGameStatsHolder.Timers.ExplosivesAttacksTimer > 0 && !explosionRunning)
             {
                 StartCoroutine(ExplosionsTimer());
             }
@@ -33,11 +33,11 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
         IEnumerator CoinTimer()
         {
             coinsRunning = true;
-            while (Timers.Instance.CoinMultiplierTimer > 0)
+            while (MainGameStatsHolder.Timers.CoinMultiplierTimer > 0)
             {
-                float coins = Timers.Instance.CoinMultiplierTimer;
+                float coins = MainGameStatsHolder.Timers.CoinMultiplierTimer;
                 coinsText.text = ConvertTimeToMinutesSeconds(coins);
-                Timers.Instance.CoinMultiplierTimer -= Time.deltaTime;
+                MainGameStatsHolder.Timers.CoinMultiplierTimer -= Time.deltaTime;
                 yield return null;
             }
             coinsText.text = "00:00";
@@ -47,11 +47,11 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
         IEnumerator PowerTimer()
         {
             powerRunning = true;
-            while (Timers.Instance.DamageMultiplierTimer > 0)
+            while (MainGameStatsHolder.Timers.DamageMultiplierTimer > 0)
             {
-                float damage = Timers.Instance.DamageMultiplierTimer;
+                float damage = MainGameStatsHolder.Timers.DamageMultiplierTimer;
                 powerText.text = ConvertTimeToMinutesSeconds(damage);
-                Timers.Instance.DamageMultiplierTimer -= Time.deltaTime;
+                MainGameStatsHolder.Timers.DamageMultiplierTimer -= Time.deltaTime;
                 yield return null;
             }
             powerText.text = "00:00";
@@ -61,11 +61,11 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
         IEnumerator ExplosionsTimer()
         {
             explosionRunning = true;
-            while (Timers.Instance.ExplosivesAttacksTimer > 0)
+            while (MainGameStatsHolder.Timers.ExplosivesAttacksTimer > 0)
             {
-                float explosions = Timers.Instance.ExplosivesAttacksTimer;
+                float explosions = MainGameStatsHolder.Timers.ExplosivesAttacksTimer;
                 explosionsText.text = ConvertTimeToMinutesSeconds(explosions);
-                Timers.Instance.ExplosivesAttacksTimer -= Time.deltaTime;
+                MainGameStatsHolder.Timers.ExplosivesAttacksTimer -= Time.deltaTime;
                 yield return null;
             }
             explosionsText.text = "00:00";
