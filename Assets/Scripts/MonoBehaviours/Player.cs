@@ -3,11 +3,15 @@ using Assets.Scripts.MonoBehaviours;
 using MeteorVoyager.Assets.Scripts.GameStatsNameSpace;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
 {
     public class Player : MonoBehaviour
     {
+        public static Action OnShot { get; set; }
+        public static Action OnChargedShot { get; set; }
+
         [SerializeField] Slider chargingSlider;
         [SerializeField] GameObject chargingFillArea;
         [SerializeField] BulletEmitter emitter;
@@ -32,12 +36,15 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
                     int spreadPower = 0;
                     if (charging > 0.9f * MainGameStatsHolder.TurretUpgrades.ChargeAttack)
                     {
+                        OnChargedShot();
                         emitter.Shoot(charging: charging);
+                        cd += shotCooldown * 5;
                     }
                     else
                     {
                         while (cd + shotCooldown < 0)
                         {
+                            OnShot();
                             emitter.Shoot(spreadPower);
                             cd += shotCooldown;
                             spreadPower += 10;
@@ -51,7 +58,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
                     chargingFillArea.SetActive(false);
                     chargingFillArea.GetComponent<Image>().color = SetColor("#A7302D");
                     chargingSlider.value = 0;
-                    cd -= Time.deltaTime;
+                    cd -= Time.deltaTime * (Mathf.Sqrt(MainGameStatsHolder.TurretUpgrades.ShotCooldown) + 1) / 2;
                 }
                 else
                 {

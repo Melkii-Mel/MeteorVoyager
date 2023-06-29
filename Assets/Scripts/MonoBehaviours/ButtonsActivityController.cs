@@ -17,7 +17,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
 
         void CheckRelocationMenuButtonActivity()
         {
-            if (GameProgression.gameStage < 3)
+            if (ProgressionController.GameStage < 3)
             {
                 ReloctionMenuButton.SetActive(false);
             }

@@ -30,6 +30,40 @@ namespace MeteorVoyager.Assets.Scripts.GameStatsNameSpace
             ShotCooldown,
         }
 
+        public int GetUpgradeLvl(Upgrades upgrade)
+        {
+            return upgrade switch
+            {
+                Upgrades.PierceCount => PierceCount,
+                Upgrades.ChargeAttack => ChargeAttack,
+                Upgrades.Damage => Damage,
+                Upgrades.SpawnCooldown => SpawnCooldown,
+                Upgrades.ShotCooldown => ShotCooldown,
+                _ => throw new ArgumentOutOfRangeException("Upgrade does not exist"),
+            };
+        }
+        public void Upgrade(Upgrades upgrade, int value)
+        {
+            switch (upgrade)
+            {
+                case Upgrades.PierceCount:
+                    PierceCount = value; 
+                    break;
+                case Upgrades.ChargeAttack:
+                    ChargeAttack = value;
+                    break;
+                case Upgrades.Damage:
+                    Damage = value;
+                    break;
+                case Upgrades.SpawnCooldown:
+                    SpawnCooldown = value;
+                    break;
+                case Upgrades.ShotCooldown:
+                    ShotCooldown = value;
+                    break;
+            }
+        }
+
         public static List<Func<int, InfiniteInteger>> Functions { get; } = new()
         {
             //PierceCount

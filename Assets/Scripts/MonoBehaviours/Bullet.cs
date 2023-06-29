@@ -12,20 +12,17 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
         public float chargedPierceCoefficient = 1;
         public float chargedDamageCoefficient = 1;
         public bool isCharged;
-        float _rBorder;
-        float _lBorder;
         [SerializeField][Range(0.5f, 10f)] float timer;
+        float lifeTimer = 5;
         float _scaleCounter;
         private const float SPEED_MULTIPLIER = 100;
+        private float chargedBulletSpeedMultiplier = 1;
         Vector3 _scale;
         void Start()
         {
             _scale = transform.localScale;
             GetComponent<TrailRenderer>().enabled = MainGameStatsHolder.Settings.TrailsEnabled;
             UpdateStats();
-            _rBorder = Consts.RBorder;
-            _lBorder = Consts.LBorder;
-
         }
 
         void Update()
@@ -34,19 +31,18 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
             {
                 if (_scaleCounter < 2)
                 {
-                    GetComponent<TrailRenderer>().widthMultiplier *= 1.01f;
                     transform.localScale = _scale * (_scaleCounter + 1);
                     _scaleCounter += Time.deltaTime;
                 }
             }
-            transform.Translate(new Vector2(0, 3 * (!isCharged ? Mathf.Log(MainGameStatsHolder.TurretUpgrades.Damage + 2, 4) : 1) * Time.deltaTime * SPEED_MULTIPLIER));
+            transform.Translate(new Vector2(0, 3 * (!isCharged ? Mathf.Log(MainGameStatsHolder.TurretUpgrades.Damage + 2, 4) / 5 + 0.5f: 1) * Time.deltaTime * SPEED_MULTIPLIER * chargedBulletSpeedMultiplier));
             if (timer > 0)
             {
                 timer -= Time.deltaTime;
                 gameObject.transform.rotation = EmitterTransform.rotation;
             }
-            float x = transform.position.x;
-            if (x < _lBorder || x > _rBorder)
+            lifeTimer -= Time.deltaTime;
+            if (lifeTimer < 0)
             {
                 Destroy(gameObject);
             }
@@ -54,6 +50,14 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
         private void OnTriggerEnter2D(Collider2D collision)
         {
             collision.gameObject.GetComponent<Enemy>().DealDamage(DamageCalculator.CalculateDefaultDamage());
+            if (isCharged)
+            {
+                chargedBulletSpeedMultiplier *= 0.99f;
+                if (chargedBulletSpeedMultiplier <= 0.1f)
+                {
+                    Destroy(gameObject);
+                }
+            }
             if (MainGameStatsHolder.Timers.ExplosivesAttacksTimer > 0)
             {
                 Instantiate(explosion, gameObject.transform.position, gameObject.transform.rotation);

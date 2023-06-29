@@ -1,3 +1,4 @@
+using MeteorVoyager.Assets.Scripts.GameStatsNameSpace;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,7 +17,7 @@ namespace MeteorVoyager.Assets.Scripts.DevOnly
             transform.GetChild(0).gameObject.GetComponent<Text>().text = "Please Restart";
             for (; ; )
             {
-                PlayerPrefs.DeleteAll();
+                GameStats.MainGameStatsHolder.ResetAllSerialization();
                 await Task.Delay(10);
             }
         }

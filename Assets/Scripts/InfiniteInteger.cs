@@ -127,27 +127,29 @@ namespace MeteorVoyager.Assets.Scripts
 
         public static bool operator >(InfiniteInteger a, InfiniteInteger b)
         {
+            if (a.Base <= 0 && b.Base >= 0) return false;
+            if (a.Base > 0 && b.Base <= 0) return true;
+            if (a.Base >= 0 && b.Base < 0) return true;
             if (a._exponent < b._exponent) return false;
             if (a._exponent > b._exponent) return true;
             return a._base > b._base;
         }
         public static bool operator <(InfiniteInteger a, InfiniteInteger b)
         {
-            if (a._exponent < b._exponent) return true;
+            if (a.Base >= 0 && b.Base <= 0) return false;
+            if (a.Base < 0 && b.Base >= 0) return true;
+            if (a.Base <= 0 && b.Base > 0) return true;
             if (a._exponent > b._exponent) return false;
+            if (a._exponent < b._exponent) return true;
             return a._base < b._base;
         }
         public static bool operator >=(InfiniteInteger a, InfiniteInteger b)
         {
-            if (a._exponent > b._exponent) return true;
-            if (a._exponent < b._exponent) return false;
-            return a._base >= b._base;
+            return !(a < b);
         }
         public static bool operator <=(InfiniteInteger a, InfiniteInteger b)
         {
-            if (a._exponent < b._exponent) return true;
-            if (a._exponent > b._exponent) return false;
-            return a._base <= b._base;
+            return !(a > b);
         }
         public static bool operator ==(InfiniteInteger a, InfiniteInteger b)
         {

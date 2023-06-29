@@ -22,7 +22,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
         {
             UpdateEnabledCategoriesCount();
             CheckForEnabledCategories();
-            categoryChanger.GetComponent<Button>().interactable = GameProgression.gameStage >= 2;
+            categoryChanger.GetComponent<Button>().interactable = ProgressionController.GameStage >= 2;
         }
 
         void CheckForEnabledCategories()
@@ -30,8 +30,8 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
             try
             {
                 categoriesEnabled[0] = true;
-                categoriesEnabled[1] = GameProgression.gameStage >= 2;
-                categoriesEnabled[2] = GameProgression.gameStage >= 4;
+                categoriesEnabled[1] = ProgressionController.GameStage >= 2;
+                categoriesEnabled[2] = ProgressionController.GameStage >= 4;
             }
             catch (Exception ex)
             {

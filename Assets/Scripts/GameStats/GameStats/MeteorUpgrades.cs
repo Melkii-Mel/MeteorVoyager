@@ -30,6 +30,39 @@ namespace MeteorVoyager.Assets.Scripts.GameStatsNameSpace
             GlowingEnemiesSpawnRate,
             ExplosivesAttacksTimeUpgrade,
         }
+        public int GetUpgradeLvl(Upgrades upgrade)
+        {
+            return upgrade switch
+            {
+                Upgrades.CoinMultiplierTimeUpgrade => CoinMultiplierTimeUpgrade,
+                Upgrades.CoinMultiplier => CoinMultiplier,
+                Upgrades.DamageMultiplierTimeUpgrade => DamageMultiplierTimeUpgrade,
+                Upgrades.ExplosivesAttacksTimeUpgrade => ExplosivesAttacksTimeUpgrade,
+                Upgrades.GlowingEnemiesSpawnRate => GlowingEnemiesSpawnRate,
+                _ => throw new ArgumentOutOfRangeException("Upgrade does not exist"),
+            };
+        }
+        public void Upgrade(Upgrades upgrade, int value = -1)
+        {
+            switch (upgrade)
+            {
+                case Upgrades.CoinMultiplier:
+                    CoinMultiplier = value; 
+                    break;
+                case Upgrades.CoinMultiplierTimeUpgrade:
+                    CoinMultiplierTimeUpgrade = value; 
+                    break;
+                case Upgrades.DamageMultiplierTimeUpgrade:
+                    DamageMultiplierTimeUpgrade = value;
+                    break;
+                case Upgrades.GlowingEnemiesSpawnRate:
+                    GlowingEnemiesSpawnRate = value;
+                    break;
+                case Upgrades.ExplosivesAttacksTimeUpgrade:
+                    ExplosivesAttacksTimeUpgrade = value;
+                    break;
+            }
+        }
 
         public static List<Func<int, InfiniteInteger>> Functions { get; } = new()
         {

@@ -8,7 +8,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
     {
         [SerializeField] GameObject particles;
         [SerializeField] Camera cam;
-        [SerializeField] float delayTime;
+        [SerializeField] float delayTimeCoeffSF;
         float delayTimeCoeff;
         bool coroutineStarted;
         public List<StarsBehaviour> stars;
@@ -17,7 +17,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
         // Start is called before the first frame update
         void Start()
         {
-            if (delayTime == 0) delayTime = 1;
+            if (delayTimeCoeffSF == 0) delayTimeCoeffSF = 1;
             UpdateCoefficient();
         }
 
@@ -38,7 +38,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
         }
         public void UpdateCoefficient()
         {
-            delayTimeCoeff = delayTime * relocationDelayCoeff / (Enemy.maxEnemyHealth.Exponent + 1);
+            delayTimeCoeff = delayTimeCoeffSF * relocationDelayCoeff / (EnemyHealthAndSpawnDelayCoefficientsCalculator.CalculateHealthCoefficient().Exponent + 1);
         }
 
         private IEnumerator Generator()

@@ -22,7 +22,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
         {
             for (; ; )
             {
-                if (GameProgression.gameStage >= 4)
+                if (ProgressionController.GameStage >= 4)
                 {
                     textData.SetActive(true);
                     StopCoroutine(DataUnlockChecker());

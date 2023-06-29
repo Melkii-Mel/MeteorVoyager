@@ -11,14 +11,14 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
         [SerializeField] private PowerUpController powerUpController;
         float lifetime = 20;
         Color color;
+        Color startingColor;
         public InfiniteInteger health = 1;
-        public static InfiniteInteger maxEnemyHealth = 1;
         InfiniteInteger startingHealth;
         public float speed;
         public bool isGlowing;
+        public int hits;
         private void Start()
         {
-            GetComponent<TrailRenderer>().enabled = MainGameStatsHolder.Settings.TrailsEnabled;
             transform.GetChild(0).gameObject.SetActive(isGlowing);
             startingHealth = health;
             SetStartingColor();
@@ -37,7 +37,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
 
         public void Undo()
         {
-            if (isGlowing)
+            if (isGlowing && hits < 5)
             {
                 GivePowerUp();
             }
@@ -55,6 +55,13 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
         }
         public void DealDamage(InfiniteInteger damage)
         {
+            hits++;
+            if (isGlowing && hits == 5)
+            {
+                isGlowing = false;
+                transform.GetChild(0).gameObject.SetActive(isGlowing);
+                GivePowerUp();
+            }
             ChangeColor();
             if (MainGameStatsHolder.Settings.ParticlesEnabled)
             {
@@ -68,17 +75,27 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
             health -= damage;
             if (health > 0)
             {
+                transform.Translate(Time.deltaTime * speed * (isGlowing ? 0.5f : 1) * 10 * new Vector2(0, 3));
                 GiveMatter(damage);
             }
             else
             {
                 GiveMatter(prevHealth);
+                Undo();
             }
-            if (health <= 0) Undo();
         }
 
         private static void GiveMatter(InfiniteInteger damage)
         {
+            var balance = MainGameStatsHolder.Currency.Balance;
+            if (balance <= 0)
+            {
+                MainGameStatsHolder.Currency.Balance = 0;
+            }
+            if (damage <= 0)
+            {
+                return;
+            }
             InfiniteInteger reward = damage;
             reward *= MainGameStatsHolder.Timers.CoinMultiplierTimer > 0 ? 3 : 1;
             reward *= MainGameStatsHolder.Timers.X10Reward > 0 ? 10 : 1;
@@ -94,20 +111,19 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
 
         private void ChangeColor()
         {
-            Color currentColor = color;
+            Color currentColor = startingColor;
             currentColor.r *= (float)(health / startingHealth);
-            currentColor.g *= 1 - (float)(health / startingHealth);
-            currentColor.b *= 1 - (float)(health / startingHealth);
+            currentColor.g *= (float)(health / startingHealth);
+            currentColor.b *= (float)(health / startingHealth);
             GetComponent<SpriteRenderer>().color = currentColor;
-            GetComponent<TrailRenderer>().startColor = currentColor;
         }
 
         private void SetStartingColor()
         {
             float colorIntencity = Sigmoida(health.Exponent, 2);
-            GetComponent<SpriteRenderer>().color = new Color(r: colorIntencity, g: -colorIntencity + 1, b: -colorIntencity + 1);
-            color = GetComponent<SpriteRenderer>().color;
-            GetComponent<TrailRenderer>().startColor = color;
+            color = new Color(r: colorIntencity, g: -colorIntencity + 1, b: -colorIntencity + 1);
+            GetComponent<SpriteRenderer>().color = color;
+            startingColor = color;
         }
 
         private void GivePowerUp()

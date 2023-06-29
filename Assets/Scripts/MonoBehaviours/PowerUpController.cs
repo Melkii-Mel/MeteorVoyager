@@ -10,66 +10,48 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
         [SerializeField] private Text coinsText;
         [SerializeField] private Text powerText;
         [SerializeField] private Text explosionsText;
-        private bool coinsRunning;
-        private bool powerRunning;
-        private bool explosionRunning;
 
         public void StartController()
         {
-            if (MainGameStatsHolder.Timers.CoinMultiplierTimer > 0 && !coinsRunning)
-            {
-                StartCoroutine(CoinTimer());
-            }
-            if (MainGameStatsHolder.Timers.DamageMultiplierTimer > 0 && !powerRunning)
-            {
-                StartCoroutine(PowerTimer());
-            }
-            if (MainGameStatsHolder.Timers.ExplosivesAttacksTimer > 0 && !explosionRunning)
-            {
-                StartCoroutine(ExplosionsTimer());
-            }
+            GlobalTimer.AddAction(HandleTimers);
         }
-
-        IEnumerator CoinTimer()
+        void HandleTimers()
         {
-            coinsRunning = true;
+            CoinTimer();
+            PowerTimer();
+            ExplosionsTimer();
+        }
+        void CoinTimer()
+        {
             while (MainGameStatsHolder.Timers.CoinMultiplierTimer > 0)
             {
                 float coins = MainGameStatsHolder.Timers.CoinMultiplierTimer;
+                if (coins < 0) coins = 0;
                 coinsText.text = ConvertTimeToMinutesSeconds(coins);
                 MainGameStatsHolder.Timers.CoinMultiplierTimer -= Time.deltaTime;
-                yield return null;
             }
             coinsText.text = "00:00";
-            coinsRunning = false;
         }
 
-        IEnumerator PowerTimer()
+        void PowerTimer()
         {
-            powerRunning = true;
             while (MainGameStatsHolder.Timers.DamageMultiplierTimer > 0)
             {
                 float damage = MainGameStatsHolder.Timers.DamageMultiplierTimer;
+                if (damage < 0) damage = 0;
                 powerText.text = ConvertTimeToMinutesSeconds(damage);
                 MainGameStatsHolder.Timers.DamageMultiplierTimer -= Time.deltaTime;
-                yield return null;
             }
             powerText.text = "00:00";
-            powerRunning = false;
         }
 
-        IEnumerator ExplosionsTimer()
+        void ExplosionsTimer()
         {
-            explosionRunning = true;
-            while (MainGameStatsHolder.Timers.ExplosivesAttacksTimer > 0)
-            {
-                float explosions = MainGameStatsHolder.Timers.ExplosivesAttacksTimer;
-                explosionsText.text = ConvertTimeToMinutesSeconds(explosions);
-                MainGameStatsHolder.Timers.ExplosivesAttacksTimer -= Time.deltaTime;
-                yield return null;
-            }
+            float explosions = MainGameStatsHolder.Timers.ExplosivesAttacksTimer;
+            if (explosions < 0) explosions = 0;
+            explosionsText.text = ConvertTimeToMinutesSeconds(explosions);
+            MainGameStatsHolder.Timers.ExplosivesAttacksTimer -= Time.deltaTime;
             explosionsText.text = "00:00";
-            explosionRunning = false;
         }
 
         private string ConvertTimeToMinutesSeconds(float input)

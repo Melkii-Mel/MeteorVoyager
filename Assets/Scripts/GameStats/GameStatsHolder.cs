@@ -1,5 +1,5 @@
-﻿using MeteorVoyager.Assets.Scripts.GameStatsNameSpace;
-using SerializationLibrary;
+﻿using SerializationLibrary;
+using SerializationLibrary.Local;
 using System;
 using UnityEngine;
 
@@ -23,6 +23,16 @@ namespace MeteorVoyager.Assets.Scripts.GameStatsNameSpace
             Settings = CreateSerializable<SettingsGameStats>();
             Timers = CreateSerializable<Timers>();
             TurretUpgrades = CreateSerializable<TurretUpgrades>();
+        }
+        public void ResetAllSerialization()
+        {
+            Currency = ResetSerializable<Currency>();
+            DataUpgrades = ResetSerializable<DataUpgradesGameStats>();
+            MeteorUpgrades = ResetSerializable<MeteorUpgrades>();
+            Progression = ResetSerializable<Progression>();
+            Settings = ResetSerializable<SettingsGameStats>();
+            Timers = ResetSerializable<Timers>();
+            TurretUpgrades = ResetSerializable<TurretUpgrades>();
         }
     }
 }

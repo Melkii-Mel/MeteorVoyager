@@ -20,11 +20,12 @@ namespace Assets.Scripts.MonoBehaviours
                 bulletBullet.isCharged = true;
                 chargedBullet.transform.localScale *= 3;
                 chargedBullet.GetComponent<TrailRenderer>().widthMultiplier *= 3;
-                chargedBullet.GetComponent<TrailRenderer>().time = 1.5f;
+                chargedBullet.GetComponent<TrailRenderer>().time *= 2.5f;
+                chargedBullet.GetComponent<Bullet>().EmitterTransform = transform;
                 return;
             }
             Quaternion rot = transform.rotation;
-            rot.z += Random.Range(-(float)spreadPower * Mathf.Deg2Rad, (float)spreadPower * Mathf.Deg2Rad);
+            rot.z += Random.Range(-(float)spreadPower * Mathf.Deg2Rad, spreadPower * Mathf.Deg2Rad);
             GameObject thisBullet = Instantiate(bullet, emitter.transform.position, emitter.transform.rotation);
             thisBullet.GetComponent<Bullet>().EmitterTransform = transform;
         }
