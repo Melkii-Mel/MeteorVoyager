@@ -1,4 +1,5 @@
-﻿using SerializationLibrary;
+﻿using Codice.CM.Common.Tree.Partial;
+using SerializationLibrary;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -72,7 +73,7 @@ namespace MeteorVoyager.Assets.Scripts.GameStatsNameSpace
 
                 if (lvl <= 10)
                 {
-                    return ((InfiniteInteger)(lvl + 2)).Pow(8);
+                    return InfiniteInteger.Pow(lvl + 2, 8);
                 }
                 else
                 {
@@ -84,7 +85,7 @@ namespace MeteorVoyager.Assets.Scripts.GameStatsNameSpace
             {
                 if (lvl <= 25)
                 {
-                    return lvl == 0 ? 10000 : (InfiniteInteger)(lvl * Mathf.Pow(10, Mathf.Sqrt(lvl)));
+                    return lvl == 0 ? 10000 : new InfiniteInteger(1, lvl + 2);
                 }
                 else
                 {
@@ -96,7 +97,7 @@ namespace MeteorVoyager.Assets.Scripts.GameStatsNameSpace
             {
                 if (lvl <= 50000)
                 {
-                    return (InfiniteInteger)Mathf.Pow(30, Mathf.Pow(lvl/20f + 1, 0.23f));
+                    return InfiniteInteger.Pow(30, Mathf.Pow(lvl/20f + 1, 0.23f));
                 }
                 else
                 {
@@ -108,7 +109,7 @@ namespace MeteorVoyager.Assets.Scripts.GameStatsNameSpace
             {
                 if (lvl <= 50000)
                 {
-                    return (InfiniteInteger)Mathf.Pow(5, Mathf.Pow(lvl, 0.23f));
+                    return InfiniteInteger.Pow(5, Mathf.Pow(lvl, 0.23f));
                 }
                 else
                 {
@@ -120,7 +121,7 @@ namespace MeteorVoyager.Assets.Scripts.GameStatsNameSpace
             {
                 if (lvl <= 200)
                 {
-                    return (InfiniteInteger)Mathf.Pow(lvl, 2.8f) * 40 / (lvl < 10 ? 10 : 1);
+                    return InfiniteInteger.Pow(lvl, 2.8f) * 40 / (lvl < 10 ? 10 : 1);
                 }
                 else
                 {

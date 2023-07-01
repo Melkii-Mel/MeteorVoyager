@@ -46,11 +46,11 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours.UpgradesNS
             bool CheckIfCanUpgrade()
             {
                 _cost = _formula(_value);
-                if (MainGameStatsHolder.Currency.Balance < _cost || _cost == -1)
+                if (MainGameStatsHolder.Currency.Balance >= _cost && _cost != -1)
                 {
-                    return false;
+                    return true;
                 }
-                return true;
+                return false;
             }
             void Upgrade(InfiniteInteger cost)
             {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using System.Xml.Serialization;
 
 namespace MeteorVoyager.Assets.Scripts
@@ -234,18 +235,59 @@ namespace MeteorVoyager.Assets.Scripts
 
         public static InfiniteInteger Pow(InfiniteInteger a, float power)
         {
-            a._base = Math.Pow(a._base, power);
+            int exponentPlus = 0;
+            double startingBase = a._base;
+            a._base = 1;
+            for (int i = 0; i < power; i++)
+            {
+                a._base *= startingBase;
+                if (a._base > 10)
+                {
+                    a._base /= 10;
+                    exponentPlus++;
+                }
+            }
             a._exponent *= power;
+            a._exponent += exponentPlus;
             Compress(ref a);
             return a;
         }
 
         public InfiniteInteger Pow(float power)
         {
+
+            int exponentPlus = 0;
+            double startingBase = _base;
+            _base = 1;
+            for (int i = 0; i < power; i++)
+            {
+                _base *= startingBase;
+                if (_base > 10)
+                {
+                    _base /= 10;
+                    exponentPlus++;
+                }
+            }
+            _exponent *= power;
+            _exponent += exponentPlus;
+            Compress(ref this);
+            return this;
+        }
+        [Obsolete("Methos doesnt support high values of power")]
+        public InfiniteInteger OldPow(float power)
+        {
             _base = Math.Pow(_base, power);
             _exponent *= power;
             Compress(ref this);
             return this;
+        }
+        [Obsolete("Methos doesnt support high values of power")]
+        public static InfiniteInteger OldPow(InfiniteInteger a, float power)
+        {
+            a._base = Math.Pow(a._base, power);
+            a._exponent *= power;
+            Compress(ref a);
+            return a;
         }
 
         private static InfiniteInteger Compress(ref InfiniteInteger ii)

@@ -38,7 +38,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
                     {
                         OnChargedShot();
                         emitter.Shoot(charging: charging);
-                        cd += shotCooldown * 5;
+                        cd += Mathf.Sqrt(shotCooldown * 5);
                     }
                     else
                     {
