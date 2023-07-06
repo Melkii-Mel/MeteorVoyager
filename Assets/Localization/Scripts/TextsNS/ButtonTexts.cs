@@ -6,8 +6,8 @@ namespace MeteorVoyager.Assets.Localization.Scripts.TextsNS
     public class ButtonTexts
     {
         #region Relocation
-        public string RelocationScreen = "Relocation";
-        public string ConfirmRelocation = "RELOCATE";
+        public string RelocationScreen = "Warp";
+        public string ConfirmRelocation = "WARP!";
         public string PierceCountUpgrade = "Piercing Power";
         #endregion
         #region Turret Upgrades

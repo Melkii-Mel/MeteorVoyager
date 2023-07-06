@@ -20,11 +20,11 @@ namespace MeteorVoyager.Assets.Localization.Scripts.TextsNS
             "\nDon't hesitate to upgrade them. " +
             "\nTo progress to the next stage, you must collect one million (1e6) units of matter.";
 
-        public string StageFour = "Now, when you went so far, you can RELOCATE" +
+        public string StageFour = "Now, when you went so far, you are able to Warp" +
             "\nThis will restart your journey and cause you to lose all your upgrades and matter" +
-            "\nHowever, upon relocating, you will gain access to all the data you collected during your previous journey" +
+            "\nHowever, upon warping, you will have access to all the data you collected during your previous journey" +
             "\nThis data makes new journey more efficient, but besides passive impact it can be spent on researches" +
-            "\nBe careful, though, as unoptimized utilization could make your new journey less efficient than it could be " +
+            "\nBe careful, though, as inefficient utilization of this data could make your new journey less efficient than it could be " +
             "\n(though it will still be more efficient than the previous one)";
     }
 }
