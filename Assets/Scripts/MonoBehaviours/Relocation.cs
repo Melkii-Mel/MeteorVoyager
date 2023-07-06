@@ -12,10 +12,13 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
         [SerializeField] GameObject canvas;
         [SerializeField] GameObject cam;
         [SerializeField] EnemySpawner spawner;
-        public void StartDataAmountCalculator()
+
+
+        public void Start()
         {
             StartCoroutine(Calculator());
         }
+
         /// <summary>
         /// Used to show how much data you will get after relocation
         /// </summary>
@@ -24,7 +27,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
             for (; ; )
             {
                 InfiniteInteger value = CalculateAmountOfData();
-                relocationText.text = $"After relocation you will get {value} units of data";
+                relocationText.text = $"After relocation \nyou will receive \n{value} units of data";
                 yield return null;
             }
         }
@@ -60,8 +63,9 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
             spawner.StopEnemiesSpawning();
             StarsBehaviour.trailsEnabled = true;
             StarsGenerator.relocationState = true;
-            foreach (GameObject enemy in EnemySpawner.Enemies)
+            for (int i = EnemySpawner.Enemies.Count - 1; i >= 0; i--)
             {
+                GameObject enemy = EnemySpawner.Enemies[i];
                 EnemySpawner.Enemies.Remove(enemy);
                 Destroy(enemy);
             }

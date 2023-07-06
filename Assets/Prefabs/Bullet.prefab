@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 9109968618886696267}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.002116378, y: -3.134767, z: 2}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -106,6 +106,7 @@ MonoBehaviour:
   chargedDamageCoefficient: 0
   isCharged: 0
   timer: 0.5
+  SPEED_MULTIPLIER: 3
 --- !u!61 &799408613801436592
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -177,7 +178,7 @@ TrailRenderer:
   m_Time: 0.1
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 70.24433
+    widthMultiplier: 2.045685
     widthCurve:
       serializedVersion: 2
       m_Curve:

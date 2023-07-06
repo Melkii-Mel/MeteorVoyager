@@ -111,6 +111,7 @@ namespace Assets.Scripts.UnitTests
             }
         }
         [Test]
+        [Obsolete]
         public void NewPowTests()
         {
             Assert.That(InfiniteInteger.Pow(10, 3) == InfiniteInteger.OldPow(10, 3), Is.True);

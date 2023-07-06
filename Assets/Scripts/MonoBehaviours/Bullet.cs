@@ -15,7 +15,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
         [SerializeField][Range(0.5f, 10f)] float timer;
         float lifeTimer = 5;
         float _scaleCounter;
-        private const float SPEED_MULTIPLIER = 100;
+        [SerializeField] private float SPEED_MULTIPLIER = 5;
         private float chargedBulletSpeedMultiplier = 1;
         Vector3 _scale;
         void Start()
