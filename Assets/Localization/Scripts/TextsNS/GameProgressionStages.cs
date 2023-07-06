@@ -5,26 +5,27 @@ namespace MeteorVoyager.Assets.Localization.Scripts.TextsNS
     [Serializable]
     public class GameProgressionStages
     {
-        public string UniversalStage = "There is no hint for this stage of the game. \nThey might appear in the future or you just need to go to touch grass";
-        public string StageOne = "Game might feel slow at the start, but progress will speed up as you grow. " +
-            "\nYou could make progress faster if you use free booster located at the upper right corner" +
-            "\nStage progression requirement: LvL 50 at Spawn Cooldown Upgrade";
-        public string StageTwo = "Upgrading damage might be pretty useful because you get more material from asteroids by destroying them completely" +
-            "\nEvery 30 levels of upgrading Spawn Cooldown will cause asteroids to become more dense resulting in doubling their health and slight decreasing their amount" +
-            "\nThe amount of material that you can obtain from them is proportional to their health, so stronger asteroids yield more material. " +
-            "\nTherefore, upgrading your damage becomes even more valuable as you progress further." +
-            "\nYou probably want to push to the Charge Attack upgrade because it's quite strong, but it is not really necessary" +
-            "\nStage progression requirement: Lvl 1 at charge attack";
-        public string StageThree = "New upgrades are now available that allow you to obtain temporary power-ups from glowing asteroids. " +
-            "\nAlthough these power-ups don't last very long, they are more useful than they may appear at first glance. " +
-            "\nDon't hesitate to upgrade them. " +
-            "\nTo progress to the next stage, you must collect one million (1e6) units of matter.";
+        public string UniversalStage = "Для этой стадии игры нет подсказки. Они появятся в будущем или вам просто нужно потрогать траву";
+        public string StageOne = "Вначале игра может ощущаться медленной, но чем дальше ты зайдёшь, тем сильнее прогресс будет ускоряться" +
+            "\nПрогресс можно ускорить благодаря бесплатному усилителю, расположенному в правом верхнем углу экрана" +
+            "\nТребование для перехода на следующую стадию: LvL 50 скорости появления астероидов";
+        public string StageTwo = "Улучшения урона может быть полезно, поскольку при полном уничтожении астероида он даёт дополнительную материю" +
+            "\nКаждые {0} уровней улучшения скорости появления астероидов сделают их более плотными, что приведёт к удвоению их здоровья и небольшому уменьшению их количества" +
+            "\nКоличество материи, которую ты можешь получить из астероида, пропорционально количеству их здоровья, то есть более плотные астероиды позволяют получить больше материи" +
+            "\nПоэтому, улучшение урона становится ещё более полезным при дальнейшем продвижении." +
+            "\nВы можете постараться добраться до улучшения Заряженной Атаки, поскольку она очень сильна, но эту цель необязательно приоритизировать." +
+            "\nТребование для перехода на следующую стадию: Lvl 1 заряженной атаки.";
+        public string StageThree = "Теперь доступны новые улучшения, которые позволяют вам получать временные усиления при разрушении светящихся астероидов." +
+            "\nНесмотря на то, что эти усиления кратковременны, они более полезны, чем могут показаться на первый взгляд" +
+            "\nНе стесняйтесь улучшать их. " +
+            "\nДля перехода к следующей стадии, вам нужно собрать один миллион (1e6) материи.";
 
-        public string StageFour = "Now, when you went so far, you are able to Warp" +
-            "\nThis will restart your journey and cause you to lose all your upgrades and matter" +
-            "\nHowever, upon warping, you will have access to all the data you collected during your previous journey" +
-            "\nThis data makes new journey more efficient, but besides passive impact it can be spent on researches" +
-            "\nBe careful, though, as inefficient utilization of this data could make your new journey less efficient than it could be " +
-            "\n(though it will still be more efficient than the previous one)";
+        public string StageFour = "Теперь, когда ты забрался так далеко, у тебя появилась возможность совершить Варп" +
+            "\nЭто приведёт к перезапуску твоего приключения, в результате чего ты потеряешь все улучшения и материю" +
+            "\nОднако, после Варпа, ты получишь доступ ко всем данным, собранным в течение предыдущего приключения" +
+            "\nЭти данные сделают твоё приключение более эффективным, но помимо пассивного воздействия они могут быть потрачены на исследования" +
+            "\nОднако, нужно быть осторожным, поскольку неэффективное использования данных может сделать новое путешествие не таким эффективным, " +
+            "\nкаким оно потенциально могло бы быть"+
+            "\n(но оно всё ещё будет более эффективным, чем предыдущее)";
     }
 }

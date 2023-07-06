@@ -11,7 +11,7 @@ namespace MeteorVoyager.Assets.Localization.Scripts.TextsNS
         public void Serialize()
         {
             string json = ToJson(_texts);
-            File.WriteAllText(RELATIVE_PATH + "en.json", json);
+            File.WriteAllText(RELATIVE_PATH + "ru.json", json);
         }
     }
 }

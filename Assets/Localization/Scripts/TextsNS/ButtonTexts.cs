@@ -6,22 +6,22 @@ namespace MeteorVoyager.Assets.Localization.Scripts.TextsNS
     public class ButtonTexts
     {
         #region Relocation
-        public string RelocationScreen = "Warp";
-        public string ConfirmRelocation = "WARP!";
-        public string PierceCountUpgrade = "Piercing Power";
+        public string RelocationScreen = "Скачок";
+        public string ConfirmRelocation = "СКАЧОК!";
+        public string PierceCountUpgrade = "Сила пробивания";
         #endregion
         #region Turret Upgrades
-        public string ShotCooldown = "Shot Cooldown";
-        public string ChargeAttack = "Charged Attack";
-        public string SpawnCooldown = "Spawn Cooldown";
-        public string Damage = "Damage";
+        public string ShotCooldown = "Перезарядка выстрела";
+        public string ChargeAttack = "Заряженная атака";
+        public string SpawnCooldown = "Скорость появления астероидов";
+        public string Damage = "Урон";
         #endregion
         #region MeteorUpgrades
-        public string GlowingEnemiesSpawnRate = "Glowing Meteors Spawn Rate";
-        public string ExplosivesAttacksTimeUpgrade = "Explosives Attacks Time";
-        public string CoinMultiplier = "More Matter";
-        public string CoinMultiplierTimeUpgrade = "Matter Multiplier Time";
-        public string DamageMultiplierTimeUpgrade = "Damage Multiplier Time";
+        public string GlowingEnemiesSpawnRate = "Шанс появления мерцающих астероидов";
+        public string ExplosivesAttacksTimeUpgrade = "Длительность разрывных атак";
+        public string CoinMultiplier = "Больше материи";
+        public string CoinMultiplierTimeUpgrade = "Длительность множителя материи";
+        public string DamageMultiplierTimeUpgrade = "Длительность множителя урона";
         #endregion
         #region DataUpgrades (NotImplemented)
         #endregion
