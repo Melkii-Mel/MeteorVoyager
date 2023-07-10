@@ -8,9 +8,10 @@ namespace MeteorVoyager.Assets.Localization.Scripts.TextsNS
         #region Relocation
         public string RelocationScreen = "Скачок";
         public string ConfirmRelocation = "СКАЧОК!";
-        public string PierceCountUpgrade = "Сила пробивания";
+        public string UnableToRelocate = "Пока что совершнить скачок невозможно";
         #endregion
         #region Turret Upgrades
+        public string PierceCountUpgrade = "Сила пробивания";
         public string ShotCooldown = "Перезарядка выстрела";
         public string ChargeAttack = "Заряженная атака";
         public string SpawnCooldown = "Скорость появления астероидов";

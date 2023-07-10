@@ -3,7 +3,8 @@
     "rootNamespace": "MeteorVoyager",
     "references": [
         "GUID:d8b63aba1907145bea998dd612889d6b",
-        "GUID:ff6de30450f3748908ff580f6ec64d9a"
+        "GUID:ff6de30450f3748908ff580f6ec64d9a",
+        "GUID:3db113c7dc12522439dab9127e4e194d"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

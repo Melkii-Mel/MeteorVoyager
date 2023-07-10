@@ -16,7 +16,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
             hintScreen.SetActive(true);
             try
             {
-                hintText.text = HintsTexts.HINTS[ProgressionController.GameStage];
+                hintText.text = HintsTexts.HINTS[GameStats.MainGameStatsHolder.Progression.GameStage];
             }
             catch (IndexOutOfRangeException)
             {

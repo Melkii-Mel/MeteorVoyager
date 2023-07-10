@@ -11,28 +11,23 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
         [SerializeField] GameObject textData;
         void Start()
         {
-            StartCoroutine(DataUnlockChecker());
+            MainGameStatsHolder.Progression.OnProgressionUpdate += DataUnlockChecker;
         }
         void Update()
         {
-            textBalance.GetComponent<Text>().text = "Matter: " + MainGameStatsHolder.Currency.Balance.ToString();
-            textData.GetComponent<Text>().text = "Data: " + MainGameStatsHolder.Currency.Data.ToString();
+            textBalance.GetComponent<Text>().text = $"{Texts.CurrencyTexts.Matter}: " + MainGameStatsHolder.Currency.Balance.ToString();
+            textData.GetComponent<Text>().text = $"{Texts.CurrencyTexts.Data}: " + MainGameStatsHolder.Currency.Data.ToString();
         }
-        IEnumerator DataUnlockChecker()
+        void DataUnlockChecker()
         {
-            for (; ; )
+            if (MainGameStatsHolder.Progression.GameStage >= 4)
             {
-                if (ProgressionController.GameStage >= 4)
-                {
-                    textData.SetActive(true);
-                    StopCoroutine(DataUnlockChecker());
-                }
-                else
-                {
-                    textData.SetActive(false);
-                }
-
-                yield return new WaitForSeconds(1);
+                textData.SetActive(true);
+                MainGameStatsHolder.Progression.OnProgressionUpdate -= DataUnlockChecker;
+            }
+            else
+            {
+                textData.SetActive(false);
             }
         }
     }

@@ -2,16 +2,20 @@ using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.GameStats;
 using System.Collections;
 using UnityEngine;
 using MeteorVoyager.Assets.Scripts.GameStatsNameSpace;
+using System;
 
 namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
 {
     public class ProgressionController
     {
-        public static int GameStage { get; private set; }
-        public ProgressionController(int gameStage)
+        public int GameStage { get; set; }
+        private Action _onUpdate;
+        public ProgressionController(Action action)
         {
             new Timer(0.1f, CheckGameStage, true);
-            GameStage = gameStage;
+            GameStage = 0;
+            _onUpdate = action;
+            action();
         }
         void CheckGameStage()
         {
@@ -36,6 +40,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
         void UpdateGameStage()
         {
             GameStage++;
+            _onUpdate();
         }
     }
 }

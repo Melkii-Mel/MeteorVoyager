@@ -1,10 +1,8 @@
-using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.GameStats;
-using MeteorVoyager.Assets.Scripts.GameStatsNameSpace;
 using System;
-using System.Collections;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
+using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.GameStats;
 
 namespace MeteorVoyager.Assets.Scripts.MonoBehaviours.UpgradesNS
 {
@@ -14,26 +12,15 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours.UpgradesNS
     /// </summary>
     public abstract class UpgradesButtonActions : MonoBehaviour
     {
-        /// <summary>
-        /// True if last time called Buy() method bought successful, else false
-        /// </summary>
-        public bool UpgradedLastTime;
         protected int _value;
         protected Func<int, InfiniteInteger> _formula;
         protected InfiniteInteger _cost;
         protected Action _onStart;
 
-        private void OnEnable()
-        {
-            OnRelocation += Start;
-        }
-
-        private void OnDisable()
-        {
-            OnRelocation -= Start;
-        }
         public void Start()
         {
+            AfterRelocation += Init;
+            AfterRelocation += () => UpdateText(_formula(_value));
             Init();
             GetComponent<Button>().onClick.AddListener(Buy);
             UpdateText(_cost);
@@ -64,14 +51,6 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours.UpgradesNS
             {
                 _value++;
                 UpdateGameStats(_value, cost);
-            }
-            if (CheckIfCanUpgrade())
-            {
-                UpgradedLastTime = true;
-            }
-            else
-            {
-                UpgradedLastTime = false;
             }
             if (BuyMultiplier.multiplier != -1)
             {

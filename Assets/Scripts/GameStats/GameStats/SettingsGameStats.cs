@@ -9,5 +9,6 @@ namespace MeteorVoyager.Assets.Scripts.GameStatsNameSpace
         public float StarsAmountMultiplier { get; set; } = 1;
         public bool TrailsEnabled { get; set; } = true;
         public bool ParticlesEnabled { get; set; } = true;
+        public string Language { get; set; } = "en";
     }
 }

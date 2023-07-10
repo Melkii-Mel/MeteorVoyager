@@ -15,7 +15,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
         [SerializeField] GameObject chargingFillArea;
         [SerializeField] BulletEmitter emitter;
         [Range(0f, 10f)] public float shotCooldown;
-        bool controlsDisabled;
+        bool controlDisabled;
 
 
         private float cd;
@@ -32,7 +32,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
             else
             {
                 FindTouchCoordinates(out float x, out float y);
-                if (DetectIfTouchPositionValid(y))
+                if (DetectIfTouchPositionValid(y) && !controlDisabled)
                 {
                     RotateTurretToTouch(x, y);
                 }
@@ -119,6 +119,10 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
             }
             void DecreaseCooldown()
             {
+                if (cd <= -shotCooldown)
+                {
+                    return;
+                }
                 cd -= Time.deltaTime * (Mathf.Sqrt(MainGameStatsHolder.TurretUpgrades.ShotCooldown) + 1) / 2;
             }
             void RotateTurretToTouch(float x, float y)
@@ -142,7 +146,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
             }
             bool DetectIfCanShoot(float y)
             {
-                return DetectIfTouchPositionValid(y) && !IsSomeFieldEnabled && !controlsDisabled && cd + shotCooldown < 0;
+                return DetectIfTouchPositionValid(y) && !IsSomeFieldEnabled && !controlDisabled && cd + shotCooldown < 0;
 
             }
             bool DetectIfTouchPositionValid(float y)
@@ -159,14 +163,14 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
 
         public void DisableContol()
         {
-            controlsDisabled = true;
-            Quaternion quaternion = Quaternion.identity;
-            quaternion.z = 0;
+            controlDisabled = true;
+            Quaternion quaternion = transform.rotation;
+            quaternion.x = 0;
             transform.rotation = quaternion;
         }
         public void EnableContol()
         {
-            controlsDisabled = false;
+            controlDisabled = false;
         }
     }
 }
