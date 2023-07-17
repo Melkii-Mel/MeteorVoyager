@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,7 +27,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
                 case 100: multiplier = -1; break;
                 case -1: multiplier = 1; break;
             }
-            transform.GetChild(0).gameObject.GetComponent<Text>().text = multiplier != -1 ? $"X{multiplier}" : "MAX";
+            transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = multiplier != -1 ? $"X{multiplier}" : "MAX";
         }
     }
 }

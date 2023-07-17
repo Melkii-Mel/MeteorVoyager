@@ -11,5 +11,7 @@
         public CurrencyTexts CurrencyTexts;
         public GameProgressionStages StageTexts;
         public OtherTexts OtherTexts;
+        public TimersTexts TimersTexts;
+        public SettingsTexts SettingsTexts;
     }
 }

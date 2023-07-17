@@ -7,17 +7,21 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
     public class Timer
     {
         public float IntervalS { get; set; } = 1;
-        public Action OnTick { get; set; }
+
+        public delegate void OnTimerTickEventHandler(float deltaTimeMS);
+
+        public event OnTimerTickEventHandler OnTimerTick;
+
         public bool Running { get; private set; } = false;
 
-        public Timer(float intervalS, Action action, bool enableOnStart)
+        public Timer(float intervalS, OnTimerTickEventHandler @event, bool enableOnStart)
         {
             if (intervalS <= 0)
             {
                 throw InvalidIntervalException;
             }
             IntervalS = intervalS;
-            OnTick = action;
+            OnTimerTick = @event;
             if (enableOnStart)
             {
                 StartTimer();
@@ -64,7 +68,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
                     StopCoroutine();
                     return;
                 }
-                OnTick();
+                OnTimerTick?.Invoke(IntervalS * 1000);
                 await Task.Delay((int)(IntervalS * 1000));
             }
         }

@@ -17,7 +17,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
             _onUpdate = action;
             action();
         }
-        void CheckGameStage()
+        void CheckGameStage(float deltaTimeMS)
         {
             if (MainGameStatsHolder == null) return;
             if (GameStage == 0 && MainGameStatsHolder.TurretUpgrades.SpawnCooldown >= 50)

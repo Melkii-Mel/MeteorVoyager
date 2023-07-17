@@ -13,9 +13,9 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
 
         public void StartController()
         {
-            GlobalTimer.AddAction(HandleTimers);
+            GlobalTimer.OnTick += HandleTimers;
         }
-        void HandleTimers()
+        void HandleTimers(float deltaTimeMS)
         {
             CoinTimer();
             PowerTimer();

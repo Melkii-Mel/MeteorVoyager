@@ -32,7 +32,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
         private Timer _timer;
         void Start()
         {
-            _timer = new(intervalS: TimerInterval, action: SpawnEnemy, enableOnStart: true);
+            _timer = new(intervalS: TimerInterval, @event: SpawnEnemy, enableOnStart: true);
         }
         private void Update()
         {
@@ -49,7 +49,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
             _timer.Stop();
         }
 
-        void SpawnEnemy()
+        void SpawnEnemy(float deltaTimeMS)
         {
             if (Enemies.Count > 100)
             {

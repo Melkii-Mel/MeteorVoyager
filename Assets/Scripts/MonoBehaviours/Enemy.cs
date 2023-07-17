@@ -7,6 +7,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
 {
     public class Enemy : MonoBehaviour
     {
+        private const int ENOUGH_HITS = 5;
         [SerializeField] private GameObject particles;
         [SerializeField] private PowerUpController powerUpController;
         float lifetime = 20;
@@ -17,6 +18,22 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
         public float speed;
         public bool isGlowing;
         public int hits;
+
+        #region events;
+
+        public delegate void EnemyDestroyHandler(Enemy enemy);
+        public event EnemyDestroyHandler OnEnemyDestroy;
+        public static event EnemyDestroyHandler OnAnyEnemyDestroy;
+
+        public delegate void EnemyDestroyOrEnoughHitsHandler(Enemy enemy);
+        public event EnemyDestroyOrEnoughHitsHandler OnEnemyDestroyOrEnoughHits;
+        public static event EnemyDestroyOrEnoughHitsHandler OnAnyEnemyDestroyOrEnoughHits;
+
+        public delegate void EnemyDespawnHandler(Enemy enemy);
+        public event EnemyDespawnHandler OnEnemyDespawn;
+        public static event EnemyDespawnHandler OnAnyEnemyDespawn;
+
+        #endregion
         private void Start()
         {
             transform.GetChild(0).gameObject.SetActive(isGlowing);
@@ -30,6 +47,8 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
             lifetime -= Time.deltaTime;
             if (lifetime < 0)
             {
+                OnEnemyDespawn?.Invoke(this);
+                OnAnyEnemyDespawn?.Invoke(this);
                 EnemySpawner.Enemies.Remove(gameObject);
                 Destroy(gameObject);
             }
@@ -37,9 +56,16 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
 
         public void Undo()
         {
-            if (isGlowing && hits < 5)
+            OnEnemyDestroy?.Invoke(this);
+            OnAnyEnemyDestroy?.Invoke(this);
+            if (hits < ENOUGH_HITS)
             {
-                GivePowerUp();
+                OnEnemyDestroyOrEnoughHits?.Invoke(this);
+                OnAnyEnemyDestroyOrEnoughHits?.Invoke(this);
+                if (isGlowing)
+                {
+                    GivePowerUp();
+                }
             }
             if (MainGameStatsHolder.Settings.ParticlesEnabled)
             {
@@ -56,6 +82,11 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
         public void DealDamage(InfiniteInteger damage)
         {
             hits++;
+            if (hits == ENOUGH_HITS)
+            {
+                OnEnemyDestroyOrEnoughHits?.Invoke(this);
+                OnAnyEnemyDestroyOrEnoughHits?.Invoke(this);
+            }
             if (isGlowing && hits == 5)
             {
                 isGlowing = false;

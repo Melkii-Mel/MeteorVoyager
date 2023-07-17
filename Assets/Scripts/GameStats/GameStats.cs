@@ -20,7 +20,7 @@ namespace MeteorVoyager.Assets.Scripts.GameStatsNameSpace
         public static Action AfterRelocation;
         
         #region Update Texts Methods
-        static Texts UpdateTexts(string Language)
+        public static Texts UpdateTexts(string Language)
         {
             if(Enum.TryParse(Language, out Languages language))
             {
@@ -28,7 +28,7 @@ namespace MeteorVoyager.Assets.Scripts.GameStatsNameSpace
             }
             return UpdateTexts(Languages.en);
         }
-        static Texts UpdateTexts(Languages language)
+        public static Texts UpdateTexts(Languages language)
         {
             Texts = LanguageDeserializer.Deserialize(language);
             return Texts;

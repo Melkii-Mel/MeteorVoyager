@@ -1,5 +1,6 @@
 using System;
 using System.Text.RegularExpressions;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.GameStats;
@@ -12,7 +13,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours.UpgradesNS
     /// </summary>
     public abstract class UpgradesButtonActions : MonoBehaviour
     {
-        protected int _value;
+        protected abstract int Value { get; set; }
         protected Func<int, InfiniteInteger> _formula;
         protected InfiniteInteger _cost;
         protected Action _onStart;
@@ -20,7 +21,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours.UpgradesNS
         public void Start()
         {
             AfterRelocation += Init;
-            AfterRelocation += () => UpdateText(_formula(_value));
+            AfterRelocation += () => UpdateText(_formula(Value));
             Init();
             GetComponent<Button>().onClick.AddListener(Buy);
             UpdateText(_cost);
@@ -29,16 +30,14 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours.UpgradesNS
         protected void Init()
         {
             _formula = GetUpgradeFormula();
-            _value = GetUpgradeLvl();
-            _cost = _formula(_value);
+            _cost = _formula(Value);
         }
         protected abstract Func<int, InfiniteInteger> GetUpgradeFormula();
-        protected abstract int GetUpgradeLvl();
-        protected abstract void UpdateGameStats(int value, InfiniteInteger costOfUpgrade);
+        public abstract InfiniteInteger Balance { get; set; }
 
         public bool CheckIfCanUpgrade()
         {
-            _cost = _formula(_value);
+            _cost = _formula(Value);
             if (MainGameStatsHolder.Currency.Balance >= _cost && _cost != -1)
             {
                 return true;
@@ -49,8 +48,8 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours.UpgradesNS
         {
             void Upgrade(InfiniteInteger cost)
             {
-                _value++;
-                UpdateGameStats(_value, cost);
+                Value++;
+                Balance -= cost;
             }
             if (BuyMultiplier.multiplier != -1)
             {
@@ -74,8 +73,8 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours.UpgradesNS
                     Upgrade(_cost);
                 }
             }
-            UpdateText(_formula(_value));
-            GetComponent<Button>().interactable = _formula(_value) != -1;
+            UpdateText(_formula(Value));
+            GetComponent<Button>().interactable = _formula(Value) != -1;
         }
 
         public void UpdateText(InfiniteInteger cost)
@@ -84,18 +83,18 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours.UpgradesNS
                 (?<=[A-Z])(?=[A-Z][a-z]) |
                  (?<=[^A-Z])(?=[A-Z]) |
                  (?<=[A-Za-z])(?=[^A-Za-z])", RegexOptions.IgnorePatternWhitespace);
-            var text = transform.GetChild(0).GetComponent<Text>();
+            var text = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
 
-            if (_formula(_value) != -1)
+            if (_formula(Value) != -1)
             {
                 text.text =
                     $"{r.Replace(name, " ")}\n" +
-                    $"Lvl: {_value}\n" +
+                    $"Lvl: {Value}\n" +
                     $"Cost: {(cost == 0 ? "FREE" : cost)}";
             }
             else
             {
-                text.text = $"MAX LVL ({_value})";
+                text.text = $"MAX LVL ({Value})";
                 GetComponent<Button>().interactable = false;
             }
         }

@@ -5,9 +5,11 @@ namespace MeteorVoyager.Assets.Scripts.GameStatsNameSpace
 {
     public class Timers : Serializable<Timers>
     {
+        private const int SECOND_MS = 1000;
+
         public Timers() : base()
         {
-            GlobalTimer.AddAction(DecreaseTime);
+            GlobalTimer.OnTick += DecreaseTime;
         }
         public enum Timer
         {
@@ -32,13 +34,13 @@ namespace MeteorVoyager.Assets.Scripts.GameStatsNameSpace
                     CoinMultiplierTimer += time; break;
             }
         }
-        private void DecreaseTime()
+        private void DecreaseTime(float deltaTimeMS)
         {
             //decrease
-            DamageMultiplierTimer -= GlobalTimer.TICK_TIME;
-            ExplosivesAttacksTimer -= GlobalTimer.TICK_TIME;
-            CoinMultiplierTimer -= GlobalTimer.TICK_TIME;
-            X10Reward -= GlobalTimer.TICK_TIME;
+            DamageMultiplierTimer -= deltaTimeMS * SECOND_MS;
+            ExplosivesAttacksTimer -= deltaTimeMS * SECOND_MS;
+            CoinMultiplierTimer -= deltaTimeMS * SECOND_MS;
+            X10Reward -= deltaTimeMS * SECOND_MS;
 
             //check if lower than zero
             if (DamageMultiplierTimer <= 0) DamageMultiplierTimer = 0;

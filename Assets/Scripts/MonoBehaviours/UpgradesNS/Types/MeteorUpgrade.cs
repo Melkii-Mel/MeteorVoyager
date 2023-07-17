@@ -8,20 +8,34 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours.UpgradesNS.Types
     public class MeteorUpgrade : UpgradesButtonActions
     {
         [SerializeField] Upgrades _upgrade;
+
+        public override InfiniteInteger Balance
+        {
+            get
+            {
+                return GameStats.MainGameStatsHolder.Currency.Balance;
+            }
+            set
+            {
+                GameStats.MainGameStatsHolder.Currency.Balance = value;
+            }
+        }
+
+        protected override int Value
+        {
+            get
+            {
+                return GameStats.MainGameStatsHolder.MeteorUpgrades.GetUpgradeLvl(_upgrade);
+            }
+            set
+            {
+                GameStats.MainGameStatsHolder.MeteorUpgrades.Upgrade(_upgrade, value);
+            }
+        }
+
         protected override Func<int, InfiniteInteger> GetUpgradeFormula()
         {
             return Functions[(int)_upgrade];
-        }
-
-        protected override int GetUpgradeLvl()
-        {
-            return GameStats.MainGameStatsHolder.MeteorUpgrades.GetUpgradeLvl(_upgrade);
-        }
-
-        protected override void UpdateGameStats(int value, InfiniteInteger costOfUpgrade)
-        {
-            GameStats.MainGameStatsHolder.MeteorUpgrades.Upgrade(_upgrade, value);
-            GameStats.MainGameStatsHolder.Currency.Balance -= costOfUpgrade;
         }
     }
 }

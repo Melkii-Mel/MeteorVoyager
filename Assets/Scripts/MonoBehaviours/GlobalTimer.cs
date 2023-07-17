@@ -10,22 +10,17 @@ namespace MeteorVoyager
     {
         [SerializeField] float tickTimeSeconds;
 
-        static Action OnTimerTick { get; set; } = delegate { };
+        #region events;
+
+        public static event Timer.OnTimerTickEventHandler OnTick;
+
+        #endregion
         public static float TICK_TIME;
         
         public void Start()
         {
             TICK_TIME = tickTimeSeconds;
-            new Timer(TICK_TIME, OnTimerTick, true);
-        }
-
-        public static void AddAction(Action action)
-        {
-            OnTimerTick += action;
-        }
-        public static void RemoveAction(Action action)
-        {
-            OnTimerTick -= action;
+            new Timer(TICK_TIME, OnTick, true);
         }
     }
 }

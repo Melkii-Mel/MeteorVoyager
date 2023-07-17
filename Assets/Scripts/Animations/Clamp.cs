@@ -39,7 +39,7 @@ namespace MeteorVoyager
             Player.OnShot += ClampDefault;
             Player.OnChargedShot += ClampCharged;
 
-            GlobalTimer.AddAction(TickUnclamp);
+            GlobalTimer.OnTick += TickUnclamp;
         }
 
         public void Update()
@@ -62,7 +62,7 @@ namespace MeteorVoyager
         }
 
         const float STEP_MULTIPLIER = 0.90f;
-        public void TickUnclamp()
+        public void TickUnclamp(float deltaTimeMS)
         {
             dynamicCoeff0 *= STEP_MULTIPLIER;
             dynamicCoeff1 *= STEP_MULTIPLIER;

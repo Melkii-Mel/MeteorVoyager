@@ -5,6 +5,7 @@ namespace MeteorVoyager.Assets.Localization.Scripts.TextsNS
     [Serializable]
     public class ButtonTexts
     {
+        public string HintButtonText;
         #region Relocation
         public string RelocationScreen = "Ñêà÷îê";
         public string ConfirmRelocation = "ÑÊÀ×ÎÊ!";

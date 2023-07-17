@@ -5,6 +5,7 @@ using System.Collections;
 using UnityEngine.UI;
 using System;
 using UnityEngine;
+using TMPro;
 
 namespace MeteorVoyager.Assets.Scripts.MonoBehaviours.UpgradesNS.Types
 {
@@ -16,18 +17,34 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours.UpgradesNS.Types
         {
             _onStart = StartDamageController;
         }
+
+        public override InfiniteInteger Balance
+        {
+            get
+            {
+                return GameStats.MainGameStatsHolder.Currency.Balance;
+            }
+            set
+            {
+                GameStats.MainGameStatsHolder.Currency.Balance = value;
+            }
+        }
+
+        protected override int Value
+        {
+            get
+            {
+                return GameStats.MainGameStatsHolder.TurretUpgrades.GetUpgradeLvl(_upgrade);
+            }
+            set
+            {
+                GameStats.MainGameStatsHolder.TurretUpgrades.Upgrade(_upgrade, value);
+            }
+        }
+
         protected override Func<int, InfiniteInteger> GetUpgradeFormula()
         {
             return Functions[(int)_upgrade];
-        }
-        protected override int GetUpgradeLvl()
-        {
-            return MainGameStatsHolder.TurretUpgrades.GetUpgradeLvl(_upgrade);
-        }
-        protected override void UpdateGameStats(int value, InfiniteInteger costOfUpgrade)
-        {
-            MainGameStatsHolder.TurretUpgrades.Upgrade(_upgrade, value);
-            MainGameStatsHolder.Currency.Balance -= costOfUpgrade;
         }
         protected void StartDamageController()
         {
@@ -47,7 +64,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours.UpgradesNS.Types
                 yield break;
             }
             SetActive(false);
-            transform.GetChild(0).gameObject.GetComponent<Text>().text = "LOCKED";
+            transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "LOCKED";
             while (MainGameStatsHolder.TurretUpgrades.SpawnCooldown < 50)
             {
                 yield return null;
