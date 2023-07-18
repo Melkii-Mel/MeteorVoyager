@@ -1,21 +1,21 @@
 using System.Collections;
 using UnityEngine;
 
-namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
+namespace MonoBehaviours
 {
     public class Boss : MonoBehaviour
     {
-        [SerializeField] GameObject smallBullet;
-        [SerializeField] GameObject largeBullet;
-        [SerializeField] GameObject emitter;
+        [SerializeField] private GameObject smallBullet;
+        [SerializeField] private GameObject largeBullet;
+        [SerializeField] private GameObject emitter;
 
         // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
 
         }
 
-        IEnumerator Actions()
+        private IEnumerator Actions()
         {
             float time = 0;
             while (time < 2)

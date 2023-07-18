@@ -1,23 +1,24 @@
-﻿using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.DataUpgradesGameStats;
+﻿using System;
+using GameStatsNS.GameStatsTypes.Upgrades;
 using UnityEngine;
-using System;
-using MeteorVoyager.Assets.Scripts.GameStatsNameSpace;
+using UnityEngine.Serialization;
+using static GameStatsNS.GameStats;
 
-namespace MeteorVoyager.Assets.Scripts.MonoBehaviours.UpgradesNS.Types
+namespace MonoBehaviours.UpgradesNS.Types
 {
     public class DataUpgrade : UpgradesButtonActions
     {
-        [SerializeField] Upgrades _upgrade;
+        [FormerlySerializedAs("_upgrade")] [SerializeField] private DataUpgradesGameStats.Upgrades upgrade;
 
         public override InfiniteInteger Balance
         {
             get
             {
-                return GameStats.MainGameStatsHolder.Currency.Data;
+                return MainGameStatsHolder.Currency.Data;
             }
             set
             {
-                GameStats.MainGameStatsHolder.Currency.Data = value;
+                MainGameStatsHolder.Currency.Data = value;
             }
         }
 
@@ -25,17 +26,17 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours.UpgradesNS.Types
         {
             get
             {
-                return GameStats.MainGameStatsHolder.DataUpgrades.GetUpgradeLvl(_upgrade);
+                return MainGameStatsHolder.DataUpgrades.GetUpgradeLvl(upgrade);
             }
             set
             {
-                GameStats.MainGameStatsHolder.DataUpgrades.Upgrade(_upgrade, value);
+                MainGameStatsHolder.DataUpgrades.Upgrade(upgrade, value);
             }
         }
 
         protected override Func<int, InfiniteInteger> GetUpgradeFormula()
         {
-            return Functions[(int)_upgrade];
+            return DataUpgradesGameStats.Functions[(int)upgrade];
         }
     }
 }

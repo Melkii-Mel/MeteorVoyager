@@ -1,20 +1,21 @@
-using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.GameStats;
+using GameStatsNS.GameStatsTypes;
+using MonoBehaviours.Interfaces;
 using Unity.Mathematics;
 using UnityEngine;
-using MeteorVoyager.Assets.Scripts.GameStatsNameSpace;
+using static GameStatsNS.GameStats;
 
-namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
+namespace MonoBehaviours
 {
-    public class Enemy : MonoBehaviour
+    public class Enemy : MonoBehaviour, IDamageable, IProjectile
     {
         private const int ENOUGH_HITS = 5;
         [SerializeField] private GameObject particles;
         [SerializeField] private PowerUpController powerUpController;
-        float lifetime = 20;
-        Color color;
-        Color startingColor;
+        private float _lifetime = 20;
+        private Color _color;
+        private Color _startingColor;
         public InfiniteInteger health = 1;
-        InfiniteInteger startingHealth;
+        private InfiniteInteger _startingHealth;
         public float speed;
         public bool isGlowing;
         public int hits;
@@ -37,15 +38,15 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
         private void Start()
         {
             transform.GetChild(0).gameObject.SetActive(isGlowing);
-            startingHealth = health;
+            _startingHealth = health;
             SetStartingColor();
         }
 
-        void Update()
+        private void Update()
         {
             transform.Translate(new Vector2(0, -3) * (Time.deltaTime * speed * (isGlowing ? 0.5f : 1)));
-            lifetime -= Time.deltaTime;
-            if (lifetime < 0)
+            _lifetime -= Time.deltaTime;
+            if (_lifetime < 0)
             {
                 OnEnemyDespawn?.Invoke(this);
                 OnAnyEnemyDespawn?.Invoke(this);
@@ -72,14 +73,14 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
                 try
                 {
                     SpriteRenderer particle = Instantiate(particles, transform.position, transform.rotation).GetComponent<SpriteRenderer>();
-                    particle.color = color;
+                    particle.color = _color;
                 }
                 catch { }
             }
             EnemySpawner.Enemies.Remove(gameObject);
             Destroy(gameObject);
         }
-        public void DealDamage(InfiniteInteger damage)
+        public void TakeDamage(InfiniteInteger damage)
         {
             hits++;
             if (hits == ENOUGH_HITS)
@@ -134,7 +135,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
             MainGameStatsHolder.Currency.Balance += reward;
         }
 
-        float Sigmoida(float value, float displacement = 0)
+        private float Sigmoida(float value, float displacement = 0)
         {
             value = 1f / (1f + Mathf.Pow(math.E, Mathf.Sqrt(value) - displacement));
             return Mathf.Pow(value, 0.25f);
@@ -142,30 +143,30 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
 
         private void ChangeColor()
         {
-            Color currentColor = startingColor;
-            currentColor.r *= (float)(health / startingHealth);
-            currentColor.g *= (float)(health / startingHealth);
-            currentColor.b *= (float)(health / startingHealth);
+            Color currentColor = _startingColor;
+            currentColor.r *= (float)(health / _startingHealth);
+            currentColor.g *= (float)(health / _startingHealth);
+            currentColor.b *= (float)(health / _startingHealth);
             GetComponent<SpriteRenderer>().color = currentColor;
         }
 
         private void SetStartingColor()
         {
             float colorIntencity = Sigmoida(health.Exponent, 2);
-            color = new Color(r: colorIntencity, g: -colorIntencity + 1, b: -colorIntencity + 1);
-            GetComponent<SpriteRenderer>().color = color;
-            startingColor = color;
+            _color = new Color(r: colorIntencity, g: -colorIntencity + 1, b: -colorIntencity + 1);
+            GetComponent<SpriteRenderer>().color = _color;
+            _startingColor = _color;
         }
 
         private void GivePowerUp()
         {
-            const float COEFF = 0.1f;
+            const float coeff = 0.1f;
             int randint = UnityEngine.Random.Range(0, 3);
             switch (randint)
             {
-                case 0: MainGameStatsHolder.Timers.AddTime(MainGameStatsHolder.MeteorUpgrades.CoinMultiplierTimeUpgrade * COEFF, Timers.Timer.CoinMultiplierTimer); break;
-                case 1: MainGameStatsHolder.Timers.AddTime(MainGameStatsHolder.MeteorUpgrades.DamageMultiplierTimeUpgrade * COEFF, Timers.Timer.DamageMultiplierTimer); break;
-                case 2: MainGameStatsHolder.Timers.AddTime(MainGameStatsHolder.MeteorUpgrades.ExplosivesAttacksTimeUpgrade * COEFF, Timers.Timer.ExplosivesAttacksTimer); break;
+                case 0: MainGameStatsHolder.Timers.AddTime(MainGameStatsHolder.MeteorUpgrades.CoinMultiplierTimeUpgrade * coeff, Timers.Timer.CoinMultiplierTimer); break;
+                case 1: MainGameStatsHolder.Timers.AddTime(MainGameStatsHolder.MeteorUpgrades.DamageMultiplierTimeUpgrade * coeff, Timers.Timer.DamageMultiplierTimer); break;
+                case 2: MainGameStatsHolder.Timers.AddTime(MainGameStatsHolder.MeteorUpgrades.ExplosivesAttacksTimeUpgrade * coeff, Timers.Timer.ExplosivesAttacksTimer); break;
             }
             powerUpController = powerUpController != null ? powerUpController : GameObject.Find("Manager").GetComponent<PowerUpController>();
             powerUpController.StartController();

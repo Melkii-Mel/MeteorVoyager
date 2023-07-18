@@ -1,18 +1,20 @@
-using MeteorVoyager.Assets.Localization.Scripts;
-using MeteorVoyager.Assets.Scripts.GameStatsNameSpace;
+using GameStatsNS;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LanguageButton : MonoBehaviour
+namespace Settings.Languages
 {
-    [SerializeField] Languages language;
+    public class LanguageButton : MonoBehaviour
+    {
+        [SerializeField] private Localization.Scripts.Languages language;
 
-    public void Start()
-    {
-        GetComponent<Button>().onClick.AddListener(ChangeLanguage);
-    }
-    private void ChangeLanguage()
-    {
-        GameStats.UpdateTexts(language);
+        public void Start()
+        {
+            GetComponent<Button>().onClick.AddListener(ChangeLanguage);
+        }
+        private void ChangeLanguage()
+        {
+            GameStats.UpdateTexts(language);
+        }
     }
 }

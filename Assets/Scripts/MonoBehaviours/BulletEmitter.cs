@@ -1,13 +1,12 @@
-﻿using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.GameStats;
-using MeteorVoyager.Assets.Scripts.MonoBehaviours;
-using UnityEngine;
+﻿using UnityEngine;
+using static GameStatsNS.GameStats;
 
-namespace Assets.Scripts.MonoBehaviours
+namespace MonoBehaviours
 {
     public class BulletEmitter : MonoBehaviour
     {
-        [SerializeField] GameObject bullet;
-        [SerializeField] GameObject emitter;
+        [SerializeField] private GameObject bullet;
+        [SerializeField] private GameObject emitter;
         public void Shoot(int spreadPower = 0, float charging = 0)
         {
             if (charging > 0)

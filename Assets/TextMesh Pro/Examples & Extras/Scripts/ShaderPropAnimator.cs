@@ -1,8 +1,8 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using TMPro;
+using UnityEngine;
 
-
-namespace TMPro.Examples
+namespace MeteorVoyager.TextMesh_Pro.Examples___Extras.Scripts
 {
     
     public class ShaderPropAnimator : MonoBehaviour
@@ -15,7 +15,7 @@ namespace TMPro.Examples
 
         public float m_frame;
 
-        void Awake()
+        private void Awake()
         {
             // Cache a reference to object's renderer
             m_Renderer = GetComponent<Renderer>();
@@ -24,12 +24,12 @@ namespace TMPro.Examples
             m_Material = m_Renderer.material;
         }
 
-        void Start()
+        private void Start()
         {
             StartCoroutine(AnimateProperties());
         }
 
-        IEnumerator AnimateProperties()
+        private IEnumerator AnimateProperties()
         {
             //float lightAngle;
             float glowPower;

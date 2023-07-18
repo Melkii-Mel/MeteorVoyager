@@ -1,8 +1,8 @@
-using MeteorVoyager.Assets.Localization.Scripts;
 using System;
+using Localization.Scripts;
 using UnityEngine;
 
-namespace MeteorVoyager.Assets.Scripts.GameStatsNameSpace
+namespace GameStatsNS
 {
     public static class GameStats
     {
@@ -15,19 +15,21 @@ namespace MeteorVoyager.Assets.Scripts.GameStatsNameSpace
 
         public static SavesStatHolder SavesStatHolder { get; set; } = new(IsPlaying, 1);
         public static GameStatsHolder MainGameStatsHolder { get; set; } = new(SavesStatHolder.Save.SaveIndex, IsPlaying, 1);
-        public static Texts Texts { get; private set; } = UpdateTexts(MainGameStatsHolder.Settings.Language);
+        public static Texts Texts { get; private set; } = UpdateTexts((string)MainGameStatsHolder.Settings.Language);
 
         public static Action AfterRelocation;
         
         #region Update Texts Methods
-        public static Texts UpdateTexts(string Language)
+
+        public static Texts UpdateTexts(string language)
         {
-            if(Enum.TryParse(Language, out Languages language))
+            if(Enum.TryParse(language, out Languages enumLanguage))
             {
-                return UpdateTexts(language);
+                return UpdateTexts(enumLanguage);
             }
-            return UpdateTexts(Languages.en);
+            return UpdateTexts(Languages.En);
         }
+
         public static Texts UpdateTexts(Languages language)
         {
             Texts = LanguageDeserializer.Deserialize(language);

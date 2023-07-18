@@ -1,7 +1,7 @@
-﻿using SerializationLibrary;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using SerializationLibrary;
 
-namespace MeteorVoyager.Assets.Scripts.GameStatsNameSpace
+namespace GameStatsNS
 {
     public class CurrentSave : Serializable<CurrentSave>
     {

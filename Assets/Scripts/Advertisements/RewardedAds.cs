@@ -1,18 +1,19 @@
+using static GameStatsNS.GameStats;
 using UnityEngine;
 using UnityEngine.Advertisements;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
-using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.GameStats;
 
-namespace MeteorVoyager.Assets.Scripts.Advertisements
+namespace Advertisements
 {
     public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
     {
-        [SerializeField] Button _showAdButton;
-        [SerializeField] string _androidAdUnitId = "Rewarded_Android";
-        [SerializeField] string _iOSAdUnitId = "Rewarded_iOS";
-        string _adUnitId = null; // This will remain null for unsupported platforms
+        [FormerlySerializedAs("_showAdButton")] [SerializeField] private Button showAdButton;
+        [FormerlySerializedAs("_androidAdUnitId")] [SerializeField] private string androidAdUnitId = "Rewarded_Android";
+        [FormerlySerializedAs("_iOSAdUnitId")] [SerializeField] private string iOSAdUnitId = "Rewarded_iOS";
+        private string _adUnitId = null; // This will remain null for unsupported platforms
 
-        void Awake()
+        private void Awake()
         {
             // Get the Ad Unit ID for the current platform:
 #if UNITY_IOS
@@ -22,10 +23,10 @@ namespace MeteorVoyager.Assets.Scripts.Advertisements
 #endif
 
             //Disable the button until the ad is ready to show:
-            _showAdButton.interactable = false;
+            showAdButton.interactable = false;
         }
 
-        void Start()
+        private void Start()
         {
             LoadAd();
         }
@@ -42,9 +43,9 @@ namespace MeteorVoyager.Assets.Scripts.Advertisements
             if (adUnitId.Equals(_adUnitId))
             {
                 // Configure the button to call the ShowAd() method when clicked:
-                _showAdButton.onClick.AddListener(ShowAd);
+                showAdButton.onClick.AddListener(ShowAd);
                 // Enable the button for users to click:
-                _showAdButton.interactable = true;
+                showAdButton.interactable = true;
             }
         }
 
@@ -52,7 +53,7 @@ namespace MeteorVoyager.Assets.Scripts.Advertisements
         public void ShowAd()
         {
             // Disable the button:
-            _showAdButton.interactable = false;
+            showAdButton.interactable = false;
             // Then show the ad:
             Advertisement.Show(_adUnitId, this);
         }
@@ -89,10 +90,10 @@ namespace MeteorVoyager.Assets.Scripts.Advertisements
         public void OnUnityAdsShowStart(string adUnitId) { }
         public void OnUnityAdsShowClick(string adUnitId) { }
 
-        void OnDestroy()
+        private void OnDestroy()
         {
             // Clean up the button listeners:
-            _showAdButton.onClick.RemoveAllListeners();
+            showAdButton.onClick.RemoveAllListeners();
         }
     }
 }

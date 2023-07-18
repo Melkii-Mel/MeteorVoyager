@@ -1,9 +1,8 @@
-using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.GameStats;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using static GameStatsNS.GameStats;
 
-namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
+namespace MonoBehaviours
 {
     public class PowerUpController : MonoBehaviour
     {
@@ -15,13 +14,15 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
         {
             GlobalTimer.OnTick += HandleTimers;
         }
-        void HandleTimers(float deltaTimeMS)
+
+        private void HandleTimers(float deltaTimeMS)
         {
             CoinTimer();
             PowerTimer();
             ExplosionsTimer();
         }
-        void CoinTimer()
+
+        private void CoinTimer()
         {
             while (MainGameStatsHolder.Timers.CoinMultiplierTimer > 0)
             {
@@ -33,7 +34,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
             coinsText.text = "00:00";
         }
 
-        void PowerTimer()
+        private void PowerTimer()
         {
             while (MainGameStatsHolder.Timers.DamageMultiplierTimer > 0)
             {
@@ -45,7 +46,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
             powerText.text = "00:00";
         }
 
-        void ExplosionsTimer()
+        private void ExplosionsTimer()
         {
             float explosions = MainGameStatsHolder.Timers.ExplosivesAttacksTimer;
             if (explosions < 0) explosions = 0;

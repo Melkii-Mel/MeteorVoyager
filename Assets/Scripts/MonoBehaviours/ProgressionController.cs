@@ -1,10 +1,7 @@
-using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.GameStats;
-using System.Collections;
-using UnityEngine;
-using MeteorVoyager.Assets.Scripts.GameStatsNameSpace;
 using System;
+using static GameStatsNS.GameStats;
 
-namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
+namespace MonoBehaviours
 {
     public class ProgressionController
     {
@@ -17,7 +14,8 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
             _onUpdate = action;
             action();
         }
-        void CheckGameStage(float deltaTimeMS)
+
+        private void CheckGameStage(float deltaTimeMS)
         {
             if (MainGameStatsHolder == null) return;
             if (GameStage == 0 && MainGameStatsHolder.TurretUpgrades.SpawnCooldown >= 50)
@@ -37,7 +35,8 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
                 UpdateGameStage();
             }
         }
-        void UpdateGameStage()
+
+        private void UpdateGameStage()
         {
             GameStage++;
             _onUpdate();

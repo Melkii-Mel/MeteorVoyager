@@ -1,11 +1,12 @@
 ﻿using System;
+using UnityEngine.Serialization;
 
-namespace MeteorVoyager.Assets.Localization.Scripts.TextsNS
+namespace Localization.Scripts.TextsNS
 {
     [Serializable]
     public class CurrencyTexts
     {
-        public string Matter = "Материя";
-        public string Data = "Данные";
+        [FormerlySerializedAs("Matter")] public string matter = "Материя";
+        [FormerlySerializedAs("Data")] public string data = "Данные";
     }
 }

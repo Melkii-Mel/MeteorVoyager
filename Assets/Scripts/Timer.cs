@@ -2,77 +2,77 @@
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
+public class Timer
 {
-    public class Timer
+    public float IntervalS { get; set; } = 1;
+
+    public delegate void OnTimerTickEventHandler(float deltaTimeMS);
+
+    public event OnTimerTickEventHandler OnTimerTick;
+
+    public bool Running { get; private set; } = false;
+
+    public Timer(float intervalS, OnTimerTickEventHandler @event, bool enableOnStart)
     {
-        public float IntervalS { get; set; } = 1;
-
-        public delegate void OnTimerTickEventHandler(float deltaTimeMS);
-
-        public event OnTimerTickEventHandler OnTimerTick;
-
-        public bool Running { get; private set; } = false;
-
-        public Timer(float intervalS, OnTimerTickEventHandler @event, bool enableOnStart)
+        if (intervalS <= 0)
         {
-            if (intervalS <= 0)
-            {
-                throw InvalidIntervalException;
-            }
-            IntervalS = intervalS;
-            OnTimerTick = @event;
-            if (enableOnStart)
-            {
-                StartTimer();
-            }
+            throw InvalidIntervalException;
         }
-        public void StartTimer()
+        IntervalS = intervalS;
+        OnTimerTick = @event;
+        if (enableOnStart)
         {
-            SetCoroutineActivity(true);
+            StartTimer();
         }
-        public void Stop()
+    }
+    public void StartTimer()
+    {
+        SetCoroutineActivity(true);
+    }
+    public void Stop()
+    {
+        SetCoroutineActivity(false);
+    }
+    private void SetCoroutineActivity(bool activity)
+    {
+        if (activity)
         {
-            SetCoroutineActivity(false);
+            StartCoroutine();
         }
-        private void SetCoroutineActivity(bool activity)
+        else
         {
-            if (activity)
-            {
-                StartCoroutine();
-            }
-            else
+            StopCoroutine();
+        }
+    }
+
+    private async void StartCoroutine()
+    {
+        if (Running == true)
+        {
+            return;
+        }
+        Running = true;
+        await Tick();
+    }
+
+    private void StopCoroutine()
+    {
+        Running = false;
+    }
+
+    private async Task Tick()
+    {
+        while (Running)
+        {
+            if (!Application.isPlaying)
             {
                 StopCoroutine();
-            }
-        }
-        async void StartCoroutine()
-        {
-            if (Running == true)
-            {
                 return;
             }
-            Running = true;
-            await Tick();
+            OnTimerTick?.Invoke(IntervalS * 1000);
+            await Task.Delay((int)(IntervalS * 1000));
         }
-        void StopCoroutine()
-        {
-            Running = false;
-        }
-        async Task Tick()
-        {
-            while (Running)
-            {
-                if (!Application.isPlaying)
-                {
-                    StopCoroutine();
-                    return;
-                }
-                OnTimerTick?.Invoke(IntervalS * 1000);
-                await Task.Delay((int)(IntervalS * 1000));
-            }
-        }
-
-        private static readonly Exception InvalidIntervalException = new("Invalid timer interval. Must be greater than 0");
     }
+
+    private static readonly Exception InvalidIntervalException = new("Invalid timer interval. Must be greater than 0");
 }

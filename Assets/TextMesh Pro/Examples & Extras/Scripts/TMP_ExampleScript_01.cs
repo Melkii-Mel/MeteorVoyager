@@ -1,10 +1,7 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-using System.Collections;
-using TMPro;
+﻿using TMPro;
+using UnityEngine;
 
-
-namespace TMPro.Examples
+namespace MeteorVoyager.TextMesh_Pro.Examples___Extras.Scripts
 {
 
     public class TMP_ExampleScript_01 : MonoBehaviour
@@ -22,7 +19,7 @@ namespace TMPro.Examples
         private const string k_label = "The count is <#0080ff>{0}</color>";
         private int count;
 
-        void Awake()
+        private void Awake()
         {
             // Get a reference to the TMP text component if one already exists otherwise add one.
             // This example show the convenience of having both TMP components derive from TMP_Text. 
@@ -51,7 +48,7 @@ namespace TMPro.Examples
         }
 
 
-        void Update()
+        private void Update()
         {
             if (!isStatic)
             {

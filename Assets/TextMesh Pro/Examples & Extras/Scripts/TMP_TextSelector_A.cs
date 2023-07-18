@@ -1,9 +1,8 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.EventSystems;
-using System.Collections;
 
-
-namespace TMPro.Examples
+namespace MeteorVoyager.TextMesh_Pro.Examples___Extras.Scripts
 {
 
     public class TMP_TextSelector_A : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
@@ -17,7 +16,7 @@ namespace TMPro.Examples
         private int m_lastCharIndex = -1;
         private int m_lastWordIndex = -1;
 
-        void Awake()
+        private void Awake()
         {
             m_TextMeshPro = gameObject.GetComponent<TextMeshPro>();
             m_Camera = Camera.main;
@@ -27,7 +26,7 @@ namespace TMPro.Examples
         }
 
 
-        void LateUpdate()
+        private void LateUpdate()
         {
             m_isHoveringObject = false;
 

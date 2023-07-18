@@ -3,9 +3,9 @@ using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.GameStats;
+using static GameStatsNS.GameStats;
 
-namespace MeteorVoyager.Assets.Scripts.MonoBehaviours.UpgradesNS
+namespace MonoBehaviours.UpgradesNS
 {
     /// <summary>
     /// Must be used with Button / UpgradeButton component
@@ -14,31 +14,31 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours.UpgradesNS
     public abstract class UpgradesButtonActions : MonoBehaviour
     {
         protected abstract int Value { get; set; }
-        protected Func<int, InfiniteInteger> _formula;
-        protected InfiniteInteger _cost;
-        protected Action _onStart;
+        protected Func<int, InfiniteInteger> Formula;
+        protected InfiniteInteger Cost;
+        protected Action OnStart;
 
         public void Start()
         {
             AfterRelocation += Init;
-            AfterRelocation += () => UpdateText(_formula(Value));
+            AfterRelocation += () => UpdateText(Formula(Value));
             Init();
             GetComponent<Button>().onClick.AddListener(Buy);
-            UpdateText(_cost);
-            _onStart?.Invoke();
+            UpdateText(Cost);
+            OnStart?.Invoke();
         }
         protected void Init()
         {
-            _formula = GetUpgradeFormula();
-            _cost = _formula(Value);
+            Formula = GetUpgradeFormula();
+            Cost = Formula(Value);
         }
         protected abstract Func<int, InfiniteInteger> GetUpgradeFormula();
         public abstract InfiniteInteger Balance { get; set; }
 
         public bool CheckIfCanUpgrade()
         {
-            _cost = _formula(Value);
-            if (MainGameStatsHolder.Currency.Balance >= _cost && _cost != -1)
+            Cost = Formula(Value);
+            if (MainGameStatsHolder.Currency.Balance >= Cost && Cost != -1)
             {
                 return true;
             }
@@ -51,15 +51,15 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours.UpgradesNS
                 Value++;
                 Balance -= cost;
             }
-            if (BuyMultiplier.multiplier != -1)
+            if (BuyMultiplier.Multiplier != -1)
             {
-                for (int i = 0; i < BuyMultiplier.multiplier; i++)
+                for (int i = 0; i < BuyMultiplier.Multiplier; i++)
                 {
                     if (!CheckIfCanUpgrade())
                     {
                         break;
                     }
-                    Upgrade(_cost);
+                    Upgrade(Cost);
                 }
             }
             else
@@ -70,11 +70,11 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours.UpgradesNS
                     {
                         break;
                     }
-                    Upgrade(_cost);
+                    Upgrade(Cost);
                 }
             }
-            UpdateText(_formula(Value));
-            GetComponent<Button>().interactable = _formula(Value) != -1;
+            UpdateText(Formula(Value));
+            GetComponent<Button>().interactable = Formula(Value) != -1;
         }
 
         public void UpdateText(InfiniteInteger cost)
@@ -85,7 +85,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours.UpgradesNS
                  (?<=[A-Za-z])(?=[^A-Za-z])", RegexOptions.IgnorePatternWhitespace);
             var text = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
 
-            if (_formula(Value) != -1)
+            if (Formula(Value) != -1)
             {
                 text.text =
                     $"{r.Replace(name, " ")}\n" +

@@ -1,8 +1,7 @@
-using MeteorVoyager.Assets.Scripts;
-using NUnit.Framework;
 using System;
+using NUnit.Framework;
 
-namespace Assets.Scripts.UnitTests
+namespace UnitTests
 {
     public class InfiniteIntegerTests
     {

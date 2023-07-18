@@ -1,11 +1,11 @@
 ﻿using System.IO;
 using static UnityEngine.JsonUtility;
 
-namespace MeteorVoyager.Assets.Localization.Scripts.TextsNS
+namespace Localization.Scripts
 {
     public class Serializer
     {
-        private Texts _texts = new() { ButtonTexts = new(), CurrencyTexts = new(), StageTexts = new() };
+        private Texts _texts = new() { buttonTexts = new(), currencyTexts = new(), stageTexts = new() };
 
         public void Serialize()
         {

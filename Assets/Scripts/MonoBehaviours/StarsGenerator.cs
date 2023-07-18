@@ -1,44 +1,45 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
+namespace MonoBehaviours
 {
     public class StarsGenerator : MonoBehaviour
     {
-        [SerializeField] GameObject particles;
-        [SerializeField] Camera cam;
-        [SerializeField] float delayTimeCoeffSF;
-        float delayTimeCoeff;
-        bool coroutineStarted;
+        [SerializeField] private GameObject particles;
+        [SerializeField] private Camera cam;
+        [FormerlySerializedAs("delayTimeCoeffSF")] [SerializeField] private float delayTimeCoeffSf;
+        private float _delayTimeCoeff;
+        private bool _coroutineStarted;
         public List<StarsBehaviour> stars;
-        public static bool relocationState = false;
-        public static float relocationDelayCoeff = 1;
+        public static bool RelocationState = false;
+        public static float RelocationDelayCoeff = 1;
         // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
-            if (delayTimeCoeffSF == 0) delayTimeCoeffSF = 1;
+            if (delayTimeCoeffSf == 0) delayTimeCoeffSf = 1;
             UpdateCoefficient();
         }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
             UpdateCoefficient();
-            if (!coroutineStarted && delayTimeCoeff != 0 && delayTimeCoeff != float.NaN && delayTimeCoeff != float.PositiveInfinity)
+            if (!_coroutineStarted && _delayTimeCoeff != 0 && _delayTimeCoeff != float.NaN && _delayTimeCoeff != float.PositiveInfinity)
             {
                 StartCoroutine(nameof(Generator));
-                coroutineStarted = true;
+                _coroutineStarted = true;
             }
-            if (delayTimeCoeff == float.NaN || delayTimeCoeff == float.PositiveInfinity)
+            if (_delayTimeCoeff == float.NaN || _delayTimeCoeff == float.PositiveInfinity)
             {
                 StopCoroutine(Generator());
-                coroutineStarted = false;
+                _coroutineStarted = false;
             }
         }
         public void UpdateCoefficient()
         {
-            delayTimeCoeff = delayTimeCoeffSF * relocationDelayCoeff / (EnemyHealthAndSpawnDelayCoefficientsCalculator.CalculateHealthCoefficient().Exponent + 1);
+            _delayTimeCoeff = delayTimeCoeffSf * RelocationDelayCoeff / (EnemyHealthAndSpawnDelayCoefficientsCalculator.CalculateHealthCoefficient().Exponent + 1);
         }
 
         private IEnumerator Generator()
@@ -46,7 +47,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
             for (; ; )
             {
                 int y = Random.Range(Screen.height / 2, Screen.height / 2 * 3);
-                if (relocationState)
+                if (RelocationState)
                 {
                     y += Screen.height;
                 }
@@ -57,7 +58,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
                 float scale = Random.Range(0.5f, 2);
                 star.transform.localScale *= new Vector2(scale, scale);
                 stars.Add(star.GetComponent<StarsBehaviour>());
-                yield return new WaitForSeconds(delayTimeCoeff);
+                yield return new WaitForSeconds(_delayTimeCoeff);
             }
         }
     }

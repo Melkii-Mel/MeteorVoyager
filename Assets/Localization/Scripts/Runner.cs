@@ -1,11 +1,10 @@
-﻿using MeteorVoyager.Assets.Localization.Scripts.TextsNS;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace MeteorVoyager.Assets.Localization
+namespace Localization.Scripts
 {
     public class Runner : MonoBehaviour
     {
-        void Start()
+        private void Start()
         {
             new Serializer().Serialize();
         }

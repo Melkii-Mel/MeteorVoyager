@@ -1,18 +1,18 @@
-using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.GameStats;
 using System.Collections;
 using UnityEngine;
 using static UnityEngine.ParticleSystem;
+using static GameStatsNS.GameStats;
 
-namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
+namespace MonoBehaviours
 {
     public class MeteorFieldParticles : MonoBehaviour
     {
-        void Start()
+        private void Start()
         {
             StartCoroutine(nameof(Updater));
         }
 
-        IEnumerator Updater()
+        private IEnumerator Updater()
         {
             while (true)
             {

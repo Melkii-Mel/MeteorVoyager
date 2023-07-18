@@ -1,12 +1,13 @@
 using UnityEngine;
 
-namespace MeteorVoyager.Assets.Scripts.DevOnly
+namespace DevOnly
 {
     public class ToggleDevOnlyTools : MonoBehaviour
     {
-        [SerializeField] bool isDevOnlyToolsEnabled;
-        [SerializeField] GameObject devOnlyTools;
-        void Update()
+        [SerializeField] private bool isDevOnlyToolsEnabled;
+        [SerializeField] private GameObject devOnlyTools;
+
+        private void Update()
         {
             devOnlyTools.SetActive(isDevOnlyToolsEnabled);
         }

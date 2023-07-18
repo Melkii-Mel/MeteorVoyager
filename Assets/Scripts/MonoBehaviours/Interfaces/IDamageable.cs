@@ -1,4 +1,4 @@
-﻿namespace MeteorVoyager.Assets.Scripts.MonoBehaviours.Interfaces
+﻿namespace MonoBehaviours.Interfaces
 {
     public interface IDamageable
     {

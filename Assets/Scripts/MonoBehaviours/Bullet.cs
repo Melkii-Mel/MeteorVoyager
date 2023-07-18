@@ -1,31 +1,34 @@
-using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.GameStats;
+using MonoBehaviours.Interfaces;
 using UnityEngine;
+using UnityEngine.Serialization;
+using static GameStatsNS.GameStats;
 
-namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
+namespace MonoBehaviours
 {
     public class Bullet : MonoBehaviour
     {
-        [SerializeField] GameObject explosion;
+        [SerializeField] private GameObject explosion;
         public Transform EmitterTransform { get; set; }
         public int ricochetCounter;
         public int pierceCounter;
         public float chargedPierceCoefficient = 1;
         public float chargedDamageCoefficient = 1;
         public bool isCharged;
-        [SerializeField][Range(0.5f, 10f)] float timer;
-        float lifeTimer = 5;
-        float _scaleCounter;
-        [SerializeField] private float SPEED_MULTIPLIER = 5;
-        private float chargedBulletSpeedMultiplier = 1;
-        Vector3 _scale;
-        void Start()
+        [SerializeField][Range(0.5f, 10f)] private float timer;
+        private float _lifeTimer = 5;
+        private float _scaleCounter;
+        [FormerlySerializedAs("SPEED_MULTIPLIER")] [SerializeField] private float speedMultiplier = 5;
+        private float _chargedBulletSpeedMultiplier = 1;
+        private Vector3 _scale;
+
+        private void Start()
         {
             _scale = transform.localScale;
             GetComponent<TrailRenderer>().enabled = MainGameStatsHolder.Settings.TrailsEnabled;
             UpdateStats();
         }
 
-        void Update()
+        private void Update()
         {
             if (isCharged)
             {
@@ -35,25 +38,25 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
                     _scaleCounter += Time.deltaTime;
                 }
             }
-            transform.Translate(new Vector2(0, 3 * (!isCharged ? Mathf.Log(MainGameStatsHolder.TurretUpgrades.Damage + 2, 4) / 5 + 0.5f: 1) * Time.deltaTime * SPEED_MULTIPLIER * chargedBulletSpeedMultiplier));
+            transform.Translate(new Vector2(0, 3 * (!isCharged ? Mathf.Log(MainGameStatsHolder.TurretUpgrades.Damage + 2, 4) / 5 + 0.5f: 1) * Time.deltaTime * speedMultiplier * _chargedBulletSpeedMultiplier));
             if (timer > 0)
             {
                 timer -= Time.deltaTime;
                 gameObject.transform.rotation = EmitterTransform.rotation;
             }
-            lifeTimer -= Time.deltaTime;
-            if (lifeTimer < 0)
+            _lifeTimer -= Time.deltaTime;
+            if (_lifeTimer < 0)
             {
                 Destroy(gameObject);
             }
         }
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            collision.gameObject.GetComponent<Enemy>().DealDamage(DamageCalculator.CalculateDefaultDamage());
+            collision.gameObject.GetComponent<IDamageable>().TakeDamage(DamageCalculator.CalculateDefaultDamage());
             if (isCharged)
             {
-                chargedBulletSpeedMultiplier *= 0.99f;
-                if (chargedBulletSpeedMultiplier <= 0.1f)
+                _chargedBulletSpeedMultiplier *= 0.99f;
+                if (_chargedBulletSpeedMultiplier <= 0.1f)
                 {
                     Destroy(gameObject);
                 }

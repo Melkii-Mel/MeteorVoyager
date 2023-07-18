@@ -1,9 +1,9 @@
-using UnityEngine;
 using System.Collections;
+using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
-
-namespace TMPro.Examples
+namespace MeteorVoyager.TextMesh_Pro.Examples___Extras.Scripts
 {
     
     public class Benchmark01_UGUI : MonoBehaviour
@@ -32,8 +32,7 @@ namespace TMPro.Examples
         private Material m_material02;
 
 
-
-        IEnumerator Start()
+        private IEnumerator Start()
         {
 
 

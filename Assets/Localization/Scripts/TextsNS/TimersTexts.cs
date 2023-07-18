@@ -1,12 +1,13 @@
 ﻿using System;
+using UnityEngine.Serialization;
 
-namespace MeteorVoyager.Assets.Localization.Scripts.TextsNS
+namespace Localization.Scripts.TextsNS
 {
     [Serializable]
     public class TimersTexts
     {
-        public string CoinMultiplierTimerText;
-        public string DamageMultiplierTimerText;
-        public string ExplosionsTimerText;
+        [FormerlySerializedAs("CoinMultiplierTimerText")] public string coinMultiplierTimerText;
+        [FormerlySerializedAs("DamageMultiplierTimerText")] public string damageMultiplierTimerText;
+        [FormerlySerializedAs("ExplosionsTimerText")] public string explosionsTimerText;
     }
 }

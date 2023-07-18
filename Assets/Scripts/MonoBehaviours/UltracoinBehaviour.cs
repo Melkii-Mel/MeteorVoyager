@@ -1,15 +1,15 @@
-﻿using MeteorVoyager.Assets.Scripts.GameStatsNameSpace;
-using MeteorVoyager.Assets.Scripts.MonoBehaviours.Interfaces;
+﻿using MonoBehaviours.Interfaces;
 using UnityEngine;
+using static GameStatsNS.GameStats;
 
-namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
+namespace MonoBehaviours
 {
     public class UltracoinBehaviour : MonoBehaviour, IDamageable
     {
-        [SerializeField] float transformCoeff;
-        [SerializeField] float rotationCoeff;
-        [SerializeField] float knockbackPower;
-        [SerializeField] int startingHitsAmount;
+        [SerializeField] private float transformCoeff;
+        [SerializeField] private float rotationCoeff;
+        [SerializeField] private float knockbackPower;
+        [SerializeField] private int startingHitsAmount;
 
         public void TakeDamage(InfiniteInteger damage)
         {
@@ -21,7 +21,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
 
             transform.localScale *= 1.1f;
             InfiniteInteger deltaBalance = Calculator.CalculateDefaultCoinsAmount(damage).Pow(3f);
-            GameStats.MainGameStatsHolder.Currency.Balance += deltaBalance;
+            MainGameStatsHolder.Currency.Balance += deltaBalance;
             Debug.Log(deltaBalance);
 
             transform.Translate(new Vector2(0, transformCoeff * Time.deltaTime * knockbackPower), Space.World);

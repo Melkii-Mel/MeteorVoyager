@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Advertisements;
 
-namespace MeteorVoyager.Assets.Scripts.Advertisements
+namespace Advertisements
 {
     public class InterstitialAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
     {
@@ -9,11 +9,11 @@ namespace MeteorVoyager.Assets.Scripts.Advertisements
         [SerializeField] private string androidAdID = "Interstitial_Android";
         [SerializeField] private string iOSAdID = "Interstitial_iOS";
 
-        private string adID;
+        private string _adID;
 
-        void Awake()
+        private void Awake()
         {
-            adID = Application.platform == RuntimePlatform.IPhonePlayer
+            _adID = Application.platform == RuntimePlatform.IPhonePlayer
                 ? iOSAdID
                 : androidAdID;
             LoadAd();
@@ -21,14 +21,14 @@ namespace MeteorVoyager.Assets.Scripts.Advertisements
 
         public void LoadAd()
         {
-            Debug.Log("Loading Ad: " + adID);
-            Advertisement.Load(adID, this);
+            Debug.Log("Loading Ad: " + _adID);
+            Advertisement.Load(_adID, this);
         }
 
         public void ShowAd()
         {
-            Debug.Log("Showing Ad: " + adID);
-            Advertisement.Show(adID, this);
+            Debug.Log("Showing Ad: " + _adID);
+            Advertisement.Show(_adID, this);
         }
 
         public void OnUnityAdsShowFailure(string placementId, UnityAdsShowError error, string message)

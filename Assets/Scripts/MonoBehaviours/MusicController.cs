@@ -1,9 +1,9 @@
-using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.GameStats;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static GameStatsNS.GameStats;
 
-namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
+namespace MonoBehaviours
 {
     public class MusicController : MonoBehaviour
     {
@@ -11,7 +11,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
         [SerializeField] private List<AudioClip> music;
         [SerializeField] private AudioSource source;
         [SerializeField] private float playSpeed;
-        private int musicIndex;
+        private int _musicIndex;
 
         private void Start()
         {
@@ -28,7 +28,8 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
         {
             source.pitch = playSpeed;
         }
-        IEnumerator PlayIntroAndSendCommand()
+
+        private IEnumerator PlayIntroAndSendCommand()
         {
             int index = CalculateIndexFromEnemiesHealth(musicIntros);
             AudioClip clip = musicIntros[index];
@@ -38,22 +39,23 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
             StartCoroutine(nameof(MusicChanger));
             yield return new WaitForEndOfFrame();
         }
-        IEnumerator MusicChanger()
+
+        private IEnumerator MusicChanger()
         {
-            musicIndex = CalculateIndexFromEnemiesHealth(music);
-            int thisFrameMusicIndex = musicIndex;
+            _musicIndex = CalculateIndexFromEnemiesHealth(music);
+            int thisFrameMusicIndex = _musicIndex;
             PlaySong(music[thisFrameMusicIndex]);
             for (; ; )
             {
                 thisFrameMusicIndex = CalculateIndexFromEnemiesHealth(music);
-                if (thisFrameMusicIndex != musicIndex)
+                if (thisFrameMusicIndex != _musicIndex)
                 {
-                    musicIndex = thisFrameMusicIndex;
-                    if (musicIndex > music.Count - 1)
+                    _musicIndex = thisFrameMusicIndex;
+                    if (_musicIndex > music.Count - 1)
                     {
-                        musicIndex = music.Count - 1;
+                        _musicIndex = music.Count - 1;
                     }
-                    PlaySong(music[musicIndex]);
+                    PlaySong(music[_musicIndex]);
                 }
                 yield return new WaitForSeconds(1);
             }

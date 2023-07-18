@@ -1,7 +1,7 @@
-using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.GameStats;
 using UnityEngine;
+using static GameStatsNS.GameStats;
 
-namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
+namespace MonoBehaviours
 {
     public class ChargingSliderActivityController : MonoBehaviour
     {
@@ -10,22 +10,18 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
         {
             SetChargingSliderActivity();
         }
-        void Update()
+
+        private void Update()
         {
             SetChargingSliderActivity();
+            // ReSharper disable once ObjectCreationAsStatement
+            // ReSharper disable once HeapView.ObjectAllocation.Evident
             new WaitForSeconds(1);
         }
 
-        void SetChargingSliderActivity()
+        private void SetChargingSliderActivity()
         {
-            if (MainGameStatsHolder.TurretUpgrades.ChargeAttack == 0)
-            {
-                slider.SetActive(false);
-            }
-            else
-            {
-                slider.SetActive(true);
-            }
+            slider.SetActive(MainGameStatsHolder.TurretUpgrades.ChargeAttack != 0);
         }
     }
 }

@@ -1,9 +1,9 @@
-﻿using SerializationLibrary;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using SerializationLibrary;
 using UnityEngine;
 
-namespace MeteorVoyager.Assets.Scripts.GameStatsNameSpace
+namespace GameStatsNS.GameStatsTypes.Upgrades
 {
     public class TurretUpgrades : Serializable<TurretUpgrades>
     {

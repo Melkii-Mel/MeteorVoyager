@@ -1,9 +1,8 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.TextCore.LowLevel;
 
-
-namespace TMPro.Examples
+namespace MeteorVoyager.TextMesh_Pro.Examples___Extras.Scripts
 {
 
     public class Benchmark03 : MonoBehaviour
@@ -16,13 +15,13 @@ namespace TMPro.Examples
         public Font SourceFont;
 
 
-        void Awake()
+        private void Awake()
         {
 
         }
 
 
-        void Start()
+        private void Start()
         {
             TMP_FontAsset fontAsset = null;
 

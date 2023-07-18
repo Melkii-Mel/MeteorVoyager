@@ -1,8 +1,8 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using TMPro;
+using UnityEngine;
 
-
-namespace TMPro.Examples
+namespace MeteorVoyager.TextMesh_Pro.Examples___Extras.Scripts
 {
 
     public class SkewTextExample : MonoBehaviour
@@ -16,13 +16,13 @@ namespace TMPro.Examples
         public float CurveScale = 1.0f;
         public float ShearAmount = 1.0f;
 
-        void Awake()
+        private void Awake()
         {
             m_TextComponent = gameObject.GetComponent<TMP_Text>();
         }
 
 
-        void Start()
+        private void Start()
         {
             StartCoroutine(WarpText());
         }
@@ -43,7 +43,7 @@ namespace TMPro.Examples
         /// </summary>
         /// <param name="textComponent"></param>
         /// <returns></returns>
-        IEnumerator WarpText()
+        private IEnumerator WarpText()
         {
             VertexCurve.preWrapMode = WrapMode.Clamp;
             VertexCurve.postWrapMode = WrapMode.Clamp;

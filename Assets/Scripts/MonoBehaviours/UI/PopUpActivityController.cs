@@ -1,17 +1,17 @@
-using MeteorVoyager.Assets.Scripts.GameStatsNameSpace;
 using System.Collections.Generic;
+using GameStatsNS;
 using UnityEngine;
-using UnityEngine.UI;
 
-namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
+namespace MonoBehaviours.UI
 {
     /// <summary>
     /// Used to disable turret while popups are active
     /// </summary>
     public class PopUpActivityController : MonoBehaviour
     {
-        [SerializeField] List<GameObject> popUps;
-        void Update()
+        [SerializeField] private List<GameObject> popUps;
+
+        private void Update()
         {
             foreach (GameObject popUp in popUps)
             {

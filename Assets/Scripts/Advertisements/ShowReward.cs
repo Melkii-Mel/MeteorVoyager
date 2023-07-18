@@ -1,12 +1,12 @@
-using MeteorVoyager.Assets.Scripts.GameStatsNameSpace;
+using GameStatsNS;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace MeteorVoyager.Assets.Scripts.Advertisements
+namespace Advertisements
 {
     public class ShowReward : MonoBehaviour
     {
-        [SerializeField] Button showButton;
+        [SerializeField] private Button showButton;
         public void Open()
         {
             if (GameStats.IsSomeFieldEnabled) return;

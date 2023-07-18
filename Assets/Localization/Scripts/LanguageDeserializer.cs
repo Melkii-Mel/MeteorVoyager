@@ -1,12 +1,12 @@
 ﻿using System.IO;
 using UnityEngine;
 
-namespace MeteorVoyager.Assets.Localization.Scripts
+namespace Localization.Scripts
 {
     public enum Languages
     {
-        en,
-        ru,
+        En,
+        Ru,
     }
     public class LanguageDeserializer
     {

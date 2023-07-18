@@ -1,9 +1,10 @@
-using MeteorVoyager.Assets.Scripts.GameStatsNameSpace;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
+using static GameStatsNS.GameStats;
 
-namespace MeteorVoyager.Assets.Scripts.DevOnly
+
+namespace DevOnly
 {
     public class DeleteProgress : MonoBehaviour
     {
@@ -12,12 +13,12 @@ namespace MeteorVoyager.Assets.Scripts.DevOnly
             await Deleter();
         }
 
-        async Task Deleter()
+        private async Task Deleter()
         {
             transform.GetChild(0).gameObject.GetComponent<Text>().text = "Please Restart";
             for (; ; )
             {
-                GameStats.MainGameStatsHolder.ResetAllSerialization();
+                MainGameStatsHolder.ResetAllSerialization();
                 await Task.Delay(10);
             }
         }

@@ -1,28 +1,31 @@
-using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.GameStats;
-using System.Collections;
-using UnityEngine;
-using UnityEngine.UI;
+using GameStatsNS;
+using Localization.Scripts;
 using TMPro;
+using UnityEngine;
+using static GameStatsNS.GameStats;
+using UnityEngine.UI;
 
-namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
+namespace MonoBehaviours
 {
     public class PowerUpTimersController : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI coinsText;
         [SerializeField] private TextMeshProUGUI powerText;
         [SerializeField] private TextMeshProUGUI explosionsText;
-
+        private Texts Texts = GameStats.Texts;
         public void Start()
         {
             GlobalTimer.OnTick += HandleTimers;
         }
-        void HandleTimers(float deltaTimeMS)
+
+        private void HandleTimers(float deltaTimeMS)
         {
             CoinTimer();
             PowerTimer();
             ExplosionsTimer();
         }
-        void CoinTimer()
+
+        private void CoinTimer()
         {
             string text = DEFAULT_TEXT;
 
@@ -33,10 +36,10 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
                 text = ToString(coins);
                 MainGameStatsHolder.Timers.CoinMultiplierTimer -= Time.deltaTime;
             }
-            coinsText.text = Texts.TimersTexts.CoinMultiplierTimerText + text;
+            coinsText.text = Texts.timersTexts.coinMultiplierTimerText + text;
         }
 
-        void PowerTimer()
+        private void PowerTimer()
         {
             string text = DEFAULT_TEXT;
 
@@ -47,10 +50,10 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
                 text = ToString(damage);
                 MainGameStatsHolder.Timers.DamageMultiplierTimer -= Time.deltaTime;
             }
-            powerText.text = Texts.TimersTexts.DamageMultiplierTimerText + text;
+            powerText.text = Texts.timersTexts.damageMultiplierTimerText + text;
         }
 
-        void ExplosionsTimer()
+        private void ExplosionsTimer()
         {
             string text = DEFAULT_TEXT;
 
@@ -61,14 +64,14 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
                 text = ToString(explosions);
                 MainGameStatsHolder.Timers.ExplosivesAttacksTimer -= Time.deltaTime;
             }
-            explosionsText.text = Texts.TimersTexts.ExplosionsTimerText + text;
+            explosionsText.text = Texts.timersTexts.explosionsTimerText + text;
         }
 
 
-        const string DEFAULT_TEXT = " -.--";
+        private const string DEFAULT_TEXT = " -.--";
         private string ToString(float input)
         {
-            return string.Format(" {0:f2}", input);
+            return $" {input:f2}";
         }
     }
 }

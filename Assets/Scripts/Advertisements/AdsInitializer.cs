@@ -1,16 +1,17 @@
 using UnityEngine;
 using UnityEngine.Advertisements;
+using UnityEngine.Serialization;
 
-namespace MeteorVoyager.Assets.Scripts.Advertisements
+namespace Advertisements
 {
     public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener
     {
-        [SerializeField] string _androidGameId = "5183725";
-        [SerializeField] string _iOSGameId = "5183724";
-        [SerializeField] bool _testMode;
+        [FormerlySerializedAs("_androidGameId")] [SerializeField] private string androidGameId = "5183725";
+        [FormerlySerializedAs("_iOSGameId")] [SerializeField] private string iOSGameId = "5183724";
+        [FormerlySerializedAs("_testMode")] [SerializeField] private bool testMode;
         private string _gameId;
 
-        void Awake()
+        private void Awake()
         {
             InitializeAds();
         }
@@ -18,9 +19,9 @@ namespace MeteorVoyager.Assets.Scripts.Advertisements
         public void InitializeAds()
         {
             _gameId = Application.platform == RuntimePlatform.IPhonePlayer
-                ? _iOSGameId
-                : _androidGameId;
-            Advertisement.Initialize(_gameId, _testMode, this);
+                ? iOSGameId
+                : androidGameId;
+            Advertisement.Initialize(_gameId, testMode, this);
         }
 
         public void OnInitializationComplete()

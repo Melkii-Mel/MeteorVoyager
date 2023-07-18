@@ -1,8 +1,7 @@
+using TMPro;
 using UnityEngine;
-using System.Collections;
 
-
-namespace TMPro.Examples
+namespace MeteorVoyager.TextMesh_Pro.Examples___Extras.Scripts
 {
     
     public class Benchmark04 : MonoBehaviour
@@ -19,7 +18,7 @@ namespace TMPro.Examples
         //public Material material;
 
 
-        void Start()
+        private void Start()
         {
             m_Transform = transform;
 

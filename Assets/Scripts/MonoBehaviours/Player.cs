@@ -1,28 +1,28 @@
-using Assets.Scripts.MonoBehaviours;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.GameStats;
+using static GameStatsNS.GameStats;
 
-namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
+namespace MonoBehaviours
 {
     public class Player : MonoBehaviour
     {
         public static Action OnShot { get; set; }
         public static Action OnChargedShot { get; set; }
 
-        [SerializeField] Slider chargingSlider;
-        [SerializeField] GameObject chargingFillArea;
-        [SerializeField] BulletEmitter emitter;
+        [SerializeField] private Slider chargingSlider;
+        [SerializeField] private GameObject chargingFillArea;
+        [SerializeField] private BulletEmitter emitter;
         [Range(0f, 10f)] public float shotCooldown;
-        bool controlDisabled;
+        private bool _controlDisabled;
 
 
-        private float cd;
-        private float charging = 0;
-        private readonly float RBorder = Mathf.Deg2Rad * 75;
-        private readonly float NRBorder = Mathf.Deg2Rad * -75;
-        void Update()
+        private float _cd;
+        private float _charging = 0;
+        private readonly float _rBorder = Mathf.Deg2Rad * 75;
+        private readonly float _nrBorder = Mathf.Deg2Rad * -75;
+
+        private void Update()
         {
             if (!Touched())
             {
@@ -32,7 +32,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
             else
             {
                 FindTouchCoordinates(out float x, out float y);
-                if (DetectIfTouchPositionValid(y) && !controlDisabled)
+                if (DetectIfTouchPositionValid(y) && !_controlDisabled)
                 {
                     RotateTurretToTouch(x, y);
                 }
@@ -51,39 +51,39 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
             void PerformChargedShot()
             {
                 OnChargedShot();
-                emitter.Shoot(charging: charging);
-                cd = 0.3f;
+                emitter.Shoot(charging: _charging);
+                _cd = 0.3f;
             }
             void PerformShot(ref int spreadPower)
             {
                 OnShot();
                 emitter.Shoot(spreadPower);
-                cd += shotCooldown;
+                _cd += shotCooldown;
                 spreadPower += 10;
             }
             void LimitCooldownStacking()
             {
-                while (cd < -(shotCooldown * 20))
+                while (_cd < -(shotCooldown * 20))
                 {
-                    cd -= shotCooldown;
+                    _cd -= shotCooldown;
                 }
             }
             void Shoot(float x, float y)
             {
                 int spreadPower = 0;
-                if (charging > 0.9f * MainGameStatsHolder.TurretUpgrades.ChargeAttack)
+                if (_charging > 0.9f * MainGameStatsHolder.TurretUpgrades.ChargeAttack)
                 {
                     PerformChargedShot();
                 }
                 else
                 {
-                    while (cd + shotCooldown < 0)
+                    while (_cd + shotCooldown < 0)
                     {
                         PerformShot(ref spreadPower);
                     }
                     LimitCooldownStacking();
                 }
-                charging = 0;
+                _charging = 0;
                 chargingFillArea.SetActive(false);
                 chargingFillArea.GetComponent<Image>().color = ConvertStringToColor("#A7302D");
                 chargingSlider.value = 0;
@@ -96,9 +96,9 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
             }
             void ChargeChargedAttack()
             {
-                charging += Time.deltaTime * MainGameStatsHolder.TurretUpgrades.ChargeAttack;
+                _charging += Time.deltaTime * MainGameStatsHolder.TurretUpgrades.ChargeAttack;
                 chargingFillArea.SetActive(true);
-                if (charging < 0.9f * MainGameStatsHolder.TurretUpgrades.ChargeAttack)
+                if (_charging < 0.9f * MainGameStatsHolder.TurretUpgrades.ChargeAttack)
                 {
                     chargingFillArea.GetComponent<Image>().color = ConvertStringToColor("#A7302D");
                 }
@@ -106,36 +106,36 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
                 {
                     chargingFillArea.GetComponent<Image>().color = ConvertStringToColor("#012A03");
                 }
-                if (charging > MainGameStatsHolder.TurretUpgrades.ChargeAttack) charging = MainGameStatsHolder.TurretUpgrades.ChargeAttack;
+                if (_charging > MainGameStatsHolder.TurretUpgrades.ChargeAttack) _charging = MainGameStatsHolder.TurretUpgrades.ChargeAttack;
                 if (MainGameStatsHolder.TurretUpgrades.ChargeAttack == 0)
                 {
                     chargingFillArea.SetActive(false);
                 }
                 else
                 {
-                    chargingSlider.value = charging / MainGameStatsHolder.TurretUpgrades.ChargeAttack;
+                    chargingSlider.value = _charging / MainGameStatsHolder.TurretUpgrades.ChargeAttack;
                     chargingFillArea.SetActive(true);
                 }
             }
             void DecreaseCooldown()
             {
-                if (cd <= -shotCooldown)
+                if (_cd <= -shotCooldown)
                 {
                     return;
                 }
-                cd -= Time.deltaTime * (Mathf.Sqrt(MainGameStatsHolder.TurretUpgrades.ShotCooldown) + 1) / 2;
+                _cd -= Time.deltaTime * (Mathf.Sqrt(MainGameStatsHolder.TurretUpgrades.ShotCooldown) + 1);
             }
             void RotateTurretToTouch(float x, float y)
             {
                 float angle = Mathf.Atan2(y, x) - Mathf.Deg2Rad * 90;
                 Quaternion quat = transform.rotation;
-                if (angle > RBorder)
+                if (angle > _rBorder)
                 {
-                    angle = RBorder;
+                    angle = _rBorder;
                 }
-                else if (angle < NRBorder)
+                else if (angle < _nrBorder)
                 {
-                    angle = NRBorder;
+                    angle = _nrBorder;
                 }
                 quat.x -= (quat.x + angle / 2f) * 0.4f;
                 transform.rotation = quat;
@@ -146,7 +146,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
             }
             bool DetectIfCanShoot(float y)
             {
-                return DetectIfTouchPositionValid(y) && !IsSomeFieldEnabled && !controlDisabled && cd + shotCooldown < 0;
+                return DetectIfTouchPositionValid(y) && !IsSomeFieldEnabled && !_controlDisabled && _cd + shotCooldown < 0;
 
             }
             bool DetectIfTouchPositionValid(float y)
@@ -163,14 +163,14 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
 
         public void DisableContol()
         {
-            controlDisabled = true;
+            _controlDisabled = true;
             Quaternion quaternion = transform.rotation;
             quaternion.x = 0;
             transform.rotation = quaternion;
         }
         public void EnableContol()
         {
-            controlDisabled = false;
+            _controlDisabled = false;
         }
     }
 }

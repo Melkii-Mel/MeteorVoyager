@@ -1,15 +1,16 @@
+using MonoBehaviours.Interfaces;
 using UnityEngine;
 
-namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
+namespace MonoBehaviours
 {
     public class ExplosionBehaviour : MonoBehaviour
     {
-        private float lifetime = 0.4f;
+        private float _lifetime = 0.4f;
 
         private void Update()
         {
-            lifetime -= Time.deltaTime;
-            if (lifetime < 0)
+            _lifetime -= Time.deltaTime;
+            if (_lifetime < 0)
             {
                 Destroy(gameObject);
             }
@@ -17,7 +18,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            collision.gameObject.GetComponent<Enemy>().DealDamage(DamageCalculator.CalculateDefaultDamage());
+            collision.gameObject.GetComponent<IDamageable>().TakeDamage(DamageCalculator.CalculateDefaultDamage());
         }
     }
 }

@@ -1,24 +1,26 @@
-using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.GameStats;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using static GameStatsNS.GameStats;
 
-namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
+namespace MonoBehaviours.UI
 {
     public class BalanceTexts : MonoBehaviour
     {
-        [SerializeField] GameObject textBalance;
-        [SerializeField] GameObject textData;
-        void Start()
+        [SerializeField] private GameObject textBalance;
+        [SerializeField] private GameObject textData;
+
+        private void Start()
         {
             MainGameStatsHolder.Progression.OnProgressionUpdate += DataUnlockChecker;
         }
-        void Update()
+
+        private void Update()
         {
-            textBalance.GetComponent<Text>().text = $"{Texts.CurrencyTexts.Matter}: " + MainGameStatsHolder.Currency.Balance.ToString();
-            textData.GetComponent<Text>().text = $"{Texts.CurrencyTexts.Data}: " + MainGameStatsHolder.Currency.Data.ToString();
+            textBalance.GetComponent<Text>().text = $"{Texts.currencyTexts.matter}: " + MainGameStatsHolder.Currency.Balance.ToString();
+            textData.GetComponent<Text>().text = $"{Texts.currencyTexts.data}: " + MainGameStatsHolder.Currency.Data.ToString();
         }
-        void DataUnlockChecker()
+
+        private void DataUnlockChecker()
         {
             if (MainGameStatsHolder.Progression.GameStage >= 4)
             {

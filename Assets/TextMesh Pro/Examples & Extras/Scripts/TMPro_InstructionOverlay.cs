@@ -1,8 +1,7 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using TMPro;
+using UnityEngine;
 
-
-namespace TMPro.Examples
+namespace MeteorVoyager.TextMesh_Pro.Examples___Extras.Scripts
 {
     
     public class TMPro_InstructionOverlay : MonoBehaviour
@@ -21,7 +20,7 @@ namespace TMPro.Examples
 
         //private FpsCounterAnchorPositions last_AnchorPosition;
 
-        void Awake()
+        private void Awake()
         {
             if (!enabled)
                 return;
@@ -51,9 +50,7 @@ namespace TMPro.Examples
         }
 
 
-
-
-        void Set_FrameCounter_Position(FpsCounterAnchorPositions anchor_position)
+        private void Set_FrameCounter_Position(FpsCounterAnchorPositions anchor_position)
         {
 
             switch (anchor_position)

@@ -1,33 +1,33 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
-namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
+namespace MonoBehaviours
 {
     public class BuyMultiplier : MonoBehaviour
     {
-        public static int multiplier;
-        void Start()
+        public static int Multiplier;
+
+        private void Start()
         {
-            multiplier = -1;
+            Multiplier = -1;
             SwitchBuyingMultiplier();
         }
 
-        void Update()
+        private void Update()
         {
 
         }
 
         public void SwitchBuyingMultiplier()
         {
-            switch (multiplier)
+            switch (Multiplier)
             {
-                case 1: multiplier = 10; break;
-                case 10: multiplier = 100; break;
-                case 100: multiplier = -1; break;
-                case -1: multiplier = 1; break;
+                case 1: Multiplier = 10; break;
+                case 10: Multiplier = 100; break;
+                case 100: Multiplier = -1; break;
+                case -1: Multiplier = 1; break;
             }
-            transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = multiplier != -1 ? $"X{multiplier}" : "MAX";
+            transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = Multiplier != -1 ? $"X{Multiplier}" : "MAX";
         }
     }
 }

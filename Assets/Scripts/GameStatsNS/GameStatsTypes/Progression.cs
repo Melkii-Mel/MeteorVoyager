@@ -1,10 +1,9 @@
-﻿using Codice.Client.Common;
-using MeteorVoyager.Assets.Scripts.MonoBehaviours;
-using SerializationLibrary;
-using System;
+﻿using System;
 using System.Xml.Serialization;
+using MonoBehaviours;
+using SerializationLibrary;
 
-namespace MeteorVoyager.Assets.Scripts.GameStatsNameSpace
+namespace GameStatsNS.GameStatsTypes
 {
     public class Progression : Serializable<Progression>
     { 

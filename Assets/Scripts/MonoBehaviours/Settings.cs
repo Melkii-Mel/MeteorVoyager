@@ -1,21 +1,20 @@
-using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.GameStats;
-using MeteorVoyager.Assets.Scripts.GameStatsNameSpace;
 using UnityEngine;
 using UnityEngine.UI;
+using static GameStatsNS.GameStats;
 
-namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
+namespace MonoBehaviours
 {
     public class Settings : MonoBehaviour
     {
 
-        [SerializeField] GameObject settingsScreen;
-        [SerializeField] Slider musicVolume;
-        [SerializeField] Slider soundsVolume;
-        [SerializeField] Slider starsAmount;
-        [SerializeField] Toggle trails;
-        [SerializeField] Toggle particles;
-        [SerializeField] Button close;
-        [SerializeField] StarsGenerator starsGenerator;
+        [SerializeField] private GameObject settingsScreen;
+        [SerializeField] private Slider musicVolume;
+        [SerializeField] private Slider soundsVolume;
+        [SerializeField] private Slider starsAmount;
+        [SerializeField] private Toggle trails;
+        [SerializeField] private Toggle particles;
+        [SerializeField] private Button close;
+        [SerializeField] private StarsGenerator starsGenerator;
 
         public void Start()
         {
@@ -25,16 +24,16 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
 
         public void OpenSettings()
         {
-            if (GameStats.IsSomeFieldEnabled) return;
+            if (IsSomeFieldEnabled) return;
 
             settingsScreen.SetActive(true);
             LoadValues();
-            GameStats.IsSomeFieldEnabled = true;
+            IsSomeFieldEnabled = true;
         }
         public void CloseSettings()
         {
             settingsScreen.SetActive(false);
-            GameStats.IsSomeFieldEnabled = false;
+            IsSomeFieldEnabled = false;
         }
 
         public void SetMusicVolume(float @in)

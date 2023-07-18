@@ -2,26 +2,27 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace MeteorVoyager.Assets.Scripts.MonoBehaviours.UpgradesNS
+namespace MonoBehaviours.UpgradesNS
 {
     public class UpgradeButton : MonoBehaviour
     {
-        [SerializeField] GameObject buttonObject;
-        [SerializeField] float indentationCoefficient = -0.19f;
-        int restorationTimeFrames = 10;
+        [SerializeField] private GameObject buttonObject;
+        [SerializeField] private float indentationCoefficient = -0.19f;
+        private int _restorationTimeFrames = 10;
 
-        void Start()
+        private void Start()
         {
             GetComponent<Button>().onClick.AddListener(StartIndentation);
         }
 
-        void StartIndentation()
+        private void StartIndentation()
         {
             StartCoroutine(Indentate());
         }
 
-        private const float FRAME_TIME_FOR_60FPS = 1 / 60f;
-        IEnumerator Indentate()
+        private const float FRAME_TIME_FOR_60_FPS = 1 / 60f;
+
+        private IEnumerator Indentate()
         {
             void Translate(float coeff)
             {
@@ -38,11 +39,11 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours.UpgradesNS
                 ic = indentationCoefficient / 3;
             }
             Translate(ic);
-            yield return new WaitForSeconds(FRAME_TIME_FOR_60FPS);
-            for (int i = 0; i < restorationTimeFrames; i++)
+            yield return new WaitForSeconds(FRAME_TIME_FOR_60_FPS);
+            for (int i = 0; i < _restorationTimeFrames; i++)
             {
-                Translate(-ic / restorationTimeFrames);
-                yield return new WaitForSeconds(FRAME_TIME_FOR_60FPS);
+                Translate(-ic / _restorationTimeFrames);
+                yield return new WaitForSeconds(FRAME_TIME_FOR_60_FPS);
             }
         }
     }

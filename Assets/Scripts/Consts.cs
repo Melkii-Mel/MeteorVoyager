@@ -1,53 +1,48 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace MeteorVoyager.Assets.Scripts
+public class Consts
 {
-    public class Consts
+    public static float RBorder
     {
-        public static float RBorder
+        get
         {
-            get
-            {
-                return RUBorder[0];
-            }
+            return RuBorder[0];
         }
-        public static float LBorder
+    }
+    public static float LBorder
+    {
+        get
         {
-            get
-            {
-                return LDBorder[0];
-            }
+            return LdBorder[0];
         }
-        public static float UBorder
+    }
+    public static float UBorder
+    {
+        get
         {
-            get
-            {
-                return RUBorder[1];
-            }
+            return RuBorder[1];
         }
-        public static float BBorder
+    }
+    public static float BBorder
+    {
+        get
         {
-            get
-            {
-                return LDBorder[1];
-            }
+            return LdBorder[1];
         }
-        public const float DATA_BONUS = 0.05f;
-        private static Vector2 RUBorder
+    }
+    public const float DATA_BONUS = 0.05f;
+    private static Vector2 RuBorder
+    {
+        get
         {
-            get
-            {
-                return Camera.main.ViewportToWorldPoint(Vector2.one);
-            }
+            return Camera.main.ViewportToWorldPoint(Vector2.one);
         }
-        private static Vector2 LDBorder
+    }
+    private static Vector2 LdBorder
+    {
+        get
         {
-            get
-            {
-                return Camera.main.ViewportToWorldPoint(Vector2.zero);
-            }
+            return Camera.main.ViewportToWorldPoint(Vector2.zero);
         }
     }
 }

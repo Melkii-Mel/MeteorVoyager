@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-
-namespace TMPro.Examples
+namespace MeteorVoyager.TextMesh_Pro.Examples___Extras.Scripts
 {
     
     public class ObjectSpin : MonoBehaviour
@@ -24,7 +22,7 @@ namespace TMPro.Examples
         public enum MotionType { Rotation, BackAndForth, Translation };
         public MotionType Motion;
 
-        void Awake()
+        private void Awake()
         {
             m_transform = transform;
             m_initial_Rotation = m_transform.rotation.eulerAngles;
@@ -36,7 +34,7 @@ namespace TMPro.Examples
 
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
             if (Motion == MotionType.Rotation)
             {

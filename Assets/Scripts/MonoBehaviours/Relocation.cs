@@ -1,21 +1,23 @@
 using System.Collections;
+using GameStatsNS;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
-using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.GameStats;
 using Random = UnityEngine.Random;
+using static GameStatsNS.GameStats;
 
-namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
+namespace MonoBehaviours
 {
     public class Relocation : MonoBehaviour
     {
-        const float FIRST_PHASE_TIME = 5;
-        const float LAST_PHASE_TIME = 6;
-        [SerializeField] Text relocationText;
-        [SerializeField] Player player;
-        [SerializeField] GameObject canvas;
-        [SerializeField] GameObject cam;
-        [SerializeField] EnemySpawner spawner;
-        [SerializeField] GameObject ButtonDisablerField;
+        private const float FIRST_PHASE_TIME = 5;
+        private const float LAST_PHASE_TIME = 6;
+        [SerializeField] private Text relocationText;
+        [SerializeField] private Player player;
+        [SerializeField] private GameObject canvas;
+        [SerializeField] private GameObject cam;
+        [SerializeField] private EnemySpawner spawner;
+        [FormerlySerializedAs("ButtonDisablerField")] [SerializeField] private GameObject buttonDisablerField;
 
         public void Start()
         {
@@ -25,12 +27,12 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
         /// <summary>
         /// Used to show how many units of data you will recieve upon relocation
         /// </summary>
-        IEnumerator Calculator()
+        private IEnumerator Calculator()
         {
             for (; ; )
             {
                 InfiniteInteger value = CalculateAmountOfData();
-                relocationText.text = string.Format(Texts.OtherTexts.DataUponRelocation, value);
+                relocationText.text = string.Format(Texts.otherTexts.dataUponRelocation, value);
                 yield return null;
             }
         }
@@ -38,7 +40,8 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
         {
             StartCoroutine(Relocator());
         }
-        IEnumerator Relocator()
+
+        private IEnumerator Relocator()
         {
             Vector3 cameraPos = cam.transform.position;
             Vector3 canvasPos = canvas.transform.position;
@@ -52,8 +55,8 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
             RemoveAllEnemies();
             for (float i = 0; i < FIRST_PHASE_TIME; i += Time.deltaTime)
             {
-                StarsBehaviour.speedCoefficientDuringRelocation = 10 * Mathf.Pow(2, i + 1);
-                StarsGenerator.relocationDelayCoeff = Mathf.Pow(2, 5 - i);
+                StarsBehaviour.SpeedCoefficientDuringRelocation = 10 * Mathf.Pow(2, i + 1);
+                StarsGenerator.RelocationDelayCoeff = Mathf.Pow(2, 5 - i);
                 Shake(coeff: i);
                 yield return new WaitForEndOfFrame();
             }
@@ -107,22 +110,22 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
                 ResetPosition();
                 player.EnableContol();
                 spawner.StartEnemiesSpawning();
-                StarsBehaviour.speedCoefficientDuringRelocation = 1;
-                StarsGenerator.relocationDelayCoeff = 1;
-                StarsBehaviour.trailsEnabled = false;
-                StarsGenerator.relocationState = false;
+                StarsBehaviour.SpeedCoefficientDuringRelocation = 1;
+                StarsGenerator.RelocationDelayCoeff = 1;
+                StarsBehaviour.TrailsEnabled = false;
+                StarsGenerator.RelocationState = false;
             }
             void EnableTrailsForStars()
             {
-                StarsBehaviour.trailsEnabled = true;
+                StarsBehaviour.TrailsEnabled = true;
             }
             void SetStarsGeneratorStateOnRelocationState()
             {
-                StarsGenerator.relocationState = true;
+                StarsGenerator.RelocationState = true;
             }
             void SetDisablerFieldActive(bool value)
             {
-                ButtonDisablerField.SetActive(value);
+                buttonDisablerField.SetActive(value);
             }
             void ResetGameStats()
             {
@@ -134,7 +137,8 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
             }
             #endregion
         }
-        InfiniteInteger CalculateAmountOfData()
+
+        private InfiniteInteger CalculateAmountOfData()
         {
             return MainGameStatsHolder.Currency.Balance.Pow(0.5f);
         }

@@ -1,10 +1,8 @@
-﻿using MeteorVoyager.Assets.Scripts;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using SerializationLibrary;
-using System;
 using UnityEngine;
 
-namespace Assets.Scripts.UnitTests
+namespace UnitTests
 {
     public class SerializationTests
     {

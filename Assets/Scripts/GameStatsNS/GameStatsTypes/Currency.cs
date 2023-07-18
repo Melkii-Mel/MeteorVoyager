@@ -1,8 +1,6 @@
-﻿using MeteorVoyager.Assets.Scripts;
-using SerializationLibrary;
-using System;
+﻿using SerializationLibrary;
 
-namespace MeteorVoyager.Assets.Scripts.GameStatsNameSpace
+namespace GameStatsNS.GameStatsTypes
 {
     public class Currency : Serializable<Currency>
     {

@@ -1,8 +1,8 @@
-﻿using SerializationLibrary;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using SerializationLibrary;
 
-namespace MeteorVoyager.Assets.Scripts.GameStatsNameSpace
+namespace GameStatsNS.GameStatsTypes.Upgrades
 {
     public class DataUpgradesGameStats : Serializable<DataUpgradesGameStats>
     {

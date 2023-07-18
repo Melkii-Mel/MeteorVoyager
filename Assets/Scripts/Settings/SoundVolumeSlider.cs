@@ -1,12 +1,12 @@
-using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.GameStats;
 using UnityEngine;
+using static GameStatsNS.GameStats;
 using UnityEngine.UI;
 
-namespace MeteorVoyager
+namespace Settings
 {
     public class SoundVolumeSlider : MonoBehaviour
     {
-        void Start()
+        private void Start()
         {
             GetComponent<Slider>().value = MainGameStatsHolder.Settings.SoundsVolume;
         }

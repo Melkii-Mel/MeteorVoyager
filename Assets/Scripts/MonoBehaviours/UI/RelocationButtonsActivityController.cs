@@ -1,13 +1,13 @@
-using MeteorVoyager.Assets.Scripts.GameStatsNameSpace;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
-using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.GameStats;
+using static GameStatsNS.GameStats;
 
-namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
+namespace MonoBehaviours.UI
 {
     public class RelocationButtonsActivityController : MonoBehaviour
     {
-        [SerializeField] private GameObject ReloctionMenuButton;
+        [FormerlySerializedAs("ReloctionMenuButton")] [SerializeField] private GameObject reloctionMenuButton;
         [SerializeField] private GameObject relocateButton;
 
         private void Start()
@@ -20,19 +20,20 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
             CheckRelocateButtonActivity();
         }
 
-        void CheckRelocationMenuButtonActivity()
+        private void CheckRelocationMenuButtonActivity()
         {
             if (MainGameStatsHolder.Progression.GameStage < 3)
             {
-                ReloctionMenuButton.SetActive(false);
+                reloctionMenuButton.SetActive(false);
             }
             else
             {
-                ReloctionMenuButton.SetActive(true);
+                reloctionMenuButton.SetActive(true);
                 MainGameStatsHolder.Progression.OnProgressionUpdate -= CheckRelocateButtonActivity;
             }
         }
-        void CheckRelocateButtonActivity()
+
+        private void CheckRelocateButtonActivity()
         {
             Text text = relocateButton.transform.GetChild(0).gameObject.GetComponent<Text>();
             Button button = relocateButton.GetComponent<Button>();
@@ -40,12 +41,12 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
             if (MainGameStatsHolder.Currency.Balance > InfiniteInteger.Million)
             {
                 button.interactable = true;
-                text.text = $"{Texts.ButtonTexts.ConfirmRelocation}";
+                text.text = $"{Texts.buttonTexts.confirmRelocation}";
             }
             else
             {
                 button.interactable = false;
-                text.text = $"{Texts.ButtonTexts.UnableToRelocate}";
+                text.text = $"{Texts.buttonTexts.unableToRelocate}";
             }
         }
     }

@@ -1,18 +1,18 @@
-﻿using MeteorVoyager.Assets.Scripts.GameStatsNameSpace;
+﻿using GameStatsNS;
 using UnityEngine;
 
-namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
+namespace MonoBehaviours
 {
-    class UltracoinSpawner : MonoBehaviour
+    internal class UltracoinSpawner : MonoBehaviour
     {
-        [SerializeField] GameObject ultracoin;
+        [SerializeField] private GameObject ultracoin;
 
-        void Start ()
+        private void Start ()
         {
             Enemy.OnAnyEnemyDestroyOrEnoughHits += SpawnUltracoin;
         }
 
-        void SpawnUltracoin(Enemy enemy)
+        private void SpawnUltracoin(Enemy enemy)
         {
             if (Calculator.RandomBool(Mathf.Sqrt(GameStats.MainGameStatsHolder.DataUpgrades.UltracoinSpawnChanceLvl) / 10))
             {

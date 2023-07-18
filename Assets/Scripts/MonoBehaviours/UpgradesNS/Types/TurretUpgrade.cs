@@ -1,32 +1,32 @@
-﻿using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.GameStats;
-using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.TurretUpgrades;
-using MeteorVoyager.Assets.Scripts.GameStatsNameSpace;
+﻿using System;
 using System.Collections;
-using UnityEngine.UI;
-using System;
-using UnityEngine;
+using GameStatsNS.GameStatsTypes.Upgrades;
 using TMPro;
+using UnityEngine;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
+using static GameStatsNS.GameStats;
 
-namespace MeteorVoyager.Assets.Scripts.MonoBehaviours.UpgradesNS.Types
+namespace MonoBehaviours.UpgradesNS.Types
 {
     public class TurretUpgrade : UpgradesButtonActions
     {
-        [SerializeField] Upgrades _upgrade;
+        [FormerlySerializedAs("_upgrade")] [SerializeField] private TurretUpgrades.Upgrades upgrade;
 
         public TurretUpgrade()
         {
-            _onStart = StartDamageController;
+            OnStart = StartDamageController;
         }
 
         public override InfiniteInteger Balance
         {
             get
             {
-                return GameStats.MainGameStatsHolder.Currency.Balance;
+                return MainGameStatsHolder.Currency.Balance;
             }
             set
             {
-                GameStats.MainGameStatsHolder.Currency.Balance = value;
+                MainGameStatsHolder.Currency.Balance = value;
             }
         }
 
@@ -34,24 +34,24 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours.UpgradesNS.Types
         {
             get
             {
-                return GameStats.MainGameStatsHolder.TurretUpgrades.GetUpgradeLvl(_upgrade);
+                return MainGameStatsHolder.TurretUpgrades.GetUpgradeLvl(upgrade);
             }
             set
             {
-                GameStats.MainGameStatsHolder.TurretUpgrades.Upgrade(_upgrade, value);
+                MainGameStatsHolder.TurretUpgrades.Upgrade(upgrade, value);
             }
         }
 
         protected override Func<int, InfiniteInteger> GetUpgradeFormula()
         {
-            return Functions[(int)_upgrade];
+            return TurretUpgrades.Functions[(int)upgrade];
         }
         protected void StartDamageController()
         {
             StartCoroutine(DamageUpgradeStateController());
         }
 
-        IEnumerator DamageUpgradeStateController()
+        private IEnumerator DamageUpgradeStateController()
         {
             void SetActive(bool state)
             {
@@ -59,7 +59,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours.UpgradesNS.Types
                 GetComponent<Button>().interactable = state;
             }
 
-            if (_upgrade != Upgrades.Damage)
+            if (upgrade != TurretUpgrades.Upgrades.Damage)
             {
                 yield break;
             }
@@ -70,7 +70,7 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours.UpgradesNS.Types
                 yield return null;
             }
             SetActive(true);
-            UpdateText(_cost);
+            UpdateText(Cost);
         }
     }
 }

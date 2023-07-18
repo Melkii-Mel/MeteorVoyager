@@ -1,12 +1,12 @@
-using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.GameStats;
 using UnityEngine;
 using UnityEngine.UI;
+using static GameStatsNS.GameStats;
 
-namespace MeteorVoyager
+namespace Settings
 {
     public class StarsAmount : MonoBehaviour
     {
-        void Start()
+        private void Start()
         {
             GetComponent<Slider>().value = MainGameStatsHolder.Settings.StarsAmountMultiplier;
         }

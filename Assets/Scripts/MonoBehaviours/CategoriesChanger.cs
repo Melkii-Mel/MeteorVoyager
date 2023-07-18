@@ -1,38 +1,40 @@
-using MeteorVoyager.Assets.Scripts.GameStatsNameSpace;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using static GameStatsNS.GameStats;
 
-namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
+
+namespace MonoBehaviours
 {
     public class CategoriesChanger : MonoBehaviour
     {
-        [SerializeField] GameObject categoryChanger;
-        [SerializeField] List<GameObject> categories;
-        public static List<bool> categoriesEnabled = new();
-        void Start()
+        [SerializeField] private GameObject categoryChanger;
+        [SerializeField] private List<GameObject> categories;
+        public static List<bool> CategoriesEnabled = new();
+
+        private void Start()
         {
             UpdateEnabledCategoriesCount();
-            GameStats.MainGameStatsHolder.Progression.OnProgressionUpdate += CheckForEnabledCategories;
+            MainGameStatsHolder.Progression.OnProgressionUpdate += CheckForEnabledCategories;
             CheckForEnabledCategories();
             categoryChanger.GetComponent<Button>().interactable = false;
         }
 
-        void Update()
+        private void Update()
         {
             UpdateEnabledCategoriesCount();
-            categoryChanger.GetComponent<Button>().interactable = GameStats.MainGameStatsHolder.Progression.GameStage >= 2;
+            categoryChanger.GetComponent<Button>().interactable = MainGameStatsHolder.Progression.GameStage >= 2;
         }
 
-        void CheckForEnabledCategories()
+        private void CheckForEnabledCategories()
         {
             try
             {
-                categoriesEnabled[0] = true;
-                categoriesEnabled[1] = GameStats.MainGameStatsHolder.Progression.GameStage >= 2;
-                categoriesEnabled[2] = GameStats.MainGameStatsHolder.Progression.GameStage >= 4;
+                CategoriesEnabled[0] = true;
+                CategoriesEnabled[1] = MainGameStatsHolder.Progression.GameStage >= 2;
+                CategoriesEnabled[2] = MainGameStatsHolder.Progression.GameStage >= 4;
             }
             catch (Exception ex)
             {
@@ -48,23 +50,23 @@ namespace MeteorVoyager.Assets.Scripts.MonoBehaviours
                 if (category.activeInHierarchy)
                 {
                     category.SetActive(false);
-                    for (int j = i + 1; j < categoriesEnabled.Count + i; j++)
+                    for (int j = i + 1; j < CategoriesEnabled.Count + i; j++)
                     {
-                        int index = j < categoriesEnabled.Count ? j : j - categoriesEnabled.Count;
-                        bool categoryEnabled = categoriesEnabled[index];
+                        int index = j < CategoriesEnabled.Count ? j : j - CategoriesEnabled.Count;
+                        bool categoryEnabled = CategoriesEnabled[index];
                         if (categoryEnabled)
                         {
                             categories[index].SetActive(true);
-                            goto ENDOFLOOP;
+                            goto END_OF_LOOP;
                         }
                     }
                 }
-            }
-        ENDOFLOOP:;
+            } 
+            END_OF_LOOP:;
         }
-        public void UpdateEnabledCategoriesCount()
+        private void UpdateEnabledCategoriesCount()
         {
-            categoriesEnabled.AddRange(from GameObject category in categories select false);
+            CategoriesEnabled.AddRange(from GameObject category in categories select false);
         }
 
     }

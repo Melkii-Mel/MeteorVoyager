@@ -1,14 +1,15 @@
-using static MeteorVoyager.Assets.Scripts.GameStatsNameSpace.GameStats;
 using UnityEngine;
 using UnityEngine.UI;
-using MeteorVoyager.Assets.Scripts.GameStatsNameSpace;
+using static GameStatsNS.GameStats;
 
-namespace MeteorVoyager.Assets.Scripts.DevOnly
+
+namespace DevOnly
 {
     public class AddCoins : MonoBehaviour
     {
         [SerializeField] private int balance;
-        void Start()
+
+        private void Start()
         {
             balance = balance == 0 ? 1000 : balance;
             transform.GetChild(0).gameObject.GetComponent<Text>().text = $"Give {balance} coins";

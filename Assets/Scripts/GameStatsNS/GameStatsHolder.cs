@@ -1,9 +1,10 @@
-﻿using SerializationLibrary;
-using SerializationLibrary.Local;
-using System;
+﻿using System;
+using GameStatsNS.GameStatsTypes;
+using SerializationLibrary;
 using UnityEngine;
+using GameStatsNS.GameStatsTypes.Upgrades;
 
-namespace MeteorVoyager.Assets.Scripts.GameStatsNameSpace
+namespace GameStatsNS
 {
     public class GameStatsHolder : SerializablesHolder
     {

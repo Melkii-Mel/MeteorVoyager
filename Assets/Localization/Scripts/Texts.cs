@@ -1,17 +1,19 @@
-﻿namespace MeteorVoyager.Assets.Localization.Scripts
+﻿using System;
+using Localization.Scripts.TextsNS;
+using UnityEngine.Serialization;
+
+namespace Localization.Scripts
 {
-    using TextsNS;
-    using System;
     [Serializable]
     public class Texts
     {
         public const string FILE_PATH = "Assets\\Localization\\LanguageFiles\\";
 
-        public ButtonTexts ButtonTexts;
-        public CurrencyTexts CurrencyTexts;
-        public GameProgressionStages StageTexts;
-        public OtherTexts OtherTexts;
-        public TimersTexts TimersTexts;
-        public SettingsTexts SettingsTexts;
+        [FormerlySerializedAs("ButtonTexts")] public ButtonTexts buttonTexts;
+        [FormerlySerializedAs("CurrencyTexts")] public CurrencyTexts currencyTexts;
+        [FormerlySerializedAs("StageTexts")] public GameProgressionStages stageTexts;
+        [FormerlySerializedAs("OtherTexts")] public OtherTexts otherTexts;
+        [FormerlySerializedAs("TimersTexts")] public TimersTexts timersTexts;
+        [FormerlySerializedAs("SettingsTexts")] public SettingsTexts settingsTexts;
     }
 }

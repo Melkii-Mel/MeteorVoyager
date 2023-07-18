@@ -1,29 +1,30 @@
 using System;
+using UnityEngine.Serialization;
 
-namespace MeteorVoyager.Assets.Localization.Scripts.TextsNS
+namespace Localization.Scripts.TextsNS
 {
     [Serializable]
     public class ButtonTexts
     {
-        public string HintButtonText;
+        [FormerlySerializedAs("HintButtonText")] public string hintButtonText;
         #region Relocation
-        public string RelocationScreen = "Скачок";
-        public string ConfirmRelocation = "СКАЧОК!";
-        public string UnableToRelocate = "Пока что совершнить скачок невозможно";
+        [FormerlySerializedAs("RelocationScreen")] public string relocationScreen = "РЎРєР°С‡РѕРє";
+        [FormerlySerializedAs("ConfirmRelocation")] public string confirmRelocation = "РЎРљРђР§РћРљ!";
+        [FormerlySerializedAs("UnableToRelocate")] public string unableToRelocate = "РџРѕРєР° С‡С‚Рѕ СЃРѕРІРµСЂС€РЅРёС‚СЊ СЃРєР°С‡РѕРє РЅРµРІРѕР·РјРѕР¶РЅРѕ";
         #endregion
         #region Turret Upgrades
-        public string PierceCountUpgrade = "Сила пробивания";
-        public string ShotCooldown = "Перезарядка выстрела";
-        public string ChargeAttack = "Заряженная атака";
-        public string SpawnCooldown = "Скорость появления астероидов";
-        public string Damage = "Урон";
+        [FormerlySerializedAs("PierceCountUpgrade")] public string pierceCountUpgrade = "РЎРёР»Р° РїСЂРѕР±РёРІР°РЅРёСЏ";
+        [FormerlySerializedAs("ShotCooldown")] public string shotCooldown = "РџРµСЂРµР·Р°СЂСЏРґРєР° РІС‹СЃС‚СЂРµР»Р°";
+        [FormerlySerializedAs("ChargeAttack")] public string chargeAttack = "Р—Р°СЂСЏР¶РµРЅРЅР°СЏ Р°С‚Р°РєР°";
+        [FormerlySerializedAs("SpawnCooldown")] public string spawnCooldown = "РЎРєРѕСЂРѕСЃС‚СЊ РїРѕСЏРІР»РµРЅРёСЏ Р°СЃС‚РµСЂРѕРёРґРѕРІ";
+        [FormerlySerializedAs("Damage")] public string damage = "РЈСЂРѕРЅ";
         #endregion
         #region MeteorUpgrades
-        public string GlowingEnemiesSpawnRate = "Шанс появления мерцающих астероидов";
-        public string ExplosivesAttacksTimeUpgrade = "Длительность разрывных атак";
-        public string CoinMultiplier = "Больше материи";
-        public string CoinMultiplierTimeUpgrade = "Длительность множителя материи";
-        public string DamageMultiplierTimeUpgrade = "Длительность множителя урона";
+        [FormerlySerializedAs("GlowingEnemiesSpawnRate")] public string glowingEnemiesSpawnRate = "РЁР°РЅСЃ РїРѕСЏРІР»РµРЅРёСЏ РјРµСЂС†Р°СЋС‰РёС… Р°СЃС‚РµСЂРѕРёРґРѕРІ";
+        [FormerlySerializedAs("ExplosivesAttacksTimeUpgrade")] public string explosivesAttacksTimeUpgrade = "Р”Р»РёС‚РµР»СЊРЅРѕСЃС‚СЊ СЂР°Р·СЂС‹РІРЅС‹С… Р°С‚Р°Рє";
+        [FormerlySerializedAs("CoinMultiplier")] public string coinMultiplier = "Р‘РѕР»СЊС€Рµ РјР°С‚РµСЂРёРё";
+        [FormerlySerializedAs("CoinMultiplierTimeUpgrade")] public string coinMultiplierTimeUpgrade = "Р”Р»РёС‚РµР»СЊРЅРѕСЃС‚СЊ РјРЅРѕР¶РёС‚РµР»СЏ РјР°С‚РµСЂРёРё";
+        [FormerlySerializedAs("DamageMultiplierTimeUpgrade")] public string damageMultiplierTimeUpgrade = "Р”Р»РёС‚РµР»СЊРЅРѕСЃС‚СЊ РјРЅРѕР¶РёС‚РµР»СЏ СѓСЂРѕРЅР°";
         #endregion
         #region DataUpgrades (NotImplemented)
         #endregion

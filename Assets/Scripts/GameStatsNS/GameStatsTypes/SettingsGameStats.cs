@@ -1,6 +1,6 @@
 ﻿using SerializationLibrary;
 
-namespace MeteorVoyager.Assets.Scripts.GameStatsNameSpace
+namespace GameStatsNS.GameStatsTypes
 {
     public class SettingsGameStats : Serializable<SettingsGameStats>
     {
