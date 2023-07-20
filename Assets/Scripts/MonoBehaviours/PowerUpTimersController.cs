@@ -3,7 +3,6 @@ using Localization.Scripts;
 using TMPro;
 using UnityEngine;
 using static GameStatsNS.GameStats;
-using UnityEngine.UI;
 
 namespace MonoBehaviours
 {
@@ -36,7 +35,7 @@ namespace MonoBehaviours
                 text = ToString(coins);
                 MainGameStatsHolder.Timers.CoinMultiplierTimer -= Time.deltaTime;
             }
-            coinsText.text = Texts.timersTexts.coinMultiplierTimerText + text;
+            coinsText.text = Texts.TimersTexts.CoinMultiplierTimerText + text;
         }
 
         private void PowerTimer()
@@ -50,7 +49,7 @@ namespace MonoBehaviours
                 text = ToString(damage);
                 MainGameStatsHolder.Timers.DamageMultiplierTimer -= Time.deltaTime;
             }
-            powerText.text = Texts.timersTexts.damageMultiplierTimerText + text;
+            powerText.text = Texts.TimersTexts.DamageMultiplierTimerText + text;
         }
 
         private void ExplosionsTimer()
@@ -64,7 +63,7 @@ namespace MonoBehaviours
                 text = ToString(explosions);
                 MainGameStatsHolder.Timers.ExplosivesAttacksTimer -= Time.deltaTime;
             }
-            explosionsText.text = Texts.timersTexts.explosionsTimerText + text;
+            explosionsText.text = Texts.TimersTexts.ExplosionsTimerText + text;
         }
 
 

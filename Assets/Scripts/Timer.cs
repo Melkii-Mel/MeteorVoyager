@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Timer
 {
-    public float IntervalS { get; set; } = 1;
+    public float IntervalS { get; set; }
 
     public delegate void OnTimerTickEventHandler(float deltaTimeMS);
 
     public event OnTimerTickEventHandler OnTimerTick;
 
-    public bool Running { get; private set; } = false;
+    public bool Running { get; private set; }
 
-    public Timer(float intervalS, OnTimerTickEventHandler @event, bool enableOnStart)
+    public Timer(float intervalS, OnTimerTickEventHandler @event, bool enableOnStart, bool stopOnSceneChange = true)
     {
         if (intervalS <= 0)
         {
@@ -23,6 +24,11 @@ public class Timer
         if (enableOnStart)
         {
             StartTimer();
+        }
+
+        if (stopOnSceneChange)
+        {
+            SceneManager.sceneUnloaded += (scene) => Stop();
         }
     }
     public void StartTimer()
@@ -47,7 +53,7 @@ public class Timer
 
     private async void StartCoroutine()
     {
-        if (Running == true)
+        if (Running)
         {
             return;
         }

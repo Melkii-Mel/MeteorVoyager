@@ -17,9 +17,9 @@ namespace Advertisements
         {
             // Get the Ad Unit ID for the current platform:
 #if UNITY_IOS
-        _adUnitId = _iOSAdUnitId;
+            _adUnitId = _iOSAdUnitId;
 #elif UNITY_ANDROID
-            _adUnitId = _androidAdUnitId;
+            _adUnitId = androidAdUnitId;
 #endif
 
             //Disable the button until the ad is ready to show:

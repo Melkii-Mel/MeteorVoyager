@@ -1,30 +1,29 @@
 using System;
-using UnityEngine.Serialization;
 
 namespace Localization.Scripts.TextsNS
 {
     [Serializable]
     public class ButtonTexts
     {
-        [FormerlySerializedAs("HintButtonText")] public string hintButtonText;
+        public string HintButtonText { get; set; } = "text";
         #region Relocation
-        [FormerlySerializedAs("RelocationScreen")] public string relocationScreen = "Скачок";
-        [FormerlySerializedAs("ConfirmRelocation")] public string confirmRelocation = "СКАЧОК!";
-        [FormerlySerializedAs("UnableToRelocate")] public string unableToRelocate = "Пока что совершнить скачок невозможно";
+        public string RelocationScreen  { get; set; } = "text";
+        public string ConfirmRelocation  { get; set; } = "text";
+        public string UnableToRelocate  { get; set; } = "text";
         #endregion
         #region Turret Upgrades
-        [FormerlySerializedAs("PierceCountUpgrade")] public string pierceCountUpgrade = "Сила пробивания";
-        [FormerlySerializedAs("ShotCooldown")] public string shotCooldown = "Перезарядка выстрела";
-        [FormerlySerializedAs("ChargeAttack")] public string chargeAttack = "Заряженная атака";
-        [FormerlySerializedAs("SpawnCooldown")] public string spawnCooldown = "Скорость появления астероидов";
-        [FormerlySerializedAs("Damage")] public string damage = "Урон";
+        public string PierceCountUpgrade  { get; set; } = "text";
+        public string ShotCooldown  { get; set; } = "text";
+        public string ChargeAttack  { get; set; } = "text";
+        public string SpawnCooldown  { get; set; } = "text";
+        public string Damage  { get; set; } = "text";
         #endregion
         #region MeteorUpgrades
-        [FormerlySerializedAs("GlowingEnemiesSpawnRate")] public string glowingEnemiesSpawnRate = "Шанс появления мерцающих астероидов";
-        [FormerlySerializedAs("ExplosivesAttacksTimeUpgrade")] public string explosivesAttacksTimeUpgrade = "Длительность разрывных атак";
-        [FormerlySerializedAs("CoinMultiplier")] public string coinMultiplier = "Больше материи";
-        [FormerlySerializedAs("CoinMultiplierTimeUpgrade")] public string coinMultiplierTimeUpgrade = "Длительность множителя материи";
-        [FormerlySerializedAs("DamageMultiplierTimeUpgrade")] public string damageMultiplierTimeUpgrade = "Длительность множителя урона";
+        public string GlowingEnemiesSpawnRate  { get; set; } = "text";
+        public string ExplosivesAttacksTimeUpgrade  { get; set; } = "text";
+        public string CoinMultiplier  { get; set; } = "text";
+        public string CoinMultiplierTimeUpgrade  { get; set; } = "text";
+        public string DamageMultiplierTimeUpgrade  { get; set; } = "text";
         #endregion
         #region DataUpgrades (NotImplemented)
         #endregion

@@ -1,5 +1,4 @@
 using System.Collections;
-using GameStatsNS;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -32,7 +31,7 @@ namespace MonoBehaviours
             for (; ; )
             {
                 InfiniteInteger value = CalculateAmountOfData();
-                relocationText.text = string.Format(Texts.otherTexts.dataUponRelocation, value);
+                relocationText.text = string.Format(Texts.OtherTexts.DataUponRelocation, value);
                 yield return null;
             }
         }

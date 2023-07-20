@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Xml.Serialization;
 using UnityEngine;
 
 namespace Localization.Scripts
@@ -8,13 +9,17 @@ namespace Localization.Scripts
         En,
         Ru,
     }
-    public class LanguageDeserializer
+    public static class LanguageDeserializer
     {
-        public static Texts Deserialize(Languages language)
+        public static Texts Deserialize(TextAsset languageFile)
         {
-            string fileName = $"{Texts.FILE_PATH}{language}.json";
-            string json = File.ReadAllText(fileName);
-            return JsonUtility.FromJson<Texts>(json);
+            return Deserialize(languageFile.text);
+        }
+
+        public static Texts Deserialize(string languageContent)
+        {
+            using TextReader stream = new StringReader(languageContent);
+            return (Texts)(new XmlSerializer(typeof(Texts)).Deserialize(stream));
         }
     }
 }

@@ -11,8 +11,8 @@ namespace MonoBehaviours.UI
 
         public void Start()
         {
-            relocationButtonText.text = Texts.buttonTexts.relocationScreen;
-            hintButtonText.text = Texts.buttonTexts.hintButtonText;
+            relocationButtonText.text = Texts.ButtonTexts.RelocationScreen;
+            hintButtonText.text = Texts.ButtonTexts.HintButtonText;
         }
     }
 }

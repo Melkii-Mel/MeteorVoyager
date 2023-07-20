@@ -21,14 +21,14 @@ namespace Settings
 
         private void Awake()
         {
-            SettingsTexts texts = Texts.settingsTexts;
-            settingsTitle.text = texts.settingsTitle;
-            musicVolume.text = texts.musicVolume;
-            soundsVolume.text = texts.soundsVolume;
-            trails.text = texts.trails;
-            particles.text = texts.particles;
-            starsAmount.text = texts.starsAmount;
-            language.text = texts.language;
+            SettingsTexts texts = Texts.SettingsTexts;
+            settingsTitle.text = texts.SettingsTitle;
+            musicVolume.text = texts.MusicVolume;
+            soundsVolume.text = texts.SoundsVolume;
+            trails.text = texts.Trails;
+            particles.text = texts.Particles;
+            starsAmount.text = texts.StarsAmount;
+            language.text = texts.Language;
         }
     }
 }

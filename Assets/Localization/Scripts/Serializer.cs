@@ -1,16 +1,25 @@
 ﻿using System.IO;
-using static UnityEngine.JsonUtility;
+using System.Xml.Serialization;
+using UnityEngine;
 
 namespace Localization.Scripts
 {
-    public class Serializer
+    public class Serializer : MonoBehaviour
     {
-        private Texts _texts = new() { buttonTexts = new(), currencyTexts = new(), stageTexts = new() };
+        private readonly Texts _texts = new()
+        {
+            ButtonTexts = new(),
+            TimersTexts = new(),
+            CurrencyTexts = new(),
+            OtherTexts = new(),
+            SettingsTexts = new(),
+            StageTexts = new(),
+        };
 
         public void Serialize()
         {
-            string json = ToJson(_texts);
-            File.WriteAllText(Texts.FILE_PATH + "ru.json", json);
+            using FileStream stream = new("Assets\\Localization\\LanguageFiles\\blank.xml", FileMode.Create);
+            new XmlSerializer(typeof(Texts)).Serialize(stream, _texts);
         }
     }
 }

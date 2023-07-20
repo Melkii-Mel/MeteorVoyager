@@ -16,8 +16,8 @@ namespace MonoBehaviours.UI
 
         private void Update()
         {
-            textBalance.GetComponent<Text>().text = $"{Texts.currencyTexts.matter}: " + MainGameStatsHolder.Currency.Balance.ToString();
-            textData.GetComponent<Text>().text = $"{Texts.currencyTexts.data}: " + MainGameStatsHolder.Currency.Data.ToString();
+            textBalance.GetComponent<Text>().text = $"{Texts.CurrencyTexts.Matter}: " + MainGameStatsHolder.Currency.Balance.ToString();
+            textData.GetComponent<Text>().text = $"{Texts.CurrencyTexts.Data}: " + MainGameStatsHolder.Currency.Data.ToString();
         }
 
         private void DataUnlockChecker()

@@ -1,4 +1,5 @@
-﻿using SerializationLibrary;
+﻿using Localization.Scripts;
+using SerializationLibrary;
 
 namespace GameStatsNS.GameStatsTypes
 {
@@ -9,6 +10,6 @@ namespace GameStatsNS.GameStatsTypes
         public float StarsAmountMultiplier { get; set; } = 1;
         public bool TrailsEnabled { get; set; } = true;
         public bool ParticlesEnabled { get; set; } = true;
-        public string Language { get; set; } = "en";
+        public Language Language { get; set; } = Language.En;
     }
 }

@@ -41,12 +41,12 @@ namespace MonoBehaviours.UI
             if (MainGameStatsHolder.Currency.Balance > InfiniteInteger.Million)
             {
                 button.interactable = true;
-                text.text = $"{Texts.buttonTexts.confirmRelocation}";
+                text.text = $"{Texts.ButtonTexts.ConfirmRelocation}";
             }
             else
             {
                 button.interactable = false;
-                text.text = $"{Texts.buttonTexts.unableToRelocate}";
+                text.text = $"{Texts.ButtonTexts.UnableToRelocate}";
             }
         }
     }

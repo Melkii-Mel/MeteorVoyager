@@ -6,7 +6,7 @@ namespace GameStatsNS
 {
     public static class GameStats
     {
-        public static bool IsPlaying()
+        private static bool IsPlaying()
         {
             return Application.isPlaying;
         }
@@ -15,24 +15,36 @@ namespace GameStatsNS
 
         public static SavesStatHolder SavesStatHolder { get; set; } = new(IsPlaying, 1);
         public static GameStatsHolder MainGameStatsHolder { get; set; } = new(SavesStatHolder.Save.SaveIndex, IsPlaying, 1);
-        public static Texts Texts { get; private set; } = UpdateTexts((string)MainGameStatsHolder.Settings.Language);
+
+        private static bool _languageInitialized = false;
+
+        private static Texts _texts;
+
+        public static Texts Texts
+        {
+            get => _texts;
+            set
+            {
+                if (_languageInitialized) return;
+                _languageInitialized = true;
+                _texts = value;
+            }
+        }
 
         public static Action AfterRelocation;
         
         #region Update Texts Methods
 
-        public static Texts UpdateTexts(string language)
+        public static Texts UpdateTexts(TextAsset languageFile)
         {
-            if(Enum.TryParse(language, out Languages enumLanguage))
-            {
-                return UpdateTexts(enumLanguage);
-            }
-            return UpdateTexts(Languages.En);
+            Texts = LanguageDeserializer.Deserialize(languageFile);
+            return Texts;
         }
 
-        public static Texts UpdateTexts(Languages language)
+        private static Texts UpdateTexts(string languageFileContent)
         {
-            Texts = LanguageDeserializer.Deserialize(language);
+            Debug.Log(languageFileContent);
+            Texts = LanguageDeserializer.Deserialize(languageFileContent);
             return Texts;
         }
         #endregion

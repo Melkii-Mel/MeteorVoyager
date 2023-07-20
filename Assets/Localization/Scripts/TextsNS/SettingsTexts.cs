@@ -1,17 +1,16 @@
 ﻿using System;
-using UnityEngine.Serialization;
 
 namespace Localization.Scripts.TextsNS
 {
     [Serializable]
     public class SettingsTexts
     {
-        [FormerlySerializedAs("SettingsTitle")] public string settingsTitle;
-        [FormerlySerializedAs("MusicVolume")] public string musicVolume;
-        [FormerlySerializedAs("SoundsVolume")] public string soundsVolume;
-        [FormerlySerializedAs("Trails")] public string trails;
-        [FormerlySerializedAs("Particles")] public string particles;
-        [FormerlySerializedAs("StarsAmount")] public string starsAmount;
-        [FormerlySerializedAs("Language")] public string language;
+        public string SettingsTitle { get; set; } = "text";
+        public string MusicVolume { get; set; } = "text";
+        public string SoundsVolume { get; set; } = "text";
+        public string Trails { get; set; } = "text";
+        public string Particles { get; set; } = "text";
+        public string StarsAmount { get; set; } = "text";
+        public string Language { get; set; } = "text";
     }
 }

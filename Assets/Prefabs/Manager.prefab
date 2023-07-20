@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2535100697173607671}
-  - component: {fileID: 2900459029953869366}
   - component: {fileID: 388122564723951693}
   - component: {fileID: -4505759627709259982}
   m_Layer: 0
@@ -34,21 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2900459029953869366
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5408226343634345735}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb4a1db974332d046aca446f70010daa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coinsText: {fileID: 0}
-  powerText: {fileID: 0}
-  explosionsText: {fileID: 0}
 --- !u!114 &388122564723951693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,8 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e0c19ac67e250e4e93859c6be3f85ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemy: {fileID: 4416919087037069876, guid: ec64f109987fa734d9290e9d9ed5b9bc, type: 3}
-  _intervalCoeff: 1
+  enemy: {fileID: 4416919087037069876, guid: ec64f109987fa734d9290e9d9ed5b9bc, type: 3}
+  sizeMultiplier: 0
+  intervalCoeff: 0
 --- !u!114 &-4505759627709259982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,5 +62,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particles: {fileID: 0}
   cam: {fileID: 0}
-  delayTime: 0
+  delayTimeCoeffSf: 0
   stars: []

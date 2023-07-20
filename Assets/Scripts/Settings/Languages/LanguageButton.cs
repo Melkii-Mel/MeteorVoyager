@@ -1,4 +1,5 @@
 using GameStatsNS;
+using Localization.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,7 +7,8 @@ namespace Settings.Languages
 {
     public class LanguageButton : MonoBehaviour
     {
-        [SerializeField] private Localization.Scripts.Languages language;
+        [SerializeField] private TextAsset text;
+        [SerializeField] private Language language;
 
         public void Start()
         {
@@ -14,7 +16,8 @@ namespace Settings.Languages
         }
         private void ChangeLanguage()
         {
-            GameStats.UpdateTexts(language);
+            GameStats.UpdateTexts(text);
+            GameStats.MainGameStatsHolder.Settings.Language = language;
         }
     }
 }
