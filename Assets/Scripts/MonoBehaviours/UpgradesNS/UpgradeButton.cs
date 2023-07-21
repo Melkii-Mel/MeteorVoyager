@@ -17,17 +17,16 @@ namespace MonoBehaviours.UpgradesNS
 
         private void StartIndentation()
         {
-            StartCoroutine(Indentate());
+            StartCoroutine(Press());
         }
 
         private const float FRAME_TIME_FOR_60_FPS = 1 / 60f;
 
-        private IEnumerator Indentate()
+        private IEnumerator Press()
         {
             void Translate(float coeff)
             {
                 buttonObject.transform.Translate(new Vector3(0, coeff));
-                gameObject.transform.Translate(new Vector3(0, coeff));
             }
             float ic;
             if (gameObject.GetComponent<UpgradesButtonActions>() != null && gameObject.GetComponent<UpgradesButtonActions>().CheckIfCanUpgrade())

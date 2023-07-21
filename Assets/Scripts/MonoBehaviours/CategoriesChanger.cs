@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using GameStatsNS;
 using UnityEngine;
 using UnityEngine.UI;
 using static GameStatsNS.GameStats;
@@ -10,31 +11,62 @@ namespace MonoBehaviours
 {
     public class CategoriesChanger : MonoBehaviour
     {
-        [SerializeField] private GameObject categoryChanger;
-        [SerializeField] private List<GameObject> categories;
-        public static List<bool> CategoriesEnabled = new();
+        [Serializable]
+        private class Category
+        {
+            public List<GameObject> objects;
 
+            [SerializeField] private bool enabled;
+            public bool Enabled
+            {
+                get => enabled;
+                set
+                {
+                    enabled = value;
+                    SetActive(value);
+                }
+            }
+            public bool unlocked = false;
+            
+            public void SetActive(bool val)
+            {
+                foreach (GameObject obj in objects)
+                {
+                    obj.SetActive(val);
+                }
+            }
+        }
+        [SerializeField] private Button categoryChanger;
+        [SerializeField] private List<Category> categoriesObjects;
+        
         private void Start()
         {
-            UpdateEnabledCategoriesCount();
             MainGameStatsHolder.Progression.OnProgressionUpdate += CheckForEnabledCategories;
             CheckForEnabledCategories();
-            categoryChanger.GetComponent<Button>().interactable = false;
+            categoryChanger.interactable = false;
+            InitializeEach();
+        }
+
+        private void InitializeEach()
+        {
+            foreach (Category category in categoriesObjects)
+            {
+                category.SetActive(category.Enabled);
+            }
         }
 
         private void Update()
         {
-            UpdateEnabledCategoriesCount();
-            categoryChanger.GetComponent<Button>().interactable = MainGameStatsHolder.Progression.GameStage >= 2;
+            categoryChanger.interactable = MainGameStatsHolder.Progression.GameStage >= 2;
         }
 
         private void CheckForEnabledCategories()
         {
             try
             {
-                CategoriesEnabled[0] = true;
-                CategoriesEnabled[1] = MainGameStatsHolder.Progression.GameStage >= 2;
-                CategoriesEnabled[2] = MainGameStatsHolder.Progression.GameStage >= 4;
+                categoriesObjects[0].unlocked = true;
+                categoriesObjects[1].unlocked = MainGameStatsHolder.Progression.GameStage >= 2;
+                categoriesObjects[2].unlocked = MainGameStatsHolder.Progression.GameStage >= 4;
             }
             catch (Exception ex)
             {
@@ -43,31 +75,22 @@ namespace MonoBehaviours
         }
         public void ChangeMode()
         {
-            UpdateEnabledCategoriesCount();
-            for (int i = 0; i < categories.Count; i++)
+            for (int i = 0; i < categoriesObjects.Count; i++)
             {
-                GameObject category = categories[i];
-                if (category.activeInHierarchy)
+                Category category = categoriesObjects[i];
+                if (category.Enabled)
                 {
-                    category.SetActive(false);
-                    for (int j = i + 1; j < CategoriesEnabled.Count + i; j++)
+                    category.Enabled = false;
+                    for (int j = i + 1;; j++)
                     {
-                        int index = j < CategoriesEnabled.Count ? j : j - CategoriesEnabled.Count;
-                        bool categoryEnabled = CategoriesEnabled[index];
-                        if (categoryEnabled)
+                        if (category.unlocked)
                         {
-                            categories[index].SetActive(true);
-                            goto END_OF_LOOP;
+                            category.Enabled = true;
+                            return;
                         }
                     }
                 }
-            } 
-            END_OF_LOOP:;
+            }
         }
-        private void UpdateEnabledCategoriesCount()
-        {
-            CategoriesEnabled.AddRange(from GameObject category in categories select false);
-        }
-
     }
 }
