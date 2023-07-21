@@ -11,13 +11,15 @@ namespace Settings
     {
 
 
-        [FormerlySerializedAs("_settingsTitle")] [SerializeField] private TextMeshProUGUI settingsTitle;
-        [FormerlySerializedAs("_musicVolume")] [SerializeField] private TextMeshProUGUI musicVolume;
-        [FormerlySerializedAs("_soundsVolume")] [SerializeField] private TextMeshProUGUI soundsVolume;
-        [FormerlySerializedAs("_trails")] [SerializeField] private Text trails;
-        [FormerlySerializedAs("_particles")] [SerializeField] private Text particles;
-        [FormerlySerializedAs("_starsAmount")] [SerializeField] private TextMeshProUGUI starsAmount;
-        [FormerlySerializedAs("_language")] [SerializeField] private TextMeshProUGUI language;
+        [SerializeField] private TextMeshProUGUI settingsTitle;
+        [SerializeField] private TextMeshProUGUI musicVolume;
+        [SerializeField] private TextMeshProUGUI soundsVolume;
+        [SerializeField] private Text trails;
+        [SerializeField] private Text particles;
+        [SerializeField] private TextMeshProUGUI starsAmount;
+        [SerializeField] private TextMeshProUGUI language;
+        [SerializeField] private Text safeScreen;
+
 
         private void Awake()
         {
@@ -29,6 +31,7 @@ namespace Settings
             particles.text = texts.Particles;
             starsAmount.text = texts.StarsAmount;
             language.text = texts.Language;
+            safeScreen.text = texts.SafeScreen;
         }
     }
 }

@@ -6,7 +6,7 @@ namespace Settings
 {
     public class ParticlesToggle : MonoBehaviour
     {
-        private void Start()
+        private void Awake()
         {
             GetComponent<Toggle>().isOn = MainGameStatsHolder.Settings.ParticlesEnabled;
         }

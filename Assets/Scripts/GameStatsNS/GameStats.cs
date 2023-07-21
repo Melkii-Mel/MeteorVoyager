@@ -16,20 +16,7 @@ namespace GameStatsNS
         public static SavesStatHolder SavesStatHolder { get; set; } = new(IsPlaying, 1);
         public static GameStatsHolder MainGameStatsHolder { get; set; } = new(SavesStatHolder.Save.SaveIndex, IsPlaying, 1);
 
-        private static bool _languageInitialized = false;
-
-        private static Texts _texts;
-
-        public static Texts Texts
-        {
-            get => _texts;
-            set
-            {
-                if (_languageInitialized) return;
-                _languageInitialized = true;
-                _texts = value;
-            }
-        }
+        public static Texts Texts { get; set; }
 
         public static Action AfterRelocation;
         

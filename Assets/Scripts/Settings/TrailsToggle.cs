@@ -6,7 +6,7 @@ namespace Settings
 {
     public class TrailsToggle : MonoBehaviour
     {
-        private void Start()
+        private void Awake()
         {
             GetComponent<Toggle>().isOn = MainGameStatsHolder.Settings.TrailsEnabled;
         }

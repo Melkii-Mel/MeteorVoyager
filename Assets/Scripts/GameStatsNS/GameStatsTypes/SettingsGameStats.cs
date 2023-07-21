@@ -11,5 +11,6 @@ namespace GameStatsNS.GameStatsTypes
         public bool TrailsEnabled { get; set; } = true;
         public bool ParticlesEnabled { get; set; } = true;
         public Language Language { get; set; } = Language.En;
+        public bool FitInSafeArea { get; set; } = true;
     }
 }

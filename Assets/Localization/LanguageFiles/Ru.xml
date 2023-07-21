@@ -59,5 +59,6 @@
     <Particles>Частицы</Particles>
     <StarsAmount>Множитель количества звёзд</StarsAmount>
     <Language>Язык</Language>
+    <SafeScreen>Безопасная область экрана</SafeScreen>
   </SettingsTexts>
 </Texts>
