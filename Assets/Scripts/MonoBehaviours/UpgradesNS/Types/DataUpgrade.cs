@@ -8,35 +8,38 @@ namespace MonoBehaviours.UpgradesNS.Types
 {
     public class DataUpgrade : UpgradesButtonActions
     {
-        [FormerlySerializedAs("_upgrade")] [SerializeField] private DataUpgradesGameStats.Upgrades upgrade;
+        [SerializeField] private DataUpgradesGameStats.Upgrades upgradeEnum;
 
         public override InfiniteInteger Balance
         {
-            get
+            get => MainGameStatsHolder.Currency.Data;
+            set => MainGameStatsHolder.Currency.Data = value;
+        }
+        
+        
+        protected override string GetUpgradeName()
+        {
+            switch (upgradeEnum)
             {
-                return MainGameStatsHolder.Currency.Data;
+                case DataUpgradesGameStats.Upgrades.Multishot: return Texts.ButtonTexts.Multishot;
+                case DataUpgradesGameStats.Upgrades.ForceField: return Texts.ButtonTexts.ForceField;
+                case DataUpgradesGameStats.Upgrades.ScreenExplosion: return Texts.ButtonTexts.ScreenExplosion;
+                case DataUpgradesGameStats.Upgrades.BossSpawnChance: return Texts.ButtonTexts.BossSpawnChance;
+                case DataUpgradesGameStats.Upgrades.UltracoinSpawnChance: return Texts.ButtonTexts.UltracoinSpawnChance;
             }
-            set
-            {
-                MainGameStatsHolder.Currency.Data = value;
-            }
+
+            throw new Exception("nO exception Data upgrade");
         }
 
         protected override int Value
         {
-            get
-            {
-                return MainGameStatsHolder.DataUpgrades.GetUpgradeLvl(upgrade);
-            }
-            set
-            {
-                MainGameStatsHolder.DataUpgrades.Upgrade(upgrade, value);
-            }
+            get => MainGameStatsHolder.DataUpgrades.GetUpgradeLvl(upgradeEnum);
+            set => MainGameStatsHolder.DataUpgrades.Upgrade(upgradeEnum, value);
         }
 
         protected override Func<int, InfiniteInteger> GetUpgradeFormula()
         {
-            return DataUpgradesGameStats.Functions[(int)upgrade];
+            return DataUpgradesGameStats.Functions[(int)upgradeEnum];
         }
     }
 }

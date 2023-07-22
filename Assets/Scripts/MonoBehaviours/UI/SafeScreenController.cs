@@ -1,5 +1,4 @@
-﻿using System;
-using GameStatsNS;
+﻿using GameStatsNS;
 using UnityEngine;
 
 namespace MonoBehaviours.UI

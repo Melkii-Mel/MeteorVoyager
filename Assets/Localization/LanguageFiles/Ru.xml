@@ -15,6 +15,11 @@
     <CoinMultiplier>Множитель материи</CoinMultiplier>
     <CoinMultiplierTimeUpgrade>Длительность множителя материи</CoinMultiplierTimeUpgrade>
     <DamageMultiplierTimeUpgrade>Длительность множителя урона</DamageMultiplierTimeUpgrade>
+    <BossSpawnChance>Шанс появления босса</BossSpawnChance>
+    <ForceField>Силовое поле</ForceField>
+    <UltracoinSpawnChance>Шанс появления "монетки"</UltracoinSpawnChance>
+    <ScreenExplosion>Шанс взрыва экрана</ScreenExplosion>
+    <Multishot>Мультивыстрел</Multishot>
   </ButtonTexts>
   <CurrencyTexts>
     <Matter>Материя</Matter>
@@ -45,6 +50,7 @@
   </StageTexts>
   <OtherTexts>
     <DataUponRelocation>При скачке ты получишь {0} единиц данных</DataUponRelocation>
+    <Cost>Цена</Cost>
   </OtherTexts>
   <TimersTexts>
     <CoinMultiplierTimerText>Множитель монет</CoinMultiplierTimerText>

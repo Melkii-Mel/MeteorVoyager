@@ -15,6 +15,11 @@
     <CoinMultiplier>Matter Multiplier</CoinMultiplier>
     <CoinMultiplierTimeUpgrade>Matter Multiplier Duration</CoinMultiplierTimeUpgrade>
     <DamageMultiplierTimeUpgrade>Damage Multiplier Duration</DamageMultiplierTimeUpgrade>
+    <BossSpawnChance>Boss Spawn Chance</BossSpawnChance>
+    <ForceField>Force Field</ForceField>
+    <UltracoinSpawnChance>"Coin" Spawn Chance</UltracoinSpawnChance>
+    <ScreenExplosion>Screen Explosion</ScreenExplosion>
+    <Multishot>Multishot</Multishot>
   </ButtonTexts>
   <CurrencyTexts>
     <Matter>Matter</Matter>
@@ -45,6 +50,7 @@
   </StageTexts>
   <OtherTexts>
     <DataUponRelocation>Upon Warping you will recieve {0} units of data</DataUponRelocation>
+    <Cost>Cost</Cost>
   </OtherTexts>
   <TimersTexts>
     <CoinMultiplierTimerText>Matter Multiplier</CoinMultiplierTimerText>

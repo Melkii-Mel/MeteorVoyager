@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using GameStatsNS;
 using UnityEngine;
 using UnityEngine.UI;
 using static GameStatsNS.GameStats;

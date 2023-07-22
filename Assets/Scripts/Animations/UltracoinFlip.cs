@@ -1,5 +1,4 @@
-﻿using System;
-using MonoBehaviours;
+﻿using MonoBehaviours;
 using UnityEngine;
 
 namespace Animations

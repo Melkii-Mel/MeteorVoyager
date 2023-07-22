@@ -1,6 +1,5 @@
 using System;
 using System.Text.RegularExpressions;
-using CodiceApp.EventTracking;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -77,24 +76,23 @@ namespace MonoBehaviours.UpgradesNS
 
         public void UpdateText(InfiniteInteger cost)
         {
-            var r = new Regex(@"
-                (?<=[A-Z])(?=[A-Z][a-z]) |
-                 (?<=[^A-Z])(?=[A-Z]) |
-                 (?<=[A-Za-z])(?=[^A-Za-z])", RegexOptions.IgnorePatternWhitespace);
             var text = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
 
-            if (Formula(Value) != -1)
+            if (cost != -1)
             {
                 text.text =
-                    $"{r.Replace(name, " ")}\n" +
+                    $"{GetUpgradeName()}\n" +
                     $"Lvl: {Value}\n" +
-                    $"Cost: {(cost == 0 ? "FREE" : cost)}";
+                    $"{Texts.OtherTexts.Cost}: {(cost == 0 ? "FREE" : cost)}";
             }
             else
             {
-                text.text = $"MAX LVL ({Value})";
+                text.text = $"{GetUpgradeName()}\n" +
+                    $"MAX LVL ({Value})";
                 GetComponent<Button>().interactable = false;
             }
         }
+
+        protected abstract string GetUpgradeName();
     }
 }

@@ -25,7 +25,14 @@ namespace Localization.Scripts.TextsNS
         public string CoinMultiplierTimeUpgrade  { get; set; } = "text";
         public string DamageMultiplierTimeUpgrade  { get; set; } = "text";
         #endregion
-        #region DataUpgrades (NotImplemented)
+        #region DataUpgrades
+
+        public string BossSpawnChance { get; set; } = "text";
+        public string ForceField { get; set; } = "text";
+        public string UltracoinSpawnChance { get; set; } = "text";
+        public string ScreenExplosion { get; set; } = "text";
+        public string Multishot { get; set; } = "text";
+
         #endregion
     }
 }

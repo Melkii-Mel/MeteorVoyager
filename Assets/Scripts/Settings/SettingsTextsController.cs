@@ -2,7 +2,6 @@ using static GameStatsNS.GameStats;
 using Localization.Scripts.TextsNS;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Settings

@@ -14973,10 +14973,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2754743907392634516, guid: 8698c3cd3547cf349bbe22018ad2479e, type: 3}
+      propertyPath: upgradeEnum
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4134543886529273355, guid: 8698c3cd3547cf349bbe22018ad2479e, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 5080984099714730295, guid: 8698c3cd3547cf349bbe22018ad2479e, type: 3}
+      propertyPath: upgradeEnum
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5621629900394153223, guid: 8698c3cd3547cf349bbe22018ad2479e, type: 3}
+      propertyPath: upgradeEnum
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5679183966184547742, guid: 8698c3cd3547cf349bbe22018ad2479e, type: 3}
+      propertyPath: upgradeEnum
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5988213313583520883, guid: 8698c3cd3547cf349bbe22018ad2479e, type: 3}
+      propertyPath: upgradeEnum
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6468792246799878011, guid: 8698c3cd3547cf349bbe22018ad2479e, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -0.000000029802322
@@ -14989,9 +15009,21 @@ PrefabInstance:
       propertyPath: m_PresetInfoIsWorld
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6951151949098921987, guid: 8698c3cd3547cf349bbe22018ad2479e, type: 3}
+      propertyPath: upgradeEnum
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7409166828848643187, guid: 8698c3cd3547cf349bbe22018ad2479e, type: 3}
+      propertyPath: upgradeEnum
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8353237210063025807, guid: 8698c3cd3547cf349bbe22018ad2479e, type: 3}
       propertyPath: m_Name
       value: UpgradesCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8561747620185332600, guid: 8698c3cd3547cf349bbe22018ad2479e, type: 3}
+      propertyPath: upgradeEnum
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

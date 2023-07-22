@@ -15,6 +15,11 @@
     <CoinMultiplier>text</CoinMultiplier>
     <CoinMultiplierTimeUpgrade>text</CoinMultiplierTimeUpgrade>
     <DamageMultiplierTimeUpgrade>text</DamageMultiplierTimeUpgrade>
+    <BossSpawnChance>text</BossSpawnChance>
+    <ForceField>text</ForceField>
+    <UltracoinSpawnChance>text</UltracoinSpawnChance>
+    <ScreenExplosion>text</ScreenExplosion>
+    <Multishot>text</Multishot>
   </ButtonTexts>
   <CurrencyTexts>
     <Matter>text</Matter>
@@ -29,6 +34,7 @@
   </StageTexts>
   <OtherTexts>
     <DataUponRelocation>text</DataUponRelocation>
+    <Cost>text</Cost>
   </OtherTexts>
   <TimersTexts>
     <CoinMultiplierTimerText>text</CoinMultiplierTimerText>
@@ -43,5 +49,6 @@
     <Particles>text</Particles>
     <StarsAmount>text</StarsAmount>
     <Language>text</Language>
+    <SafeScreen>text</SafeScreen>
   </SettingsTexts>
 </Texts>

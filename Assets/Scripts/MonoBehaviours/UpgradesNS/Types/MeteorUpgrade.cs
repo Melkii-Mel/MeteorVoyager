@@ -16,6 +16,25 @@ namespace MonoBehaviours.UpgradesNS.Types
             set => MainGameStatsHolder.Currency.Balance = value;
         }
 
+        protected override string GetUpgradeName()
+        {
+            switch (upgrade)
+            {
+                case MeteorUpgrades.Upgrades.CoinMultiplier: 
+                    return Texts.ButtonTexts.CoinMultiplier;
+                case MeteorUpgrades.Upgrades.CoinMultiplierTimeUpgrade:
+                    return Texts.ButtonTexts.CoinMultiplierTimeUpgrade;
+                case MeteorUpgrades.Upgrades.DamageMultiplierTimeUpgrade:
+                    return Texts.ButtonTexts.DamageMultiplierTimeUpgrade;
+                case MeteorUpgrades.Upgrades.ExplosivesAttacksTimeUpgrade:
+                    return Texts.ButtonTexts.ExplosivesAttacksTimeUpgrade;
+                case MeteorUpgrades.Upgrades.GlowingEnemiesSpawnRate: 
+                    return Texts.ButtonTexts.GlowingEnemiesSpawnRate;
+            }
+
+            throw new Exception("nO exception Meteor upgrade");
+        }
+
         protected override int Value
         {
             get => MainGameStatsHolder.MeteorUpgrades.GetUpgradeLvl(upgrade);
