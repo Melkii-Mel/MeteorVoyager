@@ -28,25 +28,28 @@
   <StageTexts>
     <UniversalStage>There is no hint for this stage of the game. 
       They might appear in the future or you just need to go to touch grass</UniversalStage>
-    <StageOne>Game might feel slow at the start, but progress will speed up as you grow. 
-      You could make progress faster if you use free booster located at the upper right corner
-      Stage progression requirement: LvL 50 at Spawn Cooldown Upgrade.</StageOne>
-    <StageTwo>Upgrading damage might be pretty useful because you get more material from asteroids by destroying them completely
-      Every 30 levels of upgrading Spawn Cooldown will cause asteroids to become more dense resulting in doubling their health and slight decreasing their amount
-      The amount of material that you can obtain from them is proportional to their health, so stronger asteroids yield more material. 
-      Therefore, upgrading your damage becomes even more valuable as you progress further.
-      You probably want to push to the Charge Attack upgrade because it's quite strong, but it is not really necessary
-      Stage progression requirement: Lvl 1 at charge attack.</StageTwo>
-    <StageThree>New upgrades are now available that allow you to obtain temporary power-ups from glowing asteroids. 
-      Although these power-ups don't last very long, they are more useful than they may appear at first glance. 
-      Don't hesitate to upgrade them. 
-      To progress to the next stage, you must collect one million (1e6) units of matter.</StageThree>
-    <StageFour>Now, when you went so far, you are able to Warp
-      This will restart your journey and cause you to lose all your upgrades and matter
-      However, upon warping, you will have access to all the data you collected during your previous journey
-      This data makes new journey more efficient, but besides passive impact it can be spent on researches
-      Be careful, though, as inefficient utilization of this data could make your new journey less efficient than it could be 
-      (though it will still be more efficient than the previous one).</StageFour>
+    <StageTexts>
+      <string>Game might feel slow at the start, but progress will speed up as you grow.
+        You could make progress faster if you use free booster located at the upper right corner
+        Stage progression requirement: LvL 50 at Spawn Cooldown Upgrade.</string>
+      <string>Upgrading damage might be pretty useful because you get more material from asteroids by destroying them completely
+        Every 30 levels of upgrading Spawn Cooldown will cause asteroids to become more dense resulting in doubling their health and slight decreasing their amount
+        The amount of material that you can obtain from them is proportional to their health, so stronger asteroids yield more material.
+        Therefore, upgrading your damage becomes even more valuable as you progress further.
+        You probably want to push to the Charge Attack upgrade because it's quite strong, but it is not really necessary
+        Stage progression requirement: Lvl 1 at charge attack.</string>
+      <string>New upgrades are now available that allow you to obtain temporary power-ups from glowing asteroids.
+        Although these power-ups don't last very long, they are more useful than they may appear at first glance.
+        Don't hesitate to upgrade them.
+        To progress to the next stage, you must collect one million (1e6) units of matter.</string>
+      <string>Now, when you went so far, you are able to Warp
+        This will restart your journey and cause you to lose all your upgrades and matter
+        However, upon warping, you will have access to all the data you collected during your previous journey
+        This data makes new journey more efficient, but besides passive impact it can be spent on researches
+        Be careful, though, as inefficient utilization of this data could make your new journey less efficient than it could be
+        (though it will still be more efficient than the previous one).</string>
+    </StageTexts>
+    
   </StageTexts>
   <OtherTexts>
     <DataUponRelocation>Upon Warping you will recieve {0} units of data</DataUponRelocation>

@@ -1,6 +1,7 @@
 using System;
+using GameStatsNS;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using static GameStatsNS.GameStats;
 
 namespace MonoBehaviours
@@ -8,15 +9,24 @@ namespace MonoBehaviours
     public class GameHints : MonoBehaviour
     {
         [SerializeField] private GameObject hintScreen;
-        [SerializeField] private Text hintText;
-        public void ShowHint()
+        [SerializeField] private TextMeshProUGUI hintText;
+
+        public void Update()
+        {
+            if (hintScreen.activeSelf)
+            {
+                ShowHint();
+            }
+        }
+
+        private void ShowHint()
         {
             if (IsSomeFieldEnabled) return;
 
             hintScreen.SetActive(true);
             try
             {
-                hintText.text = HintsTexts.Hints[MainGameStatsHolder.Progression.GameStage];
+                hintText.text = GameStats.Texts.StageTexts.StageTexts[MainGameStatsHolder.Progression.GameStage];
             }
             catch (IndexOutOfRangeException)
             {

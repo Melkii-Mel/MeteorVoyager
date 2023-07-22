@@ -26,15 +26,17 @@
     <Data>text</Data>
   </CurrencyTexts>
   <StageTexts>
+    <StageTexts>
+      <string>text</string>
+      <string>text</string>
+      <string>text</string>
+      <string>text</string>
+    </StageTexts>
     <UniversalStage>text</UniversalStage>
-    <StageOne>text</StageOne>
-    <StageTwo>text</StageTwo>
-    <StageThree>text</StageThree>
-    <StageFour>text</StageFour>
   </StageTexts>
   <OtherTexts>
     <DataUponRelocation>text</DataUponRelocation>
-    <Cost>text</Cost>
+    <Cost>cost</Cost>
   </OtherTexts>
   <TimersTexts>
     <CoinMultiplierTimerText>text</CoinMultiplierTimerText>
