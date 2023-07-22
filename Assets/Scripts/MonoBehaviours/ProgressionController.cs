@@ -39,7 +39,7 @@ namespace MonoBehaviours
         private void UpdateGameStage()
         {
             GameStage++;
-            _onUpdate();
+            _onUpdate?.Invoke();
         }
     }
 }
