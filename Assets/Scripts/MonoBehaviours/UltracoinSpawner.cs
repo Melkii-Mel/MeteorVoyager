@@ -16,7 +16,9 @@ namespace MonoBehaviours
         {
             if (Calculator.RandomBool(Mathf.Sqrt(GameStats.MainGameStatsHolder.DataUpgrades.UltracoinSpawnChanceLvl) / 10))
             {
-                Instantiate(ultracoin, enemy.transform.position, new Quaternion());
+                Vector2 position = enemy.transform.position;
+                position.y = Consts.UBorder;
+                Instantiate(ultracoin, position, new Quaternion());
                 return;
             }
         }

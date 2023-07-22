@@ -102,7 +102,7 @@ namespace MonoBehaviours
             }
             void GiveData(InfiniteInteger value)
             {
-                MainGameStatsHolder.Currency.Data = value;
+                MainGameStatsHolder.Currency.Data += value;
             }
             void RestoreAll()
             {

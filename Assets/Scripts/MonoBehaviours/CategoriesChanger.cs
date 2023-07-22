@@ -83,6 +83,7 @@ namespace MonoBehaviours
                     category.Enabled = false;
                     for (int j = i + 1;; j++)
                     {
+                        category = categoriesObjects[j < categoriesObjects.Count ? j : j - categoriesObjects.Count];
                         if (category.unlocked)
                         {
                             category.Enabled = true;
