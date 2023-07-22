@@ -35,7 +35,7 @@ namespace MonoBehaviours.UpgradesNS
         public bool CheckIfCanUpgrade()
         {
             Cost = Formula(Value);
-            if (MainGameStatsHolder.Currency.Balance >= Cost && Cost != -1)
+            if (Balance >= Cost && Cost != -1)
             {
                 return true;
             }
