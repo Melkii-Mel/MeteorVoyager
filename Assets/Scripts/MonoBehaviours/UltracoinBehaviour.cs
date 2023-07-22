@@ -32,7 +32,6 @@ namespace MonoBehaviours
             transform.localScale *= scaleOnHit;
             InfiniteInteger deltaBalance = Calculator.CalculateDefaultCoinsAmount(damage).Pow(3f);
             MainGameStatsHolder.Currency.Balance += deltaBalance;
-            Debug.Log(deltaBalance);
 
             transform.Translate(new Vector2(0, transformCoeff * Time.deltaTime * knockbackPower), Space.World);
         }

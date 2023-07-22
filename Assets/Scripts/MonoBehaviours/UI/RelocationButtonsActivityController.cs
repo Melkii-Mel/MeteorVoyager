@@ -40,7 +40,7 @@ namespace MonoBehaviours.UI
 
             if (MainGameStatsHolder.Currency.Balance > InfiniteInteger.Million)
             {
-                button.interactable = true;
+                button.interactable = true; 
                 text.text = $"{Texts.ButtonTexts.ConfirmRelocation}";
             }
             else

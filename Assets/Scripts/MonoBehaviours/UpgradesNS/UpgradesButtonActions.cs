@@ -1,5 +1,6 @@
 using System;
 using System.Text.RegularExpressions;
+using CodiceApp.EventTracking;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,8 +17,6 @@ namespace MonoBehaviours.UpgradesNS
         protected abstract int Value { get; set; }
         protected Func<int, InfiniteInteger> Formula;
         protected InfiniteInteger Cost;
-        protected Action OnStart;
-
         public void Start()
         {
             AfterRelocation += Init;
@@ -25,7 +24,6 @@ namespace MonoBehaviours.UpgradesNS
             Init();
             GetComponent<Button>().onClick.AddListener(Buy);
             UpdateText(Cost);
-            OnStart?.Invoke();
         }
         protected void Init()
         {

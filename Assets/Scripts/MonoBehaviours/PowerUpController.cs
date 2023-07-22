@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using static GameStatsNS.GameStats;
@@ -6,9 +7,9 @@ namespace MonoBehaviours
 {
     public class PowerUpController : MonoBehaviour
     {
-        [SerializeField] private Text coinsText;
-        [SerializeField] private Text powerText;
-        [SerializeField] private Text explosionsText;
+        [SerializeField] private TextMeshProUGUI coinsText;
+        [SerializeField] private TextMeshProUGUI powerText;
+        [SerializeField] private TextMeshProUGUI explosionsText;
 
         public void StartController()
         {

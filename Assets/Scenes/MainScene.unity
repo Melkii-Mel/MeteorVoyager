@@ -7466,6 +7466,21 @@ MonoBehaviour:
     file: {fileID: 4900000, guid: 49aa3863eac181c46be5a08133d93187, type: 3}
   - language: 1
     file: {fileID: 4900000, guid: 6b4d20511ee12a04cb8417cfc402c6f2, type: 3}
+--- !u!114 &1440542249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1440542227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af38c8504cc434c40b57775dede4e6e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinsText: {fileID: 1734994917}
+  powerText: {fileID: 525988776}
+  explosionsText: {fileID: 839812301}
 --- !u!1 &1555665623
 GameObject:
   m_ObjectHideFlags: 0
@@ -14046,6 +14061,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5408226343634345735, guid: fbd32973918f2184eb9799ed398b1641, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1440542246}
+    - targetCorrespondingSourceObject: {fileID: 5408226343634345735, guid: fbd32973918f2184eb9799ed398b1641, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1440542249}
   m_SourcePrefab: {fileID: 100100000, guid: fbd32973918f2184eb9799ed398b1641, type: 3}
 --- !u!4 &1960175447006376636
 Transform:

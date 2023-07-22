@@ -161,8 +161,7 @@ namespace MonoBehaviours
         private void GivePowerUp()
         {
             const float coeff = 0.1f;
-            int randint = UnityEngine.Random.Range(0, 3);
-            switch (randint)
+            switch (UnityEngine.Random.Range(0, 3))
             {
                 case 0: MainGameStatsHolder.Timers.AddTime(MainGameStatsHolder.MeteorUpgrades.CoinMultiplierTimeUpgrade * coeff, Timers.Timer.CoinMultiplierTimer); break;
                 case 1: MainGameStatsHolder.Timers.AddTime(MainGameStatsHolder.MeteorUpgrades.DamageMultiplierTimeUpgrade * coeff, Timers.Timer.DamageMultiplierTimer); break;

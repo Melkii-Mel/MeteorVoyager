@@ -9,6 +9,16 @@ namespace MonoBehaviours
 {
     public class Relocation : MonoBehaviour
     {
+        public class RelocationEventArgs
+        {
+            public InfiniteInteger DataAmount { get; }
+
+            public RelocationEventArgs(InfiniteInteger dataAmount)
+            {
+                DataAmount = dataAmount;
+            }
+        }
+        
         private const float FIRST_PHASE_TIME = 5;
         private const float LAST_PHASE_TIME = 6;
         [SerializeField] private Text relocationText;
@@ -17,6 +27,14 @@ namespace MonoBehaviours
         [SerializeField] private GameObject cam;
         [SerializeField] private EnemySpawner spawner;
         [FormerlySerializedAs("ButtonDisablerField")] [SerializeField] private GameObject buttonDisablerField;
+
+        #region events
+
+        public delegate void RelocationEventHandler(Relocation sender, RelocationEventArgs args);
+
+        public static event RelocationEventHandler OnRelocation;
+
+        #endregion
 
         public void Start()
         {
@@ -71,6 +89,7 @@ namespace MonoBehaviours
             RestoreAll();
             SetDisablerFieldActive(false);
             AfterRelocation();
+            OnRelocation?.Invoke(this, new RelocationEventArgs(dataAmount));
 
             #region local functions
             void RemoveAllEnemies()

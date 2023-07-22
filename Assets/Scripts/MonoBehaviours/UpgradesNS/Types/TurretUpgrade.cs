@@ -3,7 +3,6 @@ using System.Collections;
 using GameStatsNS.GameStatsTypes.Upgrades;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 using static GameStatsNS.GameStats;
 
@@ -11,42 +10,36 @@ namespace MonoBehaviours.UpgradesNS.Types
 {
     public class TurretUpgrade : UpgradesButtonActions
     {
-        [FormerlySerializedAs("_upgrade")] [SerializeField] private TurretUpgrades.Upgrades upgrade;
+        private const int DAMAGE_UPGRADE_CONDITION_LVL = 50;
+        [SerializeField] private TurretUpgrades.Upgrades upgrade;
 
-        public TurretUpgrade()
+        private new void Start()
         {
-            OnStart = StartDamageController;
+            base.Start();
+            if (upgrade == TurretUpgrades.Upgrades.Damage)
+            {
+                StartDamageController();
+                Relocation.OnRelocation += (_, _) => StartDamageController();
+            }
         }
-
         public override InfiniteInteger Balance
         {
-            get
-            {
-                return MainGameStatsHolder.Currency.Balance;
-            }
-            set
-            {
-                MainGameStatsHolder.Currency.Balance = value;
-            }
+            get => MainGameStatsHolder.Currency.Balance;
+            set => MainGameStatsHolder.Currency.Balance = value;
         }
 
         protected override int Value
         {
-            get
-            {
-                return MainGameStatsHolder.TurretUpgrades.GetUpgradeLvl(upgrade);
-            }
-            set
-            {
-                MainGameStatsHolder.TurretUpgrades.Upgrade(upgrade, value);
-            }
+            get => MainGameStatsHolder.TurretUpgrades.GetUpgradeLvl(upgrade);
+            set => MainGameStatsHolder.TurretUpgrades.Upgrade(upgrade, value);
         }
 
         protected override Func<int, InfiniteInteger> GetUpgradeFormula()
         {
             return TurretUpgrades.Functions[(int)upgrade];
         }
-        protected void StartDamageController()
+
+        private void StartDamageController()
         {
             StartCoroutine(DamageUpgradeStateController());
         }
@@ -58,17 +51,12 @@ namespace MonoBehaviours.UpgradesNS.Types
                 IsDamageUpgradeEnabled = state;
                 GetComponent<Button>().interactable = state;
             }
-
-            if (upgrade != TurretUpgrades.Upgrades.Damage)
-            {
-                yield break;
-            }
+            Debug.Log("falsed");
             SetActive(false);
             transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "LOCKED";
-            while (MainGameStatsHolder.TurretUpgrades.SpawnCooldown < 50)
-            {
-                yield return null;
-            }
+            yield return new WaitForSeconds(1);
+            yield return new WaitUntil(() => MainGameStatsHolder.TurretUpgrades.SpawnCooldown >= DAMAGE_UPGRADE_CONDITION_LVL);
+            Debug.Log("trued");
             SetActive(true);
             UpdateText(Cost);
         }
