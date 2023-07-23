@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Animations.Atom
 {
@@ -9,10 +8,16 @@ namespace Animations.Atom
         [SerializeField] private float rotationY;
         [SerializeField] private float rotationZ;
         [SerializeField] private float coeff;
+        private Vector3 _rotation;
+        private const int FPS = 60;
+        private void Start()
+        {
+            _rotation = new Vector3(rotationX, rotationY, rotationZ) * (Random.Range(1, 1.5f) * coeff * FPS);
+        }
 
         private void Update()
         {
-            transform.Rotate(rotationX * coeff, rotationY * coeff, rotationZ * coeff);
+            transform.Rotate(_rotation * Time.deltaTime);
         }
     }
 }
