@@ -13,6 +13,15 @@ namespace MonoBehaviours.UpgradesNS.Types
         private const int DAMAGE_UPGRADE_CONDITION_LVL = 50;
         [SerializeField] private TurretUpgrades.Upgrades upgradeEnum;
 
+
+        private void OnEnable()
+        {
+            if (upgradeEnum == TurretUpgrades.Upgrades.Damage)
+            {
+                StartDamageController();
+            }
+        }
+
         private new void Start()
         {
             base.Start();
@@ -55,7 +64,10 @@ namespace MonoBehaviours.UpgradesNS.Types
 
         private void StartDamageController()
         {
-            StartCoroutine(DamageUpgradeStateController());
+            if (isActiveAndEnabled)
+            {
+                StartCoroutine(DamageUpgradeStateController());
+            }
         }
 
         private IEnumerator DamageUpgradeStateController()
@@ -67,7 +79,6 @@ namespace MonoBehaviours.UpgradesNS.Types
             }
             SetActive(false);
             transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "LOCKED";
-            yield return null;
             yield return new WaitUntil(() => MainGameStatsHolder.TurretUpgrades.SpawnCooldown >= DAMAGE_UPGRADE_CONDITION_LVL);
             SetActive(true);
             UpdateText(Cost);
