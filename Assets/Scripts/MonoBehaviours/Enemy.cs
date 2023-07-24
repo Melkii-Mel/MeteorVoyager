@@ -117,6 +117,7 @@ namespace MonoBehaviours
             }
         }
 
+        private const int MATTER_MULTIPLIER = 10;
         private static void GiveMatter(InfiniteInteger damage)
         {
             var balance = MainGameStatsHolder.Currency.Balance;
@@ -132,6 +133,7 @@ namespace MonoBehaviours
             reward *= MainGameStatsHolder.Timers.CoinMultiplierTimer > 0 ? 3 : 1;
             reward *= MainGameStatsHolder.Timers.X10Reward > 0 ? 10 : 1;
             reward *= (int)Mathf.Pow(2, MainGameStatsHolder.MeteorUpgrades.CoinMultiplier);
+            reward *= MATTER_MULTIPLIER;
             MainGameStatsHolder.Currency.Balance += reward;
         }
 

@@ -32,7 +32,9 @@ namespace MonoBehaviours
 
         public delegate void RelocationEventHandler(Relocation sender, RelocationEventArgs args);
 
-        public static event RelocationEventHandler OnRelocation;
+        public static event RelocationEventHandler OnRelocationEnd;
+
+        public static event RelocationEventHandler OnRelocationStart;
 
         #endregion
 
@@ -41,13 +43,22 @@ namespace MonoBehaviours
             StartCoroutine(Calculator());
         }
 
+        public void OnDisable()
+        {
+            StopCoroutine(Calculator());
+        }
+
         /// <summary>
-        /// Used to show how many units of data you will recieve upon relocation
+        /// Used to show how many units of data you will receive upon relocation
         /// </summary>
         private IEnumerator Calculator()
         {
             for (; ; )
             {
+                if (!isActiveAndEnabled)
+                {
+                    yield break;
+                }
                 InfiniteInteger value = CalculateAmountOfData();
                 relocationText.text = string.Format(Texts.OtherTexts.DataUponRelocation, value);
                 yield return null;
@@ -60,9 +71,12 @@ namespace MonoBehaviours
 
         private IEnumerator Relocator()
         {
+            
             Vector3 cameraPos = cam.transform.position;
             Vector3 canvasPos = canvas.transform.position;
             InfiniteInteger dataAmount = CalculateAmountOfData();
+            
+            OnRelocationStart?.Invoke(this, new(dataAmount));
 
             SetDisablerFieldActive(true);
             player.DisableContol();
@@ -89,7 +103,7 @@ namespace MonoBehaviours
             RestoreAll();
             SetDisablerFieldActive(false);
             AfterRelocation();
-            OnRelocation?.Invoke(this, new RelocationEventArgs(dataAmount));
+            OnRelocationEnd?.Invoke(this, new RelocationEventArgs(dataAmount));
 
             #region local functions
             void RemoveAllEnemies()
@@ -112,11 +126,11 @@ namespace MonoBehaviours
                 Vector2 displace = new(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
                 displace.x *= coeff;
                 displace.y *= coeff;
-                Vector2 camdisplace = displace;
-                camdisplace.x /= 800f;
-                camdisplace.y /= 1600f;
-                camdisplace *= 5;
-                cam.transform.Translate(camdisplace);
+                Vector2 camDisplace = displace;
+                camDisplace.x /= 800f;
+                camDisplace.y /= 1600f;
+                camDisplace *= 5;
+                cam.transform.Translate(camDisplace);
                 canvas.transform.Translate(-displace);
             }
             void GiveData(InfiniteInteger value)

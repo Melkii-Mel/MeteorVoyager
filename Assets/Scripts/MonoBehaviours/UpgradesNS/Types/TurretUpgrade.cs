@@ -28,7 +28,7 @@ namespace MonoBehaviours.UpgradesNS.Types
             if (upgradeEnum == TurretUpgrades.Upgrades.Damage)
             {
                 StartDamageController();
-                Relocation.OnRelocation += (_, _) => StartDamageController();
+                Relocation.OnRelocationEnd += (_, _) => StartDamageController();
             }
         }
         public override InfiniteInteger Balance

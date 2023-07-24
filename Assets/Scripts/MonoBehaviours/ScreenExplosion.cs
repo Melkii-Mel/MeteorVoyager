@@ -30,6 +30,8 @@ namespace MonoBehaviours
             _objPrefabCopy = Instantiate(objPrefab);
             _objPrefabCopy.SetActive(false);
             _objPrefabCopy.AddComponent<ExplosionObj>();
+            Relocation.OnRelocationStart += (_, _) => OnDisable();
+            Relocation.OnRelocationEnd += (_, _) => OnEnable();
         }
 
         private void ControlExplosion(float deltaTimeMS)
@@ -55,17 +57,26 @@ namespace MonoBehaviours
         [Serializable]
         private class ExplosionObj : MonoBehaviour
         {
-            private float _lifeTimeSeconds = 0.3f;
-            private InfiniteInteger _damage; 
+            private float _lifeTimeSeconds = 0.6f;
+            private InfiniteInteger _damage;
+            private Vector3 _deltaSizeStarting;
+            private const float STARTING_DELTA_SIZE_COEFFICIENT = 0.3f;
+            private const float DELTA_SIZE_COEFFICIENT = 10;
             private void Start()
             {
                 _damage = DamageCalculator.CalculateDefaultDamage() * 
                           InfiniteInteger.Pow(2, GameStats.MainGameStatsHolder.DataUpgrades.ScreenExplosionLvl / 10f);
+                _deltaSizeStarting = transform.localScale * STARTING_DELTA_SIZE_COEFFICIENT;
             }
 
             private void Update()
             {
-                transform.localScale *= 1.3f;
+                var thisTransform = transform;
+                var localScale = thisTransform.localScale;
+                
+                localScale += (localScale + _deltaSizeStarting) * (Time.deltaTime * DELTA_SIZE_COEFFICIENT);
+                
+                thisTransform.localScale = localScale;
                 _lifeTimeSeconds -= Time.deltaTime;
                 if (_lifeTimeSeconds <= 0)
                 {
