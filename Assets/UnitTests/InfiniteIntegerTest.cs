@@ -1,5 +1,8 @@
 using System;
 using NUnit.Framework;
+using NUnit.Framework.Internal;
+using UnityEngine;
+using Random = System.Random;
 
 namespace UnitTests
 {
@@ -108,6 +111,18 @@ namespace UnitTests
                 InfiniteInteger i2 = v2;
                 Assert.That(i1 / i2 == (double)v1 / v2, Is.True);
             }
+        }
+
+        [Test]
+        public void PowPerformanceTest()
+        {
+            const int testsAmount = 100000;
+            for (int i = 0; i < testsAmount; i++)
+            {
+                InfiniteInteger.Pow(2, 10000);
+            }
+            Debug.Log(InfiniteInteger.Pow(2, 10000));
+            Assert.Pass();
         }
         [Test]
         [Obsolete]

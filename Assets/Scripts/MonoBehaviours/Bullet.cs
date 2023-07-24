@@ -52,7 +52,8 @@ namespace MonoBehaviours
         }
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            collision.gameObject.GetComponent<IDamageable>().TakeDamage(DamageCalculator.CalculateDefaultDamage());
+            if (!collision.gameObject.TryGetComponent(out IDamageable damageable)) return;
+            damageable.TakeDamage(DamageCalculator.CalculateDefaultDamage());
             if (isCharged)
             {
                 _chargedBulletSpeedMultiplier *= 0.99f;
@@ -63,7 +64,7 @@ namespace MonoBehaviours
             }
             if (MainGameStatsHolder.Timers.ExplosivesAttacksTimer > 0)
             {
-                Instantiate(explosion, gameObject.transform.position, gameObject.transform.rotation);
+                Instantiate(explosion, transform.position, transform.rotation);
             }
             CheckPierces();
         }

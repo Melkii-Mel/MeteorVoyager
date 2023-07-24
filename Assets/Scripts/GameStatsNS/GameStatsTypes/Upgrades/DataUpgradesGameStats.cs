@@ -6,11 +6,11 @@ namespace GameStatsNS.GameStatsTypes.Upgrades
 {
     public class DataUpgradesGameStats : Serializable<DataUpgradesGameStats>
     {
-        public int BossSpawnChanceLvl { get; set; } = 0;
-        public int ForceFieldLvl { get; set; } = 0;
-        public int UltracoinSpawnChanceLvl { get; set; } = 0;
-        public int ScreenExplosionLvl { get; set; } = 0;
-        public int MultishotLvl { get; set; } = 0;
+        public int BossSpawnChanceLvl { get; set; }
+        public int ForceFieldLvl { get; set; }
+        public int UltracoinSpawnChanceLvl { get; set; }
+        public int ScreenExplosionLvl { get; set; }
+        public int MultishotLvl { get; set; }
 
         public enum Upgrades
         {
@@ -23,7 +23,7 @@ namespace GameStatsNS.GameStatsTypes.Upgrades
         public static List<Func<int, InfiniteInteger>> Functions { get; } = new()
         {
             //BossSpawnChangeLvl
-            (int lvl) =>
+            lvl =>
             {
                 if (lvl > 20)
                 {
@@ -32,7 +32,7 @@ namespace GameStatsNS.GameStatsTypes.Upgrades
                 return (int)MathF.Pow(10f, lvl);
             },
             //ForceFieldLvl
-            (int lvl) =>
+            lvl =>
             {
                 if (lvl > 10000)
                 {
@@ -41,7 +41,7 @@ namespace GameStatsNS.GameStatsTypes.Upgrades
                 return (int)MathF.Pow(lvl + 10, 3);
             },
             //UltracoinSpawnChanceLvl
-            (int lvl) =>
+            lvl =>
             {
                 if (lvl > 5)
                 {
@@ -50,7 +50,7 @@ namespace GameStatsNS.GameStatsTypes.Upgrades
                 return (int)MathF.Pow(100, lvl + 2);
             },
             //ScreenExplosionLvl
-            (int lvl) =>
+            lvl =>
             {
                 if (lvl > 10000)
                 {
@@ -59,7 +59,7 @@ namespace GameStatsNS.GameStatsTypes.Upgrades
                 return (int)Math.Pow(lvl + 10, 3);
             },
             //MultishotLvl
-            (int lvl) =>
+            lvl =>
             {
                 if (lvl > 9)
                 {
@@ -78,7 +78,7 @@ namespace GameStatsNS.GameStatsTypes.Upgrades
                 Upgrades.UltracoinSpawnChance => UltracoinSpawnChanceLvl,
                 Upgrades.ScreenExplosion => ScreenExplosionLvl,
                 Upgrades.Multishot => MultishotLvl,
-                _ => throw new ArgumentOutOfRangeException("Upgrade does not exist"),
+                _ => throw new ArgumentOutOfRangeException(nameof(upgrade)),
             };
         }
         public void Upgrade(Upgrades upgrade, int value = -1)

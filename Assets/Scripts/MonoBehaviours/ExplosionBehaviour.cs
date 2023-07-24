@@ -18,7 +18,8 @@ namespace MonoBehaviours
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            collision.gameObject.GetComponent<IDamageable>().TakeDamage(DamageCalculator.CalculateDefaultDamage());
+            if (!collision.gameObject.TryGetComponent(out IDamageable damageable)) return; 
+            damageable.TakeDamage(DamageCalculator.CalculateDefaultDamage());
         }
     }
 }

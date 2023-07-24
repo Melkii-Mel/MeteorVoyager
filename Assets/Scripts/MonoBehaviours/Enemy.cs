@@ -6,7 +6,7 @@ using static GameStatsNS.GameStats;
 
 namespace MonoBehaviours
 {
-    public class Enemy : MonoBehaviour, IDamageable, IProjectile
+    public class Enemy : MonoBehaviour, IDamageable
     {
         private const int ENOUGH_HITS = 5;
         [SerializeField] private GameObject particles;
