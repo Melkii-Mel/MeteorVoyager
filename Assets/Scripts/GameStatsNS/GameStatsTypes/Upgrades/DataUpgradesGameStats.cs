@@ -6,11 +6,11 @@ namespace GameStatsNS.GameStatsTypes.Upgrades
 {
     public class DataUpgradesGameStats : Serializable<DataUpgradesGameStats>
     {
-        public int BossSpawnChanceLvl { get; private set; }
-        public int ForceFieldLvl { get; private set; }
-        public int UltracoinSpawnChanceLvl { get; private set; }
-        public int ScreenExplosionLvl { get; private set; }
-        public int MultishotLvl { get; private set; }
+        public int BossSpawnChanceLvl { get; set; }
+        public int ForceFieldLvl { get; set; }
+        public int UltracoinSpawnChanceLvl { get; set; }
+        public int ScreenExplosionLvl { get; set; }
+        public int MultishotLvl { get; set; }
 
         public enum Upgrades
         {

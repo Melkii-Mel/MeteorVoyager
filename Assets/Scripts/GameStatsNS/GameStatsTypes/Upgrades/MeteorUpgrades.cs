@@ -7,11 +7,11 @@ namespace GameStatsNS.GameStatsTypes.Upgrades
 {
     public class MeteorUpgrades : Serializable<MeteorUpgrades>
     {
-        public int CoinMultiplier { get; private set; }
-        public int CoinMultiplierTimeUpgrade { get; private set; }
-        public int DamageMultiplierTimeUpgrade { get; private set; }
-        public int GlowingEnemiesSpawnRate { get; private set; }
-        public int ExplosivesAttacksTimeUpgrade { get; private set; }
+        public int CoinMultiplier { get; set; }
+        public int CoinMultiplierTimeUpgrade { get; set; }
+        public int DamageMultiplierTimeUpgrade { get; set; }
+        public int GlowingEnemiesSpawnRate { get; set; }
+        public int ExplosivesAttacksTimeUpgrade { get; set; }
 
         public void ResetDeletableValues()
         {
