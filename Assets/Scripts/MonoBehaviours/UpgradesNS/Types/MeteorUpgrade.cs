@@ -8,7 +8,7 @@ namespace MonoBehaviours.UpgradesNS.Types
 {
     public class MeteorUpgrade : UpgradesButtonActions
     {
-        [FormerlySerializedAs("_upgrade")] [SerializeField] private MeteorUpgrades.Upgrades upgrade;
+        [SerializeField] private MeteorUpgrades.Upgrades upgrade;
 
         public override InfiniteInteger Balance
         {

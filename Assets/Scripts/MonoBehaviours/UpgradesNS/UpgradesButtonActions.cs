@@ -17,8 +17,8 @@ namespace MonoBehaviours.UpgradesNS
         protected InfiniteInteger Cost;
         public void Start()
         {
-            AfterRelocation += Init;
-            AfterRelocation += () => UpdateText(Formula(Value));
+            Relocation.OnRelocationEnd += (_, _) => Init();
+            Relocation.OnRelocationEnd += (_, _) => UpdateText(Formula(Value));
             Init();
             GetComponent<Button>().onClick.AddListener(Buy);
             UpdateText(Cost);

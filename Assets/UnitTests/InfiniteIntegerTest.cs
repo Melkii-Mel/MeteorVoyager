@@ -124,6 +124,24 @@ namespace UnitTests
             Debug.Log(InfiniteInteger.Pow(2, 10000));
             Assert.Pass();
         }
+
+        [Test]
+        public void BigPowTest()
+        {
+            InfiniteInteger num = new InfiniteInteger(2, 10).Pow(int.MaxValue);
+            Debug.Log(num);
+            Assert.Pass();
+        }
+
+        [Test]
+        public void LogTests()
+        {
+            Assert.That((int)new InfiniteInteger(16).Log(2), Is.EqualTo((int)Mathf.Log(16, 2)));
+            Assert.That((int)new InfiniteInteger(25).Log(2), Is.EqualTo((int)Mathf.Log(25, 2)));
+            Assert.That((int)new InfiniteInteger(100).Log(2), Is.EqualTo((int)Mathf.Log(100, 2)));
+            Assert.That((int)new InfiniteInteger(16).Log(5), Is.EqualTo((int)Mathf.Log(16, 5)));
+            Assert.That((int)new InfiniteInteger(100000000).Log(5), Is.EqualTo((int)Mathf.Log(100000000, 5)));
+        }
         [Test]
         [Obsolete]
         public void NewPowTests()

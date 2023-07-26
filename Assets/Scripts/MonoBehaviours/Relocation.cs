@@ -102,7 +102,6 @@ namespace MonoBehaviours
             ResetGameStats();
             RestoreAll();
             SetDisablerFieldActive(false);
-            AfterRelocation();
             OnRelocationEnd?.Invoke(this, new RelocationEventArgs(dataAmount));
 
             #region local functions

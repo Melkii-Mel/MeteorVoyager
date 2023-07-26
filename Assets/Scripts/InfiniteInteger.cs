@@ -1,8 +1,10 @@
 ﻿using System;
+using UnityEngine;
 
 [Serializable]
 public struct InfiniteInteger
 {
+    #region consts
     public static readonly InfiniteInteger Zero = 0;
     public static readonly InfiniteInteger One = 1;
     public static readonly InfiniteInteger Ten = 10;
@@ -11,6 +13,7 @@ public struct InfiniteInteger
     public static readonly InfiniteInteger Million = 1000000;
     public static readonly InfiniteInteger Billion = 1000000000;
     public static readonly InfiniteInteger Trillion = Billion * 1000;
+    #endregion
 
     private enum Operators
     {
@@ -34,34 +37,26 @@ public struct InfiniteInteger
     }
 
     #region fields that represents a number
+    
     private double _base;
     private float _exponent;
     #endregion
     #region public properties
+    
     public double Base
     {
-        get
-        {
-            return _base;
-        }
-        set
-        {
-            _base = value;
-        }
+        get => _base;
+        set => _base = value;
     }
     public int Exponent
     {
-        get
-        {
-            return (int)_exponent;
-        }
-        set
-        {
-            _exponent = value;
-        }
+        get => (int)_exponent;
+        set => _exponent = value;
     }
+    
     #endregion
-
+    #region casting
+    
     public static implicit operator InfiniteInteger(int value)
     {
         return new InfiniteInteger(value);
@@ -74,13 +69,25 @@ public struct InfiniteInteger
     {
         return value._base * MathF.Pow(10, value._exponent);
     }
+    
+    #endregion
+    #region arithmetic operators (+ - * /)
+    
     public static InfiniteInteger operator +(InfiniteInteger a, int b)
     {
         return PerformArithmeticOperation(a, (float)b, Operators.Plus);
     }
+    public static InfiniteInteger operator +(int a, InfiniteInteger b)
+    {
+        return b + a;
+    }
     public static InfiniteInteger operator +(InfiniteInteger a, double b)
     {
         return PerformArithmeticOperation(a, b, Operators.Plus);
+    }
+    public static InfiniteInteger operator +(double a, InfiniteInteger b)
+    {
+        return b + a;
     }
     public static InfiniteInteger operator +(InfiniteInteger a, InfiniteInteger b)
     {
@@ -90,21 +97,44 @@ public struct InfiniteInteger
     {
         return PerformArithmeticOperation(a, (double)b, Operators.Minus);
     }
+    public static InfiniteInteger operator -(int a, InfiniteInteger b)
+    {
+        return -(b - a);
+    }
     public static InfiniteInteger operator -(InfiniteInteger a, double b)
     {
         return PerformArithmeticOperation(a, b, Operators.Minus);
+    }
+    public static InfiniteInteger operator -(double a, InfiniteInteger b)
+    {
+        return -(b - a);
     }
     public static InfiniteInteger operator -(InfiniteInteger a, InfiniteInteger b)
     {
         return PerformArithmeticOperation(a, b, Operators.Minus);
     }
+
+    public static InfiniteInteger operator -(InfiniteInteger a)
+    {
+        a._base = -a._base;
+        return a;
+    }
     public static InfiniteInteger operator *(InfiniteInteger a, int b)
     {
         return PerformArithmeticOperation(a, (double)b, Operators.Multiplication);
     }
+    public static InfiniteInteger operator *(int a, InfiniteInteger b)
+    {
+        return b * a;
+    }
     public static InfiniteInteger operator *(InfiniteInteger a, double b)
     {
         return PerformArithmeticOperation(a, b, Operators.Multiplication);
+    }
+
+    public static InfiniteInteger operator *(double a, InfiniteInteger b)
+    {
+        return b * a;
     }
     public static InfiniteInteger operator *(InfiniteInteger a, InfiniteInteger b)
     {
@@ -114,15 +144,29 @@ public struct InfiniteInteger
     {
         return PerformArithmeticOperation(a, (double)b, Operators.Division);
     }
+
+    public static InfiniteInteger operator /(int a, InfiniteInteger b)
+    {
+        return PerformArithmeticOperation(a, b, Operators.Division);
+    }
     public static InfiniteInteger operator /(InfiniteInteger a, double b)
     {
         return PerformArithmeticOperation(a, b, Operators.Division);
     }
+
+    public static InfiniteInteger operator /(double a, InfiniteInteger b)
+    {
+        return 1 / PerformArithmeticOperation(b, a, Operators.Division);
+    }
+
     public static InfiniteInteger operator /(InfiniteInteger a, InfiniteInteger b)
     {
         return PerformArithmeticOperation(a, b, Operators.Division);
     }
-
+    
+    #endregion
+    #region logic operators (> < >= <= == !=)
+    
     public static bool operator >(InfiniteInteger a, InfiniteInteger b)
     {
         if (a.Base <= 0 && b.Base >= 0) return false;
@@ -179,6 +223,8 @@ public struct InfiniteInteger
     {
         return !(a == b);
     }
+    
+    #endregion
     private static InfiniteInteger PerformArithmeticOperation(InfiniteInteger a, double b, Operators @operator)
     {
         double normalizedB;
@@ -250,6 +296,9 @@ public struct InfiniteInteger
         return a;
     }
 
+    /// <summary>
+    /// Inaccurate
+    /// </summary>
     public InfiniteInteger Pow(float power)
     {
 
@@ -270,7 +319,31 @@ public struct InfiniteInteger
         Compress(ref this);
         return this;
     }
-    [Obsolete("Methos doesnt support high values of power")]
+
+    #region log
+    
+    public double Log10()
+    {
+        return _exponent + Math.Log10(_base);
+    }
+    
+    /// <summary>
+    /// Inaccurate
+    /// </summary>
+    public double Log(float logBase)
+    {
+        return Mathf.Log(10) / Math.Log(logBase) * Log10();
+    }
+    
+    #endregion
+
+    public InfiniteInteger Round(int digit)
+    {
+        _base = Math.Round(_base, digit);
+        return this;
+    }
+    
+    [Obsolete("Method doesnt support high exponent values")]
     public InfiniteInteger OldPow(float power)
     {
         _base = Math.Pow(_base, power);
@@ -278,11 +351,11 @@ public struct InfiniteInteger
         Compress(ref this);
         return this;
     }
-    [Obsolete("Methos doesnt support high values of power")]
-    public static InfiniteInteger OldPow(InfiniteInteger a, float power)
+    [Obsolete("Method doesnt support high exponent values")]
+    public static InfiniteInteger OldPow(InfiniteInteger a, float exponent)
     {
-        a._base = Math.Pow(a._base, power);
-        a._exponent *= power;
+        a._base = Math.Pow(a._base, exponent);
+        a._exponent *= exponent;
         Compress(ref a);
         return a;
     }
