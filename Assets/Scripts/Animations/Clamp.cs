@@ -52,7 +52,6 @@ namespace Animations
             bone0R.localRotation = _bone0RRotationStart * Quaternion.Euler(0, 0, -_dynamicCoeff0);
             bone1L.localRotation = _bone1LRotationStart * Quaternion.Euler(0, 0, _dynamicCoeff1);
             bone1R.localRotation = _bone1RRotationStart * Quaternion.Euler(0, 0, -_dynamicCoeff1);
-            
         }
 
         private void ClampDefault()
