@@ -3,12 +3,7 @@ using static GameStatsNS.GameStats;
 
 public static class Calculator
 {
-    public static Random Random = new();
-
-    public static InfiniteInteger CalculateDefaultDamage()
-    {
-        return new InfiniteInteger(MainGameStatsHolder.TurretUpgrades.Damage + 1) * (float)(MainGameStatsHolder.Timers.DamageMultiplierTimer > 0 ? 3 : 1);
-    }
+    private static readonly Random Random = new();
 
     public static InfiniteInteger CalculateDefaultCoinsAmount(InfiniteInteger damage)
     {

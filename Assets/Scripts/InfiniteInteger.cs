@@ -30,10 +30,12 @@ public struct InfiniteInteger
         Compress(ref this);
     }
 
-    public InfiniteInteger(double @base = 0, int exponent = 0)
+    
+    public InfiniteInteger(double @base = 0, float exponent = 0)
     {
         _base = @base;
         _exponent = exponent;
+        Compress(ref this);
     }
 
     #region fields that represents a number
@@ -48,7 +50,7 @@ public struct InfiniteInteger
         get => _base;
         set => _base = value;
     }
-    public int Exponent
+    public float Exponent
     {
         get => (int)_exponent;
         set => _exponent = value;
@@ -195,7 +197,7 @@ public struct InfiniteInteger
     }
     public static bool operator ==(InfiniteInteger a, InfiniteInteger b)
     {
-        return a._exponent == b._exponent && a._base == b._base;
+        return (int)a._exponent == (int)b._exponent && Math.Abs(a._base - b._base) < 0.00001f;
     }
     public static bool operator !=(InfiniteInteger a, InfiniteInteger b)
     {
@@ -380,15 +382,8 @@ public struct InfiniteInteger
             absBase *= 10;
             ii._exponent--;
         }
-        while (ii._exponent < 0)
-        {
-            ii._exponent++;
-            absBase /= 10;
-            ii._base /= 10;
-        }
-        ii._base = Math.Round(ii._base, 9);
         float mod = ii._exponent % 1;
-        if (Math.Abs(ii._base) == 10)
+        if (Math.Abs(Math.Abs(ii._base) - 10) < 0.0000009f)
         {
             ii._exponent++;
             ii._base = 1;
@@ -420,8 +415,7 @@ public struct InfiniteInteger
     public override bool Equals(object? obj)
     {
         return obj is InfiniteInteger integer &&
-               _base == integer._base &&
-               _exponent == integer._exponent;
+               this == integer;
     }
 #nullable disable
     public override int GetHashCode()

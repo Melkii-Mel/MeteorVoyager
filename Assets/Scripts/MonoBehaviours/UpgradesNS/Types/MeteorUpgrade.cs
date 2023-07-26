@@ -1,7 +1,6 @@
 ﻿using System;
 using GameStatsNS.GameStatsTypes.Upgrades;
 using UnityEngine;
-using UnityEngine.Serialization;
 using static GameStatsNS.GameStats;
 
 namespace MonoBehaviours.UpgradesNS.Types

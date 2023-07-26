@@ -7,7 +7,7 @@ namespace MeteorVoyager.TextMesh_Pro.Examples___Extras.Scripts
     public class Benchmark02 : MonoBehaviour
     {
 
-        public int SpawnType = 0;
+        public int SpawnType;
         public int NumberOfNPC = 12;
 
         public bool IsTextObjectScaleStatic;

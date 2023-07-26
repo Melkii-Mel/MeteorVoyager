@@ -6,10 +6,5 @@ namespace GameStatsNS.GameStatsTypes
     {
         public InfiniteInteger Data { get; set; } = 0;
         public InfiniteInteger Balance { get; set; } = 0;
-
-        public void ResetDeletableValues()
-        {
-            Balance = 0;
-        }
     }
 }

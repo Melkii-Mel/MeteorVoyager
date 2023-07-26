@@ -26,7 +26,7 @@ namespace MonoBehaviours
                 _timer.IntervalS = _interval;
             }
         }
-        public static List<GameObject> Enemies { get; set; } = new();
+        public static List<GameObject> Enemies { get; } = new();
         public static InfiniteInteger EnemyHealth { get; set; } = 1;
         private Timer _timer;
 

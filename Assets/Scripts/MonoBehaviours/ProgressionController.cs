@@ -6,7 +6,7 @@ namespace MonoBehaviours
     public class ProgressionController
     {
         public int GameStage { get; set; }
-        private Action _onUpdate;
+        private readonly Action _onUpdate;
         public ProgressionController(Action action)
         {
             new Timer(0.1f, CheckGameStage, true);

@@ -9,10 +9,15 @@ namespace UnitTests
         [Test]
         public void Test1()
         {
-            TestHolder testHolder = new();
-            testHolder.TestSerializable.StringFieldTest = "Ten";
-            testHolder.TestSerializable.IntegerFieldTest = 10;
-            testHolder.TestSerializable.InfiniteIntegerFieldTest = (10, 10);
+            TestHolder testHolder = new()
+            {
+                TestSerializable =
+                {
+                    StringFieldTest = "Ten",
+                    IntegerFieldTest = 10,
+                    InfiniteIntegerFieldTest = (10, 10)
+                }
+            };
             testHolder.SerializeAll();
 
             TestHolder testHolder2 = new();
@@ -33,7 +38,7 @@ namespace UnitTests
 
     public class TestSerializable : Serializable<TestSerializable>
     {
-        public int IntegerFieldTest { get; set; } = 0;
+        public int IntegerFieldTest { get; set; }
         public string StringFieldTest { get; set; } = "Zero";
         public InfiniteInteger InfiniteIntegerFieldTest { get; set; } = (0, 0);
     }

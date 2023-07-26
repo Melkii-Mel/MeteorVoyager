@@ -17,7 +17,7 @@ namespace MeteorVoyager.TextMesh_Pro.Examples___Extras.Scripts
         private Vector3 m_initial_Rotation;
         private Vector3 m_initial_Position;
         private Color32 m_lightColor;
-        private int frames = 0;
+        private int frames;
 
         public enum MotionType { Rotation, BackAndForth, Translation };
         public MotionType Motion;

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -12,7 +11,6 @@ namespace MonoBehaviours
         [FormerlySerializedAs("delayTimeCoeffSF")] [SerializeField] private float delayTimeCoeffSf;
         private float _delayTimeCoeff;
         private bool _coroutineStarted;
-        public List<StarsBehaviour> stars;
         public static bool RelocationState = false;
         public static float RelocationDelayCoeff = 1;
         // Start is called before the first frame update
@@ -26,12 +24,12 @@ namespace MonoBehaviours
         private void Update()
         {
             UpdateCoefficient();
-            if (!_coroutineStarted && _delayTimeCoeff != 0 && _delayTimeCoeff != float.NaN && _delayTimeCoeff != float.PositiveInfinity)
+            if (!_coroutineStarted && _delayTimeCoeff != 0 && !float.IsNaN(_delayTimeCoeff) && !float.IsPositiveInfinity(_delayTimeCoeff))
             {
                 StartCoroutine(nameof(Generator));
                 _coroutineStarted = true;
             }
-            if (_delayTimeCoeff == float.NaN || _delayTimeCoeff == float.PositiveInfinity)
+            if (float.IsNaN(_delayTimeCoeff)  || float.IsInfinity(_delayTimeCoeff))
             {
                 StopCoroutine(Generator());
                 _coroutineStarted = false;
@@ -57,7 +55,6 @@ namespace MonoBehaviours
                 GameObject star = Instantiate(particles, position, new Quaternion());
                 float scale = Random.Range(0.5f, 2);
                 star.transform.localScale *= new Vector2(scale, scale);
-                stars.Add(star.GetComponent<StarsBehaviour>());
                 yield return new WaitForSeconds(_delayTimeCoeff);
             }
         }

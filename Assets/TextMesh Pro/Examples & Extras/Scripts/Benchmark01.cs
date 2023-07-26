@@ -8,7 +8,7 @@ namespace MeteorVoyager.TextMesh_Pro.Examples___Extras.Scripts
     public class Benchmark01 : MonoBehaviour
     {
 
-        public int BenchmarkType = 0;
+        public int BenchmarkType;
 
         public TMP_FontAsset TMProFont;
         public Font TextMeshFont;

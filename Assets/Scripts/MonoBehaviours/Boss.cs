@@ -9,12 +9,6 @@ namespace MonoBehaviours
         [SerializeField] private GameObject largeBullet;
         [SerializeField] private GameObject emitter;
 
-        // Start is called before the first frame update
-        private void Start()
-        {
-
-        }
-
         private IEnumerator Actions()
         {
             float time = 0;
@@ -37,8 +31,10 @@ namespace MonoBehaviours
             time = 0;
             for (int i = 0; i < 8; i++)
             {
-                Quaternion angle = new();
-                angle.z = gameObject.transform.rotation.z - 30 * Mathf.Deg2Rad;
+                Quaternion angle = new()
+                {
+                    z = gameObject.transform.rotation.z - 30 * Mathf.Deg2Rad
+                };
                 Instant();
                 yield return new WaitForSeconds(1 / 4f);
                 angle.z += 20 * Mathf.Deg2Rad;

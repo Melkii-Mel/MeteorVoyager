@@ -43,22 +43,24 @@ namespace Animations
             TickUnclamp(Time.deltaTime);
         }
 
-        public void ClampDefault()
+        private void ClampDefault()
         {
             _dynamicCoeff0 = bone0Coeff;
             _dynamicCoeff1 = bone1Coeff;
         }
-        public void ClampCharged()
+
+        private void ClampCharged()
         {
             _dynamicCoeff0 = -bone0Coeff * 2;
             _dynamicCoeff1 = -bone1Coeff * 2;
         }
 
-        private const float STEP_MULTIPLIER = 0.90f;
-        public void TickUnclamp(float deltaTimeMS)
+        private const float STEP_MULTIPLIER = 0.09f;
+
+        private void TickUnclamp(float deltaTimeMS)
         {
-            _dynamicCoeff0 *= STEP_MULTIPLIER;
-            _dynamicCoeff1 *= STEP_MULTIPLIER;
+            _dynamicCoeff0 *= STEP_MULTIPLIER * deltaTimeMS;
+            _dynamicCoeff1 *= STEP_MULTIPLIER * deltaTimeMS;
         }
     }
 }

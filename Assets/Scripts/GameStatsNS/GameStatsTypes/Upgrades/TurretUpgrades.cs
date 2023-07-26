@@ -7,11 +7,11 @@ namespace GameStatsNS.GameStatsTypes.Upgrades
 {
     public class TurretUpgrades : Serializable<TurretUpgrades>
     {
-        public int PierceCount { get; set; } = 0;
-        public int ChargeAttack { get; set; } = 0;
-        public int Damage { get; set; } = 0;
-        public int SpawnCooldown { get; set; } = 0;
-        public int ShotCooldown { get; set; } = 0;
+        public int PierceCount { get; private set; }
+        public int ChargeAttack { get; private set; }
+        public int Damage { get; private set; }
+        public int SpawnCooldown { get; private set; }
+        public int ShotCooldown { get; private set; }
 
         public void ResetDeletableValues()
         {

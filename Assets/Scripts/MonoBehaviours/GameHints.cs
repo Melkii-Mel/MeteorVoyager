@@ -1,5 +1,4 @@
 using System;
-using GameStatsNS;
 using TMPro;
 using UnityEngine;
 using static GameStatsNS.GameStats;
@@ -26,11 +25,11 @@ namespace MonoBehaviours
             hintScreen.SetActive(true);
             try
             {
-                hintText.text = GameStats.Texts.StageTexts.StageTexts[MainGameStatsHolder.Progression.GameStage];
+                hintText.text = Texts.StageTexts.StageTexts[MainGameStatsHolder.Progression.GameStage];
             }
             catch (IndexOutOfRangeException)
             {
-                hintText.text = HintsTexts.UNIVERSAL_HINT;
+                hintText.text = Texts.StageTexts.UniversalStage;
             }
             IsSomeFieldEnabled = true;
         }

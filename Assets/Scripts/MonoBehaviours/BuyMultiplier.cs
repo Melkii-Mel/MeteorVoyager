@@ -12,12 +12,6 @@ namespace MonoBehaviours
             Multiplier = -1;
             SwitchBuyingMultiplier();
         }
-
-        private void Update()
-        {
-
-        }
-
         public void SwitchBuyingMultiplier()
         {
             switch (Multiplier)

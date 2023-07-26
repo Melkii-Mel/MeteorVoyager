@@ -8,13 +8,13 @@ namespace GameStatsNS
 {
     public class GameStatsHolder : SerializablesHolder
     {
-        public Currency Currency { get; set; }
-        public DataUpgradesGameStats DataUpgrades { get; set; }
-        public MeteorUpgrades MeteorUpgrades { get; set; }
-        public Progression Progression { get; set; }
-        public SettingsGameStats Settings { get; set; }
-        public Timers Timers { get; set; }
-        public TurretUpgrades TurretUpgrades { get; set; }
+        public Currency Currency { get; private set; }
+        public DataUpgradesGameStats DataUpgrades { get; private set; }
+        public MeteorUpgrades MeteorUpgrades { get; private set; }
+        public Progression Progression { get; private set; }
+        public SettingsGameStats Settings { get; private set; }
+        public Timers Timers { get; private set; }
+        public TurretUpgrades TurretUpgrades { get; private set; }
         public GameStatsHolder(int serializablesIndex, Func<bool> runningCondition, float delayS) : base(serializablesIndex, runningCondition, delayS, Application.persistentDataPath)
         {
             Currency = CreateSerializable<Currency>();

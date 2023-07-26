@@ -6,13 +6,13 @@ namespace MeteorVoyager.TextMesh_Pro.Examples___Extras.Scripts
 	public class DropdownSample: MonoBehaviour
 	{
 		[SerializeField]
-		private TextMeshProUGUI text = null;
+		private TextMeshProUGUI text;
 
 		[SerializeField]
-		private TMP_Dropdown dropdownWithoutPlaceholder = null;
+		private TMP_Dropdown dropdownWithoutPlaceholder;
 
 		[SerializeField]
-		private TMP_Dropdown dropdownWithPlaceholder = null;
+		private TMP_Dropdown dropdownWithPlaceholder;
 
 		public void OnButtonClick()
 		{

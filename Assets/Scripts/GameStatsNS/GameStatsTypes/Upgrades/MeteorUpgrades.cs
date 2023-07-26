@@ -7,11 +7,11 @@ namespace GameStatsNS.GameStatsTypes.Upgrades
 {
     public class MeteorUpgrades : Serializable<MeteorUpgrades>
     {
-        public int CoinMultiplier { get; set; }
-        public int CoinMultiplierTimeUpgrade { get; set; }
-        public int DamageMultiplierTimeUpgrade { get; set; }
-        public int GlowingEnemiesSpawnRate { get; set; }
-        public int ExplosivesAttacksTimeUpgrade { get; set; }
+        public int CoinMultiplier { get; private set; }
+        public int CoinMultiplierTimeUpgrade { get; private set; }
+        public int DamageMultiplierTimeUpgrade { get; private set; }
+        public int GlowingEnemiesSpawnRate { get; private set; }
+        public int ExplosivesAttacksTimeUpgrade { get; private set; }
 
         public void ResetDeletableValues()
         {
@@ -38,7 +38,7 @@ namespace GameStatsNS.GameStatsTypes.Upgrades
                 Upgrades.DamageMultiplierTimeUpgrade => DamageMultiplierTimeUpgrade,
                 Upgrades.ExplosivesAttacksTimeUpgrade => ExplosivesAttacksTimeUpgrade,
                 Upgrades.GlowingEnemiesSpawnRate => GlowingEnemiesSpawnRate,
-                _ => throw new ArgumentOutOfRangeException("Upgrade does not exist"),
+                _ => throw new ArgumentOutOfRangeException(nameof(upgrade)),
             };
         }
         public void Upgrade(Upgrades upgrade, int value = -1)
@@ -66,13 +66,10 @@ namespace GameStatsNS.GameStatsTypes.Upgrades
         public static List<Func<int, InfiniteInteger>> Functions { get; } = new()
         {
             //CoinMultiplier
-            (int lvl) =>
-            {
-                return  lvl == 0 ? 1000 :
-                        lvl == 1 ? 1000000 :
-                        lvl == 2 ? 100000000 :
-                        (-1);
-            },
+            (int lvl) => lvl == 0 ? 1000 :
+                lvl == 1 ? 1000000 :
+                lvl == 2 ? 100000000 :
+                (-1),
             //CoinMultiplierTimeUpgrade
             (int lvl) =>
             {

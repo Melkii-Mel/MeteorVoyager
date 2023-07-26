@@ -10,10 +10,16 @@ namespace Settings.Languages
         [SerializeField] private TextAsset text;
         [SerializeField] private Language language;
 
-        public void Start()
+        public void OnEnable()
         {
             GetComponent<Button>().onClick.AddListener(ChangeLanguage);
         }
+
+        public void OnDisable()
+        {
+            GetComponent<Button>().onClick.RemoveListener(ChangeLanguage);
+        }
+
         private void ChangeLanguage()
         {
             GameStats.UpdateTexts(text);

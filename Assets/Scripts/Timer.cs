@@ -28,7 +28,7 @@ public class Timer
 
         if (stopOnSceneChange)
         {
-            SceneManager.sceneUnloaded += (scene) => Stop();
+            SceneManager.sceneUnloaded += (_) => Stop();
         }
     }
     public void StartTimer()

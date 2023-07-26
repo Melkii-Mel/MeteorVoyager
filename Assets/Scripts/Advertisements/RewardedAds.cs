@@ -11,7 +11,7 @@ namespace Advertisements
         [FormerlySerializedAs("_showAdButton")] [SerializeField] private Button showAdButton;
         [FormerlySerializedAs("_androidAdUnitId")] [SerializeField] private string androidAdUnitId = "Rewarded_Android";
         [FormerlySerializedAs("_iOSAdUnitId")] [SerializeField] private string iOSAdUnitId = "Rewarded_iOS";
-        private string _adUnitId = null; // This will remain null for unsupported platforms
+        private string _adUnitId; // This will remain null for unsupported platforms
 
         private void Awake()
         {

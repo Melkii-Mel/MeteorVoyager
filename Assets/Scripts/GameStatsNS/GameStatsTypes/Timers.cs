@@ -7,7 +7,7 @@ namespace GameStatsNS.GameStatsTypes
     {
         private const int SECOND_MS = 1000;
 
-        public Timers() : base()
+        public Timers()
         {
             GlobalTimer.OnTick += DecreaseTime;
         }
@@ -18,10 +18,10 @@ namespace GameStatsNS.GameStatsTypes
             ExplosivesAttacksTimer,
             X10RewardTimer,
         }
-        public float X10Reward { get; set; } = 0;
-        public float CoinMultiplierTimer { get; set; } = 0;
-        public float DamageMultiplierTimer { get; set; } = 0;
-        public float ExplosivesAttacksTimer { get; set; } = 0;
+        public float X10Reward { get; set; }
+        public float CoinMultiplierTimer { get; set; }
+        public float DamageMultiplierTimer { get; set; }
+        public float ExplosivesAttacksTimer { get; set; }
         public void AddTime(float time, Timer timer)
         {
             switch (timer)
@@ -32,6 +32,8 @@ namespace GameStatsNS.GameStatsTypes
                     ExplosivesAttacksTimer += time; break;
                 case Timer.CoinMultiplierTimer:
                     CoinMultiplierTimer += time; break;
+                case Timer.X10RewardTimer:
+                    X10Reward += time; break;
             }
         }
         private void DecreaseTime(float deltaTimeMS)

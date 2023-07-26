@@ -79,7 +79,7 @@ namespace MonoBehaviours
             OnRelocationStart?.Invoke(this, new(dataAmount));
 
             SetDisablerFieldActive(true);
-            player.DisableContol();
+            player.DisableControl();
             spawner.StopEnemiesSpawning();
             EnableTrailsForStars();
             SetStarsGeneratorStateOnRelocationState();
@@ -139,7 +139,7 @@ namespace MonoBehaviours
             void RestoreAll()
             {
                 ResetPosition();
-                player.EnableContol();
+                player.EnableControl();
                 spawner.StartEnemiesSpawning();
                 StarsBehaviour.SpeedCoefficientDuringRelocation = 1;
                 StarsGenerator.RelocationDelayCoeff = 1;

@@ -18,7 +18,7 @@ namespace MonoBehaviours
 
 
         private float _cd;
-        private float _charging = 0;
+        private float _charging;
         private readonly float _rBorder = Mathf.Deg2Rad * 75;
         private readonly float _nrBorder = Mathf.Deg2Rad * -75;
 
@@ -39,7 +39,7 @@ namespace MonoBehaviours
 
                 if (DetectIfCanShoot(y))
                 {
-                    Shoot(x, y);
+                    Shoot();
                 }
                 else
                 {
@@ -68,7 +68,7 @@ namespace MonoBehaviours
                     _cd -= shotCooldown;
                 }
             }
-            void Shoot(float x, float y)
+            void Shoot()
             {
                 int spreadPower = 0;
                 if (_charging > 0.9f * MainGameStatsHolder.TurretUpgrades.ChargeAttack)
@@ -90,22 +90,16 @@ namespace MonoBehaviours
             }
             void FindTouchCoordinates(out float x, out float y)
             {
-                Vector2 touch = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                x = touch.x - transform.position.x;
-                y = touch.y - transform.position.y;
+                Vector2 touch = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
+                var position = transform.position;
+                x = touch.x - position.x;
+                y = touch.y - position.y;
             }
             void ChargeChargedAttack()
             {
                 _charging += Time.deltaTime * MainGameStatsHolder.TurretUpgrades.ChargeAttack;
                 chargingFillArea.SetActive(true);
-                if (_charging < 0.9f * MainGameStatsHolder.TurretUpgrades.ChargeAttack)
-                {
-                    chargingFillArea.GetComponent<Image>().color = ConvertStringToColor("#A7302D");
-                }
-                else
-                {
-                    chargingFillArea.GetComponent<Image>().color = ConvertStringToColor("#012A03");
-                }
+                chargingFillArea.GetComponent<Image>().color = ConvertStringToColor(_charging < 0.9f * MainGameStatsHolder.TurretUpgrades.ChargeAttack ? "#A7302D" : "#012A03");
                 if (_charging > MainGameStatsHolder.TurretUpgrades.ChargeAttack) _charging = MainGameStatsHolder.TurretUpgrades.ChargeAttack;
                 if (MainGameStatsHolder.TurretUpgrades.ChargeAttack == 0)
                 {
@@ -161,14 +155,15 @@ namespace MonoBehaviours
             #endregion
         }
 
-        public void DisableContol()
+        public void DisableControl()
         {
             _controlDisabled = true;
-            Quaternion quaternion = transform.rotation;
+            var transform1 = transform;
+            Quaternion quaternion = transform1.rotation;
             quaternion.x = 0;
-            transform.rotation = quaternion;
+            transform1.rotation = quaternion;
         }
-        public void EnableContol()
+        public void EnableControl()
         {
             _controlDisabled = false;
         }

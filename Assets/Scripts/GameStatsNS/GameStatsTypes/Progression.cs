@@ -10,21 +10,12 @@ namespace GameStatsNS.GameStatsTypes
         public bool IsDamageUpgradeEnabled { get; set; }
         public int GameStage
         {
-            get
-            {
-                return _progressionController.GameStage;
-            }
-            set
-            {
-                _progressionController.GameStage = value;
-            }
+            get => _progressionController.GameStage;
+            set => _progressionController.GameStage = value;
         }
 
-        private ProgressionController _progressionController;
-        public void ResetDeletableValues()
-        {
-            IsDamageUpgradeEnabled = false;
-        }
+        private readonly ProgressionController _progressionController;
+
         [XmlIgnore]
         public Action OnProgressionUpdate { get; set; } = delegate { };
 

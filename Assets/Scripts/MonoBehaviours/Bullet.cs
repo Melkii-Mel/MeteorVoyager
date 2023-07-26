@@ -64,7 +64,8 @@ namespace MonoBehaviours
             }
             if (MainGameStatsHolder.Timers.ExplosivesAttacksTimer > 0)
             {
-                Instantiate(explosion, transform.position, transform.rotation);
+                var transform1 = transform;
+                Instantiate(explosion, transform1.position, transform1.rotation);
             }
             CheckPierces();
         }

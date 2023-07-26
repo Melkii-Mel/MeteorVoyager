@@ -22,17 +22,13 @@ namespace MonoBehaviours
 
         #region events;
 
-        public delegate void EnemyDestroyHandler(Enemy enemy);
-        public event EnemyDestroyHandler OnEnemyDestroy;
-        public static event EnemyDestroyHandler OnAnyEnemyDestroy;
-
-        public delegate void EnemyDestroyOrEnoughHitsHandler(Enemy enemy);
-        public event EnemyDestroyOrEnoughHitsHandler OnEnemyDestroyOrEnoughHits;
-        public static event EnemyDestroyOrEnoughHitsHandler OnAnyEnemyDestroyOrEnoughHits;
-
-        public delegate void EnemyDespawnHandler(Enemy enemy);
-        public event EnemyDespawnHandler OnEnemyDespawn;
-        public static event EnemyDespawnHandler OnAnyEnemyDespawn;
+        public delegate void EnemyDestroyEventHandler(Enemy enemy);
+        public event EnemyDestroyEventHandler OnEnemyDestroy;
+        public static event EnemyDestroyEventHandler OnAnyEnemyDestroy;
+        public event EnemyDestroyEventHandler OnEnemyDestroyOrEnoughHits;
+        public static event EnemyDestroyEventHandler OnAnyEnemyDestroyOrEnoughHits;
+        public event EnemyDestroyEventHandler OnEnemyDespawn;
+        public static event EnemyDestroyEventHandler OnAnyEnemyDespawn;
 
         #endregion
         private void Start()
@@ -72,10 +68,14 @@ namespace MonoBehaviours
             {
                 try
                 {
-                    SpriteRenderer particle = Instantiate(particles, transform.position, transform.rotation).GetComponent<SpriteRenderer>();
+                    Transform transform1;
+                    SpriteRenderer particle = Instantiate(particles, (transform1 = transform).position, transform1.rotation).GetComponent<SpriteRenderer>();
                     particle.color = _color;
                 }
-                catch { }
+                catch
+                {
+                    // ignored
+                }
             }
             EnemySpawner.Enemies.Remove(gameObject);
             Destroy(gameObject);
@@ -97,7 +97,8 @@ namespace MonoBehaviours
             ChangeColor();
             if (MainGameStatsHolder.Settings.ParticlesEnabled)
             {
-                Instantiate(particles, transform.position, transform.rotation);
+                var transform1 = transform;
+                Instantiate(particles, transform1.position, transform1.rotation);
             }
             InfiniteInteger prevHealth = health;
             if (damage < 1)
@@ -137,7 +138,7 @@ namespace MonoBehaviours
             MainGameStatsHolder.Currency.Balance += reward;
         }
 
-        private float Sigmoida(float value, float displacement = 0)
+        private float Sigmoid(float value, float displacement = 0)
         {
             value = 1f / (1f + Mathf.Pow(math.E, Mathf.Sqrt(value) - displacement));
             return Mathf.Pow(value, 0.25f);
@@ -154,8 +155,8 @@ namespace MonoBehaviours
 
         private void SetStartingColor()
         {
-            float colorIntencity = Sigmoida(health.Exponent, 2);
-            _color = new Color(r: colorIntencity, g: -colorIntencity + 1, b: -colorIntencity + 1);
+            float colorIntensity = Sigmoid(health.Exponent, 2);
+            _color = new Color(r: colorIntensity, g: -colorIntensity + 1, b: -colorIntensity + 1);
             GetComponent<SpriteRenderer>().color = _color;
             _startingColor = _color;
         }

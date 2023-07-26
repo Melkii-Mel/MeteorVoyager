@@ -33,7 +33,6 @@ namespace MonoBehaviours
         {
             int index = CalculateIndexFromEnemiesHealth(musicIntros);
             AudioClip clip = musicIntros[index];
-            float time = clip.length;
             PlaySong(clip, oneShot: true);
             yield return new WaitUntil(() => !source.isPlaying);
             StartCoroutine(nameof(MusicChanger));
