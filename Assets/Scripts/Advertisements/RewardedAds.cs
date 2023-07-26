@@ -8,9 +8,13 @@ namespace Advertisements
 {
     public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
     {
-        [FormerlySerializedAs("_showAdButton")] [SerializeField] private Button showAdButton;
-        [FormerlySerializedAs("_androidAdUnitId")] [SerializeField] private string androidAdUnitId = "Rewarded_Android";
-        [FormerlySerializedAs("_iOSAdUnitId")] [SerializeField] private string iOSAdUnitId = "Rewarded_iOS";
+        [SerializeField] private Button showAdButton;
+#if UNITY_ANDROID
+        [SerializeField] private string androidAdUnitId = "Rewarded_Android";
+#endif
+#if UNITY_IOS
+        [SerializeField] private string iOSAdUnitId = "Rewarded_iOS";
+#endif
         private string _adUnitId; // This will remain null for unsupported platforms
 
         private void Awake()

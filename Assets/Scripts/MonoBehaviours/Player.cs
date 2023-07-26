@@ -7,21 +7,24 @@ namespace MonoBehaviours
 {
     public class Player : MonoBehaviour
     {
-        public static Action OnShot { get; set; }
-        public static Action OnChargedShot { get; set; }
-
         [SerializeField] private Slider chargingSlider;
         [SerializeField] private GameObject chargingFillArea;
         [SerializeField] private BulletEmitter emitter;
         [Range(0f, 10f)] public float shotCooldown;
         private bool _controlDisabled;
-
-
+        
         private float _cd;
         private float _charging;
         private readonly float _rBorder = Mathf.Deg2Rad * 75;
         private readonly float _nrBorder = Mathf.Deg2Rad * -75;
-
+        
+        #region events
+        public delegate void PlayerEventsHandler();
+        public static event PlayerEventsHandler OnShot;
+        public static event PlayerEventsHandler OnChargedShot;
+        
+        #endregion
+        
         private void Update()
         {
             if (!Touched())
