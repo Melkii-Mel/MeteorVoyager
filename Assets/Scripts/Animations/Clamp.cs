@@ -1,7 +1,5 @@
-using System;
 using MonoBehaviours;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Animations
 {
@@ -66,7 +64,7 @@ namespace Animations
             _dynamicCoeff1 = -bone1Coeff * 2;
         }
 
-        private const float STEP_MULTIPLIER = 0.9f;
+        private const float STEP_MULTIPLIER = 0.7f;
 
         private void TickUnclamp(float _)
         {

@@ -1,11 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class MainAppicationSettings : MonoBehaviour
+namespace MonoBehaviours
 {
-    void Start()
+    public class MainAppicationSettings : MonoBehaviour
     {
-        Application.targetFrameRate = 120;
+        void Start()
+        {
+            Application.targetFrameRate = 30;
+        }
     }
 }

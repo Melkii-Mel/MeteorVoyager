@@ -9,7 +9,7 @@ namespace MonoBehaviours
         private readonly Action _onUpdate;
         public ProgressionController(Action action)
         {
-            new Timer(0.1f, CheckGameStage, true);
+            Timer timer = new Timer(0.1f, CheckGameStage, true);
             GameStage = 0;
             _onUpdate = action;
             action();

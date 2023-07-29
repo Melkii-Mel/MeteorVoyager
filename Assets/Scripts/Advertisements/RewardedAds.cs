@@ -1,7 +1,6 @@
 using static GameStatsNS.GameStats;
 using UnityEngine;
 using UnityEngine.Advertisements;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Advertisements

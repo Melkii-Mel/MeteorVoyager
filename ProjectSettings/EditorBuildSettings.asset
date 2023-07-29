@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Settings.unity
     guid: 3391aab4bb4d8f540a13dfebcea169d4
+  - enabled: 1
+    path: Assets/Scenes/ThemesChangerScene.unity
+    guid: 95441da608dbbfb4fb49d1a155de2083
   m_configObjects: {}

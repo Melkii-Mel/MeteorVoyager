@@ -38,7 +38,9 @@ namespace MonoBehaviours
                     _scaleCounter += Time.deltaTime;
                 }
             }
-            transform.Translate(new Vector2(0, 3 * (!isCharged ? Mathf.Log(MainGameStatsHolder.TurretUpgrades.Damage + 2, 4) / 5 + 0.5f: 1) * Time.deltaTime * speedMultiplier * _chargedBulletSpeedMultiplier));
+            transform.Translate(new Vector2(0,
+                3 * (!isCharged ? Mathf.Log(MainGameStatsHolder.TurretUpgrades.Damage + 2, 4) / 5 + 0.5f : 1) *
+                Time.deltaTime * speedMultiplier * _chargedBulletSpeedMultiplier));
             if (timer > 0)
             {
                 timer -= Time.deltaTime;

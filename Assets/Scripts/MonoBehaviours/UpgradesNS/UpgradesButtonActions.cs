@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +13,7 @@ namespace MonoBehaviours.UpgradesNS
     /// </summary>
     public abstract class UpgradesButtonActions : MonoBehaviour
     {
+        private const int MAX_UPGRADES_CHUNK_SIZE = 1000;
         protected abstract int Value { get; set; }
         protected Func<int, InfiniteInteger> Formula;
         protected InfiniteInteger Cost;
@@ -20,7 +22,7 @@ namespace MonoBehaviours.UpgradesNS
             Relocation.OnRelocationEnd += (_, _) => Init();
             Relocation.OnRelocationEnd += (_, _) => UpdateText(Formula(Value));
             Init();
-            GetComponent<Button>().onClick.AddListener(Buy);
+            GetComponent<Button>().onClick.AddListener(async () => await Buy());
             UpdateText(Cost);
         }
         protected void Init()
@@ -40,12 +42,20 @@ namespace MonoBehaviours.UpgradesNS
             }
             return false;
         }
-        public void Buy()
+        public async Task Buy()
         {
-            void Upgrade(InfiniteInteger cost)
+            int upgradesCounter = 0;
+            async Task Upgrade(InfiniteInteger cost)
             {
+                upgradesCounter++;
                 Value++;
                 Balance -= cost;
+                if (upgradesCounter > MAX_UPGRADES_CHUNK_SIZE)
+                {
+                    upgradesCounter = 0;
+                    UpdateText(Formula(Value));
+                    await Task.Delay(1);
+                }
             }
             if (BuyMultiplier.Multiplier != -1)
             {
@@ -55,7 +65,7 @@ namespace MonoBehaviours.UpgradesNS
                     {
                         break;
                     }
-                    Upgrade(Cost);
+                    await Upgrade(Cost);
                 }
             }
             else
@@ -66,7 +76,7 @@ namespace MonoBehaviours.UpgradesNS
                     {
                         break;
                     }
-                    Upgrade(Cost);
+                    await Upgrade(Cost);
                 }
             }
             UpdateText(Formula(Value));

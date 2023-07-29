@@ -35,7 +35,6 @@ namespace MonoBehaviours
         {
             transform.GetChild(0).gameObject.SetActive(isGlowing);
             _startingHealth = health;
-            SetStartingColor();
         }
 
         private void Update()
@@ -94,7 +93,6 @@ namespace MonoBehaviours
                 transform.GetChild(0).gameObject.SetActive(isGlowing);
                 GivePowerUp();
             }
-            ChangeColor();
             if (MainGameStatsHolder.Settings.ParticlesEnabled)
             {
                 var transform1 = transform;
@@ -137,30 +135,6 @@ namespace MonoBehaviours
             reward *= MATTER_MULTIPLIER;
             MainGameStatsHolder.Currency.Balance += reward;
         }
-
-        private float Sigmoid(float value, float displacement = 0)
-        {
-            value = 1f / (1f + Mathf.Pow(math.E, Mathf.Sqrt(value) - displacement));
-            return Mathf.Pow(value, 0.25f);
-        }
-
-        private void ChangeColor()
-        {
-            Color currentColor = _startingColor;
-            currentColor.r *= (float)(health / _startingHealth);
-            currentColor.g *= (float)(health / _startingHealth);
-            currentColor.b *= (float)(health / _startingHealth);
-            GetComponent<SpriteRenderer>().color = currentColor;
-        }
-
-        private void SetStartingColor()
-        {
-            float colorIntensity = Sigmoid(health.Exponent, 2);
-            _color = new Color(r: colorIntensity, g: -colorIntensity + 1, b: -colorIntensity + 1);
-            GetComponent<SpriteRenderer>().color = _color;
-            _startingColor = _color;
-        }
-
         private void GivePowerUp()
         {
             const float coeff = 0.1f;

@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e0c19ac67e250e4e93859c6be3f85ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 4416919087037069876, guid: ec64f109987fa734d9290e9d9ed5b9bc, type: 3}
+  enemy: {fileID: 6710680873985251836, guid: 4950e19cb61044342b0c1ecdaca7aa90, type: 3}
   sizeMultiplier: 0
   intervalCoeff: 0
 --- !u!114 &-4505759627709259982
@@ -63,4 +63,3 @@ MonoBehaviour:
   particles: {fileID: 0}
   cam: {fileID: 0}
   delayTimeCoeffSf: 0
-  stars: []
