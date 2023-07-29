@@ -16,7 +16,8 @@ namespace MonoBehaviours.UpgradesNS
         private const int MAX_UPGRADES_CHUNK_SIZE = 1000;
         protected abstract int Value { get; set; }
         protected Func<int, InfiniteInteger> Formula;
-        protected InfiniteInteger Cost;
+        protected InfiniteInteger Cost => Formula(Value);
+
         public void Start()
         {
             Relocation.OnRelocationEnd += (_, _) => Init();
@@ -28,14 +29,13 @@ namespace MonoBehaviours.UpgradesNS
         protected void Init()
         {
             Formula = GetUpgradeFormula();
-            Cost = Formula(Value);
+            GetComponent<Button>().interactable = Cost != -1;
         }
         protected abstract Func<int, InfiniteInteger> GetUpgradeFormula();
         public abstract InfiniteInteger Balance { get; set; }
 
         public bool CheckIfCanUpgrade()
         {
-            Cost = Formula(Value);
             if (Balance >= Cost && Cost != -1)
             {
                 return true;
@@ -79,7 +79,7 @@ namespace MonoBehaviours.UpgradesNS
                     await Upgrade(Cost);
                 }
             }
-            UpdateText(Formula(Value));
+            UpdateText(Cost);
             GetComponent<Button>().interactable = Formula(Value) != -1;
         }
 
