@@ -14,8 +14,8 @@ namespace MonoBehaviours.UpgradesNS.Types
             get => MainGameStatsHolder.Currency.Data;
             set => MainGameStatsHolder.Currency.Data = value;
         }
-        
-        
+
+
         protected override string GetUpgradeName()
         {
             switch (upgradeEnum)

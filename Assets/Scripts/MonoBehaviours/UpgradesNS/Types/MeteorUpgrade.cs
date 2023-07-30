@@ -19,7 +19,7 @@ namespace MonoBehaviours.UpgradesNS.Types
         {
             switch (upgrade)
             {
-                case MeteorUpgrades.Upgrades.CoinMultiplier: 
+                case MeteorUpgrades.Upgrades.CoinMultiplier:
                     return Texts.ButtonTexts.CoinMultiplier;
                 case MeteorUpgrades.Upgrades.CoinMultiplierTimeUpgrade:
                     return Texts.ButtonTexts.CoinMultiplierTimeUpgrade;
@@ -27,7 +27,7 @@ namespace MonoBehaviours.UpgradesNS.Types
                     return Texts.ButtonTexts.DamageMultiplierTimeUpgrade;
                 case MeteorUpgrades.Upgrades.ExplosivesAttacksTimeUpgrade:
                     return Texts.ButtonTexts.ExplosivesAttacksTimeUpgrade;
-                case MeteorUpgrades.Upgrades.GlowingEnemiesSpawnRate: 
+                case MeteorUpgrades.Upgrades.GlowingEnemiesSpawnRate:
                     return Texts.ButtonTexts.GlowingEnemiesSpawnRate;
             }
 
