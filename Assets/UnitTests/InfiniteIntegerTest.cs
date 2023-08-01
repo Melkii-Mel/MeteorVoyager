@@ -34,8 +34,8 @@ namespace UnitTests
         public void Sub()
         {
             //subtraction
-            Assert.That(new InfiniteInteger(10) - 9 == 1, Is.True);
-            Assert.That(new InfiniteInteger(10) - new InfiniteInteger(9) == 1, Is.True);
+            Assert.That(new InfiniteInteger(10) - 9 == 1);
+            Assert.That(new InfiniteInteger(10) - new InfiniteInteger(9) == 1);
         }
         [Test]
         public void Negatives()
@@ -54,8 +54,9 @@ namespace UnitTests
         [Test]
         public void LargeDivision()
         {
-            Assert.That(new InfiniteInteger(1, 100) / new InfiniteInteger(1, 200) == new InfiniteInteger(0), Is.True);
-            Assert.That(new InfiniteInteger(1, 100) / new InfiniteInteger(1, 101) == new InfiniteInteger(0.1), Is.True);
+            InfiniteInteger ii = new InfiniteInteger(1, 100) / new InfiniteInteger(1, 200);
+            Assert.That(ii > 0 && ii < (InfiniteInteger)0.00000000001);
+            Assert.That(new InfiniteInteger(1, 100) / new InfiniteInteger(1, 101) == 0.1);
         }
         [Test]
         public void EverythingElse()
@@ -73,6 +74,14 @@ namespace UnitTests
             //sqrt
             powered = new InfiniteInteger(100).Pow(0.5f);
             Assert.That(powered == 10, Is.True);
+        }
+        [Test]
+        public void PowTests()
+        {
+            InfiniteInteger value10 = InfiniteInteger.Pow(5, Mathf.Pow(10, 0.23f));
+            Assert.That((int)value10, Is.EqualTo((int)Mathf.Pow(5, Mathf.Pow(10, 0.23f))));
+            value10 = InfiniteInteger.Pow(16, Mathf.Pow(10, 0.23f));
+            Assert.That((int)value10, Is.EqualTo((int)Mathf.Pow(16, Mathf.Pow(10, 0.23f))));
         }
         [Test]
         public void RandomTests()

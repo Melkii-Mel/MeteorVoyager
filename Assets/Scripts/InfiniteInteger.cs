@@ -13,6 +13,8 @@ public struct InfiniteInteger
     public static readonly InfiniteInteger Million = 1000000;
     public static readonly InfiniteInteger Billion = 1000000000;
     public static readonly InfiniteInteger Trillion = Billion * 1000;
+    public const double TOLERANCE = 1e-10;
+    public const double DENOMINATOR = 1e+10;
     #endregion
 
     private enum Operators
@@ -47,7 +49,7 @@ public struct InfiniteInteger
     
     public double Base
     {
-        get => _base;
+        get => Math.Round(_base, 9);
         set => _base = value;
     }
     public float Exponent
@@ -66,6 +68,11 @@ public struct InfiniteInteger
     public static implicit operator InfiniteInteger((double, int) value)
     {
         return new InfiniteInteger(value.Item1, value.Item2);
+    }
+
+    public static explicit operator InfiniteInteger(double value)
+    {
+        return new InfiniteInteger(value);
     }
     public static explicit operator double(InfiniteInteger value)
     {
@@ -197,7 +204,7 @@ public struct InfiniteInteger
     }
     public static bool operator ==(InfiniteInteger a, InfiniteInteger b)
     {
-        return (int)a._exponent == (int)b._exponent && Math.Abs(a._base - b._base) < 0.00001f;
+        return Math.Abs(a._exponent - b._exponent) < TOLERANCE && Math.Abs(a._base - b._base) < TOLERANCE;
     }
     public static bool operator !=(InfiniteInteger a, InfiniteInteger b)
     {
@@ -208,9 +215,8 @@ public struct InfiniteInteger
     /// </summary>
     public static bool operator ==(InfiniteInteger a, double b)
     {
-        const double tolerance = 0.00000001;
         const double denominator = 1000000000;
-        return Math.Abs((double)a / denominator - b / denominator) <= tolerance;
+        return Math.Abs((double)a / denominator - b / denominator) <= TOLERANCE;
     }
     public static bool operator !=(InfiniteInteger a, double b)
     {
@@ -218,8 +224,7 @@ public struct InfiniteInteger
     }
     public static bool operator ==(InfiniteInteger a, int b)
     {
-        InfiniteInteger iib = b;
-        return a == iib;
+        return a == (InfiniteInteger)b;
     }
     public static bool operator !=(InfiniteInteger a, int b)
     {
@@ -229,21 +234,21 @@ public struct InfiniteInteger
     #endregion
     private static InfiniteInteger PerformArithmeticOperation(InfiniteInteger a, double b, Operators @operator)
     {
-        double normalizedB;
+        double bNormalized;
         switch (@operator)
         {
             case Operators.Plus:
-                normalizedB = b / Math.Pow(10, a._exponent);
-                a._base += normalizedB; break;
+                bNormalized = b / Math.Pow(10, a._exponent);
+                a._base += bNormalized; break;
             case Operators.Minus:
-                normalizedB = b / Math.Pow(10, a._exponent);
-                a._base -= normalizedB; break;
+                bNormalized = b / Math.Pow(10, a._exponent);
+                a._base -= bNormalized; break;
             case Operators.Multiplication:
-                normalizedB = b;
-                a._base *= normalizedB; break;
+                bNormalized = b;
+                a._base *= bNormalized; break;
             case Operators.Division:
-                normalizedB = b;
-                a._base /= normalizedB; break;
+                bNormalized = b;
+                a._base /= bNormalized; break;
         }
         Compress(ref a);
         return a;
@@ -278,49 +283,57 @@ public struct InfiniteInteger
         return a;
     }
 
-    public static InfiniteInteger Pow(InfiniteInteger a, float power)
+    #region Pow
+    public static InfiniteInteger Pow(InfiniteInteger input, float power)
     {
         int exponentPlus = 0;
-        double startingBase = a._base;
-        a._base = 1;
-        for (int i = 0; i < power; i++)
+        double startingBase = input._base;
+        InfiniteInteger output = new InfiniteInteger(1, input._exponent);
+        float whole = (int)power;
+        float remainder = power % 1;
+        for (int i = 0; i < whole; i++)
         {
-            a._base *= startingBase;
-            if (a._base > 10)
+            output._base *= startingBase;
+            if (output._base > 10)
             {
-                a._base /= 10;
+                output._base /= 10;
                 exponentPlus++;
             }
         }
-        a._exponent *= power;
-        a._exponent += exponentPlus;
-        Compress(ref a);
-        return a;
-    }
 
-    /// <summary>
-    /// Inaccurate
-    /// </summary>
+        output._exponent *= whole;
+        output._exponent += exponentPlus;
+        Compress(ref output);
+        if (remainder == 0)
+        {
+            return output;
+        }
+        output *= new InfiniteInteger(Math.Pow(input._base, remainder),  input._exponent * remainder);
+        Compress(ref output);
+        return output;
+    }
+    
     public InfiniteInteger Pow(float power)
     {
-
-        int exponentPlus = 0;
-        double startingBase = _base;
-        _base = 1;
-        for (int i = 0; i < power; i++)
-        {
-            _base *= startingBase;
-            if (_base > 10)
-            {
-                _base /= 10;
-                exponentPlus++;
-            }
-        }
+        return Pow(this, power);
+    }
+    [Obsolete("Method doesnt support high exponent values")]
+    public InfiniteInteger OldPow(float power)
+    {
+        _base = Math.Pow(_base, power);
         _exponent *= power;
-        _exponent += exponentPlus;
         Compress(ref this);
         return this;
     }
+    [Obsolete("Method doesnt support high exponent values")]
+    public static InfiniteInteger OldPow(InfiniteInteger a, float exponent)
+    {
+        a._base = Math.Pow(a._base, exponent);
+        a._exponent *= exponent;
+        Compress(ref a);
+        return a;
+    }
+    #endregion
 
     #region log
     
@@ -345,22 +358,6 @@ public struct InfiniteInteger
         return this;
     }
     
-    [Obsolete("Method doesnt support high exponent values")]
-    public InfiniteInteger OldPow(float power)
-    {
-        _base = Math.Pow(_base, power);
-        _exponent *= power;
-        Compress(ref this);
-        return this;
-    }
-    [Obsolete("Method doesnt support high exponent values")]
-    public static InfiniteInteger OldPow(InfiniteInteger a, float exponent)
-    {
-        a._base = Math.Pow(a._base, exponent);
-        a._exponent *= exponent;
-        Compress(ref a);
-        return a;
-    }
 
     private static InfiniteInteger Compress(ref InfiniteInteger ii)
     {
@@ -370,27 +367,27 @@ public struct InfiniteInteger
             return ii;
         }
         double absBase = Math.Abs(ii._base);
-        while (absBase >= 10)
+        while (absBase > 10 - TOLERANCE)
         {
             ii._base /= 10;
             absBase /= 10;
             ii._exponent++;
         }
-        while (absBase < 1)
+        while (absBase < 1 - TOLERANCE)
         {
             ii._base *= 10;
             absBase *= 10;
             ii._exponent--;
         }
-        float mod = ii._exponent % 1;
-        if (Math.Abs(Math.Abs(ii._base) - 10) < 0.0000009f)
+        if (Math.Abs(Math.Abs(ii._base) - 10) < TOLERANCE)
         {
             ii._exponent++;
             ii._base = 1;
         }
+        float mod = ii._exponent % 1;
         if (mod != 0)
         {
-            ii._base *= MathF.Pow(10, mod);
+            ii._base *= Math.Pow(10, mod);
             ii._exponent -= mod;
             Compress(ref ii);
         }

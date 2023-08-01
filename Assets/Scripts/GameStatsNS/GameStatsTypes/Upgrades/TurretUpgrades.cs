@@ -82,7 +82,7 @@ namespace GameStatsNS.GameStatsTypes.Upgrades
             //ChargeAttack
             (int lvl) =>
             {
-                if (lvl <= 25)
+                if (lvl <= 2500)
                 {
                     return lvl == 0 ? 10000 : new InfiniteInteger(1, lvl + 2);
                 }
@@ -94,9 +94,9 @@ namespace GameStatsNS.GameStatsTypes.Upgrades
             //Damage
             (int lvl) =>
             {
-                if (lvl <= 50000)
+                if (lvl <= 50000000)
                 {
-                    return InfiniteInteger.Pow(30, Mathf.Pow(lvl/20f + 1, 0.23f));
+                    return new InfiniteInteger(4).Pow(lvl / 10f) + 20;
                 }
                 else
                 {
@@ -106,7 +106,7 @@ namespace GameStatsNS.GameStatsTypes.Upgrades
             //SpawnCooldown
             (int lvl) =>
             {
-                if (lvl <= 50000)
+                if (lvl <= 50000000)
                 {
                     return InfiniteInteger.Pow(5, Mathf.Pow(lvl, 0.23f));
                 }
