@@ -16,6 +16,8 @@ namespace GameStatsNS
         public static GameStatsHolder MainGameStatsHolder { get; set; } = new(SavesStatHolder.Save.SaveIndex, IsPlaying, 1);
 
         public static Texts Texts { get; set; }
+
+        public static Parameters Parameters { get; } = new();
         
         #region Update Texts Methods
 

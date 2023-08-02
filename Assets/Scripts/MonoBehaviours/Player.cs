@@ -1,6 +1,8 @@
+using GameStatsNS;
 using UnityEngine;
 using UnityEngine.UI;
 using static GameStatsNS.GameStats;
+using Parameters = GameStatsNS.Parameters;
 
 namespace MonoBehaviours
 {
@@ -9,7 +11,6 @@ namespace MonoBehaviours
         [SerializeField] private Slider chargingSlider;
         [SerializeField] private GameObject chargingFillArea;
         [SerializeField] private BulletEmitter emitter;
-        [Range(0f, 10f)] public float shotCooldown;
         private bool _controlDisabled;
         
         private float _cd;
@@ -56,19 +57,13 @@ namespace MonoBehaviours
                 emitter.Shoot(charging: _charging);
                 _cd = 0.3f;
             }
+
             void PerformShot(ref int spreadPower)
             {
-                OnShot();
+                OnShot?.Invoke();
                 emitter.Shoot(spreadPower);
-                _cd += shotCooldown;
+                _cd += GameStats.Parameters.ShotDelay;
                 spreadPower += 10;
-            }
-            void LimitCooldownStacking()
-            {
-                while (_cd < -(shotCooldown * 20))
-                {
-                    _cd -= shotCooldown;
-                }
             }
             void Shoot()
             {
@@ -79,11 +74,10 @@ namespace MonoBehaviours
                 }
                 else
                 {
-                    while (_cd + shotCooldown < 0)
+                    while (_cd < 0)
                     {
                         PerformShot(ref spreadPower);
                     }
-                    LimitCooldownStacking();
                 }
                 _charging = 0;
                 chargingFillArea.SetActive(false);
@@ -115,11 +109,11 @@ namespace MonoBehaviours
             }
             void DecreaseCooldown()
             {
-                if (_cd <= -shotCooldown)
+                if (_cd <= -GameStats.Parameters.ShotDelay)
                 {
                     return;
                 }
-                _cd -= Time.deltaTime * (Mathf.Sqrt(MainGameStatsHolder.TurretUpgrades.ShotCooldown) + 1);
+                _cd -= Time.deltaTime;
             }
             void RotateTurretToTouch(float x, float y)
             {
@@ -142,8 +136,7 @@ namespace MonoBehaviours
             }
             bool DetectIfCanShoot(float y)
             {
-                return DetectIfTouchPositionValid(y) && !IsSomeFieldEnabled && !_controlDisabled && _cd + shotCooldown < 0;
-
+                return DetectIfTouchPositionValid(y) && !IsSomeFieldEnabled && !_controlDisabled && _cd < 0;
             }
             bool DetectIfTouchPositionValid(float y)
             {

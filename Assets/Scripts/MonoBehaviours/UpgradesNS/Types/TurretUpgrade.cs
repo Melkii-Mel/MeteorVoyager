@@ -13,6 +13,12 @@ namespace MonoBehaviours.UpgradesNS.Types
         private const int DAMAGE_UPGRADE_CONDITION_LVL = 50;
         [SerializeField] private TurretUpgrades.Upgrades upgradeEnum;
 
+        #region events
+        public delegate void UpgradeEventHandler(UpgradeEventArgs args);
+
+        public static event UpgradeEventHandler OnUpgrade;
+
+        #endregion
 
         private void OnEnable()
         {
@@ -40,7 +46,11 @@ namespace MonoBehaviours.UpgradesNS.Types
         protected override int Value
         {
             get => MainGameStatsHolder.TurretUpgrades.GetUpgradeLvl(upgradeEnum);
-            set => MainGameStatsHolder.TurretUpgrades.Upgrade(upgradeEnum, value);
+            set
+            {
+                MainGameStatsHolder.TurretUpgrades.Upgrade(upgradeEnum, value);
+                OnUpgrade?.Invoke(new UpgradeEventArgs(upgradeEnum, Value, this));
+            }
         }
 
         protected override Func<int, InfiniteInteger> GetUpgradeFormula()

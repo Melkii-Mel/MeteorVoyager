@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using GameStatsNS;
 using UnityEngine;
 using UnityEngine.Serialization;
 using static GameStatsNS.GameStats;
@@ -9,9 +10,8 @@ namespace MonoBehaviours
 {
     public class EnemySpawner : MonoBehaviour
     {
-        [FormerlySerializedAs("_enemy")] [SerializeField] private GameObject enemy;
-        [FormerlySerializedAs("_sizeMultiplier")] [SerializeField][Range(0.1f, 100f)] private float sizeMultiplier;
-        [FormerlySerializedAs("intervalCoeffSF")] [SerializeField][Range(0.1f, 10f)] private float intervalCoeff;
+        [SerializeField] private GameObject enemy;
+        [SerializeField][Range(0.1f, 100f)] private float sizeMultiplier;
         private float _interval = 1;
         public float TimerInterval
         {
@@ -32,12 +32,11 @@ namespace MonoBehaviours
 
         private void Start()
         {
-            _timer = new(intervalS: TimerInterval, @event: SpawnEnemy, enableOnStart: true);
+            _timer = new(intervalS: TimerInterval, @event: _ => SpawnEnemy(), enableOnStart: true);
         }
         private void Update()
         {
-            TimerInterval = intervalCoeff * EnemyHealthAndSpawnDelayCoefficientsCalculator.CalculateSpawnDelayCoefficient();
-            EnemyHealth = EnemyHealthAndSpawnDelayCoefficientsCalculator.CalculateHealthCoefficient();
+            TimerInterval = GameStats.Parameters.SpawnDelay;
         }
         public void StartEnemiesSpawning()
         {
@@ -49,9 +48,10 @@ namespace MonoBehaviours
             _timer.Stop();
         }
 
-        private void SpawnEnemy(float deltaTimeMS)
+        private void SpawnEnemy()
         {
-            if (Enemies.Count > 100)
+            const int maxEnemies = 100;
+            if (Enemies.Count > maxEnemies)
             {
                 Enemies.Remove(Enemies.First());
             }
@@ -63,7 +63,7 @@ namespace MonoBehaviours
             enemys.transform.position = new Vector3(pos, Consts.UBorder * 1.05f, z);
             enemys.transform.localScale *= Mathf.Sqrt(coeff) * sizeMultiplier;
             Enemy enemysEnemyComponent = enemys.GetComponent<Enemy>();
-            enemysEnemyComponent.health = EnemyHealthAndSpawnDelayCoefficientsCalculator.CalculateHealthCoefficient() * coeff;
+            enemysEnemyComponent.health = GameStats.Parameters.Health * coeff;
             enemysEnemyComponent.speed *= 1f / Mathf.Sqrt(coeff);
             enemys.GetComponent<Enemy>().isGlowing = Random.value < MainGameStatsHolder.MeteorUpgrades.GlowingEnemiesSpawnRate * 0.001f;
         }

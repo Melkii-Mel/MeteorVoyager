@@ -9,6 +9,14 @@ namespace MonoBehaviours.UpgradesNS.Types
     {
         [SerializeField] private MeteorUpgrades.Upgrades upgrade;
 
+        #region Events
+
+        public delegate void UpgradeEventHandler(UpgradeEventArgs args);
+
+        public static UpgradeEventHandler OnUpgrade;
+
+        #endregion
+        
         public override InfiniteInteger Balance
         {
             get => MainGameStatsHolder.Currency.Balance;
@@ -37,7 +45,11 @@ namespace MonoBehaviours.UpgradesNS.Types
         protected override int Value
         {
             get => MainGameStatsHolder.MeteorUpgrades.GetUpgradeLvl(upgrade);
-            set => MainGameStatsHolder.MeteorUpgrades.Upgrade(upgrade, value);
+            set
+            {
+                MainGameStatsHolder.MeteorUpgrades.Upgrade(upgrade, value); 
+                OnUpgrade?.Invoke(new UpgradeEventArgs(upgrade, Value, this));
+            }
         }
 
         protected override Func<int, InfiniteInteger> GetUpgradeFormula()

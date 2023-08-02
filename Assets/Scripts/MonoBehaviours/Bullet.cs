@@ -9,15 +9,13 @@ namespace MonoBehaviours
     {
         [SerializeField] private GameObject explosion;
         public Transform EmitterTransform { get; set; }
-        public int ricochetCounter;
-        public int pierceCounter;
-        public float chargedPierceCoefficient = 1;
-        public float chargedDamageCoefficient = 1;
-        public bool isCharged;
-        [SerializeField][Range(0.5f, 10f)] private float timer;
+        public int PierceCounter { get; set; }
+        public InfiniteInteger Damage { get; set; }
+        public bool IsCharged { get; set; }
+        [SerializeField][Range(0.5f, 10f)] private float rotationTimer;
         private float _lifeTimer = 5;
-        private float _scaleCounter;
-        [FormerlySerializedAs("SPEED_MULTIPLIER")] [SerializeField] private float speedMultiplier = 5;
+        private float _scaleMultiplier;
+        [SerializeField] private float speedMultiplier = 5;
         private float _chargedBulletSpeedMultiplier = 1;
         private Vector3 _scale;
 
@@ -25,25 +23,24 @@ namespace MonoBehaviours
         {
             _scale = transform.localScale;
             GetComponent<TrailRenderer>().enabled = MainGameStatsHolder.Settings.TrailsEnabled;
-            UpdateStats();
         }
 
         private void Update()
         {
-            if (isCharged)
+            if (IsCharged)
             {
-                if (_scaleCounter < 2)
+                if (_scaleMultiplier < 2)
                 {
-                    transform.localScale = _scale * (_scaleCounter + 1);
-                    _scaleCounter += Time.deltaTime;
+                    transform.localScale = _scale * (_scaleMultiplier + 1);
+                    _scaleMultiplier += Time.deltaTime;
                 }
             }
             transform.Translate(new Vector2(0,
-                3 * (!isCharged ? Mathf.Log(MainGameStatsHolder.TurretUpgrades.Damage + 2, 4) / 5 + 0.5f : 1) *
+                3 * (!IsCharged ? Mathf.Log(MainGameStatsHolder.TurretUpgrades.Damage + 2, 4) / 5 + 0.5f : 1) *
                 Time.deltaTime * speedMultiplier * _chargedBulletSpeedMultiplier));
-            if (timer > 0)
+            if (rotationTimer > 0)
             {
-                timer -= Time.deltaTime;
+                rotationTimer -= Time.deltaTime;
                 gameObject.transform.rotation = EmitterTransform.rotation;
             }
             _lifeTimer -= Time.deltaTime;
@@ -55,11 +52,11 @@ namespace MonoBehaviours
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (!collision.gameObject.TryGetComponent(out IDamageable damageable)) return;
-            damageable.TakeDamage(DamageCalculator.CalculateDefaultDamage());
-            if (isCharged)
+            damageable.TakeDamage(Damage);
+            if (IsCharged)
             {
                 _chargedBulletSpeedMultiplier *= 0.99f;
-                if (_chargedBulletSpeedMultiplier <= 0.1f)
+                if (_chargedBulletSpeedMultiplier <= 0.05f)
                 {
                     Destroy(gameObject);
                 }
@@ -74,17 +71,11 @@ namespace MonoBehaviours
 
         private void CheckPierces()
         {
-            pierceCounter--;
-            if (pierceCounter < 0)
+            PierceCounter--;
+            if (PierceCounter < 0)
             {
                 Destroy(gameObject);
             }
-        }
-        public void UpdateStats()
-        {
-            if (chargedDamageCoefficient < 1) chargedDamageCoefficient = 1;
-            if (chargedPierceCoefficient < 1) chargedPierceCoefficient = 1;
-            pierceCounter = (int)(MainGameStatsHolder.TurretUpgrades.PierceCount * chargedPierceCoefficient);
         }
     }
 }
