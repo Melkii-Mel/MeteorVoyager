@@ -1,4 +1,5 @@
 using System.Collections;
+using GameStatsNS;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -8,7 +9,7 @@ namespace MonoBehaviours
     {
         [SerializeField] private GameObject particles;
         [SerializeField] private Camera cam;
-        [FormerlySerializedAs("delayTimeCoeffSF")] [SerializeField] private float delayTimeCoeffSf;
+        [FormerlySerializedAs("delayTimeCoeffSF")] [SerializeField] private float coeffSf;
         private float _delayTimeCoeff;
         private bool _coroutineStarted;
         public static bool RelocationState = false;
@@ -16,11 +17,10 @@ namespace MonoBehaviours
         // Start is called before the first frame update
         private void Start()
         {
-            if (delayTimeCoeffSf == 0) delayTimeCoeffSf = 1;
+            if (coeffSf == 0) coeffSf = 1;
             UpdateCoefficient();
         }
 
-        // Update is called once per frame
         private void Update()
         {
             UpdateCoefficient();
@@ -37,7 +37,7 @@ namespace MonoBehaviours
         }
         public void UpdateCoefficient()
         {
-            _delayTimeCoeff = delayTimeCoeffSf * RelocationDelayCoeff / (EnemyHealthAndSpawnDelayCoefficientsCalculator.CalculateHealthCoefficient().Exponent + 1);
+            _delayTimeCoeff = coeffSf * RelocationDelayCoeff / GameStats.MainGameStatsHolder.Progression.GameStage;
         }
 
         private IEnumerator Generator()

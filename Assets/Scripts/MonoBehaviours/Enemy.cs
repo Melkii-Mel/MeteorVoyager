@@ -1,3 +1,4 @@
+using System;
 using GameStatsNS.GameStatsTypes;
 using MonoBehaviours.Interfaces;
 using Unity.Mathematics;
@@ -14,11 +15,11 @@ namespace MonoBehaviours
         private float _lifetime = 20;
         private Color _color;
         private Color _startingColor;
-        public InfiniteInteger health = 1;
         private InfiniteInteger _startingHealth;
-        public float speed;
-        public bool isGlowing;
-        public int hits;
+        public InfiniteInteger Health { get; private set; }
+        public float Speed { get; private set; } = 2;
+        public bool IsGlowing { get; private set; }
+        public int Hits { get; private set; }
 
         #region events;
 
@@ -33,13 +34,27 @@ namespace MonoBehaviours
         #endregion
         private void Start()
         {
-            transform.GetChild(0).gameObject.SetActive(isGlowing);
-            _startingHealth = health;
+            transform.GetChild(0).gameObject.SetActive(IsGlowing);
+            _startingHealth = Health;
+            if (_initialized)
+            {
+                return;
+            }
+
+            try
+            {
+                throw new InvalidOperationException(
+                    "Initialize method has not been called upon Instantiation of a game object with Enemy component");
+            }
+            finally
+            {
+                Destroy(this);
+            }
         }
 
         private void Update()
         {
-            transform.Translate(new Vector2(0, -3) * (Time.deltaTime * speed * (isGlowing ? 0.5f : 1)));
+            transform.Translate(new Vector2(0, -3) * (Time.deltaTime * Speed * (IsGlowing ? 0.5f : 1)));
             _lifetime -= Time.deltaTime;
             if (_lifetime < 0)
             {
@@ -50,15 +65,33 @@ namespace MonoBehaviours
             }
         }
 
+        private bool _initialized = false;
+        public void Initialize(Vector3 position, float scaleMultiplier, InfiniteInteger stHealth, float speedMultiplier, bool stIsGlowing)
+        {
+            Transform thisTransform = transform;
+            thisTransform.position = position;
+            thisTransform.localScale *= scaleMultiplier;
+            Health = stHealth;
+            Speed *= speedMultiplier;
+            IsGlowing = stIsGlowing;
+            if (_initialized)
+            {
+                throw new InvalidOperationException("Initialization can be called only once");
+            }
+            
+            
+
+            _initialized = true;
+        }
         public void Undo()
         {
             OnEnemyDestroy?.Invoke(this);
             OnAnyEnemyDestroy?.Invoke(this);
-            if (hits < ENOUGH_HITS)
+            if (Hits < ENOUGH_HITS)
             {
                 OnEnemyDestroyOrEnoughHits?.Invoke(this);
                 OnAnyEnemyDestroyOrEnoughHits?.Invoke(this);
-                if (isGlowing)
+                if (IsGlowing)
                 {
                     GivePowerUp();
                 }
@@ -81,16 +114,16 @@ namespace MonoBehaviours
         }
         public void TakeDamage(InfiniteInteger damage)
         {
-            hits++;
-            if (hits == ENOUGH_HITS)
+            Hits++;
+            if (Hits == ENOUGH_HITS)
             {
                 OnEnemyDestroyOrEnoughHits?.Invoke(this);
                 OnAnyEnemyDestroyOrEnoughHits?.Invoke(this);
             }
-            if (isGlowing && hits == 5)
+            if (IsGlowing && Hits == 5)
             {
-                isGlowing = false;
-                transform.GetChild(0).gameObject.SetActive(isGlowing);
+                IsGlowing = false;
+                transform.GetChild(0).gameObject.SetActive(IsGlowing);
                 GivePowerUp();
             }
             if (MainGameStatsHolder.Settings.ParticlesEnabled)
@@ -98,15 +131,21 @@ namespace MonoBehaviours
                 var transform1 = transform;
                 Instantiate(particles, transform1.position, transform1.rotation);
             }
-            InfiniteInteger prevHealth = health;
-            if (damage < 1)
+            if (Health <= 0)
+            {
+                return;
+            }
+
+            if (damage <= 0)
             {
                 damage = 1;
             }
-            health -= damage;
-            if (health > 0)
+            InfiniteInteger prevHealth = Health;
+            Health -= damage;
+            if (Health > 0)
             {
-                transform.Translate(Time.deltaTime * speed * (isGlowing ? 0.5f : 1) * 10 * new Vector2(0, 3));
+                Debug.Log(Health);
+                transform.Translate(Time.deltaTime * Speed * (IsGlowing ? 0.5f : 1) * 10 * new Vector2(0, 3));
                 GiveMatter(damage);
             }
             else
@@ -119,21 +158,12 @@ namespace MonoBehaviours
         private const int MATTER_MULTIPLIER = 10;
         private static void GiveMatter(InfiniteInteger damage)
         {
-            var balance = MainGameStatsHolder.Currency.Balance;
-            if (balance <= 0)
-            {
-                MainGameStatsHolder.Currency.Balance = 0;
-            }
-            if (damage <= 0)
-            {
-                return;
-            }
-            InfiniteInteger reward = damage;
-            reward *= MainGameStatsHolder.Timers.CoinMultiplierTimer > 0 ? 3 : 1;
-            reward *= MainGameStatsHolder.Timers.X10Reward > 0 ? 10 : 1;
-            reward *= (int)Mathf.Pow(2, MainGameStatsHolder.MeteorUpgrades.CoinMultiplier);
-            reward *= MATTER_MULTIPLIER;
-            MainGameStatsHolder.Currency.Balance += reward;
+            InfiniteInteger deltaMatter = damage;
+            deltaMatter *= MainGameStatsHolder.Timers.CoinMultiplierTimer > 0 ? 3 : 1;
+            deltaMatter *= MainGameStatsHolder.Timers.X10Reward > 0 ? 10 : 1;
+            deltaMatter *= InfiniteInteger.Pow(2, MainGameStatsHolder.MeteorUpgrades.CoinMultiplier);
+            deltaMatter *= MATTER_MULTIPLIER;
+            MainGameStatsHolder.Currency.Balance += deltaMatter;
         }
         private void GivePowerUp()
         {

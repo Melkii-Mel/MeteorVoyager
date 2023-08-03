@@ -17,6 +17,13 @@ namespace MonoBehaviours.UpgradesNS
         protected abstract int Value { get; set; }
         protected Func<int, InfiniteInteger> Formula;
         protected InfiniteInteger Cost => Formula(Value);
+        
+        #region events
+        public delegate void UpgradeEventHandler(UpgradeEventArgs args);
+
+        public static event UpgradeEventHandler OnUpgrade;
+        
+        #endregion
 
         public void Start()
         {
@@ -48,13 +55,14 @@ namespace MonoBehaviours.UpgradesNS
             async Task Upgrade(InfiniteInteger cost)
             {
                 upgradesCounter++;
-                Value++;
                 Balance -= cost;
+                Value++;
                 if (upgradesCounter > MAX_UPGRADES_CHUNK_SIZE)
                 {
                     upgradesCounter = 0;
-                    UpdateText(Formula(Value));
+                    UpdateText(Cost);
                     await Task.Delay(1);
+                    OnUpgrade?.Invoke(GetEventArgs());
                 }
             }
             if (BuyMultiplier.Multiplier != -1)
@@ -79,8 +87,9 @@ namespace MonoBehaviours.UpgradesNS
                     await Upgrade(Cost);
                 }
             }
+            OnUpgrade?.Invoke(GetEventArgs());
             UpdateText(Cost);
-            GetComponent<Button>().interactable = Formula(Value) != -1;
+            GetComponent<Button>().interactable = Cost != -1;
         }
 
         public void UpdateText(InfiniteInteger cost)
@@ -103,5 +112,6 @@ namespace MonoBehaviours.UpgradesNS
         }
 
         protected abstract string GetUpgradeName();
+        protected abstract UpgradeEventArgs GetEventArgs();
     }
 }

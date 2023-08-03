@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 755472263830609174}
   m_Layer: 0
   m_Name: ULTRACOIN
-  m_TagString: Untagged
+  m_TagString: IDamageable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -102,6 +102,7 @@ MonoBehaviour:
   transformCoeff: 3
   knockbackPower: 3
   startingHitsAmount: 10
+  scaleOnHit: 1.05
 --- !u!61 &-7184964645912661237
 BoxCollider2D:
   m_ObjectHideFlags: 0

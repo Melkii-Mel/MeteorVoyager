@@ -14,7 +14,7 @@ public struct InfiniteInteger
     public static readonly InfiniteInteger Billion = 1000000000;
     public static readonly InfiniteInteger Trillion = Billion * 1000;
     public const double TOLERANCE = 1e-10;
-    public const double DENOMINATOR = 1e+10;
+    public const int TOLERANCE_SIGNS = 10;
     #endregion
 
     private enum Operators
@@ -178,18 +178,18 @@ public struct InfiniteInteger
     
     public static bool operator >(InfiniteInteger a, InfiniteInteger b)
     {
-        if (a.Base <= 0 && b.Base >= 0) return false;
-        if (a.Base > 0 && b.Base <= 0) return true;
-        if (a.Base >= 0 && b.Base < 0) return true;
+        if (a._base <= 0 && b._base >= 0) return false;
+        if (a._base > 0 && b._base <= 0) return true;
+        if (a._base >= 0 && b._base < 0) return true;
         if (a._exponent < b._exponent) return false;
         if (a._exponent > b._exponent) return true;
         return a._base > b._base;
     }
     public static bool operator <(InfiniteInteger a, InfiniteInteger b)
     {
-        if (a.Base >= 0 && b.Base <= 0) return false;
-        if (a.Base < 0 && b.Base >= 0) return true;
-        if (a.Base <= 0 && b.Base > 0) return true;
+        if (a._base >= 0 && b._base <= 0) return false;
+        if (a._base < 0 && b._base >= 0) return true;
+        if (a._base <= 0 && b._base > 0) return true;
         if (a._exponent > b._exponent) return false;
         if (a._exponent < b._exponent) return true;
         return a._base < b._base;
@@ -238,10 +238,10 @@ public struct InfiniteInteger
         switch (@operator)
         {
             case Operators.Plus:
-                bNormalized = b / Math.Pow(10, a._exponent);
+                bNormalized = b * Math.Pow(10, -a._exponent);
                 a._base += bNormalized; break;
             case Operators.Minus:
-                bNormalized = b / Math.Pow(10, a._exponent);
+                bNormalized = b * Math.Pow(10, -a._exponent);
                 a._base -= bNormalized; break;
             case Operators.Multiplication:
                 bNormalized = b;
@@ -257,13 +257,13 @@ public struct InfiniteInteger
     {
         void LocalCompress()
         {
-            if (a > b)
+            if (a._exponent > b._exponent)
             {
-                Compress(ref b, (int)a._exponent);
+                CompressDown(ref b, a._exponent);
             }
-            else if (a < b)
+            else if (a._exponent < b._exponent)
             {
-                Compress(ref a, (int)b._exponent);
+                CompressDown(ref a, b._exponent);
             }
         }
         switch (@operator)
@@ -394,17 +394,19 @@ public struct InfiniteInteger
         return ii;
     }
 
-    private static InfiniteInteger Compress(ref InfiniteInteger ii, int exponent)
+    private static InfiniteInteger CompressDown(ref InfiniteInteger ii, double targetExponent)
     {
-        while (ii._exponent < exponent)
+        if (targetExponent < ii._exponent)
+            throw new Exception("Internal exception: targetExponent must not be lower than ii._exponent");
+        if (targetExponent - ii._exponent > TOLERANCE_SIGNS + 1)
+        {
+            return 0;
+        }
+        
+        while (ii._exponent < targetExponent)
         {
             ii._exponent++;
             ii._base /= 10;
-        }
-        while (ii._exponent > exponent)
-        {
-            ii._exponent--;
-            ii._base *= 10;
         }
         return ii;
     }

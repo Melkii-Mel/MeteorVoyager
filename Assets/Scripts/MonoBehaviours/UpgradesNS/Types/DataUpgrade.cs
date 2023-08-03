@@ -30,6 +30,11 @@ namespace MonoBehaviours.UpgradesNS.Types
             throw new Exception("nO exception Data upgrade");
         }
 
+        protected override UpgradeEventArgs GetEventArgs()
+        {
+            return new(upgradeEnum, Value, this);
+        }
+
         protected override int Value
         {
             get => MainGameStatsHolder.DataUpgrades.GetUpgradeLvl(upgradeEnum);

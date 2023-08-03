@@ -12,7 +12,7 @@ namespace MonoBehaviours
         public int PierceCounter { get; set; }
         public InfiniteInteger Damage { get; set; }
         public bool IsCharged { get; set; }
-        [SerializeField][Range(0.5f, 10f)] private float rotationTimer;
+        private float _rotationTimer = 0.5f;
         private float _lifeTimer = 5;
         private float _scaleMultiplier;
         [SerializeField] private float speedMultiplier = 5;
@@ -38,9 +38,9 @@ namespace MonoBehaviours
             transform.Translate(new Vector2(0,
                 3 * (!IsCharged ? Mathf.Log(MainGameStatsHolder.TurretUpgrades.Damage + 2, 4) / 5 + 0.5f : 1) *
                 Time.deltaTime * speedMultiplier * _chargedBulletSpeedMultiplier));
-            if (rotationTimer > 0)
+            if (_rotationTimer > 0)
             {
-                rotationTimer -= Time.deltaTime;
+                _rotationTimer -= Time.deltaTime;
                 gameObject.transform.rotation = EmitterTransform.rotation;
             }
             _lifeTimer -= Time.deltaTime;
@@ -51,7 +51,9 @@ namespace MonoBehaviours
         }
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (!collision.gameObject.TryGetComponent(out IDamageable damageable)) return;
+            if (!collision.CompareTag("IDamageable")) return;
+            collision.gameObject.TryGetComponent(out IDamageable damageable);
+            
             damageable.TakeDamage(Damage);
             if (IsCharged)
             {
@@ -66,11 +68,6 @@ namespace MonoBehaviours
                 var transform1 = transform;
                 Instantiate(explosion, transform1.position, transform1.rotation);
             }
-            CheckPierces();
-        }
-
-        private void CheckPierces()
-        {
             PierceCounter--;
             if (PierceCounter < 0)
             {

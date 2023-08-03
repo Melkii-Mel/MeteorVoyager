@@ -86,10 +86,9 @@ namespace MonoBehaviours
 
             private void OnTriggerEnter2D(Collider2D collision)
             {
-                if (collision.TryGetComponent(out IDamageable enemy))
-                {
-                    enemy.TakeDamage(_damage);
-                }
+                if (!CompareTag("IDamageable")) return;
+                IDamageable enemy = collision.GetComponent<IDamageable>();
+                enemy.TakeDamage(_damage);
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using GameStatsNS.GameStatsTypes.Upgrades;
+using MonoBehaviours;
 using MonoBehaviours.UpgradesNS.Types;
 using UnityEngine;
 
@@ -33,6 +34,12 @@ namespace GameStatsNS
                     SetChargedAttackDamageAndPiecing(args.UpgradeValue, GameStats.MainGameStatsHolder.TurretUpgrades.PierceCount);
                 }
             };
+            Relocation.OnRelocationEnd += (_, _) => Init();
+            Init();
+        }
+
+        private void Init()
+        {
             SetDamage(GameStats.MainGameStatsHolder.TurretUpgrades.Damage);
             SetSpawnDelayAndHealth(GameStats.MainGameStatsHolder.TurretUpgrades.SpawnCooldown);
             SetShotDelay(GameStats.MainGameStatsHolder.TurretUpgrades.ShotCooldown);

@@ -4926,6 +4926,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changer: {fileID: 5472120367519865396, guid: e072d6d27c324ee40893a160d8a60dd2, type: 3}
+  ignore: []
 --- !u!114 &6593099723069334520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4958,7 +4959,7 @@ GameObject:
   - component: {fileID: 2388186723982270817}
   m_Layer: 0
   m_Name: Asteroid
-  m_TagString: Untagged
+  m_TagString: IDamageable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

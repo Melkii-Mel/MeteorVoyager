@@ -23,7 +23,7 @@ namespace MonoBehaviours
                 {
                     _interval = 0.1f;
                 }
-                _timer.IntervalS = _interval;
+        _timer.IntervalS = _interval;
             }
         }
         public static List<GameObject> Enemies { get; } = new();
@@ -60,12 +60,14 @@ namespace MonoBehaviours
             Enemies.Add(enemys);
             float pos = Random.Range(Consts.LBorder, Consts.RBorder);
             float z = enemys.transform.position.z;
-            enemys.transform.position = new Vector3(pos, Consts.UBorder * 1.05f, z);
-            enemys.transform.localScale *= Mathf.Sqrt(coeff) * sizeMultiplier;
-            Enemy enemysEnemyComponent = enemys.GetComponent<Enemy>();
-            enemysEnemyComponent.health = GameStats.Parameters.Health * coeff;
-            enemysEnemyComponent.speed *= 1f / Mathf.Sqrt(coeff);
-            enemys.GetComponent<Enemy>().isGlowing = Random.value < MainGameStatsHolder.MeteorUpgrades.GlowingEnemiesSpawnRate * 0.001f;
+            
+            Vector3 position = new Vector3(pos, Consts.UBorder * 1.05f, z);
+            float scaleMultiplier = Mathf.Sqrt(coeff) * sizeMultiplier;
+            InfiniteInteger health = GameStats.Parameters.Health * coeff;
+            float speedMultiplier = 1f / Mathf.Sqrt(coeff);
+            bool isGlowing = Random.value < MainGameStatsHolder.MeteorUpgrades.GlowingEnemiesSpawnRate * 0.001f;
+            
+            enemys.GetComponent<Enemy>().Initialize(position, scaleMultiplier, health, speedMultiplier, isGlowing);
         }
     }
 }

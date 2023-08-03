@@ -1,17 +1,22 @@
 ﻿using System.Collections;
+using GameStatsNS.GameStatsTypes.Upgrades;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace MonoBehaviours.UpgradesNS
 {
+    [RequireComponent(typeof(Button))]
     public class UpgradeButton : MonoBehaviour
     {
         [SerializeField] private GameObject buttonObject;
         [SerializeField] private float indentationCoefficient = -0.19f;
         private int _restorationTimeFrames = 10;
+        private UpgradesButtonActions _uba;
+        private bool _isUpgradeButton;
 
         private void Start()
         {
+            _isUpgradeButton = TryGetComponent(out _uba);
             GetComponent<Button>().onClick.AddListener(StartIndentation);
         }
 
@@ -29,7 +34,7 @@ namespace MonoBehaviours.UpgradesNS
                 buttonObject.transform.Translate(new Vector3(0, coeff));
             }
             float ic;
-            if (gameObject.GetComponent<UpgradesButtonActions>() != null && gameObject.GetComponent<UpgradesButtonActions>().CheckIfCanUpgrade())
+            if (!_isUpgradeButton || _uba.CheckIfCanUpgrade())
             {
                 ic = indentationCoefficient;
             }
