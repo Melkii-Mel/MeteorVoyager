@@ -43,11 +43,7 @@ namespace MonoBehaviours.UpgradesNS
 
         public bool CheckIfCanUpgrade()
         {
-            if (Balance >= Cost && Cost != -1)
-            {
-                return true;
-            }
-            return false;
+            return Balance >= Cost && Cost != -1;
         }
         public async Task Buy()
         {

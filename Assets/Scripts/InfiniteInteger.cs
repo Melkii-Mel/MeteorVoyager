@@ -394,13 +394,15 @@ public struct InfiniteInteger
         return ii;
     }
 
-    private static InfiniteInteger CompressDown(ref InfiniteInteger ii, double targetExponent)
+    private static InfiniteInteger CompressDown(ref InfiniteInteger ii, float targetExponent)
     {
         if (targetExponent < ii._exponent)
             throw new Exception("Internal exception: targetExponent must not be lower than ii._exponent");
         if (targetExponent - ii._exponent > TOLERANCE_SIGNS + 1)
         {
-            return 0;
+            ii._base = double.Epsilon;
+            ii._exponent = targetExponent;
+            return ii;
         }
         
         while (ii._exponent < targetExponent)

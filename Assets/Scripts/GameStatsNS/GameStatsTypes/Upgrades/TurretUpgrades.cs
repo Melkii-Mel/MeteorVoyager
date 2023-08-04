@@ -7,12 +7,14 @@ namespace GameStatsNS.GameStatsTypes.Upgrades
 {
     public class TurretUpgrades : Serializable<TurretUpgrades>
     {
+        // ReSharper disable MemberCanBePrivate.Global
         public int PierceCount { get; set; }
         public int ChargeAttack { get; set; }
         public int Damage { get; set; }
         public int SpawnCooldown { get; set; }
         public int ShotCooldown { get; set; }
 
+        // ReSharper restore MemberCanBePrivate.Global
         public void ResetDeletableValues()
         {
             PierceCount = 0;
@@ -39,7 +41,7 @@ namespace GameStatsNS.GameStatsTypes.Upgrades
                 Upgrades.Damage => Damage,
                 Upgrades.SpawnCooldown => SpawnCooldown,
                 Upgrades.ShotCooldown => ShotCooldown,
-                _ => throw new ArgumentOutOfRangeException("Upgrade does not exist"),
+                _ => throw new ArgumentOutOfRangeException(nameof(upgrade), $"Upgrade ({upgrade.ToString()}) does not exist"),
             };
         }
         public void Upgrade(Upgrades upgrade, int value)
@@ -64,10 +66,11 @@ namespace GameStatsNS.GameStatsTypes.Upgrades
             }
         }
 
+        private static readonly InfiniteInteger SpawnCooldownConst0 = InfiniteInteger.Pow(10, 295);
         public static List<Func<int, InfiniteInteger>> Functions { get; } = new()
         {
             //PierceCount
-            (int lvl) =>
+            lvl =>
             {
 
                 if (lvl <= 10)
@@ -80,7 +83,7 @@ namespace GameStatsNS.GameStatsTypes.Upgrades
                 }
             },
             //ChargeAttack
-            (int lvl) =>
+            lvl =>
             {
                 if (lvl <= 2500)
                 {
@@ -92,11 +95,11 @@ namespace GameStatsNS.GameStatsTypes.Upgrades
                 }
             },
             //Damage
-            (int lvl) =>
+            lvl =>
             {
-                if (lvl <= 50000000)
+                if (lvl <= 50000)
                 {
-                    return new InfiniteInteger(4).Pow(lvl / 10f) + 20;
+                    return InfiniteInteger.Pow(4, lvl / 10f) + 20;
                 }
                 else
                 {
@@ -104,11 +107,15 @@ namespace GameStatsNS.GameStatsTypes.Upgrades
                 }
             },
             //SpawnCooldown
-            (int lvl) =>
+            lvl =>
             {
-                if (lvl <= 50000000)
+                if (lvl < 1000)
                 {
-                    return InfiniteInteger.Pow(5, Mathf.Pow(lvl, 0.23f));
+                    return InfiniteInteger.Pow(lvl / 10, 3) + 10;;
+                }
+                else if (lvl < 50000)
+                {
+                    return InfiniteInteger.Pow(2, lvl) / SpawnCooldownConst0;
                 }
                 else
                 {
@@ -116,7 +123,7 @@ namespace GameStatsNS.GameStatsTypes.Upgrades
                 }
             },
             //ShotCooldown
-            (int lvl) =>
+            lvl =>
             {
                 if (lvl <= 200)
                 {

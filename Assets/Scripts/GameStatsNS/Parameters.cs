@@ -54,7 +54,7 @@ namespace GameStatsNS
         private void SetDamage(int lvl)
         {
             // ReSharper disable once PossibleLossOfFraction
-            _damage = lvl * 2 * InfiniteInteger.Pow(2, lvl / 25);
+            _damage = lvl * 2 * InfiniteInteger.Pow(2, lvl / 25) + 2;
         }
         
         #endregion

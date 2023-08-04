@@ -135,11 +135,6 @@ namespace MonoBehaviours
             {
                 return;
             }
-
-            if (damage <= 0)
-            {
-                damage = 1;
-            }
             InfiniteInteger prevHealth = Health;
             Health -= damage;
             if (Health > 0)

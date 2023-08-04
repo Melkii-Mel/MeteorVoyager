@@ -6,7 +6,7 @@ using Random = System.Random;
 
 namespace MonoBehaviours
 {
-    public class ScreenExplosion : MonoBehaviour
+    public class ScreenExplosionController : MonoBehaviour
     {
         [SerializeField] private GameObject objPrefab;
         private GameObject _objPrefabCopy;
@@ -64,7 +64,7 @@ namespace MonoBehaviours
             private const float DELTA_SIZE_COEFFICIENT = 10;
             private void Start()
             {
-                _damage = DamageCalculator.CalculateDefaultDamage() * 
+                _damage = GameStats.Parameters.Damage * 
                           InfiniteInteger.Pow(2, GameStats.MainGameStatsHolder.DataUpgrades.ScreenExplosionLvl / 10f);
                 _deltaSizeStarting = transform.localScale * STARTING_DELTA_SIZE_COEFFICIENT;
             }
@@ -86,7 +86,7 @@ namespace MonoBehaviours
 
             private void OnTriggerEnter2D(Collider2D collision)
             {
-                if (!CompareTag("IDamageable")) return;
+                if (!collision.CompareTag("IDamageable")) return;
                 IDamageable enemy = collision.GetComponent<IDamageable>();
                 enemy.TakeDamage(_damage);
             }
