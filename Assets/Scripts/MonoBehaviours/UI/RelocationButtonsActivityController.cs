@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 using static GameStatsNS.GameStats;
 
@@ -7,12 +6,22 @@ namespace MonoBehaviours.UI
 {
     public class RelocationButtonsActivityController : MonoBehaviour
     {
-        [FormerlySerializedAs("ReloctionMenuButton")] [SerializeField] private GameObject reloctionMenuButton;
+        [SerializeField] private GameObject relocationMenuButton;
         [SerializeField] private GameObject relocateButton;
 
-        private void Start()
+        private void OnEnable()
         {
             MainGameStatsHolder.Progression.OnProgressionUpdate += CheckRelocationMenuButtonActivity;
+        }
+
+        private void OnDisable()
+        {
+            MainGameStatsHolder.Progression.OnProgressionUpdate -= CheckRelocationMenuButtonActivity;
+        }
+
+        private void Awake()
+        {
+            CheckRelocationMenuButtonActivity();
         }
 
         private void Update()
@@ -24,11 +33,11 @@ namespace MonoBehaviours.UI
         {
             if (MainGameStatsHolder.Progression.GameStage < 3)
             {
-                reloctionMenuButton.SetActive(false);
+                relocationMenuButton.SetActive(false);
             }
             else
             {
-                reloctionMenuButton.SetActive(true);
+                relocationMenuButton.SetActive(true);
                 MainGameStatsHolder.Progression.OnProgressionUpdate -= CheckRelocateButtonActivity;
             }
         }

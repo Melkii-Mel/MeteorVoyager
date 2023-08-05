@@ -5,21 +5,21 @@ using UnityEngine.SceneManagement;
 
 public class Timer
 {
-    public float IntervalS { get; set; }
+    public float IntervalMS { get; set; }
 
-    public delegate void OnTimerTickEventHandler(float deltaTimeMS);
+    public delegate void TimerTickEventHandler(float deltaTimeMS);
 
-    public event OnTimerTickEventHandler OnTimerTick;
+    public event TimerTickEventHandler OnTimerTick;
 
     public bool Running { get; private set; }
 
-    public Timer(float intervalS, OnTimerTickEventHandler @event, bool enableOnStart, bool stopOnSceneChange = true)
+    public Timer(float intervalMS, TimerTickEventHandler @event, bool enableOnStart, bool stopOnSceneChange = true)
     {
-        if (intervalS <= 0)
+        if (intervalMS <= 0)
         {
             throw InvalidIntervalException;
         }
-        IntervalS = intervalS;
+        IntervalMS = intervalMS;
         OnTimerTick = @event;
         if (enableOnStart)
         {
@@ -75,8 +75,8 @@ public class Timer
                 StopCoroutine();
                 return;
             }
-            OnTimerTick?.Invoke(IntervalS * 1000);
-            await Task.Delay((int)(IntervalS * 1000));
+            OnTimerTick?.Invoke(IntervalMS);
+            await Task.Delay((int)(IntervalMS));
         }
     }
 

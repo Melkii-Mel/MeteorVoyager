@@ -5,8 +5,7 @@ namespace GameStatsNS.GameStatsTypes
 {
     public class Timers : Serializable<Timers>
     {
-        private const int SECOND_MS = 1000;
-
+        private const float MS_TO_S = 0.001F;
         public Timers()
         {
             GlobalTimer.OnTick += DecreaseTime;
@@ -22,6 +21,7 @@ namespace GameStatsNS.GameStatsTypes
         public float CoinMultiplierTimer { get; set; }
         public float DamageMultiplierTimer { get; set; }
         public float ExplosivesAttacksTimer { get; set; }
+        
         public void AddTime(float time, Timer timer)
         {
             switch (timer)
@@ -39,10 +39,10 @@ namespace GameStatsNS.GameStatsTypes
         private void DecreaseTime(float deltaTimeMS)
         {
             //decrease
-            DamageMultiplierTimer -= deltaTimeMS * SECOND_MS;
-            ExplosivesAttacksTimer -= deltaTimeMS * SECOND_MS;
-            CoinMultiplierTimer -= deltaTimeMS * SECOND_MS;
-            X10Reward -= deltaTimeMS * SECOND_MS;
+            DamageMultiplierTimer -= deltaTimeMS * MS_TO_S;
+            ExplosivesAttacksTimer -= deltaTimeMS * MS_TO_S;
+            CoinMultiplierTimer -= deltaTimeMS * MS_TO_S;
+            X10Reward -= deltaTimeMS * MS_TO_S;
 
             //check if lower than zero
             if (DamageMultiplierTimer <= 0) DamageMultiplierTimer = 0;

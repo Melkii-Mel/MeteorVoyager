@@ -1,9 +1,7 @@
-using System;
 using GameStatsNS;
 using UnityEngine;
 using UnityEngine.UI;
 using static GameStatsNS.GameStats;
-using Parameters = GameStatsNS.Parameters;
 
 namespace MonoBehaviours
 {

@@ -13,7 +13,6 @@ namespace MonoBehaviours.UpgradesNS
     /// </summary>
     public abstract class UpgradesButtonActions : MonoBehaviour
     {
-        private const int MAX_UPGRADES_CHUNK_SIZE = 1000;
         protected abstract int Value { get; set; }
         protected Func<int, InfiniteInteger> Formula;
         protected InfiniteInteger Cost => Formula(Value);
@@ -47,15 +46,16 @@ namespace MonoBehaviours.UpgradesNS
         }
         public async Task Buy()
         {
-            int upgradesCounter = 0;
+            const int msInS = 1000;
+            int msPerTick =  msInS / Application.targetFrameRate;
+            DateTime current = DateTime.Now;
             async Task Upgrade(InfiniteInteger cost)
             {
-                upgradesCounter++;
                 Balance -= cost;
                 Value++;
-                if (upgradesCounter > MAX_UPGRADES_CHUNK_SIZE)
+                if ((DateTime.Now - current).TotalMilliseconds >= msPerTick)
                 {
-                    upgradesCounter = 0;
+                    current = DateTime.Now;
                     UpdateText(Cost);
                     await Task.Delay(1);
                     OnUpgrade?.Invoke(GetEventArgs());

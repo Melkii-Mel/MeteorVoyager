@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using SerializationLibrary;
-using UnityEngine;
 
 namespace GameStatsNS.GameStatsTypes.Upgrades
 {
@@ -111,7 +110,7 @@ namespace GameStatsNS.GameStatsTypes.Upgrades
             {
                 if (lvl < 1000)
                 {
-                    return InfiniteInteger.Pow(lvl / 10, 3) + 10;;
+                    return InfiniteInteger.Pow(new InfiniteInteger(lvl / 10f), 3) + 10;;
                 }
                 else if (lvl < 50000)
                 {

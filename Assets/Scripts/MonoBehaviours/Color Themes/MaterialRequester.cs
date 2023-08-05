@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using JetBrains.Annotations;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace MonoBehaviours.Color_Themes
 {

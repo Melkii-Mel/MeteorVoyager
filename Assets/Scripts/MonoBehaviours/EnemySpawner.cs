@@ -2,7 +2,6 @@
 using System.Linq;
 using GameStatsNS;
 using UnityEngine;
-using UnityEngine.Serialization;
 using static GameStatsNS.GameStats;
 
 
@@ -13,7 +12,8 @@ namespace MonoBehaviours
         [SerializeField] private GameObject enemy;
         [SerializeField][Range(0.1f, 100f)] private float sizeMultiplier;
         private float _interval = 1;
-        public float TimerInterval
+
+        private float TimerInterval
         {
             get => _interval;
             set
@@ -23,7 +23,7 @@ namespace MonoBehaviours
                 {
                     _interval = 0.1f;
                 }
-        _timer.IntervalS = _interval;
+                _timer.IntervalMS = _interval;
             }
         }
         public static List<GameObject> Enemies { get; } = new();
@@ -32,11 +32,11 @@ namespace MonoBehaviours
 
         private void Start()
         {
-            _timer = new(intervalS: TimerInterval, @event: _ => SpawnEnemy(), enableOnStart: true);
+            _timer = new(intervalMS: TimerInterval, @event: _ => SpawnEnemy(), enableOnStart: true);
         }
         private void Update()
         {
-            TimerInterval = GameStats.Parameters.SpawnDelay;
+            TimerInterval = GameStats.Parameters.SpawnDelay * 1000;
         }
         public void StartEnemiesSpawning()
         {

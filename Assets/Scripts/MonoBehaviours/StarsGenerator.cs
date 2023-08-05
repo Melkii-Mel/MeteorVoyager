@@ -37,7 +37,7 @@ namespace MonoBehaviours
         }
         public void UpdateCoefficient()
         {
-            _delayTimeCoeff = coeffSf * RelocationDelayCoeff / GameStats.MainGameStatsHolder.Progression.GameStage;
+            _delayTimeCoeff = coeffSf * RelocationDelayCoeff / (GameStats.MainGameStatsHolder.Progression.GameStage + 1);
         }
 
         private IEnumerator Generator()

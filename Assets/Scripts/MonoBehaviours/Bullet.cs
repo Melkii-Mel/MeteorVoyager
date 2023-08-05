@@ -1,6 +1,5 @@
 using MonoBehaviours.Interfaces;
 using UnityEngine;
-using UnityEngine.Serialization;
 using static GameStatsNS.GameStats;
 
 namespace MonoBehaviours
@@ -66,6 +65,7 @@ namespace MonoBehaviours
             if (MainGameStatsHolder.Timers.ExplosivesAttacksTimer > 0)
             {
                 var transform1 = transform;
+                Debug.Log("expoololdeded");
                 Instantiate(explosion, transform1.position, transform1.rotation);
             }
             PierceCounter--;

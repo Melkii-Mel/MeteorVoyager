@@ -1,6 +1,4 @@
-﻿using System;
-using System.Xml.Serialization;
-using MonoBehaviours;
+﻿using MonoBehaviours;
 using SerializationLibrary;
 
 namespace GameStatsNS.GameStatsTypes
@@ -16,12 +14,13 @@ namespace GameStatsNS.GameStatsTypes
 
         private readonly ProgressionController _progressionController;
 
-        [XmlIgnore]
-        public Action OnProgressionUpdate { get; set; } = delegate { };
+        public delegate void ProgressionUpdateHandler();
+
+        public event ProgressionUpdateHandler OnProgressionUpdate; 
 
         public Progression()
         {
-            _progressionController = new(OnProgressionUpdate);
+            _progressionController = new(() => OnProgressionUpdate?.Invoke());
         }
     }
 }

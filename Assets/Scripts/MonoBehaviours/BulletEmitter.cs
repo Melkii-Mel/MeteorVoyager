@@ -1,6 +1,5 @@
 ﻿using GameStatsNS;
 using UnityEngine;
-using static GameStatsNS.GameStats;
 
 namespace MonoBehaviours
 {

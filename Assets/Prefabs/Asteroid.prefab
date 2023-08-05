@@ -4840,7 +4840,7 @@ GameObject:
   - component: {fileID: 2430122115191600249}
   - component: {fileID: 4625360663597002902}
   - component: {fileID: 8830503552459692491}
-  - component: {fileID: 6593099723069334520}
+  - component: {fileID: 8449091488419680982}
   m_Layer: 0
   m_Name: "\u0418\u043A\u043E\u0441\u0444\u0435\u0440\u0430"
   m_TagString: Untagged
@@ -4927,7 +4927,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   changer: {fileID: 5472120367519865396, guid: e072d6d27c324ee40893a160d8a60dd2, type: 3}
   ignore: []
---- !u!114 &6593099723069334520
+--- !u!114 &8449091488419680982
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4936,13 +4936,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4794076333633819451}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abb784af41074e228733bb2a45f0526a, type: 3}
+  m_Script: {fileID: 11500000, guid: a31a822ed66215b4484babc7dd9f28da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationX: 1
-  rotationY: 1
-  rotationZ: 1
-  coeff: 3
 --- !u!1 &6710680873985251836
 GameObject:
   m_ObjectHideFlags: 0
@@ -4995,9 +4991,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particles: {fileID: 3195652048874533124, guid: 4bc5eb2735ab8cb4c973ecdb5fc79c20, type: 3}
   powerUpController: {fileID: 2900459029953869366, guid: fbd32973918f2184eb9799ed398b1641, type: 3}
-  speed: 2
-  isGlowing: 0
-  hits: 0
 --- !u!61 &6701001846699320382
 BoxCollider2D:
   m_ObjectHideFlags: 0

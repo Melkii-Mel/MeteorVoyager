@@ -1,5 +1,4 @@
-﻿using System;
-using GameStatsNS.GameStatsTypes.Upgrades;
+﻿using GameStatsNS.GameStatsTypes.Upgrades;
 using MonoBehaviours;
 using MonoBehaviours.UpgradesNS.Types;
 using UnityEngine;
@@ -61,7 +60,7 @@ namespace GameStatsNS
 
         #region SpawnrateParameter && HealthParameter
 
-        private const float MIN_SPAWN_DELAY = 0.50f;
+        private const float MIN_SPAWN_DELAY = 0.05f;
         private float _spawnDelay;
         public float SpawnDelay => _spawnDelay;
 

@@ -1,3 +1,5 @@
+using System;
+using System.Globalization;
 using TMPro;
 using UnityEngine;
 using static GameStatsNS.GameStats;
@@ -10,9 +12,50 @@ namespace MonoBehaviours
         [SerializeField] private TextMeshProUGUI powerText;
         [SerializeField] private TextMeshProUGUI explosionsText;
 
-        public void StartController()
+        private void OnEnable()
         {
             GlobalTimer.OnTick += HandleTimers;
+            MainGameStatsHolder.Progression.OnProgressionUpdate += SetActivity;
+        }
+
+        private void OnDisable()
+        {
+            GlobalTimer.OnTick -= HandleTimers;
+            MainGameStatsHolder.Progression.OnProgressionUpdate -= SetActivity;
+
+        }
+
+        private void Awake()
+        {
+            OnEnable();
+            SetActivity();
+        }
+
+        private int GetGameStage()
+        {
+            return MainGameStatsHolder.Progression.GameStage;
+        }
+
+        private void SetActivity()
+        {
+            if (GetGameStage() <= 2)
+            {
+                Switch(false);
+            }
+            Switch(true);
+            MainGameStatsHolder.Progression.OnProgressionUpdate -= SetActivity;
+        }
+
+        private void Switch(bool state)
+        {
+            coinsText.gameObject.SetActive(state);
+            powerText.gameObject.SetActive(state);
+            explosionsText.gameObject.SetActive(state);
+        }
+
+        private void Update()
+        {
+            HandleTimers(0);
         }
 
         private void HandleTimers(float deltaTimeMS)
@@ -24,43 +67,47 @@ namespace MonoBehaviours
 
         private void CoinTimer()
         {
-            while (MainGameStatsHolder.Timers.CoinMultiplierTimer > 0)
+            if (MainGameStatsHolder.Timers.CoinMultiplierTimer > 0)
             {
                 float coins = MainGameStatsHolder.Timers.CoinMultiplierTimer;
-                if (coins < 0) coins = 0;
-                coinsText.text = ConvertTimeToMinutesSeconds(coins);
-                MainGameStatsHolder.Timers.CoinMultiplierTimer -= Time.deltaTime;
+                coinsText.text = ConvertSToHundredthOfS(coins);
+                return;
             }
-            coinsText.text = "00:00";
+            coinsText.text = "0";
         }
 
         private void PowerTimer()
         {
-            while (MainGameStatsHolder.Timers.DamageMultiplierTimer > 0)
+            if (MainGameStatsHolder.Timers.DamageMultiplierTimer > 0)
             {
                 float damage = MainGameStatsHolder.Timers.DamageMultiplierTimer;
-                if (damage < 0) damage = 0;
-                powerText.text = ConvertTimeToMinutesSeconds(damage);
-                MainGameStatsHolder.Timers.DamageMultiplierTimer -= Time.deltaTime;
+                powerText.text = ConvertSToHundredthOfS(damage);
+                return;
             }
-            powerText.text = "00:00";
+            powerText.text = "0";
         }
 
         private void ExplosionsTimer()
         {
-            float explosions = MainGameStatsHolder.Timers.ExplosivesAttacksTimer;
-            if (explosions < 0) explosions = 0;
-            explosionsText.text = ConvertTimeToMinutesSeconds(explosions);
-            MainGameStatsHolder.Timers.ExplosivesAttacksTimer -= Time.deltaTime;
-            explosionsText.text = "00:00";
+            if (MainGameStatsHolder.Timers.ExplosivesAttacksTimer > 0)
+            {
+                float explosions = MainGameStatsHolder.Timers.ExplosivesAttacksTimer;
+                explosionsText.text = ConvertSToHundredthOfS(explosions);
+                return;
+            }
+            explosionsText.text = "0";
         }
 
-        private string ConvertTimeToMinutesSeconds(float input)
+        // private string ConvertTimeToMinutesSeconds(float input)
+        // {
+        //     int minutes = (int)(input - 0.01f) / 60;
+        //     float seconds = input - 0.01f - minutes * 60;
+        //     string result = $"{minutes}:{(int)seconds}";
+        //     return result;
+        // }
+        private string ConvertSToHundredthOfS(float inputS)
         {
-            int minutes = (int)(input - 0.01f) / 60;
-            float seconds = input - 0.01f - minutes * 60;
-            string result = $"{minutes}:{(int)seconds}";
-            return result;
+            return $"{(int)(inputS * 100)}";
         }
     }
 }

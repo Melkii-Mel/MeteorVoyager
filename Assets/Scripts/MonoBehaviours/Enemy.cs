@@ -1,7 +1,6 @@
 using System;
 using GameStatsNS.GameStatsTypes;
 using MonoBehaviours.Interfaces;
-using Unity.Mathematics;
 using UnityEngine;
 using static GameStatsNS.GameStats;
 
@@ -11,11 +10,9 @@ namespace MonoBehaviours
     {
         private const int ENOUGH_HITS = 5;
         [SerializeField] private GameObject particles;
-        [SerializeField] private PowerUpController powerUpController;
         private float _lifetime = 20;
         private Color _color;
         private Color _startingColor;
-        private InfiniteInteger _startingHealth;
         public InfiniteInteger Health { get; private set; }
         public float Speed { get; private set; } = 2;
         public bool IsGlowing { get; private set; }
@@ -35,7 +32,6 @@ namespace MonoBehaviours
         private void Start()
         {
             transform.GetChild(0).gameObject.SetActive(IsGlowing);
-            _startingHealth = Health;
             if (_initialized)
             {
                 return;
@@ -139,7 +135,6 @@ namespace MonoBehaviours
             Health -= damage;
             if (Health > 0)
             {
-                Debug.Log(Health);
                 transform.Translate(Time.deltaTime * Speed * (IsGlowing ? 0.5f : 1) * 10 * new Vector2(0, 3));
                 GiveMatter(damage);
             }
@@ -149,15 +144,25 @@ namespace MonoBehaviours
                 Undo();
             }
         }
+        public delegate InfiniteInteger MatterMultipliersHandler();
 
-        private const int MATTER_MULTIPLIER = 10;
+        public static event MatterMultipliersHandler MatterMultipliers;
+
         private static void GiveMatter(InfiniteInteger damage)
         {
             InfiniteInteger deltaMatter = damage;
             deltaMatter *= MainGameStatsHolder.Timers.CoinMultiplierTimer > 0 ? 3 : 1;
             deltaMatter *= MainGameStatsHolder.Timers.X10Reward > 0 ? 10 : 1;
             deltaMatter *= InfiniteInteger.Pow(2, MainGameStatsHolder.MeteorUpgrades.CoinMultiplier);
-            deltaMatter *= MATTER_MULTIPLIER;
+            if (MatterMultipliers != null)
+            {
+                foreach (var @delegate in MatterMultipliers.GetInvocationList())
+                {
+                    var multiplier = (Func<InfiniteInteger>)@delegate;
+                    deltaMatter *= multiplier();
+                }
+            }
+
             MainGameStatsHolder.Currency.Balance += deltaMatter;
         }
         private void GivePowerUp()
@@ -169,8 +174,6 @@ namespace MonoBehaviours
                 case 1: MainGameStatsHolder.Timers.AddTime(MainGameStatsHolder.MeteorUpgrades.DamageMultiplierTimeUpgrade * coeff, Timers.Timer.DamageMultiplierTimer); break;
                 case 2: MainGameStatsHolder.Timers.AddTime(MainGameStatsHolder.MeteorUpgrades.ExplosivesAttacksTimeUpgrade * coeff, Timers.Timer.ExplosivesAttacksTimer); break;
             }
-            powerUpController = powerUpController != null ? powerUpController : GameObject.Find("Manager").GetComponent<PowerUpController>();
-            powerUpController.StartController();
         }
     }
 }
