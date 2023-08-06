@@ -20,13 +20,15 @@ namespace MonoBehaviours
 
         #region events;
 
-        public delegate void EnemyDestroyEventHandler(Enemy enemy);
-        public event EnemyDestroyEventHandler OnEnemyDestroy;
-        public static event EnemyDestroyEventHandler OnAnyEnemyDestroy;
-        public event EnemyDestroyEventHandler OnEnemyDestroyOrEnoughHits;
-        public static event EnemyDestroyEventHandler OnAnyEnemyDestroyOrEnoughHits;
-        public event EnemyDestroyEventHandler OnEnemyDespawn;
-        public static event EnemyDestroyEventHandler OnAnyEnemyDespawn;
+        public delegate void EnemyEventHandler(Enemy enemy);
+        public event EnemyEventHandler OnEnemyDestroy;
+        public static event EnemyEventHandler OnAnyEnemyDestroy;
+        public event EnemyEventHandler OnEnemyDestroyOrEnoughHits;
+        public static event EnemyEventHandler OnAnyEnemyDestroyOrEnoughHits;
+        public event EnemyEventHandler OnEnemyDespawn;
+        public static event EnemyEventHandler OnAnyEnemyDespawn;
+        public event EnemyEventHandler OnDamageTaken;
+        public static event EnemyEventHandler OnAnyEnemyDamageTaken;
 
         #endregion
         private void Start()
@@ -108,8 +110,11 @@ namespace MonoBehaviours
             EnemySpawner.Enemies.Remove(gameObject);
             Destroy(gameObject);
         }
+        
         public void TakeDamage(InfiniteInteger damage)
         {
+            OnDamageTaken?.Invoke(this);
+            OnAnyEnemyDamageTaken?.Invoke(this);
             Hits++;
             if (Hits == ENOUGH_HITS)
             {

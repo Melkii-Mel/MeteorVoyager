@@ -6,31 +6,17 @@ namespace MonoBehaviours.UI.PowerUpCircles
     public abstract class PowerUpCircle : MonoBehaviour
     {
         [SerializeField] private Slider slider;
-        private float _maxTime;
-        private void Start()
-        {
-            _maxTime = GetTime();
-            slider.value = 1;
-        }
-
         private void Update()
         {
-            float currentTime = GetTime();
-            if (currentTime > _maxTime)
+            if (GetTime() > 0)
             {
-                _maxTime = currentTime;
+                slider.value = 1;
             }
-
-            if (_maxTime == 0)
+            else
             {
-                slider.value = 0;
-                return;
+                slider.value -= 0.1f;
             }
-            slider.value = currentTime / _maxTime;
-            if (currentTime == 0)
-            {
-                _maxTime = 0;
-            }
+            
         }
 
         protected abstract float GetTime();

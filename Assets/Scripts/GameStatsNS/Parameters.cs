@@ -85,7 +85,7 @@ namespace GameStatsNS
 
         private void SetShotDelay(int lvl)
         {
-            _shotDelay = 2 / Mathf.Log(Mathf.Pow(lvl, 2) + 3);
+            _shotDelay = 1 / Mathf.Log(Mathf.Pow(lvl, 2) + 3);
         }
         
         #endregion

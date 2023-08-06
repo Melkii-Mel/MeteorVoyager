@@ -73,7 +73,7 @@ namespace MonoBehaviours
                 coinsText.text = ConvertSToHundredthOfS(coins);
                 return;
             }
-            coinsText.text = "0";
+            coinsText.text = "";
         }
 
         private void PowerTimer()
@@ -84,7 +84,7 @@ namespace MonoBehaviours
                 powerText.text = ConvertSToHundredthOfS(damage);
                 return;
             }
-            powerText.text = "0";
+            powerText.text = "";
         }
 
         private void ExplosionsTimer()
@@ -95,7 +95,7 @@ namespace MonoBehaviours
                 explosionsText.text = ConvertSToHundredthOfS(explosions);
                 return;
             }
-            explosionsText.text = "0";
+            explosionsText.text = "";
         }
 
         // private string ConvertTimeToMinutesSeconds(float input)

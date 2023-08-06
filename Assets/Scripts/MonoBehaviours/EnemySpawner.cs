@@ -12,16 +12,17 @@ namespace MonoBehaviours
         [SerializeField] private GameObject enemy;
         [SerializeField][Range(0.1f, 100f)] private float sizeMultiplier;
         private float _interval = 1;
+        private const float INTERVAL_MULTIPLIER = 0.5f;
 
         private float TimerInterval
         {
             get => _interval;
             set
             {
-                _interval = value;
+                _interval = value * INTERVAL_MULTIPLIER;
                 if (_interval <= 0)
                 {
-                    _interval = 0.1f;
+                    _interval = 0.01f;
                 }
                 _timer.IntervalMS = _interval;
             }
