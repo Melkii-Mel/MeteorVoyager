@@ -3,22 +3,23 @@ using GameStatsNS;
 using MonoBehaviours;
 using MonoBehaviours.Interfaces;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Audio
 {
-    [RequireComponent(typeof(AudioSource))]
     public class SoundPlayer : MonoBehaviour
     {
-        private AudioSource _audioSource;
+        [SerializeField] private GameObject emptyObject;
         [SerializeField] private ClipHolder impactClip;
         [SerializeField] private ClipHolder shotClip;
+        [SerializeField] private ClipHolder chargedShotClip;
         [SerializeField] private ClipHolder destroyClip;
-
         private void OnEnable()
         {
             Enemy.OnAnyEnemyDestroy += PlayDestroyClip;
             Player.OnShot += PlayShotSound;
             Enemy.OnAnyEnemyDamageTaken += PlayImpactSound;
+            Player.OnChargedShot += PlayChargedShotSound;
         }
 
         private void OnDisable()
@@ -26,19 +27,8 @@ namespace Audio
             Enemy.OnAnyEnemyDestroy -= PlayDestroyClip;
             Player.OnShot -= PlayShotSound;
             Enemy.OnAnyEnemyDamageTaken -= PlayImpactSound;
+            Player.OnChargedShot -= PlayChargedShotSound;
         }
-
-        private void Update()
-        {
-            _audioSource.volume = GameStats.MainGameStatsHolder.Settings.SoundsVolume;
-        }
-
-        private void Awake()
-        {
-            _audioSource = GetComponent<AudioSource>();
-            
-        }
-
         private void PlayImpactSound(Enemy _)
         {
             PlayIfNotOnCooldown(impactClip);
@@ -47,6 +37,11 @@ namespace Audio
         private void PlayShotSound()
         {
             PlayIfNotOnCooldown(shotClip);
+        }
+
+        private void PlayChargedShotSound()
+        {
+            PlayIfNotOnCooldown(chargedShotClip);
         }
 
         private void PlayDestroyClip(Enemy _)
@@ -60,7 +55,13 @@ namespace Audio
             {
                 return;
             }
-            _audioSource.PlayOneShot(clipHolder.Clip);
+            
+            GameObject player = Instantiate(emptyObject);
+            player.AddComponent<TemporaryPlayer>();
+            AudioSource audioSource = player.AddComponent<AudioSource>();
+            audioSource.volume = GameStats.MainGameStatsHolder.Settings.SoundsVolume;
+            audioSource.pitch = Random.Range(0.8f, 1.2f);
+            audioSource.PlayOneShot(clipHolder.Clip);
         }
 
         [Serializable]
@@ -85,6 +86,20 @@ namespace Audio
             public ClipHolder()
             {
                 _lastGetting = DateTime.Now;
+            }
+        }
+        private class TemporaryPlayer : MonoBehaviour
+        {
+            private AudioSource _audioSource;
+
+            private void Start()
+            {
+                _audioSource = GetComponent<AudioSource>();
+            }
+
+            private void Update()
+            {
+                if (!_audioSource.isPlaying) Destroy(gameObject);
             }
         }
     }
