@@ -4,11 +4,6 @@ using UnityEngine;
 
 namespace Localization.Scripts
 {
-    public enum Languages
-    {
-        En,
-        Ru,
-    }
     public static class LanguageDeserializer
     {
         public static Texts Deserialize(TextAsset languageFile)

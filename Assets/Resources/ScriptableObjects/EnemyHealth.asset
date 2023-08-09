@@ -10,7 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ddab1cd2842441f7bc840eaae10fcb43, type: 3}
-  m_Name: Damage
+  m_Name: EnemyHealth
   m_EditorClassIdentifier: 
-  upgradeNameIdentifier: 
-  upgradeDescIdentifier: 
+  upgradeNameIdentifier: 0
+  oneTimeUpgrade: 0
+  nameText:
+    languageTexts:
+    - lan: 0
+      text: 
+    - lan: 1
+      text: 
+  descText:
+    languageTexts: []
+  sprite: {fileID: 0}
