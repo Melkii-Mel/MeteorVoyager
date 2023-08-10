@@ -1,5 +1,4 @@
-﻿using System;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +11,9 @@ namespace MonoBehaviours.DataBank
         [SerializeField] private float time;
         private float _time;
         private bool _eventInvoked;
+
+        public float InitialTime => time;
+        public float RemainingTime => _time;
 
         public delegate void TimeEndEventHandler(Timer sender, DataBankTimerEventArgs args);
 

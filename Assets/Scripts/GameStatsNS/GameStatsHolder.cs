@@ -15,6 +15,8 @@ namespace GameStatsNS
         public SettingsGameStats Settings { get; private set; }
         public Timers Timers { get; private set; }
         public TurretUpgrades TurretUpgrades { get; private set; }
+        public DataBankUpgrades DataBankUpgrades { get; private set; }
+        public DataBankOthers DataBankOthers { get; private set; }
         public GameStatsHolder(int serializablesIndex, Func<bool> runningCondition, float delayS) : base(serializablesIndex, runningCondition, delayS, Application.persistentDataPath)
         {
             Currency = CreateSerializable<Currency>();
@@ -24,6 +26,8 @@ namespace GameStatsNS
             Settings = CreateSerializable<SettingsGameStats>();
             Timers = CreateSerializable<Timers>();
             TurretUpgrades = CreateSerializable<TurretUpgrades>();
+            DataBankUpgrades = CreateSerializable<DataBankUpgrades>();
+            DataBankOthers = CreateSerializable<DataBankOthers>();
         }
         public void ResetAllSerialization()
         {
@@ -34,6 +38,8 @@ namespace GameStatsNS
             Settings = ResetSerializable<SettingsGameStats>();
             Timers = ResetSerializable<Timers>();
             TurretUpgrades = ResetSerializable<TurretUpgrades>();
+            DataBankUpgrades = ResetSerializable<DataBankUpgrades>();
+            DataBankOthers = ResetSerializable<DataBankOthers>();
         }
     }
 }

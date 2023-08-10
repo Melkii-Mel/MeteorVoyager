@@ -354,6 +354,42 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 361783306600866768, guid: 66f89ff25c744094e8fd28bdeba0beac, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 62.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 361783306600866768, guid: 66f89ff25c744094e8fd28bdeba0beac, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 65.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 361783306600866768, guid: 66f89ff25c744094e8fd28bdeba0beac, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 361783306600866768, guid: 66f89ff25c744094e8fd28bdeba0beac, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 361783306600866768, guid: 66f89ff25c744094e8fd28bdeba0beac, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 361783306600866768, guid: 66f89ff25c744094e8fd28bdeba0beac, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 361783306600866768, guid: 66f89ff25c744094e8fd28bdeba0beac, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 5.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 361783306600866768, guid: 66f89ff25c744094e8fd28bdeba0beac, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 361783306600866768, guid: 66f89ff25c744094e8fd28bdeba0beac, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 180
+      objectReference: {fileID: 0}
     - target: {fileID: 1095612167567076799, guid: 66f89ff25c744094e8fd28bdeba0beac, type: 3}
       propertyPath: m_Name
       value: BasicCircularSlider
@@ -446,6 +482,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8176164634704908932, guid: 66f89ff25c744094e8fd28bdeba0beac, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8898f2c32c94ae74397ba91aa8955858, type: 3}
     - target: {fileID: 8176164634704908932, guid: 66f89ff25c744094e8fd28bdeba0beac, type: 3}
       propertyPath: m_FillAmount
       value: 1

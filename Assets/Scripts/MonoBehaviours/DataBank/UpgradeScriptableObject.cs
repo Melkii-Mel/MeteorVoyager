@@ -2,8 +2,6 @@
 using GameStatsNS;
 using Localization.Scripts;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
-using UnityEngine.UI;
 
 namespace MonoBehaviours.DataBank
 {

@@ -48,6 +48,7 @@ namespace MonoBehaviours.DataBank
 
         private IEnumerator Despawn()
         {
+            StopCoroutine(MoveToStayPosition());
             OnLeavingStayPosition?.Invoke(this, GenerateEventArgs());
             yield return StartCoroutine(Move(stayPosition, despawnPosition, fromStayToDespawnTime, _currentDataBank.transform));
             OnDespawn?.Invoke(this, GenerateEventArgs());

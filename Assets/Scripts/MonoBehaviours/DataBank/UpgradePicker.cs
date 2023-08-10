@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using GameStatsNS;
 using JetBrains.Annotations;
-using UnityEditor;
 using UnityEngine;
 
 namespace MonoBehaviours.DataBank
