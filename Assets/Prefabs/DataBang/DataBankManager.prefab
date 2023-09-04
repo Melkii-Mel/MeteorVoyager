@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6518372345127396757}
-  - component: {fileID: 3741789659935403401}
   - component: {fileID: -8106021926596408470}
+  - component: {fileID: 3741789659935403401}
   m_Layer: 0
   m_Name: DataBankManager
   m_TagString: Untagged
@@ -31,25 +31,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3741789659935403401
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5837483874607994015}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3700e2bdea914bc9b360c296a4a0dbe0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  behaviour: {fileID: 0}
-  chance: 0.1
-  chanceTickRateS: 10
-  messageCanvas: {fileID: 0}
-  upgradesCanvas: {fileID: 0}
 --- !u!114 &-8106021926596408470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,3 +51,20 @@ MonoBehaviour:
   fromSpawnToStayTime: 3
   fromStayToDespawnTime: 2
   dataBank: {fileID: 2852574452128350700, guid: 7cf521d65ea35ef4f8e36794f4387ce0, type: 3}
+--- !u!114 &3741789659935403401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5837483874607994015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3700e2bdea914bc9b360c296a4a0dbe0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: -8106021926596408470}
+  chance: 0.1
+  chanceTickRateS: 10
+  messageCanvas: {fileID: 0}
+  upgradesCanvas: {fileID: 0}

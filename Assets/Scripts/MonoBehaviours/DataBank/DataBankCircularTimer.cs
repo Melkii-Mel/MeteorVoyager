@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace MonoBehaviours.DataBank
 {
-    public class Timer : MonoBehaviour
+    public class DataBankCircularTimer : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI timeText;
         [SerializeField] private Slider timerSlider;
@@ -15,7 +15,7 @@ namespace MonoBehaviours.DataBank
         public float InitialTime => time;
         public float RemainingTime => _time;
 
-        public delegate void TimeEndEventHandler(Timer sender, DataBankTimerEventArgs args);
+        public delegate void TimeEndEventHandler(DataBankCircularTimer sender, DataBankTimerEventArgs args);
 
         public event TimeEndEventHandler OnTimeEnd;
 

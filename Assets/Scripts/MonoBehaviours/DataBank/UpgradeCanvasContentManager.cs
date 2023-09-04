@@ -4,23 +4,23 @@ namespace MonoBehaviours.DataBank
 {
     public class UpgradeCanvasContentManager
     {
-        private UpgradeScriptableObject[] _upgrades;
-        private UpgradePicker _upgradePicker;
+        private readonly UpgradeScriptableObject[] _upgrades;
+        private readonly UpgradePicker _upgradePicker;
         
-        private void Start()
+        public UpgradeCanvasContentManager()
         {
-            _upgradePicker = new(_upgrades);
             _upgrades = Resources.LoadAll<UpgradeScriptableObject>("ScriptableObjects");
+            _upgradePicker = new UpgradePicker(_upgrades);
         }
 
-        public bool SetUpgrades(UpgradeObject[] objects)
+        public bool SetUpgrades(UpgradeObject[] uo)
         {
-            var scriptableObjects = _upgradePicker.GetUpgrade(objects.Length);
+            var scriptableObjects = _upgradePicker.GetUpgrade(uo.Length);
             if (scriptableObjects == null) return false;
             for (var i = 0; i < scriptableObjects.Count; i++)
             {
                 var sObj = scriptableObjects[i];
-                var obj = objects[i];
+                var obj = uo[i];
                 obj.SetTitle(sObj.UpgradeName);
                 obj.SetDescription(sObj.UpgradeDesc);
                 obj.SetImage(sObj.Sprite);

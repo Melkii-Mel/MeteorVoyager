@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using GameStatsNS;
-using JetBrains.Annotations;
 using UnityEngine;
 
 namespace MonoBehaviours.DataBank
@@ -14,12 +13,11 @@ namespace MonoBehaviours.DataBank
             _objs = objs;
         }
         
-        [CanBeNull]
         public List<UpgradeScriptableObject> GetUpgrade(int amount)
         {
             List<UpgradeScriptableObject> result = new();
             List<int> ignoreIndexes = new();
-            int maxIndex = _objs.Length - 1;
+            var maxIndex = _objs.Length - 1;
             while (result.Count < amount)
             {
                 if (ignoreIndexes.Count == _objs.Length) break;

@@ -13,7 +13,7 @@ namespace MonoBehaviours.DataBank.Actions
         /// <summary>
         /// Time after which the DataBank will fly away
         /// </summary>
-        public Timer Timer { get; }
+        public DataBankCircularTimer DataBankCircularTimer { get; }
         /// <summary>
         /// Slider that will decrease its value as time passes
         /// </summary>

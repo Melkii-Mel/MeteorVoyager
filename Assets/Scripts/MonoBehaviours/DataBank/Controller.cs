@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace MonoBehaviours.DataBank
 {
-    public class Behaviour : MonoBehaviour
+    public class Controller : MonoBehaviour
     {
         [SerializeField] private Vector2 spawnPosition;
         [SerializeField] private Vector2 stayPosition;
@@ -15,7 +15,7 @@ namespace MonoBehaviours.DataBank
 
         #region Events
 
-        public delegate void DataBankBehaviourEventsHandler(Behaviour behaviour, DataBankBehaviourEventArgs args);
+        public delegate void DataBankBehaviourEventsHandler(Controller controller, DataBankBehaviourEventArgs args);
 
         public event DataBankBehaviourEventsHandler OnReachingStayPosition;
 

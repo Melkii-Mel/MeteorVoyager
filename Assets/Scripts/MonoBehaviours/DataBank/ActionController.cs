@@ -8,15 +8,13 @@ namespace MonoBehaviours.DataBank
 {
     public class ActionController : MonoBehaviour
     {
-        [SerializeField] private Behaviour behaviour;
+        [SerializeField] private Controller controller;
         [SerializeField] [Range(0f, 1f)] private float chance = 0.1f;
         [SerializeField] private float chanceTickRateS = 10f;
         [SerializeField] private MessageCanvas messageCanvas;
         [SerializeField] private UpgradesCanvas upgradesCanvas;
         private readonly Random _random = new();
-
-
-
+        
         private IDataBankCanvas _currentCanvas;
 
         private void OnEnable()
@@ -39,7 +37,7 @@ namespace MonoBehaviours.DataBank
                 if(GameStats.MainGameStatsHolder.DataBankOthers.DataBankVisited) yield break;
                 if (_random.NextDouble() > chance) yield return new WaitForSeconds(chanceTickRateS);
                 GameStats.MainGameStatsHolder.DataBankOthers.DataBankVisited = true;
-                behaviour.Spawn();
+                controller.Spawn();
                 SelectAction();
             }
         }
@@ -63,7 +61,7 @@ namespace MonoBehaviours.DataBank
         {
             if (!_currentCanvas.Init())
             {
-                behaviour.StartDespawn();
+                controller.StartDespawn();
             }
         }
 

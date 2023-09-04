@@ -1,5 +1,4 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace MonoBehaviours.DataBank.Actions
@@ -8,22 +7,23 @@ namespace MonoBehaviours.DataBank.Actions
     {
         [SerializeField] private Button closeButton;
         [SerializeField] private GameObject canvas;
-        [SerializeField] private Timer timer;
+        [SerializeField] private DataBankCircularTimer dataBankCircularTimer;
 
         [SerializeField] private UpgradeObject[] upgradeObjects;
 
-        private readonly UpgradeCanvasContentManager _contentManager = new();
-        
+        private UpgradeCanvasContentManager _contentManager;
+
         public Button CloseButton => closeButton;
-        
+
         public GameObject Canvas => canvas;
-        
-        public Timer Timer => timer;
-        
-        private Behaviour _dataBankBehaviour;
+
+        public DataBankCircularTimer DataBankCircularTimer => dataBankCircularTimer;
+
+        private Controller _dataBankController;
 
         public bool Init()
         {
+            _contentManager = new();
             return _contentManager.SetUpgrades(upgradeObjects);
         }
     }

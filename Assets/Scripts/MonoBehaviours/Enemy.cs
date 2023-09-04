@@ -1,8 +1,10 @@
 using System;
+using Animations;
 using GameStatsNS.GameStatsTypes;
 using MonoBehaviours.Interfaces;
 using UnityEngine;
 using static GameStatsNS.GameStats;
+using Random = UnityEngine.Random;
 
 namespace MonoBehaviours
 {
@@ -33,7 +35,7 @@ namespace MonoBehaviours
         #endregion
         private void Start()
         {
-            transform.GetChild(0).gameObject.SetActive(IsGlowing);
+            GetComponentInChildren<GlowingPulse>().enabled = IsGlowing;
             if (_initialized)
             {
                 return;
@@ -52,7 +54,7 @@ namespace MonoBehaviours
 
         private void Update()
         {
-            transform.Translate(new Vector2(0, -3) * (Time.deltaTime * Speed * (IsGlowing ? 0.5f : 1)));
+            transform.Translate(new Vector2(0, -3) * (Time.deltaTime * Speed * (IsGlowing ? 0.5f : 1)), Space.Self);
             _lifetime -= Time.deltaTime;
             if (_lifetime < 0)
             {
@@ -66,22 +68,22 @@ namespace MonoBehaviours
         private bool _initialized = false;
         public void Initialize(Vector3 position, float scaleMultiplier, InfiniteInteger stHealth, float speedMultiplier, bool stIsGlowing)
         {
+            if (_initialized)
+            {
+                throw new InvalidOperationException("Initialization should be called only once");
+            }
             Transform thisTransform = transform;
             thisTransform.position = position;
             thisTransform.localScale *= scaleMultiplier;
+            Quaternion newRot = thisTransform.rotation;
+            thisTransform.Rotate(0, 0,Random.Range(-15, 15));
             Health = stHealth;
             Speed *= speedMultiplier;
             IsGlowing = stIsGlowing;
-            if (_initialized)
-            {
-                throw new InvalidOperationException("Initialization can be called only once");
-            }
-            
-            
-
             _initialized = true;
         }
-        public void Undo()
+
+        private void Undo()
         {
             OnEnemyDestroy?.Invoke(this);
             OnAnyEnemyDestroy?.Invoke(this);

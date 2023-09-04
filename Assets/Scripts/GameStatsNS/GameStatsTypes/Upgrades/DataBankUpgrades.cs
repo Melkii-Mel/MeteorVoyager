@@ -44,6 +44,7 @@ namespace GameStatsNS.GameStatsTypes.Upgrades
                 this.upgrade = upgrade;
                 this.value = 0;
             }
+            public Pair() { }
         }
     }
 }

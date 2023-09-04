@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,20 +7,34 @@ namespace MonoBehaviours.DataBank.Actions
 {
     public class MessageCanvas : MonoBehaviour, IDataBankCanvas
     {
-        [SerializeField] private GameObject upgradeCanvas;
+        #region Interface private fields
+        
         [SerializeField] private Button closeButton;
-        [SerializeField] private Slider slider;
-        [SerializeField] private TextMeshProUGUI text;
         [SerializeField] private GameObject canvas;
-        [SerializeField] private Timer timer;
+        [SerializeField] private DataBankCircularTimer dataBankCircularTimer;
+        
+        #endregion
+
+        #region Local private fields
+
+        [SerializeField] private TextMeshProUGUI textObject;
+
+        #endregion
+        
         
         public Button CloseButton => closeButton;
         public GameObject Canvas => canvas;
-        public Timer Timer => timer;
+        public DataBankCircularTimer DataBankCircularTimer => dataBankCircularTimer;
 
         public bool Init()
         {
+            textObject.text = GetMessage();
             return true;
+        }
+
+        private string GetMessage()
+        {
+            throw new NotImplementedException();
         }
     }
 }
