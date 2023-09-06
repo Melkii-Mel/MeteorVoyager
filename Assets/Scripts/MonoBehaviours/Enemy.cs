@@ -96,24 +96,11 @@ namespace MonoBehaviours
                     GivePowerUp();
                 }
             }
-            if (MainGameStatsHolder.Settings.ParticlesEnabled)
-            {
-                try
-                {
-                    Transform transform1;
-                    SpriteRenderer particle = Instantiate(particles, (transform1 = transform).position, transform1.rotation).GetComponent<SpriteRenderer>();
-                    particle.color = _color;
-                }
-                catch
-                {
-                    // ignored
-                }
-            }
             EnemySpawner.Enemies.Remove(gameObject);
             Destroy(gameObject);
         }
         
-        public void TakeDamage(InfiniteInteger damage)
+        public void TakeDamage(InfiniteInteger damage, Quaternion direction)
         {
             OnDamageTaken?.Invoke(this);
             OnAnyEnemyDamageTaken?.Invoke(this);
@@ -132,7 +119,8 @@ namespace MonoBehaviours
             if (MainGameStatsHolder.Settings.ParticlesEnabled)
             {
                 var transform1 = transform;
-                Instantiate(particles, transform1.position, transform1.rotation);
+                if (direction == default) direction = transform1.rotation;
+                Instantiate(particles, transform1.position, direction);
             }
             if (Health <= 0)
             {

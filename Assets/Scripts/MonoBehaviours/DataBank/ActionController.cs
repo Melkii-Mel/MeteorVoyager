@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using GameStatsNS;
-using MonoBehaviours.DataBank.Actions;
+using MonoBehaviours.DataBank.Canvases;
 using UnityEngine;
 using Random = System.Random;
 
@@ -53,16 +53,44 @@ namespace MonoBehaviours.DataBank
             if (GameStats.MainGameStatsHolder.Currency.Data > 0)
             {
                 _currentCanvas = upgradesCanvas;
+                if (TryInit()) return;
+                
+                _currentCanvas = messageCanvas;
                 Init();
             }
         }
 
         private void Init()
         {
-            if (!_currentCanvas.Init())
+            if (!TryInit())
             {
                 controller.StartDespawn();
             }
+        }
+
+        private void EnableCanvas(Controller sender, Controller.DataBankBehaviourEventArgs args)
+        {
+            SetCanvasActive(true);
+        }
+
+        private void DisableCanvas(Controller sender, Controller.DataBankBehaviourEventArgs args)
+        {
+            SetCanvasActive(false);
+        }
+
+        private void SetCanvasActive(bool value)
+        {
+            _currentCanvas.Canvas.SetActive(value);
+        }
+
+        private bool TryInit()
+        {
+            bool success =  _currentCanvas.Init();
+            if (success)
+            {
+                controller.OnReachingStayPosition += EnableCanvas;
+            }
+            return success;
         }
 
         private void RelocationEnd(Relocation sender, Relocation.RelocationEventArgs args)

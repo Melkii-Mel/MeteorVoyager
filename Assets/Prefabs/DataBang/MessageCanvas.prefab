@@ -66,7 +66,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 'Hello. Looks like you see me for the first time, but I can''t say the
+    same about myself.\nLet me quickly let you know about myself because it is kinda
+    important: I serve the role of a databank and my goal is to trade researches
+    for data. I get data for further researches, you get researches to get more data.
+    symbiotic connection, isn''t it? See you after your first Warp'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

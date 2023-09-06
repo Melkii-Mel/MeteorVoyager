@@ -32,13 +32,14 @@ namespace MonoBehaviours.UpgradesNS
             GetComponent<Button>().onClick.AddListener(async () => await Buy());
             UpdateText(Cost);
         }
-        protected void Init()
+
+        private void Init()
         {
             Formula = GetUpgradeFormula();
             GetComponent<Button>().interactable = Cost != -1;
         }
         protected abstract Func<int, InfiniteInteger> GetUpgradeFormula();
-        public abstract InfiniteInteger Balance { get; set; }
+        protected abstract InfiniteInteger Balance { get; set; }
 
         public bool CheckIfCanUpgrade()
         {

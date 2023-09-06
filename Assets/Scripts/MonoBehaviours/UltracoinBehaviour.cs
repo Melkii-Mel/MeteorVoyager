@@ -46,5 +46,10 @@ namespace MonoBehaviours
         {
             transform.Translate(new Vector2(0, -transformCoeff * Time.deltaTime), Space.World);
         }
+
+        public void TakeDamage(InfiniteInteger damage, Quaternion direction = default)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

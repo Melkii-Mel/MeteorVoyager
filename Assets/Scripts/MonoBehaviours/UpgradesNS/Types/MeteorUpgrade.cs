@@ -9,7 +9,7 @@ namespace MonoBehaviours.UpgradesNS.Types
     {
         [SerializeField] private MeteorUpgrades.Upgrades upgrade;
 
-        public override InfiniteInteger Balance
+        protected override InfiniteInteger Balance
         {
             get => MainGameStatsHolder.Currency.Balance;
             set => MainGameStatsHolder.Currency.Balance = value;

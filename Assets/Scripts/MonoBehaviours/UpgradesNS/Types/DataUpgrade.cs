@@ -9,7 +9,7 @@ namespace MonoBehaviours.UpgradesNS.Types
     {
         [SerializeField] private DataUpgradesGameStats.Upgrades upgradeEnum;
 
-        public override InfiniteInteger Balance
+        protected override InfiniteInteger Balance
         {
             get => MainGameStatsHolder.Currency.Data;
             set => MainGameStatsHolder.Currency.Data = value;

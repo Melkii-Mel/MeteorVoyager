@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using GameStatsNS;
+using MonoBehaviours.DataBank.ScriptableObjects;
 using UnityEngine;
 
 namespace MonoBehaviours.DataBank
@@ -8,9 +9,9 @@ namespace MonoBehaviours.DataBank
     {
         private readonly UpgradeScriptableObject[] _objs;
         
-        public UpgradePicker(UpgradeScriptableObject[] objs)
+        public UpgradePicker()
         {
-            _objs = objs;
+            _objs = Resources.LoadAll<UpgradeScriptableObject>("ScriptableObjects");
         }
         
         public List<UpgradeScriptableObject> GetUpgrade(int amount)

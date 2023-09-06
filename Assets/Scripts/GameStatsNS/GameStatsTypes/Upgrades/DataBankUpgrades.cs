@@ -1,22 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using MonoBehaviours.DataBank;
+using MonoBehaviours.DataBank.Enums;
 using SerializationLibrary;
 
 namespace GameStatsNS.GameStatsTypes.Upgrades
 {
     public class DataBankUpgrades : Serializable<DataBankUpgrades>
     {
-        public int this[Upgrade upgrade]
+        public int this[UpgradeEnum upgradeEnum]
         {
             get
             {
-                return Upgrades.First(u => u.upgrade == upgrade).value;
+                return Upgrades.First(u => u.upgradeEnum == upgradeEnum).value;
             }
             set
             {
-                Upgrades.First(u => u.upgrade == upgrade).value = value;
+                Upgrades.First(u => u.upgradeEnum == upgradeEnum).value = value;
             }
         }
 
@@ -24,24 +23,24 @@ namespace GameStatsNS.GameStatsTypes.Upgrades
         // ReSharper disable once MemberCanBePrivate.Global
         public Pair[] Upgrades = new[]
         {
-            new Pair(Upgrade.AsteroidHealth),
-            new Pair(Upgrade.Material0Unlock),
-            new Pair(Upgrade.Material1Unlock),
-            new Pair(Upgrade.Material2Unlock),
-            new Pair(Upgrade.Material3Unlock),
-            new Pair(Upgrade.Material4Unlock),
-            new Pair(Upgrade.InstantDamageUnlock)
+            new Pair(UpgradeEnum.AsteroidHealth),
+            new Pair(UpgradeEnum.Material0Unlock),
+            new Pair(UpgradeEnum.Material1Unlock),
+            new Pair(UpgradeEnum.Material2Unlock),
+            new Pair(UpgradeEnum.Material3Unlock),
+            new Pair(UpgradeEnum.Material4Unlock),
+            new Pair(UpgradeEnum.InstantDamageUnlock)
         };
             
         [Serializable]
         public class Pair
         {
-            public Upgrade upgrade;
+            public UpgradeEnum upgradeEnum;
             public int value;
 
-            public Pair(Upgrade upgrade)
+            public Pair(UpgradeEnum upgradeEnum)
             {
-                this.upgrade = upgrade;
+                this.upgradeEnum = upgradeEnum;
                 this.value = 0;
             }
             public Pair() { }

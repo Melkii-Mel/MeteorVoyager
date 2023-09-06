@@ -1,7 +1,9 @@
-﻿namespace MonoBehaviours.Interfaces
+﻿using UnityEngine;
+
+namespace MonoBehaviours.Interfaces
 {
     public interface IDamageable
     {
-        void TakeDamage(InfiniteInteger damage);
+        void TakeDamage(InfiniteInteger damage, Quaternion direction = default);
     }
 }

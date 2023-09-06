@@ -29,6 +29,7 @@ namespace MonoBehaviours.DataBank
         
         public void Spawn()
         {
+            _reachedStayPosition = false;
             OnSpawn?.Invoke(this, GenerateEventArgs());
             _currentDataBank = Instantiate(dataBank);
             StartCoroutine(MoveToStayPosition());
@@ -44,17 +45,22 @@ namespace MonoBehaviours.DataBank
             yield return StartCoroutine(Move(spawnPosition, stayPosition, fromSpawnToStayTime, _currentDataBank.transform));
             _currentDataBank.transform.position = stayPosition;
             OnReachingStayPosition?.Invoke(this, GenerateEventArgs());
+            _reachedStayPosition = true;
         }
-
+        
         private IEnumerator Despawn()
         {
             StopCoroutine(MoveToStayPosition());
-            OnLeavingStayPosition?.Invoke(this, GenerateEventArgs());
-            yield return StartCoroutine(Move(stayPosition, despawnPosition, fromStayToDespawnTime, _currentDataBank.transform));
-            OnDespawn?.Invoke(this, GenerateEventArgs());
+            if (_reachedStayPosition)
+            {
+                OnLeavingStayPosition?.Invoke(this, GenerateEventArgs());
+                yield return StartCoroutine(Move(stayPosition, despawnPosition, fromStayToDespawnTime, _currentDataBank.transform));
+                OnDespawn?.Invoke(this, GenerateEventArgs());
+            }
             Destroy(_currentDataBank);
         }
 
+        private bool _reachedStayPosition;
         private IEnumerator Move(Vector2 start, Vector2 end, float time, Transform objTransform)
         {
             Vector2 positionDelta = end - start;

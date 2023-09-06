@@ -1,5 +1,4 @@
 ﻿using GameStatsNS;
-using UnityEngine;
 
 namespace MonoBehaviours.UI.PowerUpCircles
 {

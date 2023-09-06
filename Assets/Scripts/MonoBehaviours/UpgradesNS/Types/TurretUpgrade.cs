@@ -13,13 +13,13 @@ namespace MonoBehaviours.UpgradesNS.Types
         private const int DAMAGE_UPGRADE_CONDITION_LVL = 50;
         [SerializeField] private TurretUpgrades.Upgrades upgradeEnum;
 
-        private void OnEnable()
-        {
-            if (upgradeEnum == TurretUpgrades.Upgrades.Damage)
-            {
-                StartDamageController();
-            }
-        }
+        // private void OnEnable()
+        // {
+        //     if (upgradeEnum == TurretUpgrades.Upgrades.Damage)
+        //     {
+        //         Start();
+        //     }
+        // }
 
         private new void Start()
         {
@@ -30,7 +30,8 @@ namespace MonoBehaviours.UpgradesNS.Types
                 Relocation.OnRelocationEnd += (_, _) => StartDamageController();
             }
         }
-        public override InfiniteInteger Balance
+
+        protected override InfiniteInteger Balance
         {
             get => MainGameStatsHolder.Currency.Balance;
             set => MainGameStatsHolder.Currency.Balance = value;
@@ -57,7 +58,6 @@ namespace MonoBehaviours.UpgradesNS.Types
                 case TurretUpgrades.Upgrades.PierceCount: return Texts.ButtonTexts.PierceCountUpgrade;
                 case TurretUpgrades.Upgrades.ShotCooldown: return Texts.ButtonTexts.ShotCooldown;
             }
-
             throw new Exception("nO upgrade exception lol what is that");
         }
 
@@ -78,7 +78,10 @@ namespace MonoBehaviours.UpgradesNS.Types
             }
             SetActive(false);
             transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "LOCKED";
-            yield return new WaitUntil(() => MainGameStatsHolder.TurretUpgrades.SpawnCooldown >= DAMAGE_UPGRADE_CONDITION_LVL);
+            if (MainGameStatsHolder.TurretUpgrades.SpawnCooldown < DAMAGE_UPGRADE_CONDITION_LVL)
+            {
+                yield return new WaitUntil(() => MainGameStatsHolder.TurretUpgrades.SpawnCooldown >= DAMAGE_UPGRADE_CONDITION_LVL);
+            }
             SetActive(true);
             UpdateText(Cost);
         }

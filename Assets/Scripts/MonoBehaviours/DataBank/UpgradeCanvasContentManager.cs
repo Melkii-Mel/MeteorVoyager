@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿using MonoBehaviours.DataBank.ScriptableObjects;
 
 namespace MonoBehaviours.DataBank
 {
@@ -9,8 +9,7 @@ namespace MonoBehaviours.DataBank
         
         public UpgradeCanvasContentManager()
         {
-            _upgrades = Resources.LoadAll<UpgradeScriptableObject>("ScriptableObjects");
-            _upgradePicker = new UpgradePicker(_upgrades);
+            _upgradePicker = new UpgradePicker();
         }
 
         public bool SetUpgrades(UpgradeObject[] uo)
