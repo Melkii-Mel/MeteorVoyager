@@ -14,8 +14,8 @@ namespace MonoBehaviours.UpgradesNS
     public abstract class UpgradesButtonActions : MonoBehaviour
     {
         protected abstract int Value { get; set; }
-        protected Func<int, InfiniteInteger> Formula;
-        protected InfiniteInteger Cost => Formula(Value);
+        private Func<int, InfiniteInteger> _formula;
+        protected InfiniteInteger Cost => _formula(Value);
         
         #region events
         public delegate void UpgradeEventHandler(UpgradeEventArgs args);
@@ -28,28 +28,34 @@ namespace MonoBehaviours.UpgradesNS
         private void OnEnable()
         {
             Relocation.OnRelocationEnd += RelocationEnd;
+            GetComponent<Button>().onClick.AddListener(ButtonAction);
         }
 
         private void OnDisable()
         {
             Relocation.OnRelocationEnd -= RelocationEnd;
+            GetComponent<Button>().onClick.RemoveListener(ButtonAction);
         }
 
         public void Start()
         {
             Init();
-            GetComponent<Button>().onClick.AddListener(async () => await Buy());
             UpdateText(Cost);
+        }
+
+        private async void ButtonAction()
+        {
+            await Buy();
         }
 
         private void RelocationEnd(Relocation sender, Relocation.RelocationEventArgs args)
         {
             Init();
-            UpdateText(Formula(Value));
+            UpdateText(_formula(Value));
         }
         private void Init()
         {
-            Formula = GetUpgradeFormula();
+            _formula = GetUpgradeFormula();
             GetComponent<Button>().interactable = Cost != -1;
         }
         protected abstract Func<int, InfiniteInteger> GetUpgradeFormula();

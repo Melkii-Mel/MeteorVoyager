@@ -13,22 +13,31 @@ namespace MonoBehaviours.UpgradesNS.Types
         private const int DAMAGE_UPGRADE_CONDITION_LVL = 50;
         [SerializeField] private TurretUpgrades.Upgrades upgradeEnum;
 
-        // private void OnEnable()
-        // {
-        //     if (upgradeEnum == TurretUpgrades.Upgrades.Damage)
-        //     {
-        //         Start();
-        //     }
-        // }
-
+        private void OnEnable()
+        {
+            if (upgradeEnum == TurretUpgrades.Upgrades.Damage)
+            {
+                Relocation.OnRelocationEnd += RelocationEnd;
+            }
+        }
+        
+        private void OnDisable()
+        {
+            Relocation.OnRelocationEnd -= RelocationEnd;
+        }
+        
         private new void Start()
         {
             base.Start();
             if (upgradeEnum == TurretUpgrades.Upgrades.Damage)
             {
                 StartDamageController();
-                Relocation.OnRelocationEnd += (_, _) => StartDamageController();
             }
+        }
+
+        private void RelocationEnd(Relocation sender, Relocation.RelocationEventArgs args)
+        {
+            StartDamageController();
         }
 
         protected override InfiniteInteger Balance
