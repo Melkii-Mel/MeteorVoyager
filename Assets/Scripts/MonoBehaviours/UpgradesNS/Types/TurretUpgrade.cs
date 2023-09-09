@@ -17,13 +17,14 @@ namespace MonoBehaviours.UpgradesNS.Types
         {
             if (upgradeEnum == TurretUpgrades.Upgrades.Damage)
             {
-                Relocation.OnRelocationEnd += RelocationEnd;
+                Relocation.OnRelocationEnd += DamageUpgradeRelocationEnd;
             }
         }
         
-        private void OnDisable()
+        private new void OnDisable()
         {
-            Relocation.OnRelocationEnd -= RelocationEnd;
+            base.OnDisable();
+            Relocation.OnRelocationEnd -= DamageUpgradeRelocationEnd;
         }
         
         private new void Start()
@@ -35,7 +36,7 @@ namespace MonoBehaviours.UpgradesNS.Types
             }
         }
 
-        private void RelocationEnd(Relocation sender, Relocation.RelocationEventArgs args)
+        private void DamageUpgradeRelocationEnd(Relocation sender, Relocation.RelocationEventArgs args)
         {
             StartDamageController();
         }
@@ -67,15 +68,13 @@ namespace MonoBehaviours.UpgradesNS.Types
                 case TurretUpgrades.Upgrades.PierceCount: return Texts.ButtonTexts.PierceCountUpgrade;
                 case TurretUpgrades.Upgrades.ShotCooldown: return Texts.ButtonTexts.ShotCooldown;
             }
-            throw new Exception("nO upgrade exception lol what is that");
+            throw new ArgumentOutOfRangeException(nameof(upgradeEnum), 
+                $"{upgradeEnum.ToString()} upgrade support is not implemented yet");
         }
 
         private void StartDamageController()
         {
-            if (isActiveAndEnabled)
-            {
-                StartCoroutine(DamageUpgradeStateController());
-            }
+            StartCoroutine(DamageUpgradeStateController());
         }
 
         private IEnumerator DamageUpgradeStateController()
@@ -85,6 +84,8 @@ namespace MonoBehaviours.UpgradesNS.Types
                 IsDamageUpgradeEnabled = state;
                 GetComponent<Button>().interactable = state;
             }
+
+            yield return new WaitUntil(() => isActiveAndEnabled);
             SetActive(false);
             transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "LOCKED";
             if (MainGameStatsHolder.TurretUpgrades.SpawnCooldown < DAMAGE_UPGRADE_CONDITION_LVL)

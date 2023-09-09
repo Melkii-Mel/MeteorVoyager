@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using MonoBehaviours.UpgradesNS.Types;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,21 +25,17 @@ namespace MonoBehaviours.UpgradesNS
         
         #endregion
 
-
-        private void OnEnable()
-        {
-            Relocation.OnRelocationEnd += RelocationEnd;
-            GetComponent<Button>().onClick.AddListener(ButtonAction);
-        }
-
-        private void OnDisable()
+        protected void OnDisable()
         {
             Relocation.OnRelocationEnd -= RelocationEnd;
             GetComponent<Button>().onClick.RemoveListener(ButtonAction);
         }
 
-        public void Start()
+        protected void Start()
         {
+            Relocation.OnRelocationEnd += RelocationEnd;
+            GetComponent<Button>().onClick.AddListener(ButtonAction);
+            
             Init();
             UpdateText(Cost);
         }
