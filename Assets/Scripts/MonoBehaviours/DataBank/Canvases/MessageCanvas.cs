@@ -25,7 +25,10 @@ namespace MonoBehaviours.DataBank.Canvases
         
         
         public Button CloseButton => closeButton;
-        public GameObject Canvas => canvas;
+        public GameObject CanvasPrefab => canvas;
+        public Transform Transform => transform;
+        public GameObject GameObject => gameObject;
+        public event IDataBankCanvas.ExitButtonClickEventHandler OnExit;
         public DataBankCircularTimer DataBankCircularTimer => dataBankCircularTimer;
 
         public bool Init()
@@ -34,9 +37,24 @@ namespace MonoBehaviours.DataBank.Canvases
             return true;
         }
 
+        public void Exit()
+        {
+            OnExit?.Invoke();
+        }
+
+        public void CheckTimerValue(float value)
+        {
+            if (value <= 0) Exit();
+        }
+
         private bool MessageShown(MessageEnum messageEnum)
         {
-            return GameStats.MainGameStatsHolder.DataBankOthers.MessagesShown.Contains(messageEnum);
+            return GameStats.MainGameStatsHolder.DataBankOthers.IsMessageShown(messageEnum);
+        }
+
+        private void AddMessageShown(MessageEnum messageEnum)
+        {
+            GameStats.MainGameStatsHolder.DataBankOthers.AddShownMessage(messageEnum);
         }
 
         private MessageScriptableObject FindMessageObject(MessageEnum messageEnum)
@@ -52,16 +70,19 @@ namespace MonoBehaviours.DataBank.Canvases
         {
             if (!MessageShown(MessageEnum.HelloDoYouKnowWhoIAm))
             {
+                AddMessageShown(MessageEnum.HelloDoYouKnowWhoIAm);
                 return FindMessageObject(MessageEnum.HelloDoYouKnowWhoIAm).Content;
             }
 
             if (!MessageShown(MessageEnum.DoYouKnowWhatDataIs))
             {
+                AddMessageShown(MessageEnum.DoYouKnowWhatDataIs);
                 return FindMessageObject(MessageEnum.DoYouKnowWhatDataIs).Content;
             }
 
             else
             {
+                AddMessageShown(MessageEnum.Advice);
                 return FindRandomAdviceObject().Content;
             }
         }

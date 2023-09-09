@@ -10,6 +10,7 @@ namespace GameStatsNS
             return Application.isPlaying;
         }
         public static bool IsSomeFieldEnabled { get; set; }
+
         public static bool IsDamageUpgradeEnabled { get; set; }
 
         private static SavesStatHolder SavesStatHolder { get; set; } = new(IsPlaying, 1);

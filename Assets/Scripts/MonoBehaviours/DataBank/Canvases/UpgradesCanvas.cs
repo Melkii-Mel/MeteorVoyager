@@ -15,11 +15,23 @@ namespace MonoBehaviours.DataBank.Canvases
 
         public Button CloseButton => closeButton;
 
-        public GameObject Canvas => canvas;
+        public GameObject CanvasPrefab => canvas;
+        public Transform Transform => transform;
+        public GameObject GameObject => gameObject;
 
         public DataBankCircularTimer DataBankCircularTimer => dataBankCircularTimer;
 
         private Controller _dataBankController;
+        public event IDataBankCanvas.ExitButtonClickEventHandler OnExit;
+        public void Exit()
+        {
+            OnExit?.Invoke();
+        }
+        
+        public void CheckTimerValue(float value)
+        {
+            if (value <= 0) Exit();
+        }
 
         public bool Init()
         {

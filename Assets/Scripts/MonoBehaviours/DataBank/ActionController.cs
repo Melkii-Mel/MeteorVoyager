@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using GameStatsNS;
 using MonoBehaviours.DataBank.Canvases;
+using MonoBehaviours.UI;
 using UnityEngine;
 using Random = System.Random;
 
@@ -20,12 +22,14 @@ namespace MonoBehaviours.DataBank
         private void OnEnable()
         {
             Relocation.OnRelocationEnd += RelocationEnd;
+            controller.OnLeavingStayPosition += DestroyCanvas;
             StartCoroutine(MyUpdate());
         }
 
         private void OnDisable()
         {
             Relocation.OnRelocationEnd -= RelocationEnd;
+            controller.OnLeavingStayPosition -= DestroyCanvas;
             StopCoroutine(MyUpdate());
         }
         
@@ -34,7 +38,13 @@ namespace MonoBehaviours.DataBank
         {
             while (true)
             {
-                if(GameStats.MainGameStatsHolder.DataBankOthers.DataBankVisited) yield break;
+                yield return null;
+                bool dataBankVisited = GameStats.MainGameStatsHolder.DataBankOthers.DataBankVisited;
+                if (dataBankVisited)
+                {
+                    yield return new WaitForSeconds(chanceTickRateS);
+                    continue;
+                }
                 if (_random.NextDouble() > chance) yield return new WaitForSeconds(chanceTickRateS);
                 GameStats.MainGameStatsHolder.DataBankOthers.DataBankVisited = true;
                 controller.Spawn();
@@ -46,18 +56,28 @@ namespace MonoBehaviours.DataBank
         {
             if (GameStats.MainGameStatsHolder.Progression.GameStage < 4)
             {
-                _currentCanvas = messageCanvas;
+                AddCanvasToController(messageCanvas);
                 Init();
             }
             
             if (GameStats.MainGameStatsHolder.Currency.Data > 0)
             {
-                _currentCanvas = upgradesCanvas;
+                AddCanvasToController(messageCanvas);
                 if (TryInit()) return;
                 
-                _currentCanvas = messageCanvas;
+                AddCanvasToController(messageCanvas);
                 Init();
             }
+        }
+
+        private void AddCanvasToController(IDataBankCanvas canvas)
+        {
+            _currentCanvas = Instantiate(canvas.GameObject, controller.transform).GetComponent<IDataBankCanvas>();
+            _currentCanvas.CanvasPrefab.SetActive(false);
+            _currentCanvas.OnExit += controller.StartDespawn;
+            
+            //did that for the camera that renders the canvas to not capture the main scene part
+            _currentCanvas.Transform.Translate(100, 100, 0);
         }
 
         private void Init()
@@ -66,6 +86,12 @@ namespace MonoBehaviours.DataBank
             {
                 controller.StartDespawn();
             }
+        }
+
+        private void DestroyCanvas(Controller controller1, Controller.DataBankBehaviourEventArgs args)
+        {
+            PopUpActivityController.ForceTrue = false;
+            Destroy(_currentCanvas.GameObject);
         }
 
         private void EnableCanvas(Controller sender, Controller.DataBankBehaviourEventArgs args)
@@ -80,7 +106,12 @@ namespace MonoBehaviours.DataBank
 
         private void SetCanvasActive(bool value)
         {
-            _currentCanvas.Canvas.SetActive(value);
+            _currentCanvas.CanvasPrefab.SetActive(value);
+            PopUpActivityController.ForceTrue = value;
+            if (value)
+            {
+                _currentCanvas.DataBankCircularTimer.StartTimer();
+            }
         }
 
         private bool TryInit()

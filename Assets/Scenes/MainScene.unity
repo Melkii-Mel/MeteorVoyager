@@ -331,7 +331,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 210354890}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.6, y: 0.06, z: -25}
+  m_LocalPosition: {x: 8.62, y: 0.06, z: -25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1094,10 +1094,10 @@ RectTransform:
   m_Father: {fileID: 1565546587}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -140.2403, y: -380.9486}
+  m_AnchorMin: {x: 0.10947514, y: 0.11676244}
+  m_AnchorMax: {x: 0.8853181, y: 0.886341}
+  m_AnchoredPosition: {x: 3, y: -4.5}
+  m_SizeDelta: {x: 10.77002, y: 36.53003}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &417354661
 MonoBehaviour:
@@ -3960,7 +3960,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 307, y: 614}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1565546588
 MonoBehaviour:
@@ -4333,10 +4333,10 @@ RectTransform:
   m_Father: {fileID: 417354660}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -78.6342, y: -90.5485}
+  m_AnchorMin: {x: 0.060788043, y: 0.034345265}
+  m_AnchorMax: {x: 0.93930584, y: 0.96760404}
+  m_AnchoredPosition: {x: 0, y: -1.500061}
+  m_SizeDelta: {x: 21.365799, y: 12.4515}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1683579693
 MonoBehaviour:
@@ -9619,7 +9619,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1823672092}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 944}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -11263,7 +11263,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3741789659935403401, guid: 89935d2c52fd713488243b2d0a2e42ec, type: 3}
       propertyPath: chance
-      value: 0.1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3741789659935403401, guid: 89935d2c52fd713488243b2d0a2e42ec, type: 3}
       propertyPath: behaviour

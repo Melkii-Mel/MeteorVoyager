@@ -12,6 +12,10 @@ namespace MonoBehaviours.DataBank.ScriptableObjects
         [SerializeField] private MessageEnum messageTypeEnum;
         [SerializeField] private LanguageTextSet content;
         public MessageEnum MessageType => messageTypeEnum;
-        public string Content => content[(Language)Enum.Parse(typeof(Language), GameStats.MainGameStatsHolder.Settings.Language.ToString())];
+        public string Content => content
+        [
+            (Language)Enum.Parse(typeof(Language),
+            GameStats.MainGameStatsHolder.Settings.Language.ToString())
+        ];
     }
 }

@@ -6,7 +6,7 @@ namespace MonoBehaviours
 {
     public class ScriptableObjectsLoader : MonoBehaviour
     {
-        private void Start()
+        private void Awake()
         {
             MessageScriptableObject[] messageScriptableObjects =
                 Resources.LoadAll<MessageScriptableObject>("ScriptableObjects");

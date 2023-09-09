@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 using static GameStatsNS.GameStats;
 
 namespace MonoBehaviours
@@ -9,7 +10,7 @@ namespace MonoBehaviours
         private readonly Action _onUpdate;
         public ProgressionController(Action action)
         {
-            Timer timer = new Timer(100, CheckGameStage, true);
+            Timer timer = new Timer(intervalMS: 100, CheckGameStage, enableOnStart: true, stopOnSceneChange: false);
             GameStage = 0;
             _onUpdate = action;
             action();

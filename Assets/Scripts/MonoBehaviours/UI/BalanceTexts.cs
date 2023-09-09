@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using static GameStatsNS.GameStats;
@@ -9,9 +10,14 @@ namespace MonoBehaviours.UI
         [SerializeField] private GameObject textBalance;
         [SerializeField] private GameObject textData;
 
-        private void Start()
+        private void OnEnable()
         {
             MainGameStatsHolder.Progression.OnProgressionUpdate += DataUnlockChecker;
+        }
+
+        private void OnDisable()
+        {
+            MainGameStatsHolder.Progression.OnProgressionUpdate -= DataUnlockChecker;
         }
 
         private void Update()

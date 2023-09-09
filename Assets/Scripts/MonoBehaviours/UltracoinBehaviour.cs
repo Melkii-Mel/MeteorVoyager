@@ -12,12 +12,13 @@ namespace MonoBehaviours
         [SerializeField] private float knockbackPower;
         [SerializeField] private int startingHitsAmount;
         [SerializeField] private float scaleOnHit = 1.05f;
-        
+
         #region events
 
         public delegate void HitEventHandler();
-        
+
         public event HitEventHandler OnHit;
+
         #endregion
 
         public void TakeDamage(InfiniteInteger damage)
@@ -27,6 +28,7 @@ namespace MonoBehaviours
             {
                 Destroy();
             }
+
             startingHitsAmount -= 1;
 
             transform.localScale *= scaleOnHit;
@@ -38,7 +40,6 @@ namespace MonoBehaviours
 
         private void Destroy()
         {
-
             Destroy(gameObject);
         }
 

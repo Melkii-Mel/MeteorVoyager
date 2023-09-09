@@ -20,6 +20,11 @@ namespace MonoBehaviours.DataBank.Canvases
         /// <summary>
         /// Basically, its the game object that will be activated, so make sure its inactive
         /// </summary>
-        public GameObject Canvas { get; }
+        public GameObject CanvasPrefab { get; }
+
+        public Transform Transform { get; }
+        public GameObject GameObject { get; }
+        public delegate void ExitButtonClickEventHandler();
+        public event ExitButtonClickEventHandler OnExit;
     }
 }

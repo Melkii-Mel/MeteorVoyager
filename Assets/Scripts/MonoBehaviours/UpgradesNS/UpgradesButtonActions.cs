@@ -24,15 +24,29 @@ namespace MonoBehaviours.UpgradesNS
         
         #endregion
 
+
+        private void OnEnable()
+        {
+            Relocation.OnRelocationEnd += RelocationEnd;
+        }
+
+        private void OnDisable()
+        {
+            Relocation.OnRelocationEnd -= RelocationEnd;
+        }
+
         public void Start()
         {
-            Relocation.OnRelocationEnd += (_, _) => Init();
-            Relocation.OnRelocationEnd += (_, _) => UpdateText(Formula(Value));
             Init();
             GetComponent<Button>().onClick.AddListener(async () => await Buy());
             UpdateText(Cost);
         }
 
+        private void RelocationEnd(Relocation sender, Relocation.RelocationEventArgs args)
+        {
+            Init();
+            UpdateText(Formula(Value));
+        }
         private void Init()
         {
             Formula = GetUpgradeFormula();

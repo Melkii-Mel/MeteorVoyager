@@ -32,10 +32,8 @@ namespace MonoBehaviours.DataBank
         {
             get
             {
-                if (@enum != MessageEnum.Advice)
-                    return DataBankMessageScriptableObjects.First(o => o.MessageType == @enum);
-                MessageScriptableObject[] advices = DataBankMessageScriptableObjects.Where(o => o.MessageType == MessageEnum.Advice).ToArray();
-                return advices[Random.Range(0, advices.Length - 1)];
+                MessageScriptableObject[] enums = DataBankMessageScriptableObjects.Where(o => o.MessageType == @enum).ToArray();
+                return enums[Random.Range(0, enums.Length)];
             }
         }
     }

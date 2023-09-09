@@ -19,6 +19,7 @@ namespace GameStatsNS
         public DataBankOthers DataBankOthers { get; private set; }
         public GameStatsHolder(int serializablesIndex, Func<bool> runningCondition, float delayS) : base(serializablesIndex, runningCondition, delayS, Application.persistentDataPath)
         {
+            Debug.Log("Serializables are creating");
             Currency = CreateSerializable<Currency>();
             DataUpgrades = CreateSerializable<DataUpgradesGameStats>();
             MeteorUpgrades = CreateSerializable<MeteorUpgrades>();
