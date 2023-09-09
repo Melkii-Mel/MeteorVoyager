@@ -69,8 +69,8 @@ namespace GameStatsNS
         
         private void SetSpawnDelayAndHealth(int lvl)
         {
-            _spawnDelay = 10f / ((Mathf.Log(lvl + 5, 2)) * (Mathf.Sqrt((lvl % 20 / 20f) + 1)) *
-                                 (Mathf.Pow(lvl + 1, 1 / 5f)));
+            _spawnDelay = 10f / (Mathf.Log(lvl + 5, 2) * Mathf.Sqrt(lvl % 20 / 20f + 1) *
+                                 Mathf.Pow(lvl + 1, 1 / 5f));
             if (_spawnDelay < MIN_SPAWN_DELAY) _spawnDelay = MIN_SPAWN_DELAY;
             // ReSharper disable once PossibleLossOfFraction
             _health = InfiniteInteger.Pow(2, lvl / 20);

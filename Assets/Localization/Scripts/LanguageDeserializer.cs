@@ -14,7 +14,7 @@ namespace Localization.Scripts
         public static Texts Deserialize(string languageContent)
         {
             using TextReader stream = new StringReader(languageContent);
-            return (Texts)(new XmlSerializer(typeof(Texts)).Deserialize(stream));
+            return (Texts)new XmlSerializer(typeof(Texts)).Deserialize(stream);
         }
     }
 }

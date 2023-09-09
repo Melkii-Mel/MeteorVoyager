@@ -76,7 +76,7 @@ public class Timer
                 return;
             }
             OnTimerTick?.Invoke(IntervalMS);
-            await Task.Delay((int)(IntervalMS));
+            await Task.Delay((int)IntervalMS);
         }
     }
 

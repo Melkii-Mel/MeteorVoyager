@@ -1,4 +1,5 @@
 ﻿using GameStatsNS;
+using GameStatsNS.GameStatsTypes;
 using MonoBehaviours.DataBank.Enums;
 using MonoBehaviours.DataBank.ScriptableObjects;
 using TMPro;
@@ -47,16 +48,6 @@ namespace MonoBehaviours.DataBank.Canvases
             if (value <= 0) Exit();
         }
 
-        private bool MessageShown(MessageEnum messageEnum)
-        {
-            return GameStats.MainGameStatsHolder.DataBankOthers.IsMessageShown(messageEnum);
-        }
-
-        private void AddMessageShown(MessageEnum messageEnum)
-        {
-            GameStats.MainGameStatsHolder.DataBankOthers.AddShownMessage(messageEnum);
-        }
-
         private MessageScriptableObject FindMessageObject(MessageEnum messageEnum)
         {
             return DataBankScriptableObjectsHolder.Instance[messageEnum];
@@ -68,23 +59,21 @@ namespace MonoBehaviours.DataBank.Canvases
         }
         private string GetMessage()
         {
-            if (!MessageShown(MessageEnum.HelloDoYouKnowWhoIAm))
+            DataBankOthers dbo = GameStats.MainGameStatsHolder.DataBankOthers;
+
+            if (!dbo.Message0Shown)
             {
-                AddMessageShown(MessageEnum.HelloDoYouKnowWhoIAm);
+                dbo.Message0Shown = true;
                 return FindMessageObject(MessageEnum.HelloDoYouKnowWhoIAm).Content;
             }
 
-            if (!MessageShown(MessageEnum.DoYouKnowWhatDataIs))
+            if (!dbo.Message1Shown)
             {
-                AddMessageShown(MessageEnum.DoYouKnowWhatDataIs);
+                dbo.Message1Shown = true;
                 return FindMessageObject(MessageEnum.DoYouKnowWhatDataIs).Content;
             }
 
-            else
-            {
-                AddMessageShown(MessageEnum.Advice);
-                return FindRandomAdviceObject().Content;
-            }
+            return FindMessageObject(MessageEnum.Advice).Content;
         }
     }
 }

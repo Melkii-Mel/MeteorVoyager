@@ -77,7 +77,7 @@ Material:
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
     - _BumpScale: 1
-    - _ChangingSpeed: 0.005
+    - _ChangingSpeed: 0.0005
     - _CutOff: 0
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1

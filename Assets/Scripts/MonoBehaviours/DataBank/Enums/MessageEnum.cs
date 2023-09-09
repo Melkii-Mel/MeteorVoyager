@@ -1,5 +1,8 @@
-﻿namespace MonoBehaviours.DataBank.Enums
+﻿using System;
+
+namespace MonoBehaviours.DataBank.Enums
 {
+    [Serializable]
     public enum MessageEnum
     {
         HelloDoYouKnowWhoIAm,

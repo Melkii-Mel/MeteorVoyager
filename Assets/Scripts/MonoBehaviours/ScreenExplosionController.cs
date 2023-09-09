@@ -13,7 +13,7 @@ namespace MonoBehaviours
         private const float MS_PER_TICK = 1000;
         private float _msBuffer;
         private readonly Random _random = new();
-        private readonly Func<int, float> _chanceFormula = (x) => 1 / (Mathf.Log((x / 500f + 3), 3));
+        private readonly Func<int, float> _chanceFormula = (x) => 1 / Mathf.Log(x / 500f + 3, 3);
 
         private void OnEnable()
         {

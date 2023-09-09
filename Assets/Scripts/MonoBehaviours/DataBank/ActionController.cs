@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using GameStatsNS;
 using MonoBehaviours.DataBank.Canvases;
 using MonoBehaviours.UI;

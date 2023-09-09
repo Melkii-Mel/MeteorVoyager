@@ -12,7 +12,7 @@ public static class EnemyHealthAndSpawnDelayCoefficientsCalculator
     public static float CalculateSpawnDelayCoefficient()
     {
         float log = Mathf.Log(MainGameStatsHolder.TurretUpgrades.SpawnCooldown + 1, 2) + 1;
-        float sqrt = Mathf.Sqrt((MainGameStatsHolder.TurretUpgrades.SpawnCooldown % 20 / 20f) / DIVIDER + 1);
+        float sqrt = Mathf.Sqrt(MainGameStatsHolder.TurretUpgrades.SpawnCooldown % 20 / 20f / DIVIDER + 1);
         return SPAWN_DELAY_COEFFICIENT / log * sqrt;
     }
 }

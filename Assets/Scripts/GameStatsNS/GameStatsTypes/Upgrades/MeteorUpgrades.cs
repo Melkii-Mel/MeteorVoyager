@@ -69,7 +69,7 @@ namespace GameStatsNS.GameStatsTypes.Upgrades
             (int lvl) => lvl == 0 ? 1000 :
                 lvl == 1 ? 1000000 :
                 lvl == 2 ? 100000000 :
-                (-1),
+                -1,
             //CoinMultiplierTimeUpgrade
             (int lvl) =>
             {
@@ -83,11 +83,11 @@ namespace GameStatsNS.GameStatsTypes.Upgrades
                 }
             },
             //DamageMultiplierTimeUpgrade
-            (int lvl) => (lvl <= 5) ? (int)Mathf.Pow(10, lvl+2) : (-1),
+            (int lvl) => lvl <= 5 ? (int)Mathf.Pow(10, lvl+2) : -1,
             //GlowingEnemiesSpawnRate
-            (int lvl) => (lvl <= 100) ? (int)Mathf.Pow(8.48f , Mathf.Pow(lvl + 1, 1/2f)) : (-1),
+            (int lvl) => lvl <= 100 ? (int)Mathf.Pow(8.48f , Mathf.Pow(lvl + 1, 1/2f)) : -1,
             //ExplosivesAttacksTimeUpgrade
-            (int lvl) => (lvl <= 5) ? (int)Mathf.Pow(10, lvl+2) : (-1),
+            (int lvl) => lvl <= 5 ? (int)Mathf.Pow(10, lvl+2) : -1,
         };
     }
 }
