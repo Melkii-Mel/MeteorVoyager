@@ -61,7 +61,7 @@ namespace MonoBehaviours.DataBank
             
             if (GameStats.MainGameStatsHolder.Currency.Data > 0)
             {
-                AddCanvasToController(messageCanvas);
+                AddCanvasToController(upgradesCanvas);
                 if (TryInit()) return;
                 
                 AddCanvasToController(messageCanvas);

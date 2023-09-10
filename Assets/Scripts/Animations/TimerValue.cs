@@ -19,7 +19,7 @@ namespace Animations
             float value = min + (max - min) * timerSlider.normalizedValue;
             if (whole)
             {
-                value %= 1;
+                value = (int)value;
             }
 
             text.text = value.ToString(CultureInfo.CurrentCulture);

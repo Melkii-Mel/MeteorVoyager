@@ -8,20 +8,10 @@ namespace DevOnly
 {
     public class DeleteProgress : MonoBehaviour
     {
-        public async void DeleteAll()
+        public void DeleteAll()
         {
-            await Deleter();
-        }
-
-        private async Task Deleter()
-        {
-            transform.GetChild(0).gameObject.GetComponent<Text>().text = "Please Restart";
-            for (; ; )
-            {
-                MainGameStatsHolder.ResetAllSerialization();
-                return;
-                await Task.Delay(10);
-            }
+            MainGameStatsHolder.ResetAllSerialization();
+            Application.Quit();
         }
     }
 }
