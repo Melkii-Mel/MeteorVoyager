@@ -19,6 +19,7 @@ namespace DevOnly
             for (; ; )
             {
                 MainGameStatsHolder.ResetAllSerialization();
+                return;
                 await Task.Delay(10);
             }
         }
