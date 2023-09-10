@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 3389663216386133301}
   - component: {fileID: 6135291662646342679}
   - component: {fileID: 7402410494983316431}
+  - component: {fileID: 5381626201120844518}
   m_Layer: 5
   m_Name: UpgradeElement
   m_TagString: Untagged
@@ -258,6 +259,25 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5381626201120844518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483167259405775088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a517fc936024f418633ec5cd746fd00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 3415280924212164977}
+  title: {fileID: 2160710290287189484}
+  description: {fileID: 1505871220458349656}
+  cost: {fileID: 8872026925643083014}
+  enableDescriptionObjectAndBuyUpgradeButton: {fileID: 7402410494983316431}
+  disableDescriptionObjectButton: {fileID: 1194033907243328947}
+  descriptionObject: {fileID: 2498437263854920097}
 --- !u!1 &2498437263854920097
 GameObject:
   m_ObjectHideFlags: 0

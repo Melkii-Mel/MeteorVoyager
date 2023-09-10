@@ -1,6 +1,7 @@
 ﻿using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace MonoBehaviours.DataBank
@@ -12,7 +13,7 @@ namespace MonoBehaviours.DataBank
         [SerializeField] private TextMeshProUGUI description;
         [SerializeField] private TextMeshProUGUI cost;
         [SerializeField] private Button enableDescriptionObjectAndBuyUpgradeButton;
-        [SerializeField] private Button disableDescriptionObjectAndBuyUpgradeButton;
+        [SerializeField] private Button disableDescriptionObjectButton;
         [SerializeField] private GameObject descriptionObject;
 
         #region events
@@ -20,6 +21,10 @@ namespace MonoBehaviours.DataBank
         public delegate void BuyButtonClickEventHandler();
 
         public event BuyButtonClickEventHandler OnBuying;
+
+        public delegate void DescriptionObjectEnable(object sender);
+
+        public event DescriptionObjectEnable OnDescriptionObjectEnable;
         
 
         #endregion
@@ -27,23 +32,37 @@ namespace MonoBehaviours.DataBank
         private void OnDisable()
         {
             enableDescriptionObjectAndBuyUpgradeButton.onClick.RemoveListener(BuyButtonClick);
+            disableDescriptionObjectButton.onClick.RemoveListener(DisableDescriptionObjectActive);
+            OnDescriptionObjectEnable -= ProcessDisableOtherDescriptionObjectsRequest;
         }
 
         private void Awake()
         {
-            descriptionObject.SetActive(false);
+            DisableDescriptionObjectActive();
             enableDescriptionObjectAndBuyUpgradeButton.onClick.AddListener(BuyButtonClick);
+            disableDescriptionObjectButton.onClick.AddListener(DisableDescriptionObjectActive);
+            OnDescriptionObjectEnable += ProcessDisableOtherDescriptionObjectsRequest;
         }
 
         private bool _descriptionActivated;
+        
+        private void DisableDescriptionObjectActive()
+        {
+            SetDescriptionObjectActive(false);
+        }
 
+        private void SetDescriptionObjectActive(bool value)
+        {
+            descriptionObject.SetActive(value);
+            _descriptionActivated = value;
+            if (value)
+            {
+                OnDescriptionObjectEnable?.Invoke(this);
+            }
+        }
+        
         private void BuyButtonClick()
         {
-            void SetDescriptionObjectActive(bool value)
-            {
-                descriptionObject.SetActive(value);
-                _descriptionActivated = value;
-            }
             
             if (_descriptionActivated)
             {
@@ -56,6 +75,13 @@ namespace MonoBehaviours.DataBank
             }
         }
 
+        private void ProcessDisableOtherDescriptionObjectsRequest(object requestSender)
+        {
+            if (ReferenceEquals(requestSender, this)) return;
+            
+            DisableDescriptionObjectActive();
+        }
+        
         public void SetImage(Sprite content)
         {
             image.sprite = content;
