@@ -61,17 +61,17 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AlphaMain: 0.757
-    - _AlphaOnGlitch: 0.37
+    - _AlphaMain: 0.872
+    - _AlphaOnGlitch: 0.176
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
     - _BumpScale: 1
-    - _ChacneCheckFrequency: 6.9
+    - _ChacneCheckFrequency: 3.9
     - _Chance: 0.082
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DisplacementDisplacement: -0.5
-    - _DisplacementMultiplier: 0.1
+    - _DisplacementMultiplier: 1.09
     - _DstBlend: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5

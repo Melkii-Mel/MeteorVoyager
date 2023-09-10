@@ -72,15 +72,15 @@ MonoBehaviour:
     for data. I get data for further researches, you get researches to get more data.
     symbiotic connection, isn''t it? See you after your first Warp'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
+  m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4282620867
-  m_fontColor: {r: 0.7647059, g: 0.60784316, b: 0.2627451, a: 1}
+    rgba: 4285704417
+  m_fontColor: {r: 0.88235295, g: 0.65882355, b: 0.44705883, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 13.2
+  m_fontSize: 12.8
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -352,7 +352,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 31.6
+  m_fontSize: 30.8
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -705,7 +705,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 747219721433790033, guid: 74d3b771bd0fdea49a4adc3e0d4a8eec, type: 3}
       propertyPath: m_fontSize
-      value: 7.4
+      value: 7.2
       objectReference: {fileID: 0}
     - target: {fileID: 1467382666246565663, guid: 74d3b771bd0fdea49a4adc3e0d4a8eec, type: 3}
       propertyPath: m_Pivot.x
