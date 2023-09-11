@@ -11,6 +11,8 @@ namespace MonoBehaviours
     {
         [SerializeField] private GameObject enemy;
         [SerializeField][Range(0.1f, 100f)] private float sizeMultiplier;
+        [SerializeField] private AsteroidsMaterialAndMeshRandomizer randomizer;
+        [SerializeField] private float maxEnemies = 200;
         private float _interval = 1;
         private const float INTERVAL_MULTIPLIER = 0.5f;
 
@@ -51,7 +53,6 @@ namespace MonoBehaviours
 
         private void SpawnEnemy()
         {
-            const int maxEnemies = 100;
             if (Enemies.Count > maxEnemies)
             {
                 Enemies.Remove(Enemies.First());
@@ -67,6 +68,7 @@ namespace MonoBehaviours
             InfiniteInteger health = GameStats.Parameters.Health * coeff;
             float speedMultiplier = 1f / Mathf.Sqrt(coeff);
             bool isGlowing = Random.value < MainGameStatsHolder.MeteorUpgrades.GlowingEnemiesSpawnRate * 0.001f;
+            randomizer.SetMeshAndMaterial(enemys.GetComponentInChildren<MeshFilter>(), enemys.GetComponentInChildren<MeshRenderer>());
             
             enemys.GetComponent<Enemy>().Initialize(position, scaleMultiplier, health, speedMultiplier, isGlowing);
         }
