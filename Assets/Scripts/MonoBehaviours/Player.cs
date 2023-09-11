@@ -85,7 +85,15 @@ namespace MonoBehaviours
             }
             void FindTouchCoordinates(out float x, out float y)
             {
-                Vector2 touch = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
+                Vector2 touch;
+                try
+                {
+                    touch = Camera.main!.ScreenToWorldPoint(Input.touches[0].position);
+                }
+                catch
+                {
+                    touch = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
+                }
                 var position = transform.position;
                 x = touch.x - position.x;
                 y = touch.y - position.y;
