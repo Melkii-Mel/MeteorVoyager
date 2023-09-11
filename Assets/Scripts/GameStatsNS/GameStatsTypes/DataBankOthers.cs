@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using MonoBehaviours.DataBank.Enums;
-using SerializationLibrary;
+﻿using SerializationLibrary;
 
 namespace GameStatsNS.GameStatsTypes
 {

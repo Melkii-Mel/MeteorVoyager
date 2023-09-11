@@ -1,5 +1,4 @@
-﻿using System;
-using MonoBehaviours.DataBank.ScriptableObjects;
+﻿using MonoBehaviours.DataBank.ScriptableObjects;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

@@ -98,7 +98,7 @@ MonoBehaviour:
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 0.001
-  m_fontSizeMax: 6
+  m_fontSizeMax: 6.03
   m_fontStyle: 32
   m_HorizontalAlignment: 8
   m_VerticalAlignment: 256
@@ -275,6 +275,7 @@ MonoBehaviour:
   title: {fileID: 2160710290287189484}
   description: {fileID: 1505871220458349656}
   cost: {fileID: 8872026925643083014}
+  lvl: {fileID: 0}
   enableDescriptionObjectAndBuyUpgradeButton: {fileID: 7402410494983316431}
   disableDescriptionObjectButton: {fileID: 1194033907243328947}
   descriptionObject: {fileID: 2498437263854920097}
@@ -500,7 +501,7 @@ MonoBehaviour:
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 0.001
-  m_fontSizeMax: 100
+  m_fontSizeMax: 6.03
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -635,7 +636,7 @@ MonoBehaviour:
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 0.001
-  m_fontSizeMax: 8.56
+  m_fontSizeMax: 6.03
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
