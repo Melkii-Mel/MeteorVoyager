@@ -23,7 +23,7 @@ namespace MonoBehaviours.DataBank.ScriptableObjects
         public string UpgradeName => nameText[Language];
         public string UpgradeDesc => descText[Language];
         public UpgradeEnum UpgradeEnum => upgradeEnum;
-        public int LvL => throw new NotImplementedException();
+        public int LvL => GameStats.MainGameStatsHolder.DataBankUpgrades[upgradeEnum];
         public InfiniteInteger Cost => _formulas[upgradeEnum](LvL);
 
         private readonly UpgradeFormulas _formulas = new();

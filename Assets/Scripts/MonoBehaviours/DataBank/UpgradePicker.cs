@@ -38,7 +38,7 @@ namespace MonoBehaviours.DataBank
                 ignoreIndexes.Add(index);
             }
             
-            if (ignoreIndexes.Count < amount) result = null;
+            if (ignoreIndexes.Count == 0) result = null;
             return result;
         }
     }

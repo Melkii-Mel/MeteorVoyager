@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddab1cd2842441f7bc840eaae10fcb43, type: 3}
   m_Name: EnemyHealth
   m_EditorClassIdentifier: 
-  upgrade: 0
+  upgradeEnum: 0
   oneTimeUpgrade: 0
   nameText:
     languageTexts:
@@ -29,4 +29,4 @@ MonoBehaviour:
         \u0443\u0434\u0432\u0430\u0438\u0432\u0430\u0435\u0442 \u043F\u043B\u043E\u0442\u043D\u043E\u0441\u0442\u044C
         \u0430\u0441\u0442\u0435\u0440\u043E\u0438\u0434\u043E\u0432 (x1 -> x2 ->
         x4 -> x8 etc.)"
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 8898f2c32c94ae74397ba91aa8955858, type: 3}
