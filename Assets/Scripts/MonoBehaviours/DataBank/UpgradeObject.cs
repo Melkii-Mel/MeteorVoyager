@@ -1,7 +1,7 @@
 ﻿using System;
+using MonoBehaviours.DataBank.ScriptableObjects;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace MonoBehaviours.DataBank
@@ -12,13 +12,16 @@ namespace MonoBehaviours.DataBank
         [SerializeField] private TextMeshProUGUI title;
         [SerializeField] private TextMeshProUGUI description;
         [SerializeField] private TextMeshProUGUI cost;
+        [SerializeField] private TextMeshProUGUI lvl;
         [SerializeField] private Button enableDescriptionObjectAndBuyUpgradeButton;
         [SerializeField] private Button disableDescriptionObjectButton;
         [SerializeField] private GameObject descriptionObject;
 
+        public UpgradeScriptableObject Values { get; private set; }
+
         #region events
 
-        public delegate void BuyButtonClickEventHandler();
+        public delegate void BuyButtonClickEventHandler(UpgradeObject sender);
 
         public event BuyButtonClickEventHandler OnBuying;
 
@@ -36,12 +39,20 @@ namespace MonoBehaviours.DataBank
             OnDescriptionObjectEnable -= ProcessDisableOtherDescriptionObjectsRequest;
         }
 
-        private void Awake()
+        private void OnEnable()
         {
             DisableDescriptionObjectActive();
             enableDescriptionObjectAndBuyUpgradeButton.onClick.AddListener(BuyButtonClick);
             disableDescriptionObjectButton.onClick.AddListener(DisableDescriptionObjectActive);
             OnDescriptionObjectEnable += ProcessDisableOtherDescriptionObjectsRequest;
+        }
+
+        private void Start()
+        {
+            if (Values is null)
+            {
+                Destroy(gameObject);
+            }
         }
 
         private bool _descriptionActivated;
@@ -63,11 +74,9 @@ namespace MonoBehaviours.DataBank
         
         private void BuyButtonClick()
         {
-            
             if (_descriptionActivated)
             {
-                SetDescriptionObjectActive(false);
-                OnBuying?.Invoke();
+                OnBuying?.Invoke(this);
             }
             else
             {
@@ -99,7 +108,17 @@ namespace MonoBehaviours.DataBank
 
         public void SetCost(string content)
         {
-            cost.text = content;
+            cost.text = $"Cost: {content} data";
+        }
+
+        public void SetLvl(string content)
+        {
+            lvl.text = $"Lvl: {content}";
+        }
+
+        public void SetValues(UpgradeScriptableObject values)
+        {
+            Values = values;
         }
     }
 }

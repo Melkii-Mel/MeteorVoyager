@@ -35,6 +35,7 @@ namespace MonoBehaviours.DataBank.Canvases
         public bool Init()
         {
             textObject.text = GetMessage();
+            dataBankCircularTimer.OnTimeEnd += (_, _) => Exit();
             return true;
         }
 

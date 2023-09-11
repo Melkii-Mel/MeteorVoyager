@@ -32,6 +32,7 @@ namespace MonoBehaviours.DataBank
                     obj.Cost > GameStats.MainGameStatsHolder.Currency.Data)
                 {
                     ignoreIndexes.Add(index);
+                    continue;
                 }
                 
                 result.Add(_objs[index]);

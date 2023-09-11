@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using GameStatsNS;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace MonoBehaviours.DataBank.Canvases
@@ -9,6 +10,9 @@ namespace MonoBehaviours.DataBank.Canvases
         [SerializeField] private GameObject canvas;
         [SerializeField] private DataBankCircularTimer dataBankCircularTimer;
 
+        /// <summary>
+        /// upgrade buttons of the canvas
+        /// </summary>
         [SerializeField] private UpgradeObject[] upgradeObjects;
 
         private UpgradeCanvasContentManager _contentManager;
@@ -23,11 +27,12 @@ namespace MonoBehaviours.DataBank.Canvases
 
         private Controller _dataBankController;
         public event IDataBankCanvas.ExitButtonClickEventHandler OnExit;
+
         public void Exit()
         {
             OnExit?.Invoke();
         }
-        
+
         public void CheckTimerValue(float value)
         {
             if (value <= 0) Exit();
@@ -36,7 +41,36 @@ namespace MonoBehaviours.DataBank.Canvases
         public bool Init()
         {
             _contentManager = new();
-            return _contentManager.SetUpgrades(upgradeObjects);
+            dataBankCircularTimer.OnTimeEnd += (_, _) => Exit();
+            bool success = _contentManager.SetUpgrades(upgradeObjects);
+            
+            foreach (UpgradeObject upgradeObject in upgradeObjects)
+            {
+                try
+                {
+                    upgradeObject.OnBuying += Buying;
+                }
+                catch
+                {
+                    // ignored
+                }
+            }
+            
+            return success;
+        }
+
+        private InfiniteInteger Data
+        {
+            get => GameStats.MainGameStatsHolder.Currency.Data;
+            set => GameStats.MainGameStatsHolder.Currency.Data = value;
+        }
+
+        private void Buying(UpgradeObject sender)
+        {
+            if (sender.Values.Cost > Data) return;
+            Data -= sender.Values.Cost;
+            sender.Values.LvL++;
+            _contentManager.UpdateUpgrade(sender);
         }
     }
 }
