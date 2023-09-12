@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using static GameStatsNS.GameStats;
@@ -11,12 +12,13 @@ namespace MonoBehaviours.UI
 
         private void OnEnable()
         {
-            MainGameStatsHolder.Progression.OnProgressionUpdate += DataUnlockChecker;
+            MainGameStatsHolder.Progression.OnProgressionUpdate += DataUnlockCheck;
+            DataUnlockCheck();
         }
 
         private void OnDisable()
         {
-            MainGameStatsHolder.Progression.OnProgressionUpdate -= DataUnlockChecker;
+            MainGameStatsHolder.Progression.OnProgressionUpdate -= DataUnlockCheck;
         }
 
         private void Update()
@@ -25,12 +27,12 @@ namespace MonoBehaviours.UI
             textData.GetComponent<Text>().text = $"{Texts.CurrencyTexts.Data}: " + MainGameStatsHolder.Currency.Data.ToString();
         }
 
-        private void DataUnlockChecker()
+        private void DataUnlockCheck()
         {
             if (MainGameStatsHolder.Progression.GameStage >= 4)
             {
                 textData.SetActive(true);
-                MainGameStatsHolder.Progression.OnProgressionUpdate -= DataUnlockChecker;
+                MainGameStatsHolder.Progression.OnProgressionUpdate -= DataUnlockCheck;
             }
             else
             {

@@ -26,7 +26,17 @@ namespace MonoBehaviours.UI
             }
             
             yield return Iterate(Action, time, ignoreExceptions);
-            obj.position = finalPos;
+            try
+            {
+                obj.position = finalPos;
+            }
+            catch (Exception e)
+            {
+                if (!ignoreExceptions)
+                {
+                    Debug.LogException(e);
+                }
+            }
         }
 
         /// <summary>
@@ -49,7 +59,17 @@ namespace MonoBehaviours.UI
             }
 
             yield return Iterate(Action, time, ignoreExceptions);
-            obj.localScale = finalSize;
+            try
+            {
+                obj.localScale = finalSize;
+            }
+            catch (Exception e)
+            {
+                if (!ignoreExceptions)
+                {
+                    Debug.LogException(e);
+                }
+            }
         }
 
         private static IEnumerator Iterate(Action<float> action, float time, bool ignoreExceptions)

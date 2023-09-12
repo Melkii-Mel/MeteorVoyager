@@ -446,7 +446,8 @@ MonoBehaviour:
   destinationPoint: {x: -2.39, y: 4.72}
   flightTime: 1
   speedCurveExponent: 1.5
-  flyingObject: {fileID: 3964804471872945770, guid: 2e6639bc29339aa4eb452b6e696753b3, type: 3}
+  sizeCurveExponent: 2
+  flyingObject: {fileID: 3964804471872945770, guid: d47b4b53aba60c948aac9b4685af4f07, type: 3}
   maxAmount: 20
 --- !u!1001 &272242852
 PrefabInstance:
@@ -598,7 +599,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 8898f2c32c94ae74397ba91aa8955858, type: 3}
     - target: {fileID: 8176164634704908932, guid: 66f89ff25c744094e8fd28bdeba0beac, type: 3}
       propertyPath: m_FillAmount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -743,7 +744,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 32f07274d8c446744b409947ca4f8f40, type: 3}
     - target: {fileID: 8176164634704908932, guid: 66f89ff25c744094e8fd28bdeba0beac, type: 3}
       propertyPath: m_FillAmount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3290,7 +3291,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 99ae5f12a143e144db56a0e79c976b9f, type: 3}
     - target: {fileID: 8176164634704908932, guid: 66f89ff25c744094e8fd28bdeba0beac, type: 3}
       propertyPath: m_FillAmount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

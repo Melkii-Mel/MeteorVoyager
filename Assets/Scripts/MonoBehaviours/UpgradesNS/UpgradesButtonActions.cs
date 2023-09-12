@@ -30,11 +30,14 @@ namespace MonoBehaviours.UpgradesNS
             GetComponent<Button>().onClick.RemoveListener(ButtonAction);
         }
 
-        protected void Start()
+        protected void OnEnable()
         {
             Relocation.OnRelocationEnd += RelocationEnd;
             GetComponent<Button>().onClick.AddListener(ButtonAction);
-            
+        }
+
+        protected void Start()
+        {
             Init();
             UpdateText(Cost);
         }

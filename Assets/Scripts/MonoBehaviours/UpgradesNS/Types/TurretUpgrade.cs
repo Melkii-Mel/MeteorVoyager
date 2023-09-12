@@ -13,8 +13,9 @@ namespace MonoBehaviours.UpgradesNS.Types
         private const int DAMAGE_UPGRADE_CONDITION_LVL = 50;
         [SerializeField] private TurretUpgrades.Upgrades upgradeEnum;
 
-        private void OnEnable()
+        private new void OnEnable()
         {
+            base.OnEnable();
             if (upgradeEnum == TurretUpgrades.Upgrades.Damage)
             {
                 Relocation.OnRelocationEnd += DamageUpgradeRelocationEnd;

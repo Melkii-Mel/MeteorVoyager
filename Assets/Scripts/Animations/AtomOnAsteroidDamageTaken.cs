@@ -10,6 +10,7 @@ namespace Animations
         [SerializeField] private Vector2 destinationPoint;
         [SerializeField] private float flightTime;
         [SerializeField] private float speedCurveExponent;
+        [SerializeField] private float sizeCurveExponent;
         [SerializeField] private GameObject flyingObject;
         [SerializeField] private int maxAmount;
 
@@ -40,7 +41,7 @@ namespace Animations
             
             IEnumerator Resize()
             {
-                yield return Mover.Resize(obj.transform, obj.transform.localScale, Vector3.zero, flightTime, speedCurveExponent);
+                yield return Mover.Resize(obj.transform, obj.transform.localScale, Vector3.zero, flightTime, sizeCurveExponent);
             }
             IEnumerator Move()
             {
