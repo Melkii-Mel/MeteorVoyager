@@ -443,6 +443,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ebfbeedf0ed4060a6c67fbb4a551e6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sizeMultiplier: 0.3
   destinationPoint: {x: -2.39, y: 4.72}
   flightTime: 1
   speedCurveExponent: 1.5

@@ -7,6 +7,7 @@ namespace Animations
 {
     public class AtomOnAsteroidDamageTaken : MonoBehaviour
     {
+        [SerializeField] private float sizeMultiplier;
         [SerializeField] private Vector2 destinationPoint;
         [SerializeField] private float flightTime;
         [SerializeField] private float speedCurveExponent;
@@ -37,6 +38,7 @@ namespace Animations
             }
             
             GameObject obj = Instantiate(flyingObject, senderTransform.position, senderTransform.rotation);
+            obj.transform.localScale *= sizeMultiplier;
             _thingsAmount++;
             
             IEnumerator Resize()
