@@ -1676,7 +1676,15 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 2e65fc78d8954b44189264e15222193a, type: 3}
     cooldownMS: 50
   upgradeClip:
-    clip: {fileID: 8300000, guid: 517e5c0ecd4986842a88375ff4d6f806, type: 3}
+  - clip: {fileID: 8300000, guid: de86dfff1225fa748a6f9509dcd90c3d, type: 3}
+    cooldownMS: 0
+  - clip: {fileID: 8300000, guid: af66f57344d0cab4c92f16c359f2249a, type: 3}
+    cooldownMS: 0
+  - clip: {fileID: 8300000, guid: ebeb4d983f82d804ba05fc253497d637, type: 3}
+    cooldownMS: 0
+  - clip: {fileID: 8300000, guid: 81c2f670479de5d469a76a18760d5df5, type: 3}
+    cooldownMS: 0
+  - clip: {fileID: 8300000, guid: 4827eaccf9feaee41a6e490fc84ee4f5, type: 3}
     cooldownMS: 0
 --- !u!114 &519420036
 MonoBehaviour:

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using GameStatsNS;
 using MonoBehaviours;
 using MonoBehaviours.UpgradesNS;
@@ -14,7 +15,7 @@ namespace Audio
         [SerializeField] private ClipHolder shotClip;
         [SerializeField] private ClipHolder chargedShotClip;
         [SerializeField] private ClipHolder destroyClip;
-        [SerializeField] private ClipHolder upgradeClip;
+        [SerializeField] private ClipHolder[] upgradeClip;
         private void OnEnable()
         {
             Enemy.OnAnyEnemyDestroy += PlayDestroyClip;
@@ -52,12 +53,21 @@ namespace Audio
             PlayIfNotOnCooldown(destroyClip);
         }
 
-        private void PlayUpgradeClip(UpgradeEventArgs _)
+        private void PlayUpgradeClip(UpgradeEventArgs args)
         {
-            PlayIfNotOnCooldown(upgradeClip);
+            IEnumerator UpgradePlayer(int amount)
+            {
+                for (int i = 0; i < amount; i++)
+                {
+                    PlayIfNotOnCooldown(upgradeClip[Random.Range(0, upgradeClip.Length)], pitchMultiplier: i / 5f + 1);
+                    yield return null;
+                }
+            }
+
+            StartCoroutine(UpgradePlayer((int)Mathf.Log(args.LastAmount, 2) + 1));
         }
 
-        private void PlayIfNotOnCooldown(ClipHolder clipHolder)
+        private void PlayIfNotOnCooldown(ClipHolder clipHolder, float pitchMultiplier = 1)
         {
             if (clipHolder.OnCooldown)
             {
@@ -68,7 +78,7 @@ namespace Audio
             player.AddComponent<TemporaryPlayer>();
             AudioSource audioSource = player.AddComponent<AudioSource>();
             audioSource.volume = GameStats.MainGameStatsHolder.Settings.SoundsVolume;
-            audioSource.pitch = Random.Range(0.8f, 1.2f);
+            audioSource.pitch = Random.Range(0.8f, 1.2f) * pitchMultiplier;
             audioSource.PlayOneShot(clipHolder.Clip);
         }
 

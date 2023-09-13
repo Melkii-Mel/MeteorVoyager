@@ -12,7 +12,7 @@ namespace MonoBehaviours.UpgradesNS.Types
     {
         private const int DAMAGE_UPGRADE_CONDITION_LVL = 50;
         [SerializeField] private TurretUpgrades.Upgrades upgradeEnum;
-
+        
         private new void OnEnable()
         {
             base.OnEnable();
@@ -99,7 +99,7 @@ namespace MonoBehaviours.UpgradesNS.Types
 
         protected override UpgradeEventArgs GetEventArgs()
         {
-            return new(upgradeEnum, Value, this);
+            return new(upgradeEnum, Value, LastAmount,this);
         }
     }
 }

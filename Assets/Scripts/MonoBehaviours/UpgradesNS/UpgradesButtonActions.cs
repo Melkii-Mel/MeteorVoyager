@@ -14,6 +14,11 @@ namespace MonoBehaviours.UpgradesNS
     public abstract class UpgradesButtonActions : MonoBehaviour
     {
         protected abstract int Value { get; set; }
+        
+        /// <summary>
+        /// Represents the amount of lvl ups that was made during the last upgrade
+        /// </summary>
+        protected int LastAmount { get; set; }
         private Func<int, InfiniteInteger> _formula;
         protected InfiniteInteger Cost => _formula(Value);
         
@@ -67,7 +72,7 @@ namespace MonoBehaviours.UpgradesNS
         public async Task Buy()
         {
             if (!CheckIfCanUpgrade()) return;
-            
+            LastAmount = 0;
             const int msInS = 1000;
             int msPerTick =  msInS / Application.targetFrameRate;
             DateTime current = DateTime.Now;
@@ -75,6 +80,7 @@ namespace MonoBehaviours.UpgradesNS
             {
                 Balance -= cost;
                 Value++;
+                LastAmount++;
                 if ((DateTime.Now - current).TotalMilliseconds >= msPerTick)
                 {
                     current = DateTime.Now;

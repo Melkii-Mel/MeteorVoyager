@@ -32,7 +32,7 @@ namespace MonoBehaviours.UpgradesNS.Types
 
         protected override UpgradeEventArgs GetEventArgs()
         {
-            return new(upgradeEnum, Value, this);
+            return new(upgradeEnum, Value, LastAmount, this);
         }
 
         protected override int Value
