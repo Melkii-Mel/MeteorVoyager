@@ -6,6 +6,7 @@ namespace MonoBehaviours.UI
 {
     public static class Mover
     {
+        // ReSharper disable Unity.PerformanceAnalysis
         /// <summary>
         /// Moves an object from position A to position B for C seconds;
         /// </summary>
@@ -16,7 +17,8 @@ namespace MonoBehaviours.UI
         /// <param name="time">time in seconds</param>
         /// <param name="exponent">curve exponent</param>
         /// <param name="ignoreExceptions">if it's true, all exceptions are ignored (useful when the gameObject might be destroyed)</param>
-        public static IEnumerator Move(Transform obj, Vector3 initPos, Vector3 finalPos, float time, float exponent, bool ignoreExceptions = true)
+        public static IEnumerator Move(Transform obj, Vector3 initPos, Vector3 finalPos, float time, float exponent,
+            bool ignoreExceptions = true)
         {
             void Action(float i)
             {
@@ -24,7 +26,7 @@ namespace MonoBehaviours.UI
                 Vector3 pos = initPos + percentage * (finalPos - initPos);
                 obj.position = pos;
             }
-            
+
             yield return Iterate(Action, time, ignoreExceptions);
             try
             {
@@ -39,6 +41,7 @@ namespace MonoBehaviours.UI
             }
         }
 
+        // ReSharper disable Unity.PerformanceAnalysis
         /// <summary>
         /// Changes size of an object from size A to size B for C seconds;
         /// </summary>
@@ -72,6 +75,7 @@ namespace MonoBehaviours.UI
             }
         }
 
+        // ReSharper disable Unity.PerformanceAnalysis
         private static IEnumerator Iterate(Action<float> action, float time, bool ignoreExceptions)
         {
             for (float i = 0; i < time; i += Time.deltaTime)

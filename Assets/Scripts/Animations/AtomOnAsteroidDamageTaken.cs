@@ -36,7 +36,7 @@ namespace Animations
                 return;
             }
             
-            GameObject obj = Instantiate(flyingObject, senderTransform);
+            GameObject obj = Instantiate(flyingObject, senderTransform.position, senderTransform.rotation);
             _thingsAmount++;
             
             IEnumerator Resize()

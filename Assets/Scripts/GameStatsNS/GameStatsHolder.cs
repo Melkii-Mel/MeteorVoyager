@@ -18,7 +18,7 @@ namespace GameStatsNS
         public DataBankUpgrades DataBankUpgrades { get; private set; }
         public DataBankOthers DataBankOthers { get; private set; }
         public GameStatsHolder(int serializablesIndex, Func<bool> runningCondition, float delayS) : 
-            base(serializablesIndex, runningCondition, delayS, Application.persistentDataPath)
+            base(serializablesIndex, runningCondition, delayS, Application.persistentDataPath, true)
         {
             Currency = CreateSerializable<Currency>();
             DataUpgrades = CreateSerializable<DataUpgradesGameStats>();
