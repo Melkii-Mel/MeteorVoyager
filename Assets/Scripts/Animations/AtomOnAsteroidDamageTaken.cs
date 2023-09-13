@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using GameStatsNS;
 using MonoBehaviours;
 using MonoBehaviours.UI;
 using UnityEngine;
@@ -29,6 +30,8 @@ namespace Animations
 
         private void SpawnAtom(Enemy sender)
         {
+            if (!GameStats.MainGameStatsHolder.Settings.ParticlesEnabled) return;
+            
             Transform senderTransform = sender.transform;
             Vector3 position = senderTransform.position;
             
