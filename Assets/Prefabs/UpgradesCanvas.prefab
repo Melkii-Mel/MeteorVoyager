@@ -749,7 +749,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5693321094190874803}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &785531576196895651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -901,6 +913,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: MeteorVoyager.Assets.Scripts.MonoBehaviours.CategoriesChanger,
+          ADefinition
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 5680071747269130014}
         m_TargetAssemblyTypeName: MeteorVoyager.Assets.Scripts.MonoBehaviours.CategoriesChanger,
           ADefinition
@@ -1090,7 +1115,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 939870726797144987}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &5679183966184547742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1328,7 +1365,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4239189828890489090}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &5828696531104969547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1483,6 +1532,19 @@ MonoBehaviour:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MeteorVoyager.Assets.Scripts.MonoBehaviours.BuyMultiplier,
           ADefinition
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: MeteorVoyager.Assets.Scripts.MonoBehaviours.BuyMultiplier,
+          ADefinition
         m_MethodName: SwitchBuyingMultiplier
         m_Mode: 1
         m_Arguments:
@@ -1522,6 +1584,8 @@ MonoBehaviour:
   mainCamera: {fileID: 0}
   displacementLength: {x: 0, y: 0, z: 0}
   displacementTime: 0
+  hideCurveExponent: 0
+  showCurveExponent: 0
 --- !u!1 &2277230192683271605
 GameObject:
   m_ObjectHideFlags: 0
@@ -2085,7 +2149,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6986397806103557043}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3856229278294588546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2236,7 +2312,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1497962295459188990}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2707875671808445553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2464,6 +2552,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: MeteorVoyager.Assets.Scripts.MonoBehaviours.BuyMultiplier,
+          ADefinition
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1822274509088953505}
         m_TargetAssemblyTypeName: MeteorVoyager.Assets.Scripts.MonoBehaviours.BuyMultiplier,
           ADefinition
@@ -3251,7 +3352,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8296647741782197255}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7409166828848643187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3430,7 +3543,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2128000603586817316}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5211265851271105444
 GameObject:
   m_ObjectHideFlags: 0
@@ -3555,7 +3680,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8352663789770082854}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2797095032898998410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3734,7 +3871,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5591162916930622493}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6212621132067119251
 GameObject:
   m_ObjectHideFlags: 0
@@ -3859,7 +4008,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7434532299130903974}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1741195942593095674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4280,7 +4441,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2056564832953991810}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &5639862972820739444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4836,7 +5009,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6780193716352670272}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6965865808721453403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4988,7 +5173,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8962549933374701398}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &5080984099714730295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5140,7 +5337,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3035110020668246846}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3093405811673547617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5927,7 +6136,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 531866975619808451}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6943441102454025661
 MonoBehaviour:
   m_ObjectHideFlags: 0
