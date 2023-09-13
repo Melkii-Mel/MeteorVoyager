@@ -66,6 +66,8 @@ namespace MonoBehaviours.UpgradesNS
         }
         public async Task Buy()
         {
+            if (!CheckIfCanUpgrade()) return;
+            
             const int msInS = 1000;
             int msPerTick =  msInS / Application.targetFrameRate;
             DateTime current = DateTime.Now;
