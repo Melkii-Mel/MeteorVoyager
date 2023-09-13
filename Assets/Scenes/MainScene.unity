@@ -1675,6 +1675,9 @@ MonoBehaviour:
   destroyClip:
     clip: {fileID: 8300000, guid: 2e65fc78d8954b44189264e15222193a, type: 3}
     cooldownMS: 50
+  upgradeClip:
+    clip: {fileID: 8300000, guid: 517e5c0ecd4986842a88375ff4d6f806, type: 3}
+    cooldownMS: 0
 --- !u!114 &519420036
 MonoBehaviour:
   m_ObjectHideFlags: 0
