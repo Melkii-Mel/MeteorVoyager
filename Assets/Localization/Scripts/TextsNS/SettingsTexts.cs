@@ -15,5 +15,6 @@ namespace Localization.Scripts.TextsNS
         public string StarsAmount { get; set; } = "text";
         public string Language { get; set; } = "text";
         public string SafeScreen { get; set; } = "text";
+        public string MusicDelay { get; set; } = "text";
     }
 }

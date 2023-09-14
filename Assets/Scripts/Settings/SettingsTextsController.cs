@@ -19,6 +19,7 @@ namespace Settings
         [SerializeField] private TextMeshProUGUI language;
         [SerializeField] private Text safeScreen;
         [SerializeField] private TextMeshProUGUI targetFrameRate;
+        [SerializeField] private TextMeshProUGUI musicDelay;
 
 
         private void Awake()
@@ -33,6 +34,7 @@ namespace Settings
             language.text = texts.Language;
             safeScreen.text = texts.SafeScreen;
             targetFrameRate.text = texts.TargetFrameRate;
+            musicDelay.text = texts.MusicDelay;
         }
     }
 }
