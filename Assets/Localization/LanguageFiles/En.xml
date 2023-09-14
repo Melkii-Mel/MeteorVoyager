@@ -69,5 +69,6 @@
     <StarsAmount>Stars Amount</StarsAmount>
     <Language>Language</Language>
     <SafeScreen>Safe Screen</SafeScreen>
+    <TargetFrameRate>Frame Rate</TargetFrameRate>
   </SettingsTexts>
 </Texts>

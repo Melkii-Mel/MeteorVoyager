@@ -14,5 +14,6 @@ namespace GameStatsNS.GameStatsTypes
         public Language Language { get; set; } = Language.En;
         public bool FitInSafeArea { get; set; } = true;
         public Theme Theme { get; set; } = Theme.RedDark;
+        public int FrameRate { get; set; } = 30;
     }
 }

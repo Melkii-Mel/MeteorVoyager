@@ -1,12 +1,13 @@
+using GameStatsNS;
 using UnityEngine;
 
 namespace MonoBehaviours
 {
     public class MainApplicationSettings : MonoBehaviour
     {
-        void Start()
+        void Awake()
         {
-            Application.targetFrameRate = 60;
+            Application.targetFrameRate = GameStats.MainGameStatsHolder.Settings.FrameRate;
         }
     }
 }

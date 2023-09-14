@@ -18,6 +18,7 @@ namespace Settings
         [SerializeField] private TextMeshProUGUI starsAmount;
         [SerializeField] private TextMeshProUGUI language;
         [SerializeField] private Text safeScreen;
+        [SerializeField] private TextMeshProUGUI targetFrameRate;
 
 
         private void Awake()
@@ -31,6 +32,7 @@ namespace Settings
             starsAmount.text = texts.StarsAmount;
             language.text = texts.Language;
             safeScreen.text = texts.SafeScreen;
+            targetFrameRate.text = texts.TargetFrameRate;
         }
     }
 }

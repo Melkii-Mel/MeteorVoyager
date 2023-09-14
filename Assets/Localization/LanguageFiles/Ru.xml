@@ -68,5 +68,6 @@
     <StarsAmount>Множитель количества звёзд</StarsAmount>
     <Language>Язык</Language>
     <SafeScreen>Безопасная область экрана</SafeScreen>
+    <TargetFrameRate>Частота кадров</TargetFrameRate>
   </SettingsTexts>
 </Texts>
