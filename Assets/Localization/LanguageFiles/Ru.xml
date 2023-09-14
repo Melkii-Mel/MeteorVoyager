@@ -70,5 +70,6 @@
     <SafeScreen>Безопасная область экрана</SafeScreen>
     <TargetFrameRate>Частота кадров</TargetFrameRate>
     <MusicDelay>Интервал воспроизведения музыки</MusicDelay>>
+    <SceenShake>Тряска экрана</SceenShake>
   </SettingsTexts>
 </Texts>

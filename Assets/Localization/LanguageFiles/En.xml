@@ -70,6 +70,7 @@
     <Language>Language</Language>
     <SafeScreen>Safe Screen</SafeScreen>
     <TargetFrameRate>Frame Rate</TargetFrameRate>
-    <MusicDelay>Music Playback Interval</MusicDelay>>
+    <MusicDelay>Music Playback Interval</MusicDelay>
+    <SceenShake>Screen Shake</SceenShake>
   </SettingsTexts>
 </Texts>

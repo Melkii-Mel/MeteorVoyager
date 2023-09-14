@@ -27,6 +27,7 @@ namespace GameStatsNS.GameStatsTypes
         public bool FitInSafeArea { get; set; } = true;
         public Theme Theme { get; set; } = Theme.RedDark;
         public int FrameRate { get; set; } = 30;
+        public float ScreenShake { get; set; } = 1;
 
         public int MusicDelayS
         {
