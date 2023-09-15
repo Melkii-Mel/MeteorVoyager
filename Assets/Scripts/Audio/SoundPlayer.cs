@@ -1,14 +1,16 @@
 using System;
 using System.Collections;
+using Audio.Tools;
 using GameStatsNS;
 using MonoBehaviours;
 using MonoBehaviours.UpgradesNS;
 using UnityEngine;
+using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
 namespace Audio
 {
-    public class SoundPlayer : MonoBehaviour
+    public partial class SoundPlayer : MonoBehaviour
     {
         [SerializeField] private GameObject emptyObject;
         [SerializeField] private ClipHolder impactClip;
@@ -16,6 +18,7 @@ namespace Audio
         [SerializeField] private ClipHolder chargedShotClip;
         [SerializeField] private ClipHolder destroyClip;
         [SerializeField] private ClipHolder[] upgradeClip;
+        [SerializeField] private ClipHolder[] clickClip;
         private void OnEnable()
         {
             Enemy.OnAnyEnemyDestroy += PlayDestroyClip;
@@ -23,6 +26,7 @@ namespace Audio
             Enemy.OnAnyEnemyDamageTaken += PlayImpactSound;
             Player.OnChargedShot += PlayChargedShotSound;
             UpgradesButtonActions.OnUpgrade += PlayUpgradeClip;
+            
         }
 
         private void OnDisable()
@@ -67,6 +71,8 @@ namespace Audio
             StartCoroutine(UpgradePlayer((int)Mathf.Log(args.LastAmount, 2) + 1));
         }
 
+        
+
         private void PlayIfNotOnCooldown(ClipHolder clipHolder, float pitchMultiplier = 1)
         {
             if (clipHolder.OnCooldown)
@@ -80,45 +86,6 @@ namespace Audio
             audioSource.volume = GameStats.MainGameStatsHolder.Settings.SoundsVolume;
             audioSource.pitch = Random.Range(0.8f, 1.2f) * pitchMultiplier;
             audioSource.PlayOneShot(clipHolder.Clip);
-        }
-
-        [Serializable]
-        private class ClipHolder
-        {
-            [SerializeField] private AudioClip clip;
-            [SerializeField] private float cooldownMS;
-            private DateTime _lastGetting;
-            public AudioClip Clip
-            {
-                get
-                {
-                    _lastGetting = DateTime.Now;
-                    return clip;
-                }
-            }
-            /// <summary>
-            /// Cooldown sets when Clip getter is used
-            /// </summary>
-            public bool OnCooldown => (DateTime.Now - _lastGetting).TotalSeconds < cooldownMS / 1000;
-
-            public ClipHolder()
-            {
-                _lastGetting = DateTime.Now;
-            }
-        }
-        private class TemporaryPlayer : MonoBehaviour
-        {
-            private AudioSource _audioSource;
-
-            private void Start()
-            {
-                _audioSource = GetComponent<AudioSource>();
-            }
-
-            private void Update()
-            {
-                if (!_audioSource.isPlaying) Destroy(gameObject);
-            }
         }
     }
 }
