@@ -36,8 +36,11 @@ namespace MonoBehaviours
 
                 if (Vector3.Distance(initialPosition, objectTransform.position) > amplitude)
                 {
-                    
-                    RandomizeDirection();
+                    while (Vector3.Distance(initialPosition, objectTransform.position) >
+                           Vector3.Distance(initialPosition + direction, objectTransform.position))
+                    {
+                        RandomizeDirection();
+                    }
                     RandomizeSpeed();
                 }
             }

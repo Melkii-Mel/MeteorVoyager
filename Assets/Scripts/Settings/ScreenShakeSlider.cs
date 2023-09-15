@@ -1,3 +1,4 @@
+using System;
 using System.Globalization;
 using GameStatsNS;
 using TMPro;
@@ -26,9 +27,9 @@ namespace Settings
 
         public void ChangeScreenShakeValue(float value)
         {
-            int val = (int)value;
+            float val = value;
             ScreenShake = val;
-            valueText.text = val.ToString();
+            valueText.text = Math.Round(val, 2).ToString(CultureInfo.InvariantCulture);
         }
     }
 }

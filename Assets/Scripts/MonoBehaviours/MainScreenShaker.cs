@@ -26,7 +26,7 @@ namespace MonoBehaviours
         }
         private void Shake(UpgradeEventArgs args)
         {
-            float multiplier = Mathf.Log(args.LastAmount, 2) + 1;
+            float multiplier = Mathf.Log(args.LastAmount + 1, 5);
             StartCoroutine(Shaker.StartShaking(
                 mainCamera.transform,
                 shakingAmplitude * multiplier * ScreenShakeSettingMultiplier,
