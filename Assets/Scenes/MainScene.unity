@@ -2278,9 +2278,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeS: 0.3
-  sizeOnOverSizePercents: 1.5
-  backTrackTime: 0.2
-  acceleration: 0.5
+  speedAcceleration: 0.5
+  scaleAcceleration: 0
 --- !u!224 &620154025 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 220995608723747311, guid: 8698c3cd3547cf349bbe22018ad2479e, type: 3}
@@ -4362,9 +4361,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeS: 0.3
-  sizeOnOverSizePercents: 1.5
-  backTrackTime: 0.2
-  acceleration: 0.5
+  speedAcceleration: 0.5
+  scaleAcceleration: 3
 --- !u!1 &1571315741
 GameObject:
   m_ObjectHideFlags: 0
@@ -11694,6 +11692,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 674990902}
     m_Modifications:
+    - target: {fileID: -8106021926596408470, guid: 89935d2c52fd713488243b2d0a2e42ec, type: 3}
+      propertyPath: despawnPosition.x
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -8106021926596408470, guid: 89935d2c52fd713488243b2d0a2e42ec, type: 3}
+      propertyPath: despawnPosition.y
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3741789659935403401, guid: 89935d2c52fd713488243b2d0a2e42ec, type: 3}
       propertyPath: chance
       value: 1
