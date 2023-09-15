@@ -71,6 +71,6 @@
     <SafeScreen>Safe Screen</SafeScreen>
     <TargetFrameRate>Frame Rate</TargetFrameRate>
     <MusicDelay>Music Playback Interval</MusicDelay>
-    <SceenShake>Screen Shake</SceenShake>
+    <ScreenShake>Screen Shake</ScreenShake>
   </SettingsTexts>
 </Texts>

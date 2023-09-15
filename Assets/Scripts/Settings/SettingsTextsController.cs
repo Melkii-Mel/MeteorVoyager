@@ -20,6 +20,7 @@ namespace Settings
         [SerializeField] private Text safeScreen;
         [SerializeField] private TextMeshProUGUI targetFrameRate;
         [SerializeField] private TextMeshProUGUI musicDelay;
+        [SerializeField] private TextMeshProUGUI screenShake;
 
 
         private void Awake()
@@ -35,6 +36,7 @@ namespace Settings
             safeScreen.text = texts.SafeScreen;
             targetFrameRate.text = texts.TargetFrameRate;
             musicDelay.text = texts.MusicDelay;
+            screenShake.text = texts.ScreenShake;
         }
     }
 }
