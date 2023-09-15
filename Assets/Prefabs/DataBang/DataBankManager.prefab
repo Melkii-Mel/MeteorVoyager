@@ -50,7 +50,7 @@ MonoBehaviour:
   despawnPosition: {x: 4, y: 4}
   fromSpawnToStayTime: 3
   fromStayToDespawnTime: 2
-  dataBank: {fileID: 2852574452128350700, guid: 7cf521d65ea35ef4f8e36794f4387ce0, type: 3}
+  dataBank: {fileID: 7277772290117412194, guid: 7cf521d65ea35ef4f8e36794f4387ce0, type: 3}
 --- !u!114 &3741789659935403401
 MonoBehaviour:
   m_ObjectHideFlags: 0
