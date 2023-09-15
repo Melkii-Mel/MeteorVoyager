@@ -13,7 +13,7 @@ namespace MonoBehaviours
         [SerializeField] private float frequency;
         [SerializeField] private float shakingTime;
 
-        private float ScreenShakeSettingMultiplier => GameStats.MainGameStatsHolder.Settings.ScreenShake;
+        private float ScreenShakeSettingMultiplier => 1;//GameStats.MainGameStatsHolder.Settings.ScreenShake;
 
         public void OnEnable()
         {
@@ -26,7 +26,7 @@ namespace MonoBehaviours
         }
         private void Shake(UpgradeEventArgs args)
         {
-            float multiplier = Mathf.Log(args.LastAmount, 2);
+            float multiplier = Mathf.Log(args.LastAmount, 2) + 1;
             StartCoroutine(Shaker.StartShaking(
                 mainCamera.transform,
                 shakingAmplitude * multiplier * ScreenShakeSettingMultiplier,
