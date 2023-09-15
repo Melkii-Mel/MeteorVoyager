@@ -25,7 +25,7 @@ namespace Animations.Upgrade
             int amount = (int)Mathf.Log(args.LastAmount + 1, 3) + 1;
             for (int i = 0; i < amount; i++)
             {
-                Instantiate(system).Play();
+                Instantiate(system, transform).Play();
                 Debug.Log("spawned");
             }
         }
